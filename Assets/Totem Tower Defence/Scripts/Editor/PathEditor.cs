@@ -16,6 +16,8 @@
                 p.SetPoints();
             else if ( GUILayout.Button( "Set Points" ) )
                     p.SetPoints();
+            if ( GUILayout.Button( "Generate Mesh" ) )
+                p.ConstructMesh();
         }
     }
 }

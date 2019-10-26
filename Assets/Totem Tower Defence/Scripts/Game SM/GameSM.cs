@@ -4,7 +4,7 @@
 
     public class GameSM : StateMachineBase {
         [Header("Data")]
-        [SerializeField] GameData gameData;
+        [SerializeField] GameData gameData = null;
 
         private void Start () {
             Setup();
