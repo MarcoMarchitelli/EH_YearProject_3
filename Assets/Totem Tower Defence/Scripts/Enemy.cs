@@ -21,7 +21,7 @@
         }
 
         void GetToTarget () {
-            currentTarget = path.points[currentTargetIndex];
+            currentTarget = path.points[currentTargetIndex].position;
             transform.DOMove( currentTarget, Vector3.Distance( transform.position, currentTarget ) / speed ).onComplete += () => {
                 currentTargetIndex++;
                 if ( currentTargetIndex < path.points.Length )

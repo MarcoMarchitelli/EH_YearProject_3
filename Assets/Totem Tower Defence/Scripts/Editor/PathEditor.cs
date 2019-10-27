@@ -12,12 +12,10 @@
 
         public override void OnInspectorGUI () {
             base.OnInspectorGUI();
-            if ( p.autoSetPoints )
-                p.SetPoints();
-            else if ( GUILayout.Button( "Set Points" ) )
-                    p.SetPoints();
             if ( GUILayout.Button( "Generate Mesh" ) )
                 p.ConstructMesh();
+            if ( GUILayout.Button( "Generate Fake Mesh" ) )
+                p.ConstructFakeMesh();
         }
     }
 }

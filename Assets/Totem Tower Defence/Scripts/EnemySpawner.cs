@@ -23,7 +23,7 @@
             int c = 0;
             while ( c < currentWave.enemies ) {
                 yield return new WaitForSeconds( currentWave.spawnInterval );
-                Enemy e = Instantiate( enemyPrefab, path.points[0], Quaternion.identity );
+                Enemy e = Instantiate( enemyPrefab, path.points[0].position, Quaternion.identity );
                 e.Setup( path );
                 e.StartFollowingPath();
                 c++;
