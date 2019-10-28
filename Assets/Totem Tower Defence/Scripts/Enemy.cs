@@ -20,6 +20,12 @@
             GetToTarget();
         }
 
+        public void Damage ( int value ) {
+            life -= value;
+            if ( life <= 0 )
+                Die();
+        }
+
         void GetToTarget () {
             currentTarget = path.points[currentTargetIndex].position;
             transform.DOMove( currentTarget, Vector3.Distance( transform.position, currentTarget ) / speed ).onComplete += () => {
@@ -27,6 +33,10 @@
                 if ( currentTargetIndex < path.points.Length )
                     GetToTarget();
             };
+        }
+
+        void Die () {
+            Destroy( gameObject );
         }
     }
 }

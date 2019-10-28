@@ -2,7 +2,7 @@
     using UnityEngine;
     using UnityEditor;
 
-    [CustomEditor(typeof(CustomGrid))]
+    [CustomEditor( typeof( CustomGrid ) )]
     public class CustomGridEditor : Editor {
         CustomGrid g;
 

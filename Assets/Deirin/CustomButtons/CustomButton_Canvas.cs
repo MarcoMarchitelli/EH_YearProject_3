@@ -26,6 +26,8 @@
         }
 
         public void OnPointerUp ( PointerEventData eventData ) {
+            if ( selected && clickMode == ClickMode.Up )
+                OnMouseClick?.Invoke();
             OnMouseUp?.Invoke();
         }
     }

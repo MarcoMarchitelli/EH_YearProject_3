@@ -11,8 +11,15 @@
         public LayerMask unplaceableMask;
         public bool gizmos;
 
+        public static CustomGrid instance;
+
         private GameObject gridContainer;
         private Cell[,] cells;
+
+        private void Awake () {
+            if ( instance == null )
+                instance = this;
+        }
 
         public void GenerateGrid () {
             if ( gridContainer )
