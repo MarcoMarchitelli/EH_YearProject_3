@@ -24,6 +24,8 @@
         }
 
         public void Place () {
+            if ( currentCell.unplaceable || !currentCell.empty )
+                return;
             transform.position = currentCell.transform.position;
             placed = true;
             OnPlacement.Invoke();
@@ -32,7 +34,7 @@
         public void SnapToGrid () {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if ( Physics.Raycast( ray, out hit, 50, cellMask ) ) {
+            if ( Physics.Raycast( ray, out hit, 300, cellMask ) ) {
                 Cell c = hit.collider.GetComponent<Cell>();
                 if ( c ) {
                     currentCell = c;

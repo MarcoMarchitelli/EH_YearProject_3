@@ -9,7 +9,10 @@
         public MouseInteraction offInteraction;
 
         [Header("Events")]
-        public UnityEvent On, Off;
+        public UnityEvent On;
+        public UnityEvent Off;
+        public UnityEvent MouseEnter;
+        public UnityEvent MouseExit;
 
         [SerializeField] bool on;
 
@@ -35,6 +38,7 @@
                 on = false;
                 Off.Invoke();
             }
+            MouseEnter.Invoke();
         }
 
         public void OnPointerExit ( PointerEventData eventData ) {
@@ -47,6 +51,7 @@
                 on = false;
                 Off.Invoke();
             }
+            MouseExit.Invoke();
         }
 
         public void OnPointerUp ( PointerEventData eventData ) {

@@ -6,16 +6,17 @@
         [Header("Refs")]
         public Enemy enemyPrefab;
         public Path path;
+        public TurretMenu turretMenu;
 
         [Header("Params")]
-        public Wave[] waves;
+        public WaveData[] waves;
         public float waveInterval;
 
         private int currentWaveIndex;
-        private Wave currentWave;
+        private WaveData currentWave;
 
         public void StartWaves () {
-            currentWave = waves[currentWaveIndex];
+            ChangeWave();
             StartCoroutine( SpawnRoutine() );
         }
 
@@ -31,17 +32,17 @@
             currentWaveIndex++;
             if ( currentWaveIndex < waves.Length ) {
                 yield return new WaitForSeconds( waveInterval );
+                ChangeWave();
                 StartCoroutine( SpawnRoutine() );
             }
             else {
                 //win
             }
         }
-    }
 
-    [System.Serializable]
-    public class Wave {
-        public int enemies;
-        public float spawnInterval;
+        void ChangeWave () {
+            currentWave = waves[currentWaveIndex];
+            turretMenu.SetTurrets( currentWave.turrets );
+        }
     }
 }

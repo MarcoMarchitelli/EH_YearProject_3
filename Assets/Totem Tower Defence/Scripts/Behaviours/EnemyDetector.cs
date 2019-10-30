@@ -9,19 +9,24 @@
         public bool active;
 
         [Header("Events")]
-        public UnityEvent OnEnemyDetected, OnEnemiesLost;
+        public UnityTransformEvent OnEnemyDetected;
+        public UnityEvent OnEnemiesLost;
 
         private List<Enemy> enemiesInRange = new List<Enemy>();
         private Enemy currentTarget;
+        private int currentTargetIndex;
 
         private void OnTriggerEnter ( Collider other ) {
             if ( !active )
                 return;
             Enemy e = other.GetComponentInParent<Enemy>();
             if ( e ) {
-                currentTarget = e;
+                if ( enemiesInRange.Contains( e ) )
+                    return;
                 enemiesInRange.Add( e );
-                OnEnemyDetected.Invoke();
+                currentTarget = e;
+                currentTargetIndex++;
+                OnEnemyDetected.Invoke( currentTarget.transform );
             }
         }
 
@@ -30,6 +35,10 @@
                 return;
             Enemy e = other.GetComponentInParent<Enemy>();
             if ( e ) {
+                if ( e == currentTarget ) {
+                    currentTargetIndex--;
+                    currentTarget = enemiesInRange[currentTargetIndex];
+                }
                 enemiesInRange.Remove( e );
                 if ( enemiesInRange.Count == 0 ) {
                     OnEnemiesLost.Invoke();
@@ -40,5 +49,10 @@
         public void Activate ( bool value ) {
             active = value;
         }
+    }
+
+    [System.Serializable]
+    public class UnityTransformEvent : UnityEvent<Transform> {
+
     }
 }
