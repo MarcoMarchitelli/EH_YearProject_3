@@ -5,9 +5,10 @@
         [Header("Params")]
         public float speed;
         public Vector3 orientation;
+        public Space space;
 
         private void Update () {
-            transform.position += orientation * speed * Time.deltaTime;
+            transform.Translate( orientation * speed * Time.deltaTime, space );
         }
     }
 }

@@ -17,6 +17,6 @@
 
     [System.Serializable]
     public class GameData : IStateMachineData {
-        public EnemySpawner enemySpawner;
+        public WaveManager enemySpawner;
     }
 }

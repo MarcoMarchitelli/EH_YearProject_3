@@ -8,6 +8,9 @@
         public float speed;
         public float turnRate;
 
+        public System.Action<int> OnLifeChange;
+        public System.Action<Enemy> OnDeath;
+
         private Path path;
         private int currentTargetIndex;
         private Vector3 currentTarget;
@@ -22,6 +25,7 @@
 
         public void Damage ( int value ) {
             life -= value;
+            OnLifeChange?.Invoke( life );
             if ( life <= 0 )
                 Die();
         }
@@ -37,6 +41,7 @@
 
         void Die () {
             Destroy( gameObject );
+            OnDeath?.Invoke( this );
         }
     }
 }

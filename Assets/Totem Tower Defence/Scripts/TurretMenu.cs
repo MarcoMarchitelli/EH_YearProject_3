@@ -6,10 +6,10 @@
         [Header("Refs")]
         public TurretUI turretUIPrefab;
 
-        GameObject[] turrets;
+        TurretData[] turrets;
         List<TurretUI> turretUIs = new List<TurretUI>();
 
-        public void SetTurrets ( GameObject[] turrets ) {
+        public void SetTurretsData ( TurretData[] turrets ) {
             this.turrets = turrets;
             UpdateUI();
         }
@@ -19,18 +19,18 @@
             int uiLegth = turretUIs.Count;
             int loops = dataLength > uiLegth ? dataLength : uiLegth;
             for ( int i = 0; i < loops; i++ ) {
-                GameObject data = i <= dataLength-1 ? turrets[i] : null;
+                TurretData data = i <= dataLength-1 ? turrets[i] : null;
                 TurretUI ui = i <= uiLegth-1 ? turretUIs[i] : null;
                 if ( data && !ui ) {
                     TurretUI t = Instantiate(turretUIPrefab, transform);
-                    t.turret = data;
+                    t.turretData = data;
                     turretUIs.Add( t );
                 }
                 else if ( ui && !data ) {
                     Destroy( ui.gameObject );
                 }
                 else {
-                    ui.turret = data;
+                    ui.turretData = data;
                 }
             }
         }

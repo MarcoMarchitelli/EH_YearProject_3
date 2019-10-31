@@ -515,6 +515,7 @@ GameObject:
   m_Component:
   - component: {fileID: 26266284368193661}
   - component: {fileID: 26266284368193660}
+  - component: {fileID: 5516048574419546120}
   m_Layer: 5
   m_Name: Turret UI
   m_TagString: Untagged
@@ -554,8 +555,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42cc817283ff8cc4a8a5c7e7fa78208c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turretPrefab: {fileID: 6083367689940762869, guid: e6823201fa7c5ad4fbb91a77f464c847,
+    type: 3}
   button: {fileID: 26266282787593559}
-  turret: {fileID: 0}
+  OnTurretSelection:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5516048574419546120}
+        m_MethodName: Destroy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  turretData: {fileID: 0}
+--- !u!114 &5516048574419546120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26266284368193538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1006332d46403ff428b6fa75e14a04a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 26266284368193538}
+  delay: 0
+  OnDestruction:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &26266284590105714
 GameObject:
   m_ObjectHideFlags: 0

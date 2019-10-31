@@ -3,7 +3,6 @@
 
     [RequireComponent( typeof( Collider ) )]
     public class Cell : MonoBehaviour {
-        public bool unplaceable;
-        public bool empty = true;
+        public bool empty;
     }
 }

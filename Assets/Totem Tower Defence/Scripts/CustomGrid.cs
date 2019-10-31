@@ -35,8 +35,7 @@
                     cell.transform.localScale = cellSize;
                     cell.transform.SetParent( gridContainer.transform );
                     Collider[] hits = Physics.OverlapBox(cellPos, cellSize/2, cell.transform.rotation, unplaceableMask);
-                    if ( hits.Length > 0 )
-                        cell.unplaceable = true;
+                    cell.empty = hits.Length > 0 ? false : true;
                     cells[x, y] = cell;
                 }
             }
@@ -46,7 +45,7 @@
             if ( gizmos && gridContainer ) {
                 for ( int x = 0; x < cells.GetLength( 0 ); x++ ) {
                     for ( int y = 0; y < cells.GetLength( 1 ); y++ ) {
-                        Gizmos.color = cells[x, y].unplaceable ? Color.red : Color.green;
+                        Gizmos.color = cells[x, y].empty ? Color.green : Color.red;
                         Gizmos.DrawWireCube( cells[x, y].transform.position, cellSize );
                     }
                 }

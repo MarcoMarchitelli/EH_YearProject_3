@@ -6,6 +6,7 @@
     public class Shooter : MonoBehaviour {
         [Header("Refs")]
         public Bullet bulletPrefab;
+        public BulletData bulletData;
         public Transform spawnPoint;
 
         [Header("Params")]
@@ -27,8 +28,10 @@
         }
 
         IEnumerator ShootSequence () {
+            shooting = true;
             while ( true ) {
-                Instantiate( bulletPrefab, spawnPoint.position, Quaternion.LookRotation( spawnPoint.forward ) );
+                Bullet b = Instantiate( bulletPrefab, spawnPoint.position, Quaternion.LookRotation( spawnPoint.forward ) );
+                b.data = bulletData;
                 OnShoot.Invoke();
                 yield return new WaitForSeconds( 1 / fireRate );
             }

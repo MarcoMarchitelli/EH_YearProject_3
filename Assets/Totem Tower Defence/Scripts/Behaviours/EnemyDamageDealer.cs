@@ -11,7 +11,7 @@
         public UnityEvent OnDamageDealt;
 
         private void OnTriggerEnter ( Collider other ) {
-            Enemy e = other.GetComponent<Enemy>();
+            Enemy e = other.GetComponentInParent<Enemy>();
             if ( e ) {
                 e.Damage( damage );
                 Die();

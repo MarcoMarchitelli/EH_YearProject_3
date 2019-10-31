@@ -2,7 +2,7 @@
     using System.Collections;
     using UnityEngine;
 
-    public class EnemySpawner : MonoBehaviour {
+    public class WaveManager : MonoBehaviour {
         [Header("Refs")]
         public Enemy enemyPrefab;
         public Path path;
@@ -10,7 +10,6 @@
 
         [Header("Params")]
         public WaveData[] waves;
-        public float waveInterval;
 
         private int currentWaveIndex;
         private WaveData currentWave;
@@ -22,6 +21,8 @@
 
         IEnumerator SpawnRoutine () {
             int c = 0;
+            //do stuff for place time
+            yield return new WaitForSeconds( currentWave.placeTime );
             while ( c < currentWave.enemies ) {
                 yield return new WaitForSeconds( currentWave.spawnInterval );
                 Enemy e = Instantiate( enemyPrefab, path.points[0].position, Quaternion.identity );
@@ -31,7 +32,6 @@
             }
             currentWaveIndex++;
             if ( currentWaveIndex < waves.Length ) {
-                yield return new WaitForSeconds( waveInterval );
                 ChangeWave();
                 StartCoroutine( SpawnRoutine() );
             }
@@ -42,7 +42,7 @@
 
         void ChangeWave () {
             currentWave = waves[currentWaveIndex];
-            turretMenu.SetTurrets( currentWave.turrets );
+            turretMenu.SetTurretsData( currentWave.turrets );
         }
     }
 }
