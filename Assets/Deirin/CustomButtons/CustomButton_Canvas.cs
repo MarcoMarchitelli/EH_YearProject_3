@@ -17,6 +17,8 @@
         public UnityEvent OnMouseClick;
 
         public void OnPointerDown ( PointerEventData eventData ) {
+            if ( !active )
+                return;
             if ( selected ) {
                 if ( clickMode == ClickMode.Down )
                     OnMouseClick?.Invoke();
@@ -29,6 +31,8 @@
         }
 
         public void OnPointerEnter ( PointerEventData eventData ) {
+            if ( !active )
+                return;
             if ( !selected ) {
                 if ( selectMode == SelectMode.MouseEnter )
                     Select();
@@ -37,6 +41,8 @@
         }
 
         public void OnPointerExit ( PointerEventData eventData ) {
+            if ( !active )
+                return;
             if ( selected ) {
                 if ( deselectMode == DeselectMode.MouseExit )
                     Deselect();
@@ -45,6 +51,8 @@
         }
 
         public void OnPointerUp ( PointerEventData eventData ) {
+            if ( !active )
+                return;
             if ( selected && clickMode == ClickMode.Up )
                 OnMouseClick?.Invoke();
             OnMouseUp?.Invoke();

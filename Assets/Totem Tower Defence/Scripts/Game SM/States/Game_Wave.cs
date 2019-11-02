@@ -1,15 +1,11 @@
 ﻿namespace TotemTD {
-    public class Game_Setup : Game_BaseState {
+    public class Game_Wave : Game_BaseState {
         public override void Enter () {
-            gameData.phaseUI.Setup();
-
-            //HACK
+            //close time graphics
             gameData.placeTimeUI.gameObject.SetActive( false );
-            //HACK
-
+            //deactivate turret menu
             gameData.turretMenu.Activate( false );
-
-            gameData.GoNext();
+            //check win/loss or go to next wave
         }
     }
 }

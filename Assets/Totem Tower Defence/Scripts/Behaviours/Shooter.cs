@@ -33,7 +33,7 @@
                 Bullet b = Instantiate( bulletPrefab, spawnPoint.position, Quaternion.LookRotation( spawnPoint.forward ) );
                 b.data = bulletData;
                 OnShoot.Invoke();
-                yield return new WaitForSeconds( 1 / fireRate );
+                yield return new WaitForSeconds( 1f / fireRate );
             }
         }
     }

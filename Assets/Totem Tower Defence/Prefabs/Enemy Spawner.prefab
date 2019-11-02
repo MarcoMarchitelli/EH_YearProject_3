@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3595872175102658652}
-  - component: {fileID: 3595872175102658651}
+  - component: {fileID: 402158184}
   m_Layer: 0
   m_Name: Enemy Spawner
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3595872175102658651
+--- !u!114 &402158184
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,19 +40,51 @@ MonoBehaviour:
   m_GameObject: {fileID: 3595872175102658650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0522e34e78056ba4db6b3a28a5710608, type: 3}
+  m_Script: {fileID: 11500000, guid: e62639f15e5256341ab2c8442ba548b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1285193917929420041, guid: 7bc25fe62afb3b74aa7adca1d513f51a,
     type: 3}
   path: {fileID: 0}
+  turretMenu: {fileID: 0}
   waves:
-  - enemies: 3
-    spawnInterval: 2
-  - enemies: 6
-    spawnInterval: 1.7
-  - enemies: 12
-    spawnInterval: 1.5
-  - enemies: 15
-    spawnInterval: 1
-  waveInterval: 45
+  - {fileID: 11400000, guid: 7f0b336664e72554f859e356af9fe43e, type: 2}
+  OnPlaceTimeStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: SetTime
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: StartCounting
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPlaceTimeEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: Close
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

@@ -34,5 +34,11 @@
                 }
             }
         }
+
+        public void Activate ( bool value ) {
+            foreach ( var item in turretUIs ) {
+                item.button.active = value;
+            }
+        }
     }
 }

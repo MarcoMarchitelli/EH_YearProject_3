@@ -5,8 +5,12 @@
         public System.Action OnSelection, OnDeselection, OnClick;
 
         protected bool selected;
+        public bool active;
 
         public void Select () {
+            if ( !active )
+                return;
+
             if ( selected )
                 return;
 
@@ -15,6 +19,9 @@
         }
 
         public void Deselect () {
+            if ( !active )
+                return;
+
             if ( !selected )
                 return;
 
@@ -23,6 +30,9 @@
         }
 
         public void Click () {
+            if ( !active )
+                return;
+
             if ( !selected )
                 return;
 
