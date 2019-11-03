@@ -2,7 +2,7 @@
     using UnityEngine;
 
     [CreateAssetMenu()]
-    public class TurretData : ScriptableObject {
+    public class TurretBaseData : GameElement {
         public float turnSpeed;
         public BulletData bullet;
         public float detectionRange;

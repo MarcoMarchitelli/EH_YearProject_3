@@ -11,7 +11,7 @@
         [Header("Events")]
         public UnityEvent OnTurretSelection;
 
-        [HideInInspector] public TurretData turretData;
+        [HideInInspector] public TurretBaseData turretData;
 
         public void SelectTurret () {
             Turret t = Instantiate( turretPrefab, transform.position, Quaternion.identity );

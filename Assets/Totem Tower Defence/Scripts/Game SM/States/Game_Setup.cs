@@ -7,6 +7,7 @@
             gameData.placeTimeUI.gameObject.SetActive( false );
             //HACK
 
+            gameData.turretMenu.SetTurretsData( gameData.waveManager.waveData.turretBases );
             gameData.turretMenu.Activate( false );
 
             gameData.GoNext();

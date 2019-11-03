@@ -83,9 +83,9 @@
         }
 
         private void FindClosestTarget () {
-            Enemy t = null;
-            float dist = range + 1;
-            for ( int i = 0; i < enemiesInRange.Count; i++ ) {
+            Enemy t = enemiesInRange[0];
+            float dist = Vector3.Distance( enemiesInRange[0].transform.position, transform.position );
+            for ( int i = 1; i < enemiesInRange.Count; i++ ) {
                 float newDist = Vector3.Distance( enemiesInRange[i].transform.position, transform.position );
                 if ( newDist < dist ) {
                     dist = newDist;

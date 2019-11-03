@@ -10,62 +10,41 @@
         public TurretMenu turretMenu;
 
         [Header("Params")]
-        public WaveData[] waves;
+        public WaveData waveData;
 
         [Header("Events")]
         public UnityFloatEvent OnPlaceTimeStart;
         public UnityEvent OnPlaceTimeEnd;
 
-        public int CurrentWaveIndex => currentWaveIndex;
-
-        private int currentWaveIndex;
-        private WaveData currentWave;
         private bool counting;
 
-        public void StartWaves () {
-            StartCoroutine( SpawnRoutine() );
+        public void StartWave () {
+            StartCoroutine( WaveRoutine() );
         }
 
         public void SkipPlaceTime () {
             counting = false;
         }
 
-        IEnumerator SpawnRoutine () {
-            int c = 0;
+        IEnumerator WaveRoutine () {
             float timer = 0;
             counting = true;
 
-            OnPlaceTimeStart.Invoke( currentWave.placeTime );
+            OnPlaceTimeStart.Invoke( waveData.placeTime );
 
-            while ( counting && timer < currentWave.placeTime ) {
+            while ( counting && timer < waveData.placeTime ) {
                 timer += Time.deltaTime;
                 yield return null;
             }
 
             OnPlaceTimeEnd.Invoke();
 
-            while ( c < currentWave.enemies ) {
-                yield return new WaitForSeconds( currentWave.spawnInterval );
+            foreach ( var item in waveData.enemies ) {
                 Enemy e = Instantiate( enemyPrefab, path.points[0].position, Quaternion.identity );
-                e.Setup( path );
+                e.Setup( item, path );
                 e.StartFollowingPath();
-                c++;
+                yield return new WaitForSeconds( waveData.spawnInterval );
             }
-
-            currentWaveIndex++;
-
-            if ( currentWaveIndex < waves.Length ) {
-                ChangeWave();
-                StartCoroutine( SpawnRoutine() );
-            }
-            else {
-                //win
-            }
-        }
-
-        public void ChangeWave () {
-            currentWave = waves[currentWaveIndex];
-            turretMenu.SetTurretsData( currentWave.turrets );
         }
     }
 

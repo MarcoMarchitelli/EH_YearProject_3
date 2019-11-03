@@ -1,10 +1,8 @@
 ﻿namespace TotemTD {
     public class Game_Placement : Game_BaseState {
         public override void Enter () {
-            //set current wave
-            gameData.waveManager.ChangeWave();
-            gameData.phaseUI.SetWaveNumber( gameData.waveManager.CurrentWaveIndex );
-            //wave placement graphics
+            //placement phase graphics
+            gameData.phaseUI.SetTexts( "PLACEMENT", "PHASE" );
             gameData.phaseUI.Play( () => gameData.phaseUI.Rewind( PhaseUIEndHandler ) );
 
             gameData.waveManager.OnPlaceTimeEnd.AddListener( gameData.GoNext );
@@ -17,6 +15,7 @@
             //gameData.placeTimeUI.Open();
             //HACK
             gameData.placeTimeUI.gameObject.SetActive( true );
+            gameData.waveManager.StartWave();
         }
 
         public override void Exit () {

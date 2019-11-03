@@ -3,7 +3,7 @@
 
     public class Turret : MonoBehaviour {
         [Header("Data")]
-        public TurretData data;
+        public TurretBaseData data;
 
         [Header("Refs")]
         public LookAt lookAt;

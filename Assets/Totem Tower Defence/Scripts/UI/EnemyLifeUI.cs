@@ -17,11 +17,15 @@
         private bool count;
 
         private void Awake () {
+            enemy.OnSetup += Setup;
+        }
+
+        public void Setup () {
             foreach ( var item in images ) {
                 item.color = new Color( item.color.r, item.color.g, item.color.b, 0 );
             }
             enemy.OnLifeChange += SetLife;
-            slider.maxValue = enemy.life;
+            slider.maxValue = enemy.data.life;
             slider.value = slider.maxValue;
         }
 
@@ -53,6 +57,10 @@
                 item.DOKill();
                 item.DOFade( 0, fadeDuration );
             }
+        }
+
+        private void OnDestroy () {
+            enemy.OnSetup -= Setup;
         }
     }
 }

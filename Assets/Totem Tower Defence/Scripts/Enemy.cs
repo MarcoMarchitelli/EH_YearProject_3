@@ -3,20 +3,28 @@
     using DG.Tweening;
 
     public class Enemy : MonoBehaviour {
-        [Header("Params")]
-        public int life;
-        public float speed;
-        public float turnRate;
+        [Header("Data")]
+        public EnemyData data;
 
         public System.Action<int> OnLifeChange;
         public System.Action<Enemy> OnDeath;
+        public System.Action OnSetup;
 
         private Path path;
         private int currentTargetIndex;
         private Vector3 currentTarget;
 
-        public void Setup ( Path path ) {
+        private int life;
+        private int armor;
+        private float speed;
+
+        public void Setup ( EnemyData data, Path path ) {
+            this.data = data;
+            life = data.life;
+            armor = data.armor;
+            speed = data.speed;
             this.path = path;
+            OnSetup?.Invoke();
         }
 
         public void StartFollowingPath () {
@@ -32,7 +40,9 @@
 
         void GetToTarget () {
             currentTarget = path.points[currentTargetIndex].position;
-            transform.DOMove( currentTarget, Vector3.Distance( transform.position, currentTarget ) / speed ).onComplete += () => {
+            float distance = Vector3.Distance( transform.position, currentTarget );
+            float duration = distance / speed;
+            transform.DOMove( currentTarget, duration ).SetEase(Ease.Linear).onComplete += () => {
                 currentTargetIndex++;
                 if ( currentTargetIndex < path.points.Length )
                     GetToTarget();

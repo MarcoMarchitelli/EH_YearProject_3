@@ -46,13 +46,13 @@
             }
             else {
                 if ( !currentCell )
-                    transform.position = Input.mousePosition;
+                    transform.position = new Vector3( Input.mousePosition.x, 0, Input.mousePosition.y );
             }
         }
 
         void SetCurrentCell ( Cell c ) {
             currentCell = c;
-            transform.position = currentCell.transform.position + Vector3.up *.5f;
+            transform.position = currentCell.transform.position + Vector3.up * .5f;
             OnCurrentCellChange.Invoke( currentCell.empty ? placeableColor : unplaceableColor );
         }
     }
