@@ -31,8 +31,14 @@
         }
 
         public void Rewind ( System.Action func = null ) {
-            s.PlayBackwards();
-            s.onRewind += () => func?.Invoke();
+            s = DOTween.Sequence();
+            for ( int i = texts.Count - 1; i > 0; i-- ) {
+                s.Append( texts[i].DOFade( 0, .3f ) );
+            }
+            s.Append( texts[0].DOFade( 0, .3f ) );
+            s.Append( background.DOFade( 0f, 1f ).SetEase( Ease.InCubic ) );
+            s.Join( background.transform.DOScaleY( 0, 1f ).SetEase( Ease.InCubic ) );
+            s.onComplete += () => func?.Invoke();
         }
 
         public void SetTexts ( params string[] texts ) {

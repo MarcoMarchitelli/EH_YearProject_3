@@ -8,6 +8,7 @@
             //HACK
 
             gameData.turretMenu.SetTurretsData( gameData.waveManager.waveData.turretBases );
+            gameData.turretMenu.SetTurretModsData( gameData.waveManager.waveData.turretMods );
             gameData.turretMenu.Activate( false );
 
             gameData.GoNext();
