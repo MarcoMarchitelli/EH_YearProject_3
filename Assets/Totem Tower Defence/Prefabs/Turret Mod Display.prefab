@@ -180,7 +180,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5210750372145448070}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5210750372447921984}
@@ -199,7 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5210750372294015524}
   - component: {fileID: 5210750372294015515}
-  - component: {fileID: 1911735367409405}
+  - component: {fileID: 3381829500362427194}
   m_Layer: 0
   m_Name: Turret Mod Display
   m_TagString: Untagged
@@ -237,7 +237,7 @@ MonoBehaviour:
   data: {fileID: 0}
   meshRenderer: {fileID: 5210750372447921986}
   setupOnAwake: 0
---- !u!114 &1911735367409405
+--- !u!114 &3381829500362427194
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,12 +246,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5210750372294015514}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74ceb1ab4d1d54b4d80a8f3bc8686119, type: 3}
+  m_Script: {fileID: 11500000, guid: 13a643a7587e61e448a2ca42ccfba91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turretModDisplay: {fileID: 5210750372294015515}
   cellMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 3072
   placeableColor: {r: 0, g: 1, b: 0, a: 1}
   unplaceableColor: {r: 1, g: 0, b: 0, a: 1}
   OnPlacement:
@@ -279,7 +280,43 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3381829500362427194}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnCurrentCellChange:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2100000, guid: 92d0d00a6bb97084eb8eca0b58e07795, type: 2}
+        m_MethodName: set_color
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2100000, guid: 20b74f09b88c6ad46ad2ae5d91f73ba4, type: 2}
+        m_MethodName: set_color
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnCurrentTurretChange:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2100000, guid: 92d0d00a6bb97084eb8eca0b58e07795, type: 2}

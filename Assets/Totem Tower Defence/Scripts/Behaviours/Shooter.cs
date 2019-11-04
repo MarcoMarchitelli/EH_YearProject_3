@@ -23,8 +23,10 @@
         }
 
         public void StopShooting () {
-            if ( shooting )
+            if ( shooting ) {
                 StopAllCoroutines();
+                shooting = false;
+            }
         }
 
         IEnumerator ShootSequence () {

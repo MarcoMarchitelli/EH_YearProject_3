@@ -45,8 +45,10 @@
                 }
             }
             else {
-                if ( !currentCell )
-                    transform.position = new Vector3( Input.mousePosition.x, 0, Input.mousePosition.y );
+                if ( !currentCell ) {
+                    Vector3 mouseWorldPos = cam.ScreenToWorldPoint(Input.mousePosition);
+                    transform.position = new Vector3( mouseWorldPos.x, 0, mouseWorldPos.y );
+                }
             }
         }
 
