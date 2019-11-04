@@ -8,19 +8,24 @@
         public int damage;
 
         [Header("Events")]
-        public UnityEvent OnDamageDealt;
+        public UnityEnemyEvent OnDamageDealt;
 
         private void OnTriggerEnter ( Collider other ) {
             Enemy e = other.GetComponentInParent<Enemy>();
             if ( e ) {
                 e.Damage( damage );
                 Die();
-                OnDamageDealt.Invoke();
+                OnDamageDealt.Invoke( e );
             }
         }
 
         void Die () {
             Destroy( gameObject );
         }
+    }
+
+    [System.Serializable]
+    public class UnityEnemyEvent : UnityEvent<Enemy> {
+
     }
 }

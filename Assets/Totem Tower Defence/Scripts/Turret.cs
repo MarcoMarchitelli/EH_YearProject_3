@@ -1,5 +1,6 @@
 ﻿namespace TotemTD {
     using UnityEngine;
+    using System.Collections.Generic;
 
     public class Turret : MonoBehaviour {
         [Header("Data")]
@@ -14,10 +15,9 @@
         [Header("Params")]
         public bool setupOnAwake = true;
 
-        public bool freeSlots => currentModIndex < data.maxMods - 1;
+        public bool freeSlots => modDisplays.Count < data.maxMods;
 
-        TurretModDisplay[] modDisplays;
-        int currentModIndex;
+        List<TurretModDisplay> modDisplays = new List<TurretModDisplay>();
 
         private void Awake () {
             if ( setupOnAwake )
@@ -33,50 +33,42 @@
 
             enemyDetector.range = data.detectionRange;
             enemyDetector.Setup();
-
-            currentModIndex = 0;
-            modDisplays = new TurretModDisplay[data.maxMods];
         }
 
         public void AddModDisplay ( TurretModDisplay turretModDisplay ) {
-            if ( currentModIndex > 0 && currentModIndex < data.maxMods ) {
-                modDisplays[currentModIndex] = turretModDisplay;
-                currentModIndex++;
+            if ( freeSlots ) {
+                modDisplays.Add( turretModDisplay );
+                AttachMod( turretModDisplay.data );
             }
             UpdateDisplay();
         }
 
         public void RemoveModDisplay ( TurretModDisplay turretModDisplay ) {
-            if ( currentModIndex > 0 && currentModIndex < data.maxMods ) {
-                Destroy( modDisplays[currentModIndex].gameObject );
-                modDisplays[currentModIndex] = null;
-                currentModIndex--;
+            if ( modDisplays.Contains( turretModDisplay ) ) {
+                Destroy( turretModDisplay.gameObject );
+                modDisplays.Remove( turretModDisplay );
+                DetachMod( turretModDisplay.data );
             }
             UpdateDisplay();
         }
 
-        private void SubscribeMod ( TurretModData data ) {
-            if ( data is BulletMod ) {
-
-            }
-            else if ( data is TurretMod ) {
-
-            }
+        private void AttachMod ( TurretModData data ) {
+            shooter.AddMod( data );
         }
 
-        private void UnubscribeMod ( TurretModData data ) {
-
+        private void DetachMod ( TurretModData data ) {
+            shooter.RemoveMod( data );
         }
 
         private void UpdateDisplay () {
             for ( int i = 0; i < modDisplaysContainer.childCount; i++ ) {
                 Destroy( modDisplaysContainer.GetChild( 0 ).gameObject );
             }
-            for ( int i = 0; i < modDisplays.Length; i++ ) {
+            for ( int i = 0; i < modDisplays.Count; i++ ) {
                 TurretModDisplay t = modDisplays[i];
                 if ( t ) {
                     t.transform.SetParent( modDisplaysContainer );
-                    t.transform.localPosition = new Vector3( i * t.transform.localScale.x, 0, 0 );
+                    t.transform.localPosition = new Vector3( i * 2, 0, 0 );
                 }
             }
         }

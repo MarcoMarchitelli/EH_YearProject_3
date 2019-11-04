@@ -1,9 +1,9 @@
 ﻿namespace TotemTD {
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
 
-    public abstract class TurretModData : GameElement {
+    [CreateAssetMenu]
+    public class TurretModData : GameElement {
         public Color color;
+        public EnemyDebuff[] enemyDebuffs;
     }
 }

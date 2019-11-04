@@ -37,7 +37,7 @@
             }
         }
 
-        public void SetLife ( int value ) {
+        public void SetLife ( float value ) {
             FadeIn();
             slider.value = value;
         }

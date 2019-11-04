@@ -3,7 +3,7 @@
 
     [CreateAssetMenu]
     public class EnemyData : GameElement {
-        public int life;
+        public float life;
         public int armor;
         public float speed;
     }
