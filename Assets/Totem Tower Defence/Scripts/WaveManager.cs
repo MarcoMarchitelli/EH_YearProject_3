@@ -18,6 +18,10 @@
 
         private bool counting;
 
+        public void StartPlaceTime () {
+            StartCoroutine( PlaceTimeRoutine() );
+        }
+
         public void StartWave () {
             StartCoroutine( WaveRoutine() );
         }
@@ -26,7 +30,7 @@
             counting = false;
         }
 
-        IEnumerator WaveRoutine () {
+        IEnumerator PlaceTimeRoutine () {
             float timer = 0;
             counting = true;
 
@@ -37,8 +41,10 @@
                 yield return null;
             }
 
-            OnPlaceTimeEnd.Invoke();
+            OnPlaceTimeEnd.Invoke();           
+        }
 
+        IEnumerator WaveRoutine () {
             foreach ( var item in waveData.enemies ) {
                 Enemy e = Instantiate( enemyPrefab, path.points[0].position, Quaternion.identity );
                 e.Setup( item, path );

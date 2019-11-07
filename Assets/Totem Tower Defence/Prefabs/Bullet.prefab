@@ -52,6 +52,7 @@ MonoBehaviour:
   data: {fileID: 0}
   mover: {fileID: 7576496883784882023}
   enemyDamageDealer: {fileID: 7576496883784882022}
+  turretMods: []
 --- !u!114 &7576496883784882023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,9 +84,9 @@ MonoBehaviour:
   OnDamageDealt:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8827982524610186904}
-        m_MethodName: Destroy
-        m_Mode: 1
+      - m_Target: {fileID: 6237022291049161715}
+        m_MethodName: SetDebuffToEnemy
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -94,9 +95,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 6237022291049161715}
-        m_MethodName: SetDebuffToEnemy
-        m_Mode: 0
+      - m_Target: {fileID: 8827982524610186904}
+        m_MethodName: Destroy
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

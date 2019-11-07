@@ -3,7 +3,7 @@
         public override void Enter () {
             //placement phase graphics
             gameData.phaseUI.SetTexts( "PLACEMENT", "PHASE" );
-            gameData.phaseUI.Play( () => gameData.phaseUI.Rewind( PhaseUIEndHandler ) );
+            gameData.phaseUI.Play( 1, () => gameData.phaseUI.Rewind( PhaseUIEndHandler ) );
 
             gameData.waveManager.OnPlaceTimeEnd.AddListener( gameData.GoNext );
         }
@@ -15,7 +15,7 @@
             //gameData.placeTimeUI.Open();
             //HACK
             gameData.placeTimeUI.gameObject.SetActive( true );
-            gameData.waveManager.StartWave();
+            gameData.waveManager.StartPlaceTime();
         }
 
         public override void Exit () {

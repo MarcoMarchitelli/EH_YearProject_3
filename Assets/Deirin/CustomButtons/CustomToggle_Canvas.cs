@@ -17,6 +17,8 @@
         [SerializeField] bool on;
 
         public void OnPointerDown ( PointerEventData eventData ) {
+            if ( active == false )
+                return;
             if ( onInteraction == MouseInteraction.Down && !on ) {
                 on = true;
                 On.Invoke();
@@ -29,6 +31,8 @@
         }
 
         public void OnPointerEnter ( PointerEventData eventData ) {
+            if ( active == false )
+                return;
             if ( onInteraction == MouseInteraction.Enter && !on ) {
                 on = true;
                 On.Invoke();
@@ -42,6 +46,8 @@
         }
 
         public void OnPointerExit ( PointerEventData eventData ) {
+            if ( active == false )
+                return;
             if ( onInteraction == MouseInteraction.Exit && !on ) {
                 on = true;
                 On.Invoke();
@@ -55,6 +61,8 @@
         }
 
         public void OnPointerUp ( PointerEventData eventData ) {
+            if ( active == false )
+                return;
             if ( onInteraction == MouseInteraction.Up && !on ) {
                 on = true;
                 On.Invoke();
@@ -64,6 +72,14 @@
                 on = false;
                 Off.Invoke();
             }
+        }
+
+        public void SetOn ( bool value ) {
+            on = value;
+            if ( on == true )
+                On.Invoke();
+            else
+                Off.Invoke();
         }
     }
 }

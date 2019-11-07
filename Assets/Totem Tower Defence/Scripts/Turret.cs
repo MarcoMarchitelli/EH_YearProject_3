@@ -61,14 +61,12 @@
         }
 
         private void UpdateDisplay () {
-            for ( int i = 0; i < modDisplaysContainer.childCount; i++ ) {
-                Destroy( modDisplaysContainer.GetChild( 0 ).gameObject );
-            }
             for ( int i = 0; i < modDisplays.Count; i++ ) {
                 TurretModDisplay t = modDisplays[i];
                 if ( t ) {
                     t.transform.SetParent( modDisplaysContainer );
-                    t.transform.localPosition = new Vector3( i * 2, 0, 0 );
+                    t.transform.localScale = Vector3.one;
+                    t.transform.localPosition = new Vector3( -i * t.transform.localScale.x, 0, 0 );
                 }
             }
         }

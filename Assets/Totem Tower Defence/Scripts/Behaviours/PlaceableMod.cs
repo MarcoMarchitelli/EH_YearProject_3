@@ -1,6 +1,7 @@
 ﻿namespace TotemTD {
     using UnityEngine;
     using UnityEngine.Events;
+    using Deirin.Utilities;
 
     public class PlaceableMod : MonoBehaviour {
         [Header("Refs")]
@@ -12,6 +13,8 @@
         public Color unplaceableColor;
 
         [Header("Events")]
+        public GameEvent placementEvent;
+        public TurretGameEvent deplacementEvent;
         public UnityTurretEvent OnPlacement;
         public UnityColorEvent OnCurrentCellChange;
         public UnityColorEvent OnCurrentTurretChange;
@@ -29,6 +32,8 @@
             SnapToGrid();
             if ( !placed && Input.GetMouseButtonUp( 0 ) )
                 Place();
+            else if ( !placed && Input.GetMouseButtonUp( 1 ) )
+                deplacementEvent.Invoke();
         }
 
         public void Place () {
@@ -37,6 +42,7 @@
             currentTurret.AddModDisplay( turretModDisplay );
             placed = true;
             currentCell.empty = false;
+            placementEvent.Invoke();
             OnPlacement.Invoke( currentTurret );
         }
 
@@ -47,6 +53,7 @@
                 Cell c = hit.collider.GetComponent<Cell>();
                 if ( c ) {
                     SetCurrentCell( c );
+                    currentTurret = null;
                     return;
                 }
                 Turret t = hit.collider.GetComponentInParent<Turret>();
@@ -70,7 +77,7 @@
 
         void SetCurrentTurret ( Turret c ) {
             currentTurret = c;
-            transform.position = currentTurret.transform.position + Vector3.up * .5f;
+            transform.position = currentTurret.modDisplaysContainer.position;
             OnCurrentTurretChange.Invoke( currentTurret.freeSlots ? placeableColor : unplaceableColor );
         }
     }

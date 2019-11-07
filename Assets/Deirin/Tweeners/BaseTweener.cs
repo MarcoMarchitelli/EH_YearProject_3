@@ -9,6 +9,7 @@
         public Ease ease;
         [Min(-1)] public int loops;
         public UnityEvent OnTweenerStart;
+        public UnityEvent OnTweenerRewind;
         public UnityEvent OnTweenerEnd;
 
         public abstract void PlayTween ();

@@ -1,6 +1,4 @@
 ﻿namespace TotemTD {
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.Events;
 
@@ -27,6 +25,10 @@
             this.waveData = waveData;
             this.waveData.OnChanged += Refresh;
             Refresh();
+        }
+
+        private void OnDisable () {
+            this.waveData.OnChanged -= Refresh;
         }
 
         public void Refresh () {
@@ -59,6 +61,8 @@
         }
 
         void CleanChildren ( Transform t ) {
+            if ( t == null )
+                return;
             int c = t.childCount;
             if ( c > 0 )
                 for ( int i = 0; i < c; i++ ) {

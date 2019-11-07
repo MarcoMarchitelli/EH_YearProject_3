@@ -1,11 +1,14 @@
 ﻿namespace TotemTD {
     using System.Collections.Generic;
     using UnityEngine;
+    using UnityEngine.Events;
+    using Deirin.CustomButton;
 
     public class TurretMenu : MonoBehaviour {
         [Header("Refs")]
         public TurretUI turretUIPrefab;
         public TurretModUI turretModUIPrefab;
+        public CustomToggle_Canvas toggle;
 
         List<TurretBaseData> turretBasesData;
         List<TurretModData> turretModsData;
@@ -28,6 +31,7 @@
         }
 
         public void Activate ( bool value ) {
+            toggle.active = value;
             foreach ( var item in turretBaseUIs ) {
                 item.button.active = value;
             }
@@ -45,14 +49,14 @@
                 TurretModUI ui = i <= uiLegth-1 ? turretModUIs[i] : null;
                 if ( data && !ui ) {
                     TurretModUI t = Instantiate(turretModUIPrefab, transform);
-                    t.turretModData = data;
+                    t.TurretModData = data;
                     turretModUIs.Add( t );
                 }
                 else if ( ui && !data ) {
                     Destroy( ui.gameObject );
                 }
                 else {
-                    ui.turretModData = data;
+                    ui.TurretModData = data;
                 }
             }
         }
@@ -66,14 +70,14 @@
                 TurretUI ui = i <= uiLegth-1 ? turretBaseUIs[i] : null;
                 if ( data && !ui ) {
                     TurretUI t = Instantiate(turretUIPrefab, transform);
-                    t.turretData = data;
+                    t.TurretData = data;
                     turretBaseUIs.Add( t );
                 }
                 else if ( ui && !data ) {
                     Destroy( ui.gameObject );
                 }
                 else {
-                    ui.turretData = data;
+                    ui.TurretData = data;
                 }
             }
         }

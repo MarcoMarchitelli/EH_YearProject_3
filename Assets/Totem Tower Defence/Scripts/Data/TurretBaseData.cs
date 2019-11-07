@@ -3,6 +3,7 @@
 
     [CreateAssetMenu()]
     public class TurretBaseData : GameElement {
+        public Sprite sprite;
         public float turnSpeed;
         public BulletData bullet;
         public float detectionRange;

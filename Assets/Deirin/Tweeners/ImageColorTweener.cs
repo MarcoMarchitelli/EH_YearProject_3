@@ -12,6 +12,7 @@
 
         public override void BackwardsTween () {
             target.DOColor( startColor, duration ).SetEase( ease ).SetLoops( loops ).onComplete += () => OnTweenerEnd.Invoke();
+            OnTweenerRewind.Invoke();
         }
 
         public override void PlayTween () {

@@ -1,6 +1,7 @@
 ﻿namespace TotemTD {
     using UnityEngine;
     using UnityEngine.Events;
+    using Deirin.Utilities;
 
     public class Placeable : MonoBehaviour {
         [Header("Params")]
@@ -9,6 +10,8 @@
         public Color unplaceableColor;
 
         [Header("Events")]
+        public GameEvent placementEvent;
+        public TurretGameEvent deplacementEvent;
         public UnityEvent OnPlacement;
         public UnityColorEvent OnCurrentCellChange;
 
@@ -24,6 +27,8 @@
             SnapToGrid();
             if ( !placed && Input.GetMouseButtonUp( 0 ) )
                 Place();
+            else if ( !placed && Input.GetMouseButtonUp( 1 ) )
+                deplacementEvent.Invoke();
         }
 
         public void Place () {
@@ -32,6 +37,7 @@
             transform.position = currentCell.transform.position + Vector3.up * .5f;
             placed = true;
             currentCell.empty = false;
+            placementEvent.Invoke();
             OnPlacement.Invoke();
         }
 
