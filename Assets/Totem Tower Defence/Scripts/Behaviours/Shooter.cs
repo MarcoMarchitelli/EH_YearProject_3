@@ -4,7 +4,7 @@
     using UnityEngine;
     using UnityEngine.Events;
 
-    public class Shooter : MonoBehaviour {
+    public class Shooter : BaseBehaviour {
         [Header("Refs")]
         public Bullet bulletPrefab;
         public BulletData bulletData;
@@ -32,7 +32,7 @@
             }
         }
 
-        public void AddMod( TurretModData mod ) {
+        public void AddMod ( TurretModData mod ) {
             turretMods.Add( mod );
         }
 

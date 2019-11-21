@@ -3,7 +3,7 @@
     using UnityEngine.Events;
 
     [RequireComponent( typeof( Collider ) )]
-    public class EnemyDamageDealer : MonoBehaviour {
+    public class EnemyDamageDealer : BaseBehaviour {
         [Header("Params")]
         public int damage;
 

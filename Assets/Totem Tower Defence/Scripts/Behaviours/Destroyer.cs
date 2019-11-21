@@ -2,7 +2,7 @@
     using UnityEngine;
     using UnityEngine.Events;
 
-    public class Destroyer : MonoBehaviour {
+    public class Destroyer : BaseBehaviour {
         [Header("Params")]
         public GameObject target;
         public float delay;

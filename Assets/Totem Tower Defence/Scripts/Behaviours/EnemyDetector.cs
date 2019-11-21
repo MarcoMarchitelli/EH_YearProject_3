@@ -4,7 +4,7 @@
     using System.Collections.Generic;
 
     [RequireComponent( typeof( SphereCollider ) )]
-    public class EnemyDetector : MonoBehaviour {
+    public class EnemyDetector : BaseBehaviour {
         [Header("Refs")]
         public SphereCollider sphereCollider;
         public GameObject rangeGraphicsBorder;
@@ -23,7 +23,7 @@
         public List<Enemy> enemiesInRange = new List<Enemy>();
         public Enemy currentTarget;
 
-        public void Setup () {
+        protected override void CustomSetup () {
             sphereCollider.radius = range;
             rangeGraphicsBorder.transform.localScale = Vector3.one * ( range + 1 );
             rangeGraphics.transform.localScale = Vector3.one * ( range + 2 );

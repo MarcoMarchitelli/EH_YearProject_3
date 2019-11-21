@@ -1,19 +1,19 @@
 ﻿namespace TotemTD {
     using UnityEngine;
 
-    public class Billboard : MonoBehaviour {
+    public class Billboard : BaseBehaviour {
         [Header("Refs")]
         public Camera cam;
 
         [Header("Params")]
         public bool searchCameraOnAwake = true;
 
-        private void Awake () {
+        public override void OnAwake () {
             if ( searchCameraOnAwake )
                 cam = Camera.main;
         }
 
-        private void Update () {
+        public override void OnUpdate () {
             transform.LookAt( cam.transform );
         }
     }

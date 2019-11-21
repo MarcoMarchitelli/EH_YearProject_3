@@ -2,7 +2,7 @@
     using UnityEngine;
     using DG.Tweening;
 
-    public class LookAt : MonoBehaviour {
+    public class LookAt : BaseBehaviour {
         [Header("Refs")]
         public Transform target;
 
@@ -12,11 +12,11 @@
 
         private Quaternion startRotation;
 
-        public void Setup () {
+        protected override void CustomSetup () {
             startRotation = transform.rotation;
         }
 
-        private void Update () {
+        public override void OnUpdate () {
             if ( !target )
                 return;
 
