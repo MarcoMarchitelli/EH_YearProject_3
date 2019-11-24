@@ -2,6 +2,8 @@
 using UnityEngine;
 
 public abstract class BaseEntity : MonoBehaviour {
+    public bool setupOnAwake = false;
+
     public BaseBehaviour[] Behaviours { get; private set; }
     public bool active { get; private set; }
 
@@ -37,6 +39,8 @@ public abstract class BaseEntity : MonoBehaviour {
     }
 
     private void Awake () {
+        if ( setupOnAwake )
+            Setup();
         if ( !active )
             return;
         for ( int i = 0; i < Behaviours.Length; i++ ) {

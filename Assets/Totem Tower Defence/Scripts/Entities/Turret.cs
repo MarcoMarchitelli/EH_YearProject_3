@@ -12,17 +12,9 @@
         public EnemyDetector enemyDetector;
         public Transform modDisplaysContainer;
 
-        [Header("Params")]
-        public bool setupOnAwake = true;
-
         public bool freeSlots => modDisplays.Count < data.maxMods;
 
         List<TurretModDisplay> modDisplays = new List<TurretModDisplay>();
-
-        private void Awake () {
-            if ( setupOnAwake )
-                Setup();
-        }
 
         protected override void CustomSetup () {
             lookAt.turnSpeed = data.turnSpeed;
