@@ -60,13 +60,13 @@
 
         private void AddEnemy ( Enemy e ) {
             enemiesInRange.Add( e );
-            e.OnDeath += RemoveEnemy;
+            //e.OnDeath += RemoveEnemy;
             if ( !currentTarget )
                 SetCurrentTarget( e );
         }
 
         private void RemoveEnemy ( Enemy e ) {
-            e.OnDeath -= RemoveEnemy;
+            //e.OnDeath -= RemoveEnemy;
             enemiesInRange.Remove( e );
             if ( enemiesInRange.Count == 0 ) {
                 OnEnemiesLost.Invoke();

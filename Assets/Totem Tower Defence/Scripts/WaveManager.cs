@@ -6,11 +6,11 @@
     public class WaveManager : MonoBehaviour {
         [Header("Refs")]
         public Enemy enemyPrefab;
-        public Path path;
         public TurretMenu turretMenu;
 
         [Header("Params")]
         public WaveData waveData;
+        public Vector3ArrayVariable pathPoints;
 
         [Header("Events")]
         public UnityFloatEvent OnPlaceTimeStart;
@@ -46,8 +46,7 @@
 
         IEnumerator WaveRoutine () {
             foreach ( var item in waveData.enemies ) {
-                Enemy e = Instantiate( enemyPrefab, path.points[0].position, Quaternion.identity );
-                e.StartFollowingPath();
+                Enemy e = Instantiate( enemyPrefab, pathPoints.Value[0], Quaternion.identity );
                 yield return new WaitForSeconds( waveData.spawnInterval );
             }
         }

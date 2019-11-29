@@ -6,7 +6,8 @@
     public class Path : MonoBehaviour {
         [Header("Refs")]
         public GameObject pathPiecePrefab;
-        public Transform[] points;
+        public Transform pointsContainer;
+        public Vector3ArrayVariable pathPoints;
 
         [Header("Params")]
         public float meshWidth;
@@ -15,18 +16,28 @@
         private MeshFilter mf;
         private MeshRenderer mr;
         private GameObject meshContainer;
+        private Vector3[] points;
 
         public void ConstructFakeMesh () {
             if ( meshContainer )
                 DestroyImmediate( meshContainer );
             meshContainer = new GameObject( "Path Mesh Container" );
             meshContainer.transform.SetParent( transform );
+
+            int pointsCount = pointsContainer.childCount;
+            points = new Vector3[pointsCount];
+            for ( int i = 0; i < pointsCount; i++ ) {
+                points[i] = pointsContainer.GetChild( i ).position;
+            }
+
             for ( int i = 0; i < points.Length - 1; i++ ) {
-                Vector3 orientationToNext = (points[i+1].position -points[i].position);
-                GameObject g = Instantiate( pathPiecePrefab, points[i].position + orientationToNext/2, Quaternion.LookRotation(orientationToNext.normalized, Vector3.up ));
+                Vector3 orientationToNext = (points[i+1] -points[i]);
+                GameObject g = Instantiate( pathPiecePrefab, points[i] + orientationToNext/2, Quaternion.LookRotation(orientationToNext.normalized, Vector3.up ));
                 g.transform.localScale = new Vector3( meshWidth, meshHeight, orientationToNext.magnitude + meshWidth );
                 g.transform.SetParent( meshContainer.transform );
             }
+
+            pathPoints.Value = points;
         }
 
         public void ConstructMesh () {
@@ -48,28 +59,28 @@
 
             for ( int i = 0; i < points.Length; i++ ) {
                 if ( i == 0 ) {
-                    Vector3 dirToNextPoint = ( points[ i + 1 ].position - points[i].position ).normalized;
-                    Vector3 p = points[i].position - dirToNextPoint * meshWidth / 2;
-                    Vector3 dirToP = (points[i].position - p ).normalized;
+                    Vector3 dirToNextPoint = ( points[ i + 1 ] - points[i] ).normalized;
+                    Vector3 p = points[i] - dirToNextPoint * meshWidth / 2;
+                    Vector3 dirToP = (points[i] - p ).normalized;
                     verts.Add( p - Vector3.Cross( dirToP, Vector3.up ) * meshWidth / 2 );
                     verts.Add( p + Vector3.Cross( dirToP, Vector3.up ) * meshWidth / 2 );
                     normals.Add( Vector3.up );
                     normals.Add( Vector3.up );
                 }
                 else if ( i == points.Length - 1 ) {
-                    Vector3 dirToPrevPoint = ( points[ i - 1 ].position - points[i].position ).normalized;
-                    Vector3 p = points[i].position - dirToPrevPoint * meshWidth / 2;
-                    Vector3 dirToP = (points[i].position - p ).normalized;
+                    Vector3 dirToPrevPoint = ( points[ i - 1 ] - points[i] ).normalized;
+                    Vector3 p = points[i] - dirToPrevPoint * meshWidth / 2;
+                    Vector3 dirToP = (points[i] - p ).normalized;
                     verts.Add( p - Vector3.Cross( dirToP, Vector3.up ) * meshWidth / 2 );
                     verts.Add( p + Vector3.Cross( dirToP, Vector3.up ) * meshWidth / 2 );
                     normals.Add( Vector3.up );
                     normals.Add( Vector3.up );
                 }
                 else {
-                    Vector3 dirToNextPoint = ( points[ i + 1 ].position - points[i].position ).normalized;
-                    Vector3 dirToPrevPoint = ( points[ i - 1 ].position - points[i].position ).normalized;
-                    verts.Add( points[i].position + new Vector3( dirToNextPoint.x * meshWidth / 2, 0, dirToPrevPoint.y * meshWidth / 2 ) );
-                    verts.Add( points[i].position - new Vector3( dirToNextPoint.x * meshWidth / 2, 0, dirToPrevPoint.y * meshWidth / 2 ) );
+                    Vector3 dirToNextPoint = ( points[ i + 1 ] - points[i] ).normalized;
+                    Vector3 dirToPrevPoint = ( points[ i - 1 ] - points[i] ).normalized;
+                    verts.Add( points[i] + new Vector3( dirToNextPoint.x * meshWidth / 2, 0, dirToPrevPoint.y * meshWidth / 2 ) );
+                    verts.Add( points[i] - new Vector3( dirToNextPoint.x * meshWidth / 2, 0, dirToPrevPoint.y * meshWidth / 2 ) );
                     normals.Add( Vector3.up );
                     normals.Add( Vector3.up );
                 }
@@ -96,9 +107,9 @@
             if ( points == null )
                 return;
             for ( int i = 0; i < points.Length; i++ ) {
-                Gizmos.DrawSphere( points[i].position, 1 );
-                Vector3 target = points[Mathf.Min( i + 1, points.Length - 1)].position;
-                Gizmos.DrawLine( points[i].position, target );
+                Gizmos.DrawSphere( points[i], 1 );
+                Vector3 target = points[Mathf.Min( i + 1, points.Length - 1)];
+                Gizmos.DrawLine( points[i], target );
             }
         }
     }
