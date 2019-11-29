@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
+using Deirin.EB;
 
 [CustomEditor( typeof( CollisionChecker ) )]
 public class CollisionCheckerEditor : Editor {

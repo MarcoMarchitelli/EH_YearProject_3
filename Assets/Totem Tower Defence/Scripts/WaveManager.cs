@@ -2,11 +2,11 @@
     using System.Collections;
     using UnityEngine;
     using UnityEngine.Events;
+    using Deirin.Utilities;
 
     public class WaveManager : MonoBehaviour {
         [Header("Refs")]
         public Enemy enemyPrefab;
-        public TurretMenu turretMenu;
 
         [Header("Params")]
         public WaveData waveData;
@@ -36,7 +36,7 @@
 
             OnPlaceTimeStart.Invoke( waveData.placeTime );
 
-            while ( counting && timer < waveData.placeTime ) {
+            while ( counting == true && timer < waveData.placeTime ) {
                 timer += Time.deltaTime;
                 yield return null;
             }
@@ -51,7 +51,4 @@
             }
         }
     }
-
-    [System.Serializable]
-    public class UnityFloatEvent : UnityEvent<float> { }
 }

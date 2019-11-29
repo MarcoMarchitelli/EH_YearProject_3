@@ -1,4 +1,5 @@
 ﻿using UnityEditor;
+using Deirin.EB;
 
 [CustomEditor( typeof( MouseFollower ) )]
 public class MouseFollowerEditor : Editor {
@@ -13,10 +14,12 @@ public class MouseFollowerEditor : Editor {
         so.Update();
 
         SerializedProperty target = so.FindProperty("target");
+        SerializedProperty startFollowingOnSetup = so.FindProperty("startFollowingOnSetup");
         SerializedProperty useMainCam = so.FindProperty("useMainCam");
         SerializedProperty followMode = so.FindProperty("followMode");
 
         EditorGUILayout.PropertyField( target );
+        EditorGUILayout.PropertyField( startFollowingOnSetup );
         EditorGUILayout.PropertyField( useMainCam );
         if ( !useMainCam.boolValue ) {
             SerializedProperty cam = so.FindProperty("cam");

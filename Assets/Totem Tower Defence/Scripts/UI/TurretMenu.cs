@@ -7,16 +7,28 @@
         [Header("Refs")]
         public TurretModuleUI turretUIPrefab;
         public CustomToggle_Canvas toggle;
+        public Transform moduleUIsContainer;
 
         List<TurretModule> turretModules;
         List<TurretModuleUI> turretModuleUIs = new List<TurretModuleUI>();
 
         public void SetTurrets ( List<TurretModule> turrets ) {
             this.turretModules = turrets;
+            UpdateUI();
         }
 
         public void UpdateUI () {
+            for ( int i = 0; i < moduleUIsContainer.childCount; i++ ) {
+                Destroy( moduleUIsContainer.GetChild( i ).gameObject );
+            }
 
+            turretModuleUIs.Clear();
+
+            for ( int i = 0; i < turretModules.Count; i++ ) {
+                TurretModuleUI ui = Instantiate(turretUIPrefab, moduleUIsContainer);
+                ui.turretPrefab = turretModules[i];
+                turretModuleUIs.Add( ui );
+            }
         }
 
         /// <summary>

@@ -1,4 +1,4 @@
-﻿namespace TotemTD {
+﻿namespace Deirin.EB {
     using UnityEngine;
 
     public class Billboard : BaseBehaviour {
@@ -6,10 +6,10 @@
         public Camera cam;
 
         [Header("Params")]
-        public bool searchCameraOnAwake = true;
+        public bool searchMainCameraOnAwake = true;
 
         public override void OnAwake () {
-            if ( searchCameraOnAwake )
+            if ( searchMainCameraOnAwake )
                 cam = Camera.main;
         }
 

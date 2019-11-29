@@ -326,12 +326,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 502182301673752432}
-  - component: {fileID: 6083367689940762869}
+  - component: {fileID: 1960339868395782538}
   - component: {fileID: 502182301673752436}
   - component: {fileID: 502182301673752435}
   - component: {fileID: 4705415663095425980}
   m_Layer: 0
-  m_Name: Turret
+  m_Name: Turret 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -354,7 +354,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6083367689940762869
+--- !u!114 &1960339868395782538
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -363,15 +363,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 502182301673752433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c38c9bfb473d2ab41b15856efdec86af, type: 3}
+  m_Script: {fileID: 11500000, guid: 972a880ac1f4cbe498c4ba80379d5deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   setupOnAwake: 1
-  data: {fileID: 0}
-  lookAt: {fileID: 3787284235473189020}
-  shooter: {fileID: 502182301673752435}
-  enemyDetector: {fileID: 502182302662718804}
-  modDisplaysContainer: {fileID: 0}
 --- !u!114 &502182301673752436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,13 +379,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ceb1ab4d1d54b4d80a8f3bc8686119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellMask:
+  placeableMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 512
+  previewMask:
+    serializedVersion: 2
+    m_Bits: 1
   placeableColor: {r: 0.33456254, g: 1, b: 0, a: 1}
   unplaceableColor: {r: 1, g: 0, b: 0, a: 1}
-  placementEvent: {fileID: 11400000, guid: 8cc1dcca6cc97484baa14dd6d5cc91a4, type: 2}
-  deplacementEvent: {fileID: 11400000, guid: 7253143aa67890a44a0583c8dabad5f1, type: 2}
   OnPlacement:
     m_PersistentCalls:
       m_Calls:
@@ -438,6 +434,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnDeplacement:
+    m_PersistentCalls:
+      m_Calls: []
   OnCurrentCellChange:
     m_PersistentCalls:
       m_Calls:
@@ -464,9 +463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d9767bc99adfbd4c8088b781e66e2c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 6237022291049161715, guid: fd153714b69d044469a1e1ec3957dd27,
-    type: 3}
-  bulletData: {fileID: 0}
+  projectilePrefab: {fileID: 0}
   spawnPoint: {fileID: 4834522308301607252}
   fireRate: 0.5
   OnShoot:
@@ -483,7 +480,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  turretMods: []
 --- !u!114 &4705415663095425980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,11 +494,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 502182301673752432}
   followMode: 0
-  useMainCam: 0
+  startFollowingOnSetup: 1
+  useMainCam: 1
   cam: {fileID: 0}
   positionOffset: {x: 0, y: 0, z: 0}
   planeCenter: {x: 0, y: 0, z: 0}
-  planeNormal: {x: 0, y: 0, z: 0}
+  planeNormal: {x: 0, y: 1, z: 0}
   castMask:
     serializedVersion: 2
     m_Bits: 0

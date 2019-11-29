@@ -17,4 +17,7 @@
             response.Invoke( t );
         }
     }
+
+    [System.Serializable]
+    public class UnityTurretEvent : UnityEngine.Events.UnityEvent<TurretModule> { }
 }

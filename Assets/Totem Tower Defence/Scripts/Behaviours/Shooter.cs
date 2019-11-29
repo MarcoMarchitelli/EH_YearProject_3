@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.Events;
+    using Deirin.EB;
 
     public class Shooter : BaseBehaviour {
         [Header("Refs")]

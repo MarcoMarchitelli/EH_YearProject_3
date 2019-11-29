@@ -2,6 +2,7 @@
     using UnityEngine;
     using UnityEngine.Events;
     using System.Collections;
+    using Deirin.EB;
 
     public class Placeable : BaseBehaviour {
         [Header("Params")]

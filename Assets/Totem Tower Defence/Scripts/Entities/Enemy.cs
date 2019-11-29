@@ -2,6 +2,7 @@
     using UnityEngine;
     using DG.Tweening;
     using System.Collections.Generic;
+    using Deirin.EB;
 
     public class Enemy : BaseEntity {
         //public System.Action<float> OnLifeChange;

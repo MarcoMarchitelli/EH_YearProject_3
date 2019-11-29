@@ -1,4 +1,4 @@
-﻿namespace TotemTD {
+﻿namespace Deirin.EB {
     using UnityEngine;
     using UnityEngine.Events;
 

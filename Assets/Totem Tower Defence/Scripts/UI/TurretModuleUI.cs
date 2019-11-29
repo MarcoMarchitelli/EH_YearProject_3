@@ -14,7 +14,7 @@
         public UnityEvent OnTurretSelection;
 
         public void SelectTurret () {
-            TurretModule t = Instantiate( turretPrefab, transform.position, Quaternion.identity );
+            Instantiate( turretPrefab, transform.position, Quaternion.identity );
             OnTurretSelection.Invoke();
         }
     }

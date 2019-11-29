@@ -2,6 +2,7 @@
     using UnityEngine;
     using UnityEngine.Events;
     using System.Collections.Generic;
+    using Deirin.EB;
 
     [RequireComponent( typeof( SphereCollider ) )]
     public class EnemyDetector : BaseBehaviour {
