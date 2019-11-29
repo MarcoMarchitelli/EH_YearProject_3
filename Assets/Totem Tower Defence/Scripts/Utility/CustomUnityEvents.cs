@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
+using TotemTD;
 
 public static class CustomUnityEvents {
 
@@ -12,3 +11,9 @@ public class UnityStringEvent : UnityEvent<string> { }
 
 [System.Serializable]
 public class UnityComponentEvent : UnityEvent<Component> { }
+
+[System.Serializable]
+public class UnityTurretEvent : UnityEvent<TurretModule> { }
+
+[System.Serializable]
+public class UnityVector3ArrayEvent : UnityEvent<Vector3[]> { }

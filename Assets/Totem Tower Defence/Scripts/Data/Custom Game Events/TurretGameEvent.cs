@@ -4,7 +4,7 @@
 
     [CreateAssetMenu( menuName = "Custom Game Events/Turret Game Event" )]
     public class TurretGameEvent : ScriptableObject {
-        public Turret turret;
+        public TurretModule turret;
         private List<TurretGameEventListener> listeners = new List<TurretGameEventListener>();
 
         public void Subscribe ( TurretGameEventListener listener ) {
@@ -21,7 +21,7 @@
             }
         }
 
-        public void Invoke ( Turret t ) {
+        public void Invoke ( TurretModule t ) {
             for ( int i = 0; i < listeners.Count; i++ ) {
                 listeners[i].OnInvoke( t );
             }

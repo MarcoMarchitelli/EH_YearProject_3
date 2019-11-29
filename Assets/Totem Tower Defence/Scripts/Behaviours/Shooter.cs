@@ -6,8 +6,7 @@
 
     public class Shooter : BaseBehaviour {
         [Header("Refs")]
-        public Bullet bulletPrefab;
-        public BulletData bulletData;
+        public Projectile projectilePrefab;
         public Transform spawnPoint;
 
         [Header("Params")]
@@ -15,8 +14,6 @@
 
         [Header("Events")]
         public UnityEvent OnShoot;
-
-        public List<TurretModData> turretMods = new List<TurretModData>();
 
         private bool shooting;
 
@@ -32,22 +29,10 @@
             }
         }
 
-        public void AddMod ( TurretModData mod ) {
-            turretMods.Add( mod );
-        }
-
-        public void RemoveMod ( TurretModData mod ) {
-            turretMods.Remove( mod );
-        }
-
         IEnumerator ShootSequence () {
             shooting = true;
             while ( true ) {
-                Bullet b = Instantiate( bulletPrefab, spawnPoint.position, Quaternion.LookRotation( spawnPoint.forward ) );
-                b.data = bulletData;
-                foreach ( var item in turretMods ) {
-                    b.AddMod( item );
-                }
+                Projectile b = Instantiate( projectilePrefab, spawnPoint.position, Quaternion.LookRotation( spawnPoint.forward ) );
                 OnShoot.Invoke();
                 yield return new WaitForSeconds( 1f / fireRate );
             }

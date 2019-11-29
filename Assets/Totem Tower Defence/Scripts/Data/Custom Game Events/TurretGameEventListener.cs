@@ -13,7 +13,7 @@
             gameEvent.Unsubscribe( this );
         }
 
-        public void OnInvoke ( Turret t ) {
+        public void OnInvoke ( TurretModule t ) {
             response.Invoke( t );
         }
     }
