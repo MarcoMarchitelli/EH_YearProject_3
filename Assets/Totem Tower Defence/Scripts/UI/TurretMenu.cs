@@ -26,7 +26,8 @@
 
             for ( int i = 0; i < turretModules.Count; i++ ) {
                 TurretModuleUI ui = Instantiate(turretUIPrefab, moduleUIsContainer);
-                ui.turretPrefab = turretModules[i];
+                ui.SetTurretModule( turretModules[i] );
+                ui.UpdateUI();
                 turretModuleUIs.Add( ui );
             }
         }
