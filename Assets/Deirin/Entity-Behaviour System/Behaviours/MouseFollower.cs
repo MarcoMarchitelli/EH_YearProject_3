@@ -20,6 +20,8 @@
         public LayerMask castMask;
         public float rayMaxDistance;
 
+        private Coroutine plane, raycast, screen;
+
         protected override void CustomSetup () {
             if ( useMainCam )
                 cam = Camera.main;
@@ -31,21 +33,21 @@
             switch ( followMode ) {
                 case FollowMode.PlaneCasting:
                 if ( value )
-                    StartCoroutine( PlaneCastingRoutine() );
+                    plane = StartCoroutine( PlaneCastingRoutine() );
                 else
-                    StopCoroutine( PlaneCastingRoutine() );
+                    StopCoroutine( plane );
                 break;
                 case FollowMode.RayCasting:
                 if ( value )
-                    StartCoroutine( RayCastingRoutine() );
+                    raycast = StartCoroutine( RayCastingRoutine() );
                 else
-                    StopCoroutine( RayCastingRoutine() );
+                    StopCoroutine( raycast );
                 break;
                 case FollowMode.ScreenSpace:
                 if ( value )
-                    StartCoroutine( ScreenSpaceRoutine() );
+                    screen =  StartCoroutine( ScreenSpaceRoutine() );
                 else
-                    StopCoroutine( ScreenSpaceRoutine() );
+                    StopCoroutine( screen );
                 break;
             }
         }

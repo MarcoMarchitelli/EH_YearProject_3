@@ -3,6 +3,7 @@
     using UnityEngine.Events;
     using System.Collections;
     using Deirin.EB;
+    using Deirin.Utilities;
 
     public class Placeable : BaseBehaviour {
         [Header("Params")]
@@ -10,38 +11,53 @@
         public LayerMask previewMask;
         public Color placeableColor;
         public Color unplaceableColor;
+        public bool setActiveOnSetup;
 
         [Header("Events")]
         public UnityEvent OnPlacement;
         public UnityEvent OnDeplacement;
-        public UnityColorEvent OnCurrentCellChange;
+        public UnityColorEvent OnPlaceStateChange;
 
         bool placed, onContainer;
         Camera cam;
         TurretContainer currentTurretContainer;
         Quaternion targetRot;
+        Coroutine placementCoroutine;
+
+        bool OnContainer {
+            get => onContainer;
+            set {
+                if ( onContainer != value ) {
+                    onContainer = value;
+                    OnPlaceStateChange.Invoke( onContainer ? placeableColor : unplaceableColor );
+                }
+            }
+        }
 
         #region Overrides
         protected override void CustomSetup () {
             cam = Camera.main;
+            OnContainer = false;
+            if ( setActiveOnSetup )
+                Active( true );
         }
 
-        public override void OnLateUpdate () {
-            if ( onContainer == true )
-                return;
+        //public override void OnLateUpdate () {
+        //    if ( OnContainer == true )
+        //        return;
 
-            Quaternion startRotation = transform.localRotation;
-            transform.localRotation = Quaternion.identity;
+        //    Quaternion startRotation = transform.localRotation;
+        //    transform.localRotation = Quaternion.identity;
 
-            transform.localRotation = Quaternion.Slerp( startRotation, targetRot, 1 - Mathf.Exp( -230f * Time.deltaTime ) );
-        }
+        //    transform.localRotation = Quaternion.Slerp( startRotation, targetRot, 1 - Mathf.Exp( -230f * Time.deltaTime ) );
+        //}
         #endregion
 
         public void Active ( bool value ) {
             if ( value )
-                StartCoroutine( PlacementRoutine() );
+                placementCoroutine = StartCoroutine( PlacementRoutine() );
             else
-                StopCoroutine( PlacementRoutine() );
+                StopCoroutine( placementCoroutine );
         }
 
         IEnumerator PlacementRoutine () {
@@ -49,7 +65,7 @@
                 RayCast();
                 if ( placed == false && Input.GetMouseButtonUp( 0 ) )
                     TryPlace();
-                else if ( !placed && Input.GetMouseButtonUp( 1 ) )
+                else if ( placed == true && Input.GetMouseButtonUp( 1 ) )
                     OnDeplacement.Invoke();
                 yield return null;
             }
@@ -58,18 +74,21 @@
         private void RayCast () {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if ( Physics.Raycast( ray, out hit, 500f, placeableMask ) ) { //we hit turret container                
-                onContainer = hit.collider.TryGetComponent( out currentTurretContainer );
+            if ( Physics.Raycast( ray, out hit, 500f, placeableMask ) ) { //we hit turret container 
+                currentTurretContainer = hit.collider.GetComponent<TurretContainer>();
+                OnContainer = currentTurretContainer;
+                //onContainer = hit.collider.TryGetComponent( out currentTurretContainer );
             }
             else if ( Physics.Raycast( ray, out hit, 500f, previewMask ) ) {
-                onContainer = false;
+                currentTurretContainer = null;
+                OnContainer = false;
                 transform.position = hit.point;
                 targetRot = Quaternion.LookRotation( transform.forward, hit.normal );
             }
         }
 
         private void TryPlace () {
-            if ( onContainer == false )
+            if ( OnContainer == false )
                 return;
             if ( currentTurretContainer.AddModule( Entity as TurretModule ) ) {
                 placed = true;
@@ -77,7 +96,4 @@
             }
         }
     }
-
-    [System.Serializable]
-    public class UnityColorEvent : UnityEvent<Color> { }
 }

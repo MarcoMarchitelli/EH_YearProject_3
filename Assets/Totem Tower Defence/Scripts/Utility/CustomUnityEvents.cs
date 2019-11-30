@@ -19,5 +19,8 @@
     public class UnityComponentEvent : UnityEvent<Component> { }
 
     [System.Serializable]
-    public class UnityVector3ArrayEvent : UnityEvent<Vector3[]> { } 
+    public class UnityVector3ArrayEvent : UnityEvent<Vector3[]> { }
+
+    [System.Serializable]
+    public class UnityColorEvent : UnityEvent<Color> { }
 }

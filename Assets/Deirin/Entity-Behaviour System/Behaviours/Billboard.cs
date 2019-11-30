@@ -14,7 +14,7 @@
         }
 
         public override void OnUpdate () {
-            transform.LookAt( cam.transform );
+            transform.LookAt( -cam.transform.position );
         }
     }
 }

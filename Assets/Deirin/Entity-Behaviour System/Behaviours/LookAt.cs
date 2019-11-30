@@ -7,6 +7,9 @@
         public Transform target;
 
         [Header("Params")]
+        public bool X;
+        public bool Y;
+        public bool Z;
         public Vector3 targetOffset;
         public float turnSpeed;
 
@@ -21,6 +24,7 @@
                 return;
 
             Vector3 targetPos = target.position + targetOffset;
+            targetPos = new Vector3( X ? targetPos.x : transform.position.x, Y ? targetPos.y : transform.position.y, Z ? targetPos.z : transform.position.z );
             Quaternion currentRotation = transform.localRotation;
             transform.localRotation = Quaternion.identity;
             Quaternion targetRotation = Quaternion.LookRotation((targetPos - transform.position).normalized, transform.up);

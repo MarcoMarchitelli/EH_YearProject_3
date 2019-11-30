@@ -30,6 +30,17 @@
             return obj;
         }
 
+        public bool TryGetBehaviour<T> ( out T b ) where T : BaseBehaviour {
+            b = null;
+            for ( int i = 0; i < Behaviours.Length; i++ ) {
+                if ( Behaviours[i].GetType() is T ) {
+                    b = Behaviours[i] as T;
+                    break;
+                }
+            }
+            return b != null;
+        }
+
         public List<T> GetBehaviours<T> () where T : BaseBehaviour {
             List<T> objs = new List<T>();
             for ( int i = 0; i < Behaviours.Length; i++ ) {
@@ -80,5 +91,5 @@
                 Behaviours[i].OnFixedUpdate();
             }
         }
-    } 
+    }
 }

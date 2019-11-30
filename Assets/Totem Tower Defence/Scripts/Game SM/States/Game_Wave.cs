@@ -3,7 +3,7 @@
         public override void Enter () {
             //wave phase graphics
             gameData.phaseUI.SetTexts( "WAVE", "INCOMING" );
-            gameData.phaseUI.Play( 1, () =>
+            gameData.phaseUI.Play( .5f, () =>
                 gameData.phaseUI.Rewind(() => { 
                     //close time graphics
                     gameData.placeTimeUI.gameObject.SetActive( false );

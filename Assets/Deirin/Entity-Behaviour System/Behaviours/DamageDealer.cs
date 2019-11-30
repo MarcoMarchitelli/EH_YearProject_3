@@ -10,11 +10,12 @@
         [Header("Events")]
         public UnityEvent OnDamageDealt;
 
-        DamageReceiver target;
+        DamageReceiver damageReceiver;
 
         private void OnTriggerEnter ( Collider other ) {
-            if(other.TryGetComponent(out target ) ) {
-                target.Damage( damage );
+            damageReceiver = other.GetComponentInChildren<DamageReceiver>();
+            if ( damageReceiver ) {
+                damageReceiver.Damage( damage );
                 OnDamageDealt.Invoke();
             }
         }
