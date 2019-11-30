@@ -12,9 +12,11 @@
 
         public override void OnInspectorGUI () {
             base.OnInspectorGUI();
-            if ( GUILayout.Button( "Generate Mesh" ) )
-                p.ConstructMesh();
-            if ( GUILayout.Button( "Generate Fake Mesh" ) )
+            //if ( GUILayout.Button( "Generate Mesh" ) )
+            //    p.ConstructMesh();
+            if ( p.autoGenerateFakeMesh )
+                p.ConstructFakeMesh();
+            else if ( GUILayout.Button( "Generate Fake Mesh" ) )
                 p.ConstructFakeMesh();
         }
     }

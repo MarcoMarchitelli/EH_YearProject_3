@@ -12,6 +12,7 @@
         [Header("Params")]
         public float meshWidth;
         public float meshHeight;
+        public bool autoGenerateFakeMesh;
 
         private MeshFilter mf;
         private MeshRenderer mr;
