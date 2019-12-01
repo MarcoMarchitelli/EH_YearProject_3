@@ -1,6 +1,7 @@
 ﻿namespace Deirin.Utilities {
     using UnityEngine;
     using UnityEngine.Events;
+    using Deirin.EB;
 
     public static class CustomUnityEvents {
 
@@ -23,4 +24,10 @@
 
     [System.Serializable]
     public class UnityColorEvent : UnityEvent<Color> { }
+
+    [System.Serializable]
+    public class UnityEntityEvent : UnityEvent<BaseEntity> { }
+
+    [System.Serializable]
+    public class UnityBehaviourEvent : UnityEvent<BaseBehaviour> { }
 }

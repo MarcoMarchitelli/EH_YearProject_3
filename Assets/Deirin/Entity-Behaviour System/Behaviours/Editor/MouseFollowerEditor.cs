@@ -14,12 +14,12 @@ public class MouseFollowerEditor : Editor {
         so.Update();
 
         SerializedProperty target = so.FindProperty("target");
-        SerializedProperty startFollowingOnSetup = so.FindProperty("startFollowingOnSetup");
+        SerializedProperty startFollowingOnAwake = so.FindProperty("startFollowingOnAwake");
         SerializedProperty useMainCam = so.FindProperty("useMainCam");
         SerializedProperty followMode = so.FindProperty("followMode");
 
         EditorGUILayout.PropertyField( target );
-        EditorGUILayout.PropertyField( startFollowingOnSetup );
+        EditorGUILayout.PropertyField( startFollowingOnAwake );
         EditorGUILayout.PropertyField( useMainCam );
         if ( !useMainCam.boolValue ) {
             SerializedProperty cam = so.FindProperty("cam");

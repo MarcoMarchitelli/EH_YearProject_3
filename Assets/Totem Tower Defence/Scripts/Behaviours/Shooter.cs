@@ -1,9 +1,8 @@
 ﻿namespace TotemTD {
     using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
-    using UnityEngine.Events;
     using Deirin.EB;
+    using Deirin.Utilities;
 
     public class Shooter : BaseBehaviour {
         [Header("Refs")]
@@ -14,7 +13,7 @@
         public float fireRate;
 
         [Header("Events")]
-        public UnityEvent OnShoot;
+        public UnityEntityEvent OnShoot;
 
         private bool shooting;
 
@@ -24,17 +23,14 @@
         }
 
         public void StopShooting () {
-            if ( shooting ) {
-                StopAllCoroutines();
-                shooting = false;
-            }
+            shooting = false;
         }
 
         IEnumerator ShootSequence () {
             shooting = true;
-            while ( true ) {
+            while ( shooting ) {
                 Projectile b = Instantiate( projectilePrefab, spawnPoint.position, Quaternion.LookRotation( spawnPoint.forward ) );
-                OnShoot.Invoke();
+                OnShoot.Invoke( b );
                 yield return new WaitForSeconds( 1f / fireRate );
             }
         }

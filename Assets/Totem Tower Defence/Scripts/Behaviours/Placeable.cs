@@ -11,7 +11,7 @@
         public LayerMask previewMask;
         public Color placeableColor;
         public Color unplaceableColor;
-        public bool setActiveOnSetup;
+        public bool setActiveOnAwake;
 
         [Header("Events")]
         public UnityEvent OnPlacement;
@@ -35,22 +35,12 @@
         }
 
         #region Overrides
-        protected override void CustomSetup () {
+        public override void OnAwake () {
             cam = Camera.main;
             OnContainer = false;
-            if ( setActiveOnSetup )
+            if ( setActiveOnAwake )
                 Active( true );
         }
-
-        //public override void OnLateUpdate () {
-        //    if ( OnContainer == true )
-        //        return;
-
-        //    Quaternion startRotation = transform.localRotation;
-        //    transform.localRotation = Quaternion.identity;
-
-        //    transform.localRotation = Quaternion.Slerp( startRotation, targetRot, 1 - Mathf.Exp( -230f * Time.deltaTime ) );
-        //}
         #endregion
 
         public void Active ( bool value ) {

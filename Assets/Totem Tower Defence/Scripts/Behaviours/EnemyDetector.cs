@@ -8,10 +8,7 @@
     public class EnemyDetector : BaseBehaviour {
         [Header("Refs")]
         public SphereCollider sphereCollider;
-        public GameObject rangeGraphicsBorder;
         public GameObject rangeGraphics;
-        public Material rangeBorderMat;
-        public Material rangeMat;
 
         [Header("Params")]
         public bool active;
@@ -26,7 +23,6 @@
 
         protected override void CustomSetup () {
             sphereCollider.radius = range;
-            rangeGraphicsBorder.transform.localScale = Vector3.one * ( range + 1 );
             rangeGraphics.transform.localScale = Vector3.one * ( range + 2 );
         }
 
@@ -52,11 +48,6 @@
 
         public void Activate ( bool value ) {
             active = value;
-        }
-
-        public void ChangeColor ( Color color ) {
-            rangeMat.SetColor( "_Color", color );
-            rangeBorderMat.SetColor( "_Color", color );
         }
 
         private void AddEnemy ( Enemy e ) {

@@ -11,7 +11,7 @@
         [Header("Follow Mode")]
         public FollowMode followMode;
 
-        public bool startFollowingOnSetup;
+        public bool startFollowingOnAwake;
         public bool useMainCam;
         public Camera cam;
         public Vector3 positionOffset;
@@ -22,10 +22,10 @@
 
         private Coroutine plane, raycast, screen;
 
-        protected override void CustomSetup () {
+        public override void OnAwake () {
             if ( useMainCam )
                 cam = Camera.main;
-            if ( startFollowingOnSetup )
+            if ( startFollowingOnAwake )
                 Follow( true );
         }
 
