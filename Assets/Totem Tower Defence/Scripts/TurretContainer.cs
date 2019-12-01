@@ -22,6 +22,11 @@
 
         }
 
+        public void PreviewPosition ( TurretModule module ) {
+            module.transform.position = transform.position + Vector3.up * moduleHeight * ( modules.Count - 1 );
+            module.transform.localRotation = Quaternion.identity;
+        }
+
         private void Place ( TurretModule module ) {
             module.transform.position = transform.position + Vector3.up * moduleHeight * ( modules.Count - 1 );
             module.transform.localRotation = Quaternion.identity;

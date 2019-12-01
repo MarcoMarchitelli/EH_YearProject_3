@@ -6,12 +6,16 @@
         [Header("Refs")]
         public Renderer circleRange;
         public Renderer circleRangeBorder;
+        public bool useStartColor;
+        public Color startColor;
 
         private MaterialPropertyBlock circleRangeMpb, circleRangeBorderMpb;
 
         public override void OnAwake () {
             circleRangeMpb = new MaterialPropertyBlock();
             circleRangeBorderMpb = new MaterialPropertyBlock();
+            if ( useStartColor )
+                SetColor( startColor );
         }
 
         public void SetColor ( Color color ) {

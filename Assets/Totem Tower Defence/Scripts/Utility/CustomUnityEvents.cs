@@ -17,6 +17,9 @@
     public class UnityStringEvent : UnityEvent<string> { }
 
     [System.Serializable]
+    public class UnityBoolEvent : UnityEvent<bool> { }
+
+    [System.Serializable]
     public class UnityComponentEvent : UnityEvent<Component> { }
 
     [System.Serializable]

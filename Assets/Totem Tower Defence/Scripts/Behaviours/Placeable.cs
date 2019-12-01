@@ -16,7 +16,7 @@
         [Header("Events")]
         public UnityEvent OnPlacement;
         public UnityEvent OnDeplacement;
-        public UnityColorEvent OnPlaceStateChange;
+        public UnityColorEvent OnPlaceStateChangeColor;
 
         bool placed, onContainer;
         Camera cam;
@@ -29,7 +29,9 @@
             set {
                 if ( onContainer != value ) {
                     onContainer = value;
-                    OnPlaceStateChange.Invoke( onContainer ? placeableColor : unplaceableColor );
+                    if ( onContainer )
+                        currentTurretContainer.PreviewPosition( Entity as TurretModule );
+                    OnPlaceStateChangeColor.Invoke( onContainer ? placeableColor : unplaceableColor );
                 }
             }
         }
@@ -67,7 +69,6 @@
             if ( Physics.Raycast( ray, out hit, 500f, placeableMask ) ) { //we hit turret container 
                 currentTurretContainer = hit.collider.GetComponent<TurretContainer>();
                 OnContainer = currentTurretContainer;
-                //onContainer = hit.collider.TryGetComponent( out currentTurretContainer );
             }
             else if ( Physics.Raycast( ray, out hit, 500f, previewMask ) ) {
                 currentTurretContainer = null;
