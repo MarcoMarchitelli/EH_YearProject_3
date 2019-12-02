@@ -17,6 +17,7 @@
         public UnityEvent OnPlacement;
         public UnityEvent OnDeplacement;
         public UnityColorEvent OnPlaceStateChangeColor;
+        public UnityBoolEvent OnPlaceStateChangeBool;
 
         bool placed, onContainer;
         Camera cam;
@@ -29,8 +30,10 @@
             set {
                 if ( onContainer != value ) {
                     onContainer = value;
-                    if ( onContainer )
+                    if ( onContainer ) {
                         currentTurretContainer.PreviewPosition( Entity as TurretModule );
+                        OnPlaceStateChangeBool.Invoke( onContainer );
+                    }
                     OnPlaceStateChangeColor.Invoke( onContainer ? placeableColor : unplaceableColor );
                 }
             }

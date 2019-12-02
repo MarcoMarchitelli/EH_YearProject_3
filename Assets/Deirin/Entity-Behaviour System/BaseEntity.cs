@@ -21,11 +21,18 @@
 
         }
 
+        /// <summary>
+        /// Returns the first behaviour found of the specified type (null if none is found).
+        /// </summary>
+        /// <typeparam name="T">Behaviour class type</typeparam>
+        /// <returns></returns>
         public T GetBehaviour<T> () where T : BaseBehaviour {
             T obj = null;
             for ( int i = 0; i < Behaviours.Length; i++ ) {
-                if ( Behaviours[i].GetType() is T )
+                if ( Behaviours[i].GetType() is T ) {
                     obj = Behaviours[i] as T;
+                    break;
+                }
             }
             return obj;
         }

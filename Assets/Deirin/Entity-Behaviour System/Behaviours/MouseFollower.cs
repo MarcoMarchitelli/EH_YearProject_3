@@ -52,6 +52,29 @@
             }
         }
 
+        public void InverseFollow ( bool value ) {
+            switch ( followMode ) {
+                case FollowMode.PlaneCasting:
+                if ( value == false )
+                    plane = StartCoroutine( PlaneCastingRoutine() );
+                else
+                    StopCoroutine( plane );
+                break;
+                case FollowMode.RayCasting:
+                if ( value == false )
+                    raycast = StartCoroutine( RayCastingRoutine() );
+                else
+                    StopCoroutine( raycast );
+                break;
+                case FollowMode.ScreenSpace:
+                if ( value == false )
+                    screen = StartCoroutine( ScreenSpaceRoutine() );
+                else
+                    StopCoroutine( screen );
+                break;
+            }
+        }
+
         IEnumerator ScreenSpaceRoutine () {
             if ( !target )
                 yield break;
