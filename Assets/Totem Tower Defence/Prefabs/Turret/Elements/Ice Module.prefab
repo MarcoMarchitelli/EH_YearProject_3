@@ -229,7 +229,6 @@ GameObject:
   - component: {fileID: 4071561350366188397}
   - component: {fileID: 4071561350366188398}
   - component: {fileID: 4071561350366188399}
-  - component: {fileID: 4071561350366188392}
   - component: {fileID: 4071561350366188393}
   - component: {fileID: 636695229254752036}
   m_Layer: 0
@@ -347,19 +346,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Deirin.Utilities.UnityColorEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &4071561350366188392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4071561350366188394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79953859ce491404c8c912b4dd577f96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  element: {fileID: 11400000, guid: 5368107dc977401498dc0d33e3ee33e0, type: 2}
 --- !u!114 &4071561350366188393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,6 +480,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4071561349021606840}
     m_Modifications:
+    - target: {fileID: 2849538729979986693, guid: 1518e5445fe8f2d4697e50f9aaf63532,
+        type: 3}
+      propertyPath: m_Name
+      value: Circle Range
+      objectReference: {fileID: 0}
     - target: {fileID: 5145882198616111151, guid: 1518e5445fe8f2d4697e50f9aaf63532,
         type: 3}
       propertyPath: startColor.r
@@ -563,11 +554,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2849538729979986693, guid: 1518e5445fe8f2d4697e50f9aaf63532,
-        type: 3}
-      propertyPath: m_Name
-      value: Circle Range
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1518e5445fe8f2d4697e50f9aaf63532, type: 3}

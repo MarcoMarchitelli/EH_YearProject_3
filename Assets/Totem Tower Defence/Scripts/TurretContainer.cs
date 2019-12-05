@@ -9,9 +9,19 @@
         public float moduleHeight;
 
         private List<TurretModule> modules = new List<TurretModule>();
+        private bool hasShooter {
+            get {
+                for ( int i = 0; i < modules.Count; i++ ) {
+                    if ( modules[i].HasBehaviour<Shooter>() )
+                        return true;
+                }
+                return false;
+            }
+        }
 
         public bool AddModule ( TurretModule module ) {
-            if ( modules.Count >= maxModules )
+            //(if we don't have space for a module) OR (the current module is not a shooter AND we don't have one).
+            if ( modules.Count >= maxModules || ( hasShooter == false && module.HasBehaviour<Shooter>() == false ) )
                 return false;
             modules.Add( module );
             Place( module );
@@ -20,11 +30,6 @@
 
         public void RemoveModule () {
 
-        }
-
-        public void PreviewPosition ( TurretModule module ) {
-            module.transform.position = transform.position + Vector3.up * moduleHeight * ( modules.Count - 1 );
-            module.transform.localRotation = Quaternion.identity;
         }
 
         private void Place ( TurretModule module ) {

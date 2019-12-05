@@ -29,7 +29,7 @@
         public T GetBehaviour<T> () where T : BaseBehaviour {
             T obj = null;
             for ( int i = 0; i < Behaviours.Length; i++ ) {
-                if ( Behaviours[i].GetType() is T ) {
+                if ( Behaviours[i] is T ) {
                     obj = Behaviours[i] as T;
                     break;
                 }
@@ -40,7 +40,7 @@
         public bool TryGetBehaviour<T> ( out T b ) where T : BaseBehaviour {
             b = null;
             for ( int i = 0; i < Behaviours.Length; i++ ) {
-                if ( Behaviours[i].GetType() is T ) {
+                if ( Behaviours[i] is T ) {
                     b = Behaviours[i] as T;
                     break;
                 }
@@ -48,10 +48,19 @@
             return b != null;
         }
 
+        public bool HasBehaviour<T> () where T : BaseBehaviour {
+            for ( int i = 0; i < Behaviours.Length; i++ ) {
+                if ( Behaviours[i] is T ) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public List<T> GetBehaviours<T> () where T : BaseBehaviour {
             List<T> objs = new List<T>();
             for ( int i = 0; i < Behaviours.Length; i++ ) {
-                if ( Behaviours[i].GetType() is T )
+                if ( Behaviours[i] is T )
                     objs.Add( Behaviours[i] as T );
             }
             return objs;
