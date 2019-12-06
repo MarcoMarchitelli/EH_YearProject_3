@@ -123,6 +123,8 @@ GameObject:
   - component: {fileID: 5384056428285394822}
   - component: {fileID: 267902806678347246}
   - component: {fileID: 3434651522411145754}
+  - component: {fileID: 5394848929931838133}
+  - component: {fileID: 3149174468593954769}
   m_Layer: 0
   m_Name: Enemy 01
   m_TagString: Untagged
@@ -280,6 +282,53 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &5394848929931838133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285193917929420043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8f91713a7130524ba51cab1689aad8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStatusApply:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnStatusRemove:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  pathPatroller: {fileID: 267902806678347246}
+--- !u!114 &3149174468593954769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285193917929420043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56b9f44a227b98b48910b92b5f8214a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStatusApply:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnStatusRemove:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  damageReceiver: {fileID: 2370915912159039557}
+  fireElement: {fileID: 0}
 --- !u!1 &2217482374318711471
 GameObject:
   m_ObjectHideFlags: 0
