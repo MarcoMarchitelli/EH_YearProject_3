@@ -17,7 +17,7 @@
         public UnityEvent OnPlacement;
         public UnityEvent OnDeplacement;
         public UnityColorEvent OnPlaceStateChangeColor;
-        //public UnityBoolEvent OnPlaceStateChangeBool;
+        public UnityTurretModuleEvent OnContainerMouseOver;
 
         bool placed, onContainer;
         Camera cam;
@@ -30,7 +30,8 @@
             set {
                 if ( onContainer != value ) {
                     onContainer = value;
-                    //OnPlaceStateChangeBool.Invoke( onContainer );
+                    if ( onContainer )
+                        OnContainerMouseOver.Invoke( Entity as TurretModule );
                     OnPlaceStateChangeColor.Invoke( onContainer ? placeableColor : unplaceableColor );
                 }
             }
@@ -66,22 +67,23 @@
         private void RayCast () {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if ( Physics.Raycast( ray, out hit, 500f, placeableMask ) ) { //we hit turret container 
+            if ( OnContainer == false && Physics.Raycast( ray, out hit, 500f, placeableMask ) ) { //we hit turret container 
                 currentTurretContainer = hit.collider.GetComponent<TurretContainer>();
                 OnContainer = currentTurretContainer;
             }
-            else if ( Physics.Raycast( ray, out hit, 500f, previewMask ) ) {
+            else if ( OnContainer == true && Physics.Raycast( ray, out hit, 500f, previewMask ) ) {
                 currentTurretContainer = null;
                 OnContainer = false;
                 transform.position = hit.point;
                 targetRot = Quaternion.LookRotation( transform.forward, hit.normal );
             }
+            print( OnContainer );
         }
 
         private void TryPlace () {
             if ( OnContainer == false )
                 return;
-            if ( currentTurretContainer.AddModule( Entity as TurretModule ) ) {
+            if ( currentTurretContainer.CanPlace( Entity as TurretModule ) ) {
                 placed = true;
                 OnPlacement.Invoke();
             }
