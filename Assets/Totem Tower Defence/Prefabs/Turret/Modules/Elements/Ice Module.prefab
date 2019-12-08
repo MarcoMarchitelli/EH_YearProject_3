@@ -232,6 +232,9 @@ GameObject:
   - component: {fileID: 4071561350366188393}
   - component: {fileID: 636695229254752036}
   - component: {fileID: 5631886549866047270}
+  - component: {fileID: -6834780158053813828}
+  - component: {fileID: -8391326451072725186}
+  - component: {fileID: 5238387806896042901}
   m_Layer: 0
   m_Name: Ice Module
   m_TagString: Untagged
@@ -268,6 +271,77 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setupOnAwake: 1
   type: 1
+  state: 0
+  OnCanBePlaced:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4583768309779922155}
+        m_MethodName: SetColor
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 636695229254752036}
+        m_MethodName: Follow
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnCannotBePlaced:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4583768309779922155}
+        m_MethodName: SetColor
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 636695229254752036}
+        m_MethodName: Follow
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnPlace:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6881095632014526401}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &4071561350366188399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,7 +362,7 @@ MonoBehaviour:
     m_Bits: 1025
   placeableColor: {r: 0, g: 1, b: 0, a: 1}
   unplaceableColor: {r: 1, g: 0, b: 0, a: 1}
-  setActiveOnAwake: 1
+  setActiveOnAwake: 0
   OnPlacement:
     m_PersistentCalls:
       m_Calls:
@@ -348,6 +422,11 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Deirin.Utilities.UnityColorEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  OnContainerMouseOver:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: TotemTD.UnityTurretModuleEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &4071561350366188393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,6 +478,93 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowPercent: 0.19
   duration: 2
+--- !u!114 &-6834780158053813828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4071561350366188394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b43da1bf4255af4a86a13fc4e3dc034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: c558c06d3b7024e40b3cdd31482514ef, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4071561350366188398}
+        m_MethodName: LeftMouseClickHandler
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &-8391326451072725186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4071561350366188394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cacff5c3be1d89345bd0487fa57cce98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 7f8ec958b7daceb4b9de5c9916583ac5, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4071561350366188398}
+        m_MethodName: TurretContainerEnterHandler
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: TotemTD.UnityTurretContainerEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &5238387806896042901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4071561350366188394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cacff5c3be1d89345bd0487fa57cce98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: cbe9ba6fdc46403429b69490e9e81788, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4071561350366188398}
+        m_MethodName: TurretContainerExitHandler
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: TotemTD.UnityTurretContainerEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1001 &4071561349555722293
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -406,11 +572,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4071561349021606840}
     m_Modifications:
-    - target: {fileID: 8549935257422908334, guid: 2627c3a2c8b92b84fadf5f4a020d8b1a,
-        type: 3}
-      propertyPath: m_Name
-      value: Ice Sphere Content
-      objectReference: {fileID: 0}
     - target: {fileID: 8549935257422908338, guid: 2627c3a2c8b92b84fadf5f4a020d8b1a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -481,6 +642,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 3.3
       objectReference: {fileID: 0}
+    - target: {fileID: 8549935257422908334, guid: 2627c3a2c8b92b84fadf5f4a020d8b1a,
+        type: 3}
+      propertyPath: m_Name
+      value: Ice Sphere Content
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2627c3a2c8b92b84fadf5f4a020d8b1a, type: 3}
 --- !u!4 &5631311154073392007 stripped
@@ -496,11 +662,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4071561349021606840}
     m_Modifications:
-    - target: {fileID: 2849538729979986693, guid: 1518e5445fe8f2d4697e50f9aaf63532,
-        type: 3}
-      propertyPath: m_Name
-      value: Circle Range
-      objectReference: {fileID: 0}
     - target: {fileID: 5145882198616111151, guid: 1518e5445fe8f2d4697e50f9aaf63532,
         type: 3}
       propertyPath: startColor.r
@@ -515,6 +676,11 @@ PrefabInstance:
         type: 3}
       propertyPath: useStartColor
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2849538729979986693, guid: 1518e5445fe8f2d4697e50f9aaf63532,
+        type: 3}
+      propertyPath: m_Name
+      value: Circle Range
       objectReference: {fileID: 0}
     - target: {fileID: 2849538729979986692, guid: 1518e5445fe8f2d4697e50f9aaf63532,
         type: 3}

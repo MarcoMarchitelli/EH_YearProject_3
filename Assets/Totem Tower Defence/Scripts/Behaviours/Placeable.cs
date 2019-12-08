@@ -77,7 +77,6 @@
                 transform.position = hit.point;
                 targetRot = Quaternion.LookRotation( transform.forward, hit.normal );
             }
-            print( OnContainer );
         }
 
         private void TryPlace () {

@@ -1,9 +1,9 @@
 ﻿namespace TotemTD {
     using UnityEngine;
 
-    public class TurretGameEventListener : MonoBehaviour {
-        public TurretGameEvent gameEvent;
-        public UnityTurretEvent response;
+    public class TurretModuleGameEventListener : MonoBehaviour {
+        public TurretModuleGameEvent gameEvent;
+        public UnityTurretModuleEvent response;
 
         private void OnEnable () {
             gameEvent.Subscribe( this );
@@ -17,7 +17,4 @@
             response.Invoke( t );
         }
     }
-
-    [System.Serializable]
-    public class UnityTurretEvent : UnityEngine.Events.UnityEvent<TurretModule> { }
 }

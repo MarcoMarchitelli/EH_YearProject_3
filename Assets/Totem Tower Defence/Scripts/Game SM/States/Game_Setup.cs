@@ -1,6 +1,8 @@
 ﻿namespace TotemTD {
     public class Game_Setup : Game_BaseState {
         public override void Enter () {
+            base.Enter();
+
             gameData.phaseUI.Setup();
 
             //HACK

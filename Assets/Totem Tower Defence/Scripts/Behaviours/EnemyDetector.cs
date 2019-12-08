@@ -3,6 +3,7 @@
     using UnityEngine.Events;
     using System.Collections.Generic;
     using Deirin.EB;
+    using Deirin.Utilities;
 
     [RequireComponent( typeof( SphereCollider ) )]
     public class EnemyDetector : BaseBehaviour {
@@ -18,11 +19,12 @@
         public UnityTransformEvent OnEnemyDetected;
         public UnityEvent OnEnemiesLost;
 
-        public List<Enemy> enemiesInRange = new List<Enemy>();
-        public Enemy currentTarget;
+        [ReadOnly] public List<Enemy> enemiesInRange = new List<Enemy>();
+        [ReadOnly] public Enemy currentTarget;
 
         protected override void CustomSetup () {
             sphereCollider.radius = range;
+            sphereCollider.enabled = false;
             rangeGraphics.transform.localScale = Vector3.one * ( range + 2 );
         }
 
@@ -48,17 +50,12 @@
 
         public void Activate ( bool value ) {
             active = value;
+            sphereCollider.enabled = value;
         }
 
-        private void AddEnemy ( Enemy e ) {
-            enemiesInRange.Add( e );
-            //e.OnDeath += RemoveEnemy;
-            if ( !currentTarget )
-                SetCurrentTarget( e );
-        }
-
-        private void RemoveEnemy ( Enemy e ) {
-            //e.OnDeath -= RemoveEnemy;
+        public void RemoveEnemy ( Enemy e ) {
+            if ( enemiesInRange.Contains( e ) == false )
+                return;
             enemiesInRange.Remove( e );
             if ( enemiesInRange.Count == 0 ) {
                 OnEnemiesLost.Invoke();
@@ -67,6 +64,12 @@
             }
             if ( e == currentTarget )
                 FindClosestTarget();
+        }
+
+        private void AddEnemy ( Enemy e ) {
+            enemiesInRange.Add( e );
+            if ( !currentTarget )
+                SetCurrentTarget( e );
         }
 
         private void SetCurrentTarget ( Enemy target ) {

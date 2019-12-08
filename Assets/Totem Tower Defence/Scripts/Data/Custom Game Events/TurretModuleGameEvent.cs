@@ -3,15 +3,15 @@
     using UnityEngine;
 
     [CreateAssetMenu( menuName = "TotemTD/Custom Game Events/Turret Game Event" )]
-    public class TurretGameEvent : ScriptableObject {
+    public class TurretModuleGameEvent : ScriptableObject {
         public TurretModule turret;
-        private List<TurretGameEventListener> listeners = new List<TurretGameEventListener>();
+        private List<TurretModuleGameEventListener> listeners = new List<TurretModuleGameEventListener>();
 
-        public void Subscribe ( TurretGameEventListener listener ) {
+        public void Subscribe ( TurretModuleGameEventListener listener ) {
             listeners.Add( listener );
         }
 
-        public void Unsubscribe ( TurretGameEventListener listener ) {
+        public void Unsubscribe ( TurretModuleGameEventListener listener ) {
             listeners.Remove( listener );
         }
 

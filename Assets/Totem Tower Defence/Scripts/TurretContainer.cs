@@ -1,13 +1,20 @@
 ﻿namespace TotemTD {
-    using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.Events;
+    using Deirin.Utilities;
 
     public class TurretContainer : MonoBehaviour {
+        public enum State { disasbled, enabled }
+
         [Header("Parameters")]
         public int maxModules;
         public float moduleHeight;
+        [ReadOnly] public State state;
+
+        [Header("Events")]
+        public UnityTurretContainerEvent onMouseEnter;
+        public UnityTurretContainerEvent onMouseExit;
 
         private List<TurretModule> shooterModules = new List<TurretModule>();
         private List<TurretModule> elementModules = new List<TurretModule>();
@@ -25,6 +32,20 @@
         }
         private int moduleCount => shooterModules.Count + elementModules.Count + modifierModules.Count;
 
+        private void OnMouseEnter () {
+            if ( state == State.enabled )
+                onMouseEnter.Invoke( this );
+        }
+
+        private void OnMouseExit () {
+            if ( state == State.enabled )
+                onMouseExit.Invoke( this );
+        }
+
+        public void SetState ( int state ) {
+            this.state = ( State ) state;
+        }
+
         public bool CanPlace ( TurretModule module ) {
             if ( moduleCount >= maxModules || ( hasShooter == false && module.type != TurretModule.ModuleType.shooter ) )
                 return false;
@@ -33,10 +54,8 @@
         }
 
         public void Preview ( TurretModule module ) {
-            if ( CanPlace( module ) ) {
-                previewModule = module;
-                SortModules( true );
-            }
+            previewModule = module;
+            AddModule( previewModule );
         }
 
         public void AddModule ( TurretModule module ) {
@@ -51,12 +70,27 @@
                 modifierModules.Add( module );
                 break;
             }
+            SortModules();
         }
 
-        private void SortModules ( bool withPreview = false ) {
-            if ( withPreview )
-                AddModule( previewModule );
+        public void RemoveModule ( TurretModule module ) {
+            switch ( previewModule.type ) {
+                case TurretModule.ModuleType.shooter:
+                if ( shooterModules.Contains( module ) == true )
+                    shooterModules.Remove( module );
+                break;
+                case TurretModule.ModuleType.element:
+                if ( elementModules.Contains( module ) == true )
+                    elementModules.Remove( module );
+                break;
+                case TurretModule.ModuleType.modifier:
+                if ( modifierModules.Contains( module ) == true )
+                    modifierModules.Remove( module );
+                break;
+            }
+        }
 
+        private void SortModules () {
             Vector3 pos = transform.position;
             for ( int i = 0; i < shooterModules.Count; i++ ) {
                 pos += Vector3.up * i * moduleHeight;
@@ -75,4 +109,6 @@
             }
         }
     }
+    [System.Serializable]
+    public class UnityTurretContainerEvent : UnityEvent<TurretContainer> { }
 }

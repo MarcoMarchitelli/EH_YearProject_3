@@ -3,24 +3,34 @@
     using Deirin.EB;
 
     public class CircleRangeSetter : BaseBehaviour {
-        [Header("Refs")]
+        [Header("References")]
         public Renderer circleRange;
         public Renderer circleRangeBorder;
-        public bool useStartColor;
-        public Color startColor;
+
+        [Header("Parameters")]
+        public Color[] colors;
+        public bool useFirstColorAsStart;
 
         private MaterialPropertyBlock circleRangeMpb, circleRangeBorderMpb;
 
         public override void OnAwake () {
             circleRangeMpb = new MaterialPropertyBlock();
             circleRangeBorderMpb = new MaterialPropertyBlock();
-            if ( useStartColor )
-                SetColor( startColor );
+            if ( useFirstColorAsStart )
+                SetColor( colors[0] );
         }
 
         public void SetColor ( Color color ) {
             circleRangeMpb.SetColor( "_Color", color );
             circleRangeBorderMpb.SetColor( "_Color", color );
+
+            circleRange.SetPropertyBlock( circleRangeMpb );
+            circleRangeBorder.SetPropertyBlock( circleRangeBorderMpb );
+        }
+
+        public void SetColor ( int colorIndex ) {
+            circleRangeMpb.SetColor( "_Color", colors[colorIndex] );
+            circleRangeBorderMpb.SetColor( "_Color", colors[colorIndex] );
 
             circleRange.SetPropertyBlock( circleRangeMpb );
             circleRangeBorder.SetPropertyBlock( circleRangeBorderMpb );

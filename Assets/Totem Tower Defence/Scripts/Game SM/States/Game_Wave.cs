@@ -1,6 +1,14 @@
 ﻿namespace TotemTD {
+    using UnityEngine;
+    using UnityEngine.Events;
+
     public class Game_Wave : Game_BaseState {
+        [Header("Events")]
+        public UnityEvent OnLeftMouseClick;
+
         public override void Enter () {
+            base.Enter();
+
             //wave phase graphics
             gameData.phaseUI.SetTexts( "WAVE", "INCOMING" );
             gameData.phaseUI.Play( .5f, () =>
@@ -13,6 +21,11 @@
                 }
                 )
             );
+        }
+
+        public override void Tick () {
+            if ( Input.GetMouseButtonDown( 0 ) )
+                OnLeftMouseClick.Invoke();
         }
     }
 }
