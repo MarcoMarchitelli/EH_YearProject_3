@@ -1,9 +1,13 @@
 ﻿namespace TotemTD {
-    using UnityEngine;
+    using System.Collections;
     using System.Collections.Generic;
-    using Deirin.EB;
+    using UnityEngine;
 
-    public class Projectile : BaseEntity {
+    public class Projectile : MonoBehaviour {
+        public ProjectileData data;
 
+        public void Setup () {
+
+        }
     }
 }
