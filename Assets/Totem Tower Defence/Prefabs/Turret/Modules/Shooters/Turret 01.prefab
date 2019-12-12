@@ -74,10 +74,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 502182301673752432}
-  - component: {fileID: 1960339868395782538}
+  - component: {fileID: 2053452487293809041}
   - component: {fileID: 502182301673752435}
   - component: {fileID: 4705415663095425980}
-  - component: {fileID: 5029562944437973803}
   - component: {fileID: 266263923437155698}
   - component: {fileID: -9213456383898364519}
   - component: {fileID: 3828449705404909932}
@@ -104,7 +103,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1960339868395782538
+--- !u!114 &2053452487293809041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,82 +112,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 502182301673752433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 972a880ac1f4cbe498c4ba80379d5deb, type: 3}
+  m_Script: {fileID: 11500000, guid: 2777e29f35682f944b1916403698b6d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setupOnAwake: 1
-  type: 0
+  data: {fileID: 0}
   state: 0
-  OnCanBePlaced:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6981213808474534614}
-        m_MethodName: SetColor
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4705415663095425980}
-        m_MethodName: Follow
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnCannotBePlaced:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6981213808474534614}
-        m_MethodName: SetColor
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4705415663095425980}
-        m_MethodName: Follow
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnPlace:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1703217660}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  shooter: {fileID: 502182301673752435}
+  lookAt: {fileID: 2517304237242154432}
 --- !u!114 &502182301673752435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +134,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 6237022291049161715, guid: fd153714b69d044469a1e1ec3957dd27,
     type: 3}
   spawnPoint: {fileID: 4834522308301607252}
+  projectileData: {fileID: 0}
   fireRate: 2
   OnShoot:
     m_PersistentCalls:
@@ -219,8 +150,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: Deirin.Utilities.UnityEntityEvent, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+    m_TypeName: TotemTD.UnityProjectileEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &4705415663095425980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,19 +176,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   rayMaxDistance: 0
---- !u!114 &5029562944437973803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 502182301673752433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f4b102960821c2408eeac8ea1481b23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 21085bb6aeb37b44e8e9349982d75c6f, type: 3}
 --- !u!114 &266263923437155698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,7 +192,7 @@ MonoBehaviour:
   response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1960339868395782538}
+      - m_Target: {fileID: 0}
         m_MethodName: TurretContainerEnterHandler
         m_Mode: 0
         m_Arguments:
@@ -303,7 +221,7 @@ MonoBehaviour:
   response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1960339868395782538}
+      - m_Target: {fileID: 0}
         m_MethodName: TurretContainerExitHandler
         m_Mode: 0
         m_Arguments:
@@ -328,11 +246,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b43da1bf4255af4a86a13fc4e3dc034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: c558c06d3b7024e40b3cdd31482514ef, type: 2}
+  gameEvent: {fileID: 0}
   response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1960339868395782538}
+      - m_Target: {fileID: 0}
         m_MethodName: LeftMouseClickHandler
         m_Mode: 1
         m_Arguments:
@@ -569,7 +487,7 @@ MonoBehaviour:
   Y: 1
   Z: 1
   targetOffset: {x: 0, y: 1, z: 0}
-  turnSpeed: 270
+  turnRate: 0
 --- !u!1 &1372230059769703634
 GameObject:
   m_ObjectHideFlags: 0
@@ -11013,7 +10931,7 @@ MonoBehaviour:
   Y: 0
   Z: 1
   targetOffset: {x: 0, y: 0, z: 0}
-  turnSpeed: 270
+  turnRate: 0
 --- !u!1 &7855149522986363218
 GameObject:
   m_ObjectHideFlags: 0
@@ -11192,18 +11110,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1518e5445fe8f2d4697e50f9aaf63532, type: 3}
---- !u!114 &6981213808474534614 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5145882198616111151, guid: 1518e5445fe8f2d4697e50f9aaf63532,
-    type: 3}
-  m_PrefabInstance: {fileID: 2849538731548461817}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703217660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0372d795a87969d49b142a8f8a19d0dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1703217660 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2849538729979986693, guid: 1518e5445fe8f2d4697e50f9aaf63532,
@@ -11223,11 +11129,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4127269675329932816}
     m_Modifications:
-    - target: {fileID: -1504981713932161579, guid: 57d446239b25cad4d8f4acf7a1c7fdcd,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 3895f8be2a2e8594888ae35861073e39, type: 2}
     - target: {fileID: -927199367670048503, guid: 57d446239b25cad4d8f4acf7a1c7fdcd,
         type: 3}
       propertyPath: m_Name
@@ -11303,17 +11204,22 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.42383927
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 57d446239b25cad4d8f4acf7a1c7fdcd,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3895f8be2a2e8594888ae35861073e39, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57d446239b25cad4d8f4acf7a1c7fdcd, type: 3}
---- !u!23 &6160546854295320248 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -1504981713932161579, guid: 57d446239b25cad4d8f4acf7a1c7fdcd,
-    type: 3}
-  m_PrefabInstance: {fileID: 4495599183548472173}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8870164290228252791 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 57d446239b25cad4d8f4acf7a1c7fdcd,
+    type: 3}
+  m_PrefabInstance: {fileID: 4495599183548472173}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6160546854295320248 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1504981713932161579, guid: 57d446239b25cad4d8f4acf7a1c7fdcd,
     type: 3}
   m_PrefabInstance: {fileID: 4495599183548472173}
   m_PrefabAsset: {fileID: 0}
@@ -11324,11 +11230,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3329400694178339560}
     m_Modifications:
-    - target: {fileID: -1504981713932161579, guid: 57d446239b25cad4d8f4acf7a1c7fdcd,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 2688ed427cd14c146b0a1de75e3be0fc, type: 2}
     - target: {fileID: -927199367670048503, guid: 57d446239b25cad4d8f4acf7a1c7fdcd,
         type: 3}
       propertyPath: m_Name
@@ -11404,6 +11305,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.42383927
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 57d446239b25cad4d8f4acf7a1c7fdcd,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2688ed427cd14c146b0a1de75e3be0fc, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57d446239b25cad4d8f4acf7a1c7fdcd, type: 3}
 --- !u!4 &458653676635085649 stripped

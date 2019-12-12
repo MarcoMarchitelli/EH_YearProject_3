@@ -9,11 +9,16 @@
         public CustomToggle_Canvas toggle;
         public Transform moduleUIsContainer;
 
-        List<TurretModule> turretModules;
+        TurretModuleData[] turretModulesData;
         List<TurretModuleUI> turretModuleUIs = new List<TurretModuleUI>();
 
-        public void SetTurrets ( List<TurretModule> turrets ) {
-            this.turretModules = turrets;
+        public void SetTurrets ( List<TurretModuleData> turrets ) {
+            this.turretModulesData = turrets.ToArray();
+            UpdateUI();
+        }
+
+        public void SetTurrets ( TurretModuleData[] turrets ) {
+            this.turretModulesData = turrets;
             UpdateUI();
         }
 
@@ -24,9 +29,9 @@
 
             turretModuleUIs.Clear();
 
-            for ( int i = 0; i < turretModules.Count; i++ ) {
+            for ( int i = 0; i < turretModulesData.Length; i++ ) {
                 TurretModuleUI ui = Instantiate(turretUIPrefab, moduleUIsContainer);
-                ui.SetTurretModule( turretModules[i] );
+                ui.SetTurretModule( turretModulesData[i] );
                 ui.UpdateUI();
                 turretModuleUIs.Add( ui );
             }

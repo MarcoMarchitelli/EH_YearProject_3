@@ -4,11 +4,7 @@
     using UnityEngine;
 
     public class ModifierModule : TurretModule {
-        public ShooterModuleData data;
-
-        public void Setup () {
-
-        }
+        
 
     }
 }

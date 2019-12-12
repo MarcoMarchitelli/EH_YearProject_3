@@ -17,6 +17,8 @@
         public UnityFloatEvent OnPlaceTimeStart;
         public UnityEvent OnPlaceTimeEnd;
 
+        public WaveData CurrentWave => currentWave;
+
         private WaveSequence currentSequence;
         private WaveData currentWave;
         private int currentWaveIndex;

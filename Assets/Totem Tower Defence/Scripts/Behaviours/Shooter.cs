@@ -4,12 +4,13 @@
     using Deirin.EB;
     using Deirin.Utilities;
 
-    public class Shooter : MonoBehaviour {
+    public class Shooter : BaseBehaviour {
         [Header("Refs")]
         public Projectile projectilePrefab;
         public Transform spawnPoint;
 
         [Header("Params")]
+        public ProjectileData projectileData;
         public float fireRate;
 
         [Header("Events")]
@@ -30,6 +31,7 @@
             shooting = true;
             while ( shooting ) {
                 Projectile b = Instantiate( projectilePrefab, spawnPoint.position, Quaternion.LookRotation( spawnPoint.forward ) );
+                b.Setup( projectileData );
                 OnShoot.Invoke( b );
                 yield return new WaitForSeconds( 1f / fireRate );
             }

@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class Game_State : Game_BaseState {
+    public class Wave_State : Game_StateBase {
 
     }
 }

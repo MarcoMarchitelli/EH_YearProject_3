@@ -4,10 +4,6 @@
     using UnityEngine;
 
     public class ElementModule : TurretModule {
-        public ShooterModuleData data;
 
-        public void Setup () {
-
-        }
     }
 }

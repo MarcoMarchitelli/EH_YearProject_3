@@ -11,7 +11,7 @@
         public bool Y;
         public bool Z;
         public Vector3 targetOffset;
-        public float turnSpeed;
+        public float turnRate;
 
         private Quaternion startRotation;
 
@@ -32,7 +32,7 @@
             transform.rotation = Quaternion.Slerp(
                 currentRotation,
                 targetRotation,
-                1 - Mathf.Exp( -turnSpeed * Time.deltaTime )
+                1 - Mathf.Exp( -turnRate * Time.deltaTime )
             );
         }
 
