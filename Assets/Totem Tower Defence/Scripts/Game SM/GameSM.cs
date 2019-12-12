@@ -42,9 +42,11 @@
         public void GoNext () {
             Next?.Invoke();
         }
+
         public void GoWin () {
             Win?.Invoke();
         }
+
         public void GoLoss () {
             Loss?.Invoke();
         }

@@ -6,7 +6,7 @@
     public class TurretMenu : MonoBehaviour {
         [Header("Refs")]
         public TurretModuleUI turretUIPrefab;
-        public CustomToggle_Canvas toggle;
+        public CustomButton_Canvas openCloseButton;
         public Transform moduleUIsContainer;
 
         List<TurretModule> turretModules;
@@ -37,7 +37,7 @@
         /// </summary>
         /// <param name="value"></param>
         public void Activate ( bool value ) {
-            toggle.active = value;
+            openCloseButton.active = value;
             foreach ( var item in turretModuleUIs ) {
                 item.button.active = value;
             }

@@ -7,16 +7,24 @@
         public Transform target;
         public Vector3 targetPosition;
         public bool addToOriginal;
+        public bool resetOnPlay = true;
 
         Vector3 startPos;
 
+        private void Awake () {
+            startPos = target.position;
+        }
+
         public override void BackwardsTween () {
+            target.DOKill();
             target.DOMove( startPos, duration ).SetEase( ease ).SetLoops( loops ).onComplete += () => OnTweenerEnd.Invoke();
         }
 
         public override void PlayTween () {
+            target.DOKill();
             OnTweenerStart.Invoke();
-            startPos = target.position;
+            if ( resetOnPlay == false )
+                startPos = target.position;
             target.DOMove( addToOriginal ? startPos + targetPosition : targetPosition, duration ).SetEase( ease ).SetLoops( loops ).onComplete += () => OnTweenerEnd.Invoke();
         }
 
