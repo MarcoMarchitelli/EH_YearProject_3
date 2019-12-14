@@ -9,16 +9,15 @@
         public CustomButtonBase openCloseButton;
         public Transform moduleUIsContainer;
 
-        List<TurretModule> turretModules;
         List<TurretModuleUI> turretModuleUIs = new List<TurretModuleUI>();
 
-        public void SetTurrets ( List<TurretModule> turrets ) {
-            this.turretModules = new List<TurretModule>( turrets );
+        public void AddTurretModule ( TurretModule module ) {
+            RuntimeLevelData.turretModules.Add( module );
             UpdateUI();
         }
 
-        public void AddTurretModule ( TurretModule module ) {
-            turretModules.Add( module );
+        public void RemoveTurretModule ( TurretModule module ) {
+            RuntimeLevelData.turretModules.Remove( module );
             UpdateUI();
         }
 
@@ -29,9 +28,9 @@
 
             turretModuleUIs.Clear();
 
-            for ( int i = 0; i < turretModules.Count; i++ ) {
+            for ( int i = 0; i < RuntimeLevelData.turretModules.Count; i++ ) {
                 TurretModuleUI ui = Instantiate(turretUIPrefab, moduleUIsContainer);
-                ui.SetTurretModule( turretModules[i] );
+                ui.SetTurretModule( RuntimeLevelData.turretModules[i] );
                 ui.UpdateUI();
                 turretModuleUIs.Add( ui );
             }

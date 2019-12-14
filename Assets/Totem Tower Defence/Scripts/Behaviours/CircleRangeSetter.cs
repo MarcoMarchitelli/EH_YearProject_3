@@ -13,7 +13,7 @@
 
         private MaterialPropertyBlock circleRangeMpb, circleRangeBorderMpb;
 
-        public override void OnAwake () {
+        protected override void CustomSetup () {
             circleRangeMpb = new MaterialPropertyBlock();
             circleRangeBorderMpb = new MaterialPropertyBlock();
             if ( useFirstColorAsStart )

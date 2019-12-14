@@ -12,7 +12,7 @@
         public GameObject rangeGraphics;
 
         [Header("Params")]
-        public bool active;
+        public bool activeOnSetup;
         public float range = 6;
 
         [Header("Events")]
@@ -22,9 +22,11 @@
         [ReadOnly] public List<Enemy> enemiesInRange = new List<Enemy>();
         [ReadOnly] public Enemy currentTarget;
 
+        private bool active;
+
         protected override void CustomSetup () {
+            Activate( activeOnSetup );
             sphereCollider.radius = range;
-            sphereCollider.enabled = false;
             rangeGraphics.transform.localScale = Vector3.one * ( range + 2 );
         }
 

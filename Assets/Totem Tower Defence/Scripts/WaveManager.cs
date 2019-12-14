@@ -3,6 +3,7 @@
     using UnityEngine;
     using UnityEngine.Events;
     using Deirin.Utilities;
+    using System.Collections.Generic;
 
     public class WaveManager : MonoBehaviour {
         [Header("Refs")]
@@ -17,6 +18,19 @@
         public UnityEvent OnPlaceTimeEnd;
 
         private bool counting;
+
+        public void Setup () {
+            GameObject modulesContainer = new GameObject("Turret Modules Container");
+            modulesContainer.transform.SetParent( transform );
+
+            RuntimeLevelData.turretModules = new List<TurretModule>();
+
+            for ( int i = 0; i < waveData.turretModules.Count; i++ ) {
+                TurretModule t = Instantiate( waveData.turretModules[i], modulesContainer.transform );
+                t.gameObject.SetActive( false );
+                RuntimeLevelData.turretModules.Add( t );
+            }
+        }
 
         public void StartPlaceTime () {
             StartCoroutine( PlaceTimeRoutine() );
@@ -41,7 +55,7 @@
                 yield return null;
             }
 
-            OnPlaceTimeEnd.Invoke();           
+            OnPlaceTimeEnd.Invoke();
         }
 
         IEnumerator WaveRoutine () {

@@ -5,7 +5,6 @@
     public class PlaceTimeUI : MonoBehaviour {
         [Header("Refs")]
         public TextMeshProUGUI text;
-        public Animator animator;
 
         float timer, time;
         bool counting;
@@ -28,15 +27,6 @@
 
         public void SetTime ( float time ) {
             this.time = time;
-        }
-
-        public void Close () {
-            //animator.SetTrigger( "Close" );
-            
-        }
-
-        public void Open () {
-            //animator.SetTrigger( "Open" );
         }
     } 
 }

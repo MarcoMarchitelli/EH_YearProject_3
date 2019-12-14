@@ -1,18 +1,19 @@
 ﻿namespace TotemTD {
     using UnityEngine;
     using UnityEngine.UI;
-    using UnityEngine.Events;
     using Deirin.CustomButton;
+    using Deirin.Utilities;
     using Deirin.EB;
 
     public class TurretModuleUI : MonoBehaviour {
         [Header("Refs")]
-        public TurretModule turretModule;
         public CustomButton_Canvas button;
         public Image image;
 
         [Header("Events")]
-        public UnityEvent OnTurretSelection;
+        public UnityTurretModuleEvent OnTurretSelection;
+
+        [ReadOnly] public TurretModule turretModule;
 
         private SpriteGetter spriteGetter;
 
@@ -26,8 +27,9 @@
         }
 
         public void SelectTurret () {
-            Instantiate( turretModule, transform.position, Quaternion.identity );
-            OnTurretSelection.Invoke();
+            turretModule.gameObject.SetActive( true );
+            turretModule.Setup();
+            OnTurretSelection.Invoke( turretModule );
         }
     }
 }
