@@ -20,6 +20,7 @@
         private List<TurretModule> elementModules = new List<TurretModule>();
         private List<TurretModule> modifierModules = new List<TurretModule>();
         private TurretModule previewModule;
+        private Vector3 currentTopPosition;
 
         private bool hasShooter {
             get {
@@ -91,20 +92,20 @@
         }
 
         private void SortModules () {
-            Vector3 pos = transform.position;
+            currentTopPosition = transform.position;
             for ( int i = 0; i < shooterModules.Count; i++ ) {
-                pos += Vector3.up * i * moduleHeight;
-                shooterModules[i].transform.position = pos;
+                currentTopPosition += Vector3.up * moduleHeight;
+                shooterModules[i].transform.position = currentTopPosition;
                 shooterModules[i].transform.rotation = Quaternion.identity;
             }
             for ( int i = 0; i < elementModules.Count; i++ ) {
-                pos += Vector3.up * i * moduleHeight;
-                elementModules[i].transform.position = pos;
+                currentTopPosition += Vector3.up * moduleHeight;
+                elementModules[i].transform.position = currentTopPosition;
                 elementModules[i].transform.rotation = Quaternion.identity;
             }
             for ( int i = 0; i < modifierModules.Count; i++ ) {
-                pos += Vector3.up * i * moduleHeight;
-                modifierModules[i].transform.position = pos;
+                currentTopPosition += Vector3.up * moduleHeight;
+                modifierModules[i].transform.position = currentTopPosition;
                 modifierModules[i].transform.rotation = Quaternion.identity;
             }
         }

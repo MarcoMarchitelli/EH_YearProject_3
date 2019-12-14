@@ -6,7 +6,7 @@
     public class TurretMenu : MonoBehaviour {
         [Header("Refs")]
         public TurretModuleUI turretUIPrefab;
-        public CustomButton_Canvas openCloseButton;
+        public CustomButtonBase openCloseButton;
         public Transform moduleUIsContainer;
 
         List<TurretModule> turretModules;
