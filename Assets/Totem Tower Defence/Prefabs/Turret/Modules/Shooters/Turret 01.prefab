@@ -81,6 +81,7 @@ GameObject:
   - component: {fileID: 266263923437155698}
   - component: {fileID: -9213456383898364519}
   - component: {fileID: 3828449705404909932}
+  - component: {fileID: 3480605575616787931}
   m_Layer: 0
   m_Name: Turret 01
   m_TagString: Untagged
@@ -189,6 +190,33 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  OnDeselection:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 2818ffcaff8b76f478248de1cb2eb3a8, type: 2}
+        m_MethodName: Invoke
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3480605575616787931}
+        m_MethodName: Destroy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: TotemTD.UnityTurretModuleEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &502182301673752435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,7 +263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 502182301673752432}
   followMode: 0
-  startFollowingOnAwake: 1
+  startFollowingOnSetup: 1
   useMainCam: 1
   cam: {fileID: 0}
   positionOffset: {x: 0, y: 0.5, z: 0}
@@ -328,12 +356,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b43da1bf4255af4a86a13fc4e3dc034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: c558c06d3b7024e40b3cdd31482514ef, type: 2}
+  gameEvent: {fileID: 11400000, guid: f79a307e45460d74cb7d2f427c42887f, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1960339868395782538}
-        m_MethodName: LeftMouseClickHandler
+        m_MethodName: LeftMouseUpHandler
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -343,6 +371,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &3480605575616787931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502182301673752433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1006332d46403ff428b6fa75e14a04a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 502182301673752433}
+  delay: 0
+  OnDestruction:
+    m_PersistentCalls:
+      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &502182302662718803
@@ -721,7 +768,6 @@ GameObject:
   - component: {fileID: 7146639838392854767}
   - component: {fileID: 1477338805553408788}
   - component: {fileID: 8174278270054586582}
-  - component: {fileID: 1558994994967576987}
   m_Layer: 11
   m_Name: Cylinder
   m_TagString: Untagged
@@ -789,20 +835,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &1558994994967576987
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2753798042933503714}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &3200495923110819365
 GameObject:
   m_ObjectHideFlags: 0
@@ -11192,6 +11224,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1518e5445fe8f2d4697e50f9aaf63532, type: 3}
+--- !u!4 &1703217661 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2849538729979986692, guid: 1518e5445fe8f2d4697e50f9aaf63532,
+    type: 3}
+  m_PrefabInstance: {fileID: 2849538731548461817}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6981213808474534614 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5145882198616111151, guid: 1518e5445fe8f2d4697e50f9aaf63532,
@@ -11207,12 +11245,6 @@ MonoBehaviour:
 --- !u!1 &1703217660 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2849538729979986693, guid: 1518e5445fe8f2d4697e50f9aaf63532,
-    type: 3}
-  m_PrefabInstance: {fileID: 2849538731548461817}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1703217661 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2849538729979986692, guid: 1518e5445fe8f2d4697e50f9aaf63532,
     type: 3}
   m_PrefabInstance: {fileID: 2849538731548461817}
   m_PrefabAsset: {fileID: 0}

@@ -16,6 +16,8 @@
         public UnityEvent OnCanBePlaced;
         public UnityEvent OnCannotBePlaced;
         public UnityEvent OnPlace;
+        [Tooltip("Called when releasing left mouse while not being placeable.")]
+        public UnityTurretModuleEvent OnDeselection;
 
         private TurretContainer turretContainer;
 
@@ -47,10 +49,13 @@
             }
         }
 
-        public void LeftMouseClickHandler () {
+        public void LeftMouseUpHandler () {
             if ( state == State.preview ) {
                 SetState( State.placed );
                 OnPlace.Invoke();
+            }
+            else if ( state == State.selected ) {
+                OnDeselection.Invoke( this );
             }
         }
         #endregion

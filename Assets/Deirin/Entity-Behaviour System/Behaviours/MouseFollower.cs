@@ -11,7 +11,7 @@
         [Header("Follow Mode")]
         public FollowMode followMode;
 
-        public bool startFollowingOnAwake;
+        public bool startFollowingOnSetup;
         public bool useMainCam;
         public Camera cam;
         public Vector3 positionOffset;
@@ -20,12 +20,12 @@
         public LayerMask castMask;
         public float rayMaxDistance;
 
-        private Coroutine plane, raycast, screen;
+        public Coroutine plane, raycast, screen;
 
-        public override void OnAwake () {
+        protected override void CustomSetup () {
             if ( useMainCam )
                 cam = Camera.main;
-            if ( startFollowingOnAwake )
+            if ( startFollowingOnSetup )
                 Follow( true );
         }
 
@@ -33,21 +33,21 @@
             switch ( followMode ) {
                 case FollowMode.PlaneCasting:
                 if ( value )
-                    plane = StartCoroutine( PlaneCastingRoutine() );
+                    StartCoroutine( "PlaneCastingRoutine" );
                 else
-                    StopCoroutine( plane );
+                    StopCoroutine( "PlaneCastingRoutine" );
                 break;
                 case FollowMode.RayCasting:
                 if ( value )
-                    raycast = StartCoroutine( RayCastingRoutine() );
+                    StartCoroutine( "RayCastingRoutine" );
                 else
-                    StopCoroutine( raycast );
+                    StopCoroutine( "RayCastingRoutine" );
                 break;
                 case FollowMode.ScreenSpace:
                 if ( value )
-                    screen =  StartCoroutine( ScreenSpaceRoutine() );
+                    StartCoroutine( "ScreenSpaceRoutine" );
                 else
-                    StopCoroutine( screen );
+                    StopCoroutine( "ScreenSpaceRoutine" );
                 break;
             }
         }
@@ -111,5 +111,5 @@
                 yield return null;
             }
         }
-    } 
+    }
 }

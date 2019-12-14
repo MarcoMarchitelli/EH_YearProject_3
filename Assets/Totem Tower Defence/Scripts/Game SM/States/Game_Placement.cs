@@ -4,7 +4,8 @@
 
     public class Game_Placement : Game_BaseState {
         [Header("Events")]
-        public UnityEvent OnLeftMouseClick;
+        public UnityEvent OnLeftMouseDown;
+        public UnityEvent OnLeftMouseUp;
 
         public override void Enter () {
             base.Enter();
@@ -18,7 +19,9 @@
 
         public override void Tick () {
             if ( Input.GetMouseButtonDown( 0 ) )
-                OnLeftMouseClick.Invoke();
+                OnLeftMouseDown.Invoke();
+            else if ( Input.GetMouseButtonUp( 0 ) )
+                OnLeftMouseUp.Invoke();
         }
 
         private void PhaseUIEndHandler () {

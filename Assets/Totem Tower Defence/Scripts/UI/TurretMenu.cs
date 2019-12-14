@@ -13,7 +13,12 @@
         List<TurretModuleUI> turretModuleUIs = new List<TurretModuleUI>();
 
         public void SetTurrets ( List<TurretModule> turrets ) {
-            this.turretModules = turrets;
+            this.turretModules = new List<TurretModule>( turrets );
+            UpdateUI();
+        }
+
+        public void AddTurretModule ( TurretModule module ) {
+            turretModules.Add( module );
             UpdateUI();
         }
 

@@ -89,24 +89,25 @@
                     modifierModules.Remove( module );
                 break;
             }
+            SortModules();
         }
 
         private void SortModules () {
             currentTopPosition = transform.position;
             for ( int i = 0; i < shooterModules.Count; i++ ) {
-                currentTopPosition += Vector3.up * moduleHeight;
                 shooterModules[i].transform.position = currentTopPosition;
                 shooterModules[i].transform.rotation = Quaternion.identity;
+                currentTopPosition += Vector3.up * moduleHeight;
             }
             for ( int i = 0; i < elementModules.Count; i++ ) {
-                currentTopPosition += Vector3.up * moduleHeight;
                 elementModules[i].transform.position = currentTopPosition;
                 elementModules[i].transform.rotation = Quaternion.identity;
+                currentTopPosition += Vector3.up * moduleHeight;
             }
             for ( int i = 0; i < modifierModules.Count; i++ ) {
-                currentTopPosition += Vector3.up * moduleHeight;
                 modifierModules[i].transform.position = currentTopPosition;
                 modifierModules[i].transform.rotation = Quaternion.identity;
+                currentTopPosition += Vector3.up * moduleHeight;
             }
         }
     }

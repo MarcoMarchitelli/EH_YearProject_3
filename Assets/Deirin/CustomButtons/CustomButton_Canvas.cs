@@ -14,14 +14,16 @@
         public UnityEvent OnMouseExit;
         public UnityEvent OnMouseDown;
         public UnityEvent OnMouseUp;
-        public UnityEvent OnMouseClick;
+        public UnityEvent OnButtonClick;
 
         public void OnPointerDown ( PointerEventData eventData ) {
             if ( !active )
                 return;
             if ( selected ) {
-                if ( clickMode == ClickMode.Down )
-                    OnMouseClick?.Invoke();
+                if ( clickMode == ClickMode.Down ) {
+                    Click();
+                    OnButtonClick?.Invoke();
+                }
             }
             else {
                 if ( selectMode == SelectMode.MouseDown )
@@ -44,6 +46,10 @@
             if ( !active )
                 return;
             if ( selected ) {
+                if ( clickMode == ClickMode.Drag ) {
+                    Click();
+                    OnButtonClick?.Invoke();
+                }
                 if ( deselectMode == DeselectMode.MouseExit )
                     Deselect();
             }
@@ -53,8 +59,10 @@
         public void OnPointerUp ( PointerEventData eventData ) {
             if ( !active )
                 return;
-            if ( selected && clickMode == ClickMode.Up )
-                OnMouseClick?.Invoke();
+            if ( selected && clickMode == ClickMode.Up ) {
+                Click();
+                OnButtonClick.Invoke();
+            }
             OnMouseUp?.Invoke();
         }
     }

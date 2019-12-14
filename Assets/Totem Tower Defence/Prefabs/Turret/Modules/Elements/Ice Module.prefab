@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4071561348814078580}
   - component: {fileID: 4071561348814078569}
   - component: {fileID: 4071561348814078570}
-  - component: {fileID: 4071561348814078571}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -79,19 +78,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &4071561348814078571
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4071561348814078581}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4071561349021606841
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +123,6 @@ GameObject:
   - component: {fileID: 4071561349832798944}
   - component: {fileID: 4071561349832798949}
   - component: {fileID: 4071561349832798950}
-  - component: {fileID: 4071561349832798951}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -205,19 +190,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &4071561349832798951
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4071561349832798945}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4071561350366188394
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,13 +200,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4071561350366188397}
   - component: {fileID: 4071561350366188398}
-  - component: {fileID: 4071561350366188399}
   - component: {fileID: 4071561350366188393}
   - component: {fileID: 636695229254752036}
   - component: {fileID: 5631886549866047270}
   - component: {fileID: -6834780158053813828}
   - component: {fileID: -8391326451072725186}
   - component: {fileID: 5238387806896042901}
+  - component: {fileID: 5903762995611780816}
   m_Layer: 0
   m_Name: Ice Module
   m_TagString: Untagged
@@ -342,75 +314,11 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &4071561350366188399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4071561350366188394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74ceb1ab4d1d54b4d80a8f3bc8686119, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  placeableMask:
-    serializedVersion: 2
-    m_Bits: 512
-  previewMask:
-    serializedVersion: 2
-    m_Bits: 1025
-  placeableColor: {r: 0, g: 1, b: 0, a: 1}
-  unplaceableColor: {r: 1, g: 0, b: 0, a: 1}
-  setActiveOnAwake: 0
-  OnPlacement:
+  OnDeselection:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 636695229254752036}
-        m_MethodName: Follow
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4071561350366188399}
-        m_MethodName: Active
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6881095632014526401}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnDeplacement:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnPlaceStateChangeColor:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4583768309779922155}
-        m_MethodName: SetColor
+      - m_Target: {fileID: 11400000, guid: 2818ffcaff8b76f478248de1cb2eb3a8, type: 2}
+        m_MethodName: Invoke
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -420,11 +328,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: Deirin.Utilities.UnityColorEvent, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnContainerMouseOver:
-    m_PersistentCalls:
-      m_Calls: []
+      - m_Target: {fileID: 5903762995611780816}
+        m_MethodName: Destroy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: TotemTD.UnityTurretModuleEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &4071561350366188393
@@ -454,7 +368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 4071561350366188397}
   followMode: 0
-  startFollowingOnAwake: 1
+  startFollowingOnSetup: 1
   useMainCam: 1
   cam: {fileID: 0}
   positionOffset: {x: 0, y: 1, z: 0}
@@ -490,12 +404,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b43da1bf4255af4a86a13fc4e3dc034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: c558c06d3b7024e40b3cdd31482514ef, type: 2}
+  gameEvent: {fileID: 11400000, guid: f79a307e45460d74cb7d2f427c42887f, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4071561350366188398}
-        m_MethodName: LeftMouseClickHandler
+        m_MethodName: LeftMouseUpHandler
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -565,6 +479,25 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: TotemTD.UnityTurretContainerEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &5903762995611780816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4071561350366188394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1006332d46403ff428b6fa75e14a04a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 4071561350366188394}
+  delay: 0
+  OnDestruction:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1001 &4071561349555722293
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -626,21 +559,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549935257422908338, guid: 2627c3a2c8b92b84fadf5f4a020d8b1a,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549935257422908338, guid: 2627c3a2c8b92b84fadf5f4a020d8b1a,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549935257422908338, guid: 2627c3a2c8b92b84fadf5f4a020d8b1a,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3.3
       objectReference: {fileID: 0}
     - target: {fileID: 8549935257422908334, guid: 2627c3a2c8b92b84fadf5f4a020d8b1a,
         type: 3}
