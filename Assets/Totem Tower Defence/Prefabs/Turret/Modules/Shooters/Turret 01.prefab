@@ -188,6 +188,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 502182302662718804}
+        m_MethodName: Activate
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   OnDeselection:
@@ -440,7 +451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sphereCollider: {fileID: 502182302662718805}
   rangeGraphics: {fileID: 1703217660}
-  activeOnSetup: 1
+  activeOnSetup: 0
   range: 10
   OnEnemyDetected:
     m_PersistentCalls:
@@ -518,7 +529,7 @@ SphereCollider:
   m_GameObject: {fileID: 502182302662718803}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
@@ -11255,11 +11266,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4127269675329932816}
     m_Modifications:
-    - target: {fileID: -1504981713932161579, guid: 57d446239b25cad4d8f4acf7a1c7fdcd,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 3895f8be2a2e8594888ae35861073e39, type: 2}
     - target: {fileID: -927199367670048503, guid: 57d446239b25cad4d8f4acf7a1c7fdcd,
         type: 3}
       propertyPath: m_Name
@@ -11335,6 +11341,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.42383927
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 57d446239b25cad4d8f4acf7a1c7fdcd,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3895f8be2a2e8594888ae35861073e39, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57d446239b25cad4d8f4acf7a1c7fdcd, type: 3}
 --- !u!23 &6160546854295320248 stripped
@@ -11356,11 +11367,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3329400694178339560}
     m_Modifications:
-    - target: {fileID: -1504981713932161579, guid: 57d446239b25cad4d8f4acf7a1c7fdcd,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 2688ed427cd14c146b0a1de75e3be0fc, type: 2}
     - target: {fileID: -927199367670048503, guid: 57d446239b25cad4d8f4acf7a1c7fdcd,
         type: 3}
       propertyPath: m_Name
@@ -11436,6 +11442,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.42383927
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 57d446239b25cad4d8f4acf7a1c7fdcd,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2688ed427cd14c146b0a1de75e3be0fc, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57d446239b25cad4d8f4acf7a1c7fdcd, type: 3}
 --- !u!4 &458653676635085649 stripped

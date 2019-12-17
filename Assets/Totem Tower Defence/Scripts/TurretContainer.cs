@@ -22,23 +22,17 @@
         private TurretModule previewModule;
         private Vector3 currentTopPosition;
 
-        private bool hasShooter {
-            get {
-                for ( int i = 0; i < shooterModules.Count; i++ ) {
-                    if ( shooterModules[i].type == TurretModule.ModuleType.shooter )
-                        return true;
-                }
-                return false;
-            }
-        }
+        private bool hasShooter => shooterModules.Count > 0;
         private int moduleCount => shooterModules.Count + elementModules.Count + modifierModules.Count;
 
         private void OnMouseEnter () {
+            print( name + " enter" );
             if ( state == State.enabled )
                 onMouseEnter.Invoke( this );
         }
 
         private void OnMouseExit () {
+            print( name + " exit" );
             if ( state == State.enabled )
                 onMouseExit.Invoke( this );
         }

@@ -14,11 +14,13 @@
         public void AddTurretModule ( TurretModule module ) {
             RuntimeLevelData.turretModules.Add( module );
             UpdateUI();
+            Activate( true );
         }
 
         public void RemoveTurretModule ( TurretModule module ) {
             RuntimeLevelData.turretModules.Remove( module );
             UpdateUI();
+            Activate( true );
         }
 
         public void UpdateUI () {
