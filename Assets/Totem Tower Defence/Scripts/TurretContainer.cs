@@ -12,10 +12,6 @@
         public float moduleHeight;
         [ReadOnly] public State state;
 
-        [Header("Events")]
-        public UnityTurretContainerEvent onMouseEnter;
-        public UnityTurretContainerEvent onMouseExit;
-
         private List<TurretModule> shooterModules = new List<TurretModule>();
         private List<TurretModule> elementModules = new List<TurretModule>();
         private List<TurretModule> modifierModules = new List<TurretModule>();
@@ -24,18 +20,6 @@
 
         private bool hasShooter => shooterModules.Count > 0;
         private int moduleCount => shooterModules.Count + elementModules.Count + modifierModules.Count;
-
-        private void OnMouseEnter () {
-            print( name + " enter" );
-            if ( state == State.enabled )
-                onMouseEnter.Invoke( this );
-        }
-
-        private void OnMouseExit () {
-            print( name + " exit" );
-            if ( state == State.enabled )
-                onMouseExit.Invoke( this );
-        }
 
         public void SetState ( int state ) {
             this.state = ( State ) state;
