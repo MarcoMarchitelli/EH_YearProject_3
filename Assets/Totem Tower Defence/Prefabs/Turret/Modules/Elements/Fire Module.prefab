@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 6088998829104993357}
   - component: {fileID: 6088998829104993360}
   - component: {fileID: 6088998829104993363}
-  - component: {fileID: 6088998829104993362}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -112,19 +111,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &6088998829104993362
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6088998829104993356}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6088998830104831192
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,7 +122,6 @@ GameObject:
   - component: {fileID: 6088998830104831193}
   - component: {fileID: 6088998830104831196}
   - component: {fileID: 6088998830104831199}
-  - component: {fileID: 6088998830104831198}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -204,19 +189,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &6088998830104831198
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6088998830104831192}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6088998830640842067
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,6 +505,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6088998830640842068}
     m_Modifications:
+    - target: {fileID: 2849538729979986693, guid: 1518e5445fe8f2d4697e50f9aaf63532,
+        type: 3}
+      propertyPath: m_Name
+      value: Circle Range
+      objectReference: {fileID: 0}
     - target: {fileID: 5145882198616111151, guid: 1518e5445fe8f2d4697e50f9aaf63532,
         type: 3}
       propertyPath: startColor.r
@@ -547,11 +524,6 @@ PrefabInstance:
         type: 3}
       propertyPath: useStartColor
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2849538729979986693, guid: 1518e5445fe8f2d4697e50f9aaf63532,
-        type: 3}
-      propertyPath: m_Name
-      value: Circle Range
       objectReference: {fileID: 0}
     - target: {fileID: 2849538729979986692, guid: 1518e5445fe8f2d4697e50f9aaf63532,
         type: 3}
@@ -700,21 +672,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549935257422908338, guid: d98784635e27c6341ac6ee596d27b1b3,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549935257422908338, guid: d98784635e27c6341ac6ee596d27b1b3,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549935257422908338, guid: d98784635e27c6341ac6ee596d27b1b3,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d98784635e27c6341ac6ee596d27b1b3, type: 3}
