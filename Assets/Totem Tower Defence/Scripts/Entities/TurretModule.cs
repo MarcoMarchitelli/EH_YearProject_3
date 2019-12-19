@@ -20,6 +20,7 @@
         public UnityTurretModuleEvent OnDeselection;
 
         private TurretContainer turretContainer;
+        private bool mouseEntered;
 
         protected override void CustomSetup () {
             SetState( State.selected );
