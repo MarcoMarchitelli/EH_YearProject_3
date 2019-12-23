@@ -8,7 +8,7 @@
         public UnityEvent OnStatusApply;
         public UnityEvent OnStatusRemove;
 
-        protected Element element;
+        [HideInInspector] public Element element;
 
         public void Apply ( Element element ) {
             this.element = element;

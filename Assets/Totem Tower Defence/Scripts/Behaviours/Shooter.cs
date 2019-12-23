@@ -29,10 +29,15 @@
         IEnumerator ShootSequence () {
             shooting = true;
             while ( shooting ) {
-                Projectile b = Instantiate( projectilePrefab, spawnPoint.position, Quaternion.LookRotation( spawnPoint.forward ) );
-                OnShoot.Invoke( b );
+                Shoot();
                 yield return new WaitForSeconds( 1f / fireRate );
             }
+        }
+
+        private void Shoot () {
+
+            Projectile b = Instantiate( projectilePrefab, spawnPoint.position, Quaternion.LookRotation( spawnPoint.forward ) );
+            OnShoot.Invoke( b );
         }
     }
 }

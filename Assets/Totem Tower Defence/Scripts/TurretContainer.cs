@@ -44,6 +44,7 @@
                 break;
                 case TurretModule.ModuleType.element:
                 elementModules.Add( module );
+                HandleElementAttachment( module );
                 break;
                 case TurretModule.ModuleType.modifier:
                 modifierModules.Add( module );
@@ -59,8 +60,10 @@
                     shooterModules.Remove( module );
                 break;
                 case TurretModule.ModuleType.element:
-                if ( elementModules.Contains( module ) == true )
+                if ( elementModules.Contains( module ) == true ) {
                     elementModules.Remove( module );
+                    HandleElementDetachment( module );
+                }
                 break;
                 case TurretModule.ModuleType.modifier:
                 if ( modifierModules.Contains( module ) == true )
@@ -86,6 +89,30 @@
                 modifierModules[i].transform.position = currentTopPosition;
                 modifierModules[i].transform.rotation = Quaternion.identity;
                 currentTopPosition += Vector3.up * moduleHeight;
+            }
+        }
+
+        private void HandleElementAttachment ( TurretModule elementModule ) {
+            Element e;
+            if ( elementModule.TryGetBehaviour( out e ) ) {
+                foreach ( var item in shooterModules ) {
+                    ElementStatusHandler esh;
+                    if ( item.TryGetBehaviour( out esh ) ) {
+                        esh.Apply( e );
+                    }
+                }
+            }
+        }
+
+        private void HandleElementDetachment ( TurretModule elementModule ) {
+            Element e;
+            if ( elementModule.TryGetBehaviour( out e ) ) {
+                foreach ( var item in shooterModules ) {
+                    ElementStatusHandler esh;
+                    if ( item.TryGetBehaviour( out esh ) && esh.element == e ) {
+                        esh.Remove();
+                    }
+                }
             }
         }
     }
