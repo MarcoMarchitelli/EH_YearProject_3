@@ -30,7 +30,7 @@
         public void InMenu () {
             animator.SetTrigger( "InMenu" );
         }
-
+        
         public void Placed () {
             animator.SetTrigger( "Placed" );
         }
@@ -38,8 +38,6 @@
 
     [System.Serializable]
     public class TurretModuleSMContext : IStateMachineData {
-
-
         public System.Action OnNext;
         public System.Action OnSelected;
         public System.Action OnInMenu;

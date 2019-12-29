@@ -18,9 +18,15 @@
         public UnityEvent OnPlace;
         [Tooltip("Called when releasing left mouse while not being placeable.")]
         public UnityTurretModuleEvent OnDeselection;
+        public UnityEvent OnMouseEnter;
+        public UnityEvent OnMouseExit;
+        public UnityEvent OnMouseDown;
+        public UnityEvent OnMouseUp;
 
         private TurretContainer turretContainer;
         private bool mouseEntered;
+
+        public System.Action OnTurretContainerEnter, OnTurretContainerExit, OnLeftMouseUp;
 
         protected override void CustomSetup () {
             SetState( State.selected );
@@ -58,6 +64,26 @@
             else if ( state == State.selected ) {
                 OnDeselection.Invoke( this );
             }
+        }
+
+        public void ModuleEnterHandler ( TurretModule module ) {
+            if ( state == State.placed && module == this )
+                OnMouseEnter.Invoke();
+        }
+
+        public void ModuleExitHandler ( TurretModule module ) {
+            if ( state == State.placed && module == this )
+                OnMouseExit.Invoke();
+        }
+
+        public void ModuleDownHandler ( TurretModule module ) {
+            if ( state == State.placed && module == this )
+                OnMouseDown.Invoke();
+        }
+
+        public void ModuleUpHandler ( TurretModule module ) {
+            if ( state == State.placed && module == this )
+                OnMouseUp.Invoke();
         }
         #endregion
 

@@ -15,6 +15,8 @@
         public UnityTurretContainerEvent OnContainerExit;
         public UnityTurretModuleEvent OnModuleEnter;
         public UnityTurretModuleEvent OnModuleExit;
+        public UnityTurretModuleEvent OnModuleDown;
+        public UnityTurretModuleEvent OnModuleUp;
 
         private bool onContainer;
         private bool onModule;
@@ -31,6 +33,7 @@
         public override void OnUpdate () {
             ray = cam.ScreenPointToRay( Input.mousePosition );
 
+            //casting for containers
             if ( Physics.Raycast( ray, out hit, rayLength, containerMask ) ) {
                 if ( onContainer == false ) {
                     turretContainer = hit.collider.GetComponent<TurretContainer>();
@@ -47,10 +50,12 @@
                 }
             }
 
+            //casting for modules
             if ( Physics.Raycast( ray, out hit, rayLength, moduleMask ) ) {
                 if ( onModule == false ) {
-                    turretModule = hit.collider.GetComponent<TurretModule>();
+                    turretModule = hit.collider.GetComponentInParent<TurretModule>();
                     OnModuleEnter.Invoke( turretModule );
+                    print( turretModule.name + " enter" );
                     onModule = true;
                 }
             }
@@ -58,8 +63,16 @@
                 if ( onModule == true ) {
                     onModule = false;
                     OnModuleExit.Invoke( turretModule );
+                    print( turretModule.name + " exit" );
                 }
             }
+
+            //mouse input reading for modules
+            if ( onModule )
+                if ( Input.GetMouseButtonDown( 0 ) )
+                    OnModuleDown.Invoke( turretModule );
+                else if ( Input.GetMouseButtonUp( 0 ) )
+                    OnModuleUp.Invoke( turretModule );
         }
     }
 }
