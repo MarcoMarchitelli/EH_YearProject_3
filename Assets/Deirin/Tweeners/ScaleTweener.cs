@@ -1,29 +1,34 @@
 ﻿namespace Deirin.Tweeners {
     using UnityEngine;
     using DG.Tweening;
+    using Deirin.Utilities;
 
     public class ScaleTweener : BaseTweener {
         [Header("Specific Params")]
         public Transform target;
         public Vector3 targetScale;
         public bool addToOriginal;
+        public bool multiply;
+        [Tooltip("Always starts from original scale.")]
         public bool resetOnPlay = true;
 
-        Vector3 startScale;
+        private Vector3 startScale;
+        private Vector3 endScale;
 
         private void Awake () {
             startScale = target.localScale;
         }
 
-        public override void BackwardsTween () {
+        public override void Rewind () {
             target.DOScale( startScale, duration ).SetEase( ease ).SetLoops( loops ).onComplete += () => OnTweenerEnd.Invoke();
         }
 
-        public override void PlayTween () {
+        public override void Play () {
             OnTweenerStart.Invoke();
             if ( resetOnPlay == false )
                 startScale = target.localScale;
-            target.DOScale( addToOriginal ? startScale + targetScale : targetScale, duration ).SetEase( ease ).SetLoops( loops ).onComplete += () => OnTweenerEnd.Invoke();
+            endScale = multiply ? startScale.Mul( targetScale ) : targetScale;
+            target.DOScale( addToOriginal ? startScale + endScale : endScale, duration ).SetEase( ease ).SetLoops( loops ).onComplete += () => OnTweenerEnd.Invoke();
         }
 
         public override void StopTween () {

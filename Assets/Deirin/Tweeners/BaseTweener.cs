@@ -12,9 +12,9 @@
         public UnityEvent OnTweenerRewind;
         public UnityEvent OnTweenerEnd;
 
-        public abstract void PlayTween ();
+        public abstract void Play ();
 
-        public abstract void BackwardsTween ();
+        public abstract void Rewind ();
 
         public abstract void StopTween ();
     }

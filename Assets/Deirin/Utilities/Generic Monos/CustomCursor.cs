@@ -11,7 +11,7 @@
         }
 
         private void Update () {
-            image.transform.position = Input.mousePosition;
+            transform.position = Input.mousePosition;
         }
 
         public void ChangeSprite ( Sprite sprite ) {

@@ -64,7 +64,8 @@
 				i.uv -= .5;
 				float d = sdBox(i.uv, float2(_SizeX, _SizeY) );
 				float4 col = 1-smoothstep(_SmoothstepMin,_SmoothstepMax,d);
-				col *= _Color;
+				col.rgba *= _Color.rgba;
+				//col.a = min(col.a,_Color.a);
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;

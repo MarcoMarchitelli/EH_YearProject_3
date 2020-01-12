@@ -15,13 +15,13 @@
             startColor = target.color;
         }
 
-        public override void BackwardsTween () {
+        public override void Rewind () {
             target.DOKill();
             target.DOColor( startColor, duration ).SetEase( ease ).SetLoops( loops ).onComplete += () => OnTweenerEnd.Invoke();
             OnTweenerRewind.Invoke();
         }
 
-        public override void PlayTween () {
+        public override void Play () {
             target.DOKill();
             OnTweenerStart.Invoke();
             if ( resetOnPlay == false )
