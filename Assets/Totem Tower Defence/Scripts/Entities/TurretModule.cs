@@ -34,6 +34,11 @@
             SetState( State.selected );
         }
 
+        private void Deplace () {
+            turretContainer.RemoveModule( this );
+            OnDeplacement.Invoke();
+        }
+
         #region Game Event Handlers
         public void TurretContainerEnterHandler ( TurretContainer turretContainer ) {
             if ( state == State.selected ) {
@@ -76,7 +81,7 @@
         public void ModuleExitHandler ( TurretModule module ) {
             if ( state == State.placed && module == this ) {
                 if ( mouseDowned )
-                    OnDeplacement.Invoke();
+                    Deplace();
                 mouseDowned = false;
                 OnMouseExit.Invoke();
             }

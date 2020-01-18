@@ -75,6 +75,12 @@
 
         private void SortModules () {
             currentTopPosition = transform.position;
+
+            if ( shooterModules.Count == 0 ) {
+                Disassemble();
+                return;
+            }
+
             for ( int i = 0; i < shooterModules.Count; i++ ) {
                 shooterModules[i].transform.position = currentTopPosition;
                 shooterModules[i].transform.rotation = Quaternion.identity;
@@ -90,6 +96,10 @@
                 modifierModules[i].transform.rotation = Quaternion.identity;
                 currentTopPosition += Vector3.up * moduleHeight;
             }
+        }
+
+        private void Disassemble () {
+            //TODO
         }
 
         private void HandleElementAttachment ( TurretModule elementModule ) {
