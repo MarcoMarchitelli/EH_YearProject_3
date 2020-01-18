@@ -12,19 +12,21 @@
         public ModuleType type;
         [ReadOnly] public State state;
 
-        [Header("Events")]
+        [Header("Gameplay State Events")]
         public UnityEvent OnCanBePlaced;
         public UnityEvent OnCannotBePlaced;
         public UnityEvent OnPlace;
         [Tooltip("Called when releasing left mouse while not being placeable.")]
         public UnityTurretModuleEvent OnDeselection;
+        public UnityEvent OnDeplacement;
+        [Header("Mouse Interaction Events")]
         public UnityEvent OnMouseEnter;
         public UnityEvent OnMouseExit;
         public UnityEvent OnMouseDown;
         public UnityEvent OnMouseUp;
 
         private TurretContainer turretContainer;
-        private bool mouseEntered;
+        private bool mouseEntered, mouseDowned;
 
         public System.Action OnTurretContainerEnter, OnTurretContainerExit, OnLeftMouseUp;
 
@@ -72,18 +74,26 @@
         }
 
         public void ModuleExitHandler ( TurretModule module ) {
-            if ( state == State.placed && module == this )
+            if ( state == State.placed && module == this ) {
+                if ( mouseDowned )
+                    OnDeplacement.Invoke();
+                mouseDowned = false;
                 OnMouseExit.Invoke();
+            }
         }
 
         public void ModuleDownHandler ( TurretModule module ) {
-            if ( state == State.placed && module == this )
+            if ( state == State.placed && module == this ) {
+                mouseDowned = true;
                 OnMouseDown.Invoke();
+            }
         }
 
         public void ModuleUpHandler ( TurretModule module ) {
-            if ( state == State.placed && module == this )
+            if ( state == State.placed && module == this ) {
+                mouseDowned = false;
                 OnMouseUp.Invoke();
+            }
         }
         #endregion
 
