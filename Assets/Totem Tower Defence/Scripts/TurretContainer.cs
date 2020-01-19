@@ -55,7 +55,7 @@
         }
 
         public void RemoveModule ( TurretModule module ) {
-            switch ( previewModule.type ) {
+            switch ( module.type ) {
                 case TurretModule.ModuleType.shooter:
                 if ( shooterModules.Contains( module ) == true )
                     shooterModules.Remove( module );
@@ -105,16 +105,25 @@
         private void Disassemble () {
             //TODO
             for ( int i = 0; i < shooterModules.Count; i++ ) {
-                Vector3 pos = Random.insideUnitSphere;
-                shooterModules[i].transform.DOJump( pos, 2, Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic );
+                float duration = Random.Range(1.5f,3f);
+                Vector3 pos = transform.position + Vector3.up * 2f + Random.insideUnitSphere;
+                TurretModule module = shooterModules[i];
+                module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), duration ).SetEase( Ease.OutCubic ).onComplete += () => module.OnDeselection.Invoke( module );
+                module.transform.DOLocalRotate( new Vector3( Random.Range( 0, 360 ), Random.Range( 0, 360 ), Random.Range( 0, 360 ) ), duration ).SetEase( Ease.OutCubic );
             }
             for ( int i = 0; i < elementModules.Count; i++ ) {
-                Vector3 pos = Random.insideUnitSphere;
-                elementModules[i].transform.DOJump( pos, 2, Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic );
+                float duration = Random.Range(1.5f,3f);
+                Vector3 pos = transform.position + Vector3.up * 2f + Random.insideUnitSphere;
+                TurretModule module = elementModules[i];
+                module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic ).onComplete += () => module.OnDeselection.Invoke( module );
+                module.transform.DOLocalRotate( new Vector3( Random.Range( 0, 360 ), Random.Range( 0, 360 ), Random.Range( 0, 360 ) ), duration ).SetEase( Ease.OutCubic );
             }
             for ( int i = 0; i < modifierModules.Count; i++ ) {
-                Vector3 pos = Random.insideUnitSphere;
-                modifierModules[i].transform.DOJump( pos, 2, Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic );
+                float duration = Random.Range(1.5f,3f);
+                Vector3 pos = transform.position + Vector3.up * 2f + Random.insideUnitSphere;
+                TurretModule module = modifierModules[i];
+                module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic ).onComplete += () => module.OnDeselection.Invoke( module );
+                module.transform.DOLocalRotate( new Vector3( Random.Range( 0, 360 ), Random.Range( 0, 360 ), Random.Range( 0, 360 ) ), duration ).SetEase( Ease.OutCubic );
             }
         }
 
