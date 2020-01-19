@@ -3,6 +3,7 @@
     using UnityEngine;
     using UnityEngine.Events;
     using Deirin.Utilities;
+    using DG.Tweening;
 
     public class TurretContainer : MonoBehaviour {
         public enum State { disasbled, enabled }
@@ -82,17 +83,20 @@
             }
 
             for ( int i = 0; i < shooterModules.Count; i++ ) {
-                shooterModules[i].transform.position = currentTopPosition;
+                shooterModules[i].transform.DOMove( currentTopPosition, .2f ).SetEase( Ease.OutCubic );
+                //shooterModules[i].transform.position = currentTopPosition;
                 shooterModules[i].transform.rotation = Quaternion.identity;
                 currentTopPosition += Vector3.up * moduleHeight;
             }
             for ( int i = 0; i < elementModules.Count; i++ ) {
-                elementModules[i].transform.position = currentTopPosition;
+                elementModules[i].transform.DOMove( currentTopPosition, .2f ).SetEase( Ease.OutCubic );
+                //elementModules[i].transform.position = currentTopPosition;
                 elementModules[i].transform.rotation = Quaternion.identity;
                 currentTopPosition += Vector3.up * moduleHeight;
             }
             for ( int i = 0; i < modifierModules.Count; i++ ) {
-                modifierModules[i].transform.position = currentTopPosition;
+                modifierModules[i].transform.DOMove( currentTopPosition, .2f ).SetEase( Ease.OutCubic );
+                //modifierModules[i].transform.position = currentTopPosition;
                 modifierModules[i].transform.rotation = Quaternion.identity;
                 currentTopPosition += Vector3.up * moduleHeight;
             }
@@ -100,6 +104,18 @@
 
         private void Disassemble () {
             //TODO
+            for ( int i = 0; i < shooterModules.Count; i++ ) {
+                Vector3 pos = Random.insideUnitSphere;
+                shooterModules[i].transform.DOJump( pos, 2, Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic );
+            }
+            for ( int i = 0; i < elementModules.Count; i++ ) {
+                Vector3 pos = Random.insideUnitSphere;
+                elementModules[i].transform.DOJump( pos, 2, Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic );
+            }
+            for ( int i = 0; i < modifierModules.Count; i++ ) {
+                Vector3 pos = Random.insideUnitSphere;
+                modifierModules[i].transform.DOJump( pos, 2, Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic );
+            }
         }
 
         private void HandleElementAttachment ( TurretModule elementModule ) {
