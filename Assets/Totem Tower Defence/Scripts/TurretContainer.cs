@@ -103,30 +103,23 @@
         }
 
         private void Disassemble () {
-            //TODO
-            for ( int i = 0; i < shooterModules.Count; i++ ) {
-                float duration = Random.Range(1.5f,3f);
-                Vector3 pos = transform.position + Vector3.up * 2f + Random.insideUnitSphere;
-                TurretModule module = shooterModules[i];
-                module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), duration ).SetEase( Ease.OutCubic ).onComplete += () => module.OnDeselection.Invoke( module );
-                module.transform.DOLocalRotate( new Vector3( Random.Range( 0, 360 ), Random.Range( 0, 360 ), Random.Range( 0, 360 ) ), duration ).SetEase( Ease.OutCubic );
-            }
             for ( int i = 0; i < elementModules.Count; i++ ) {
-                elementModules.Remove( elementModules[i] );
                 float duration = Random.Range(1.5f,3f);
                 Vector3 pos = transform.position + Vector3.up * 2f + Random.insideUnitSphere;
                 TurretModule module = elementModules[i];
                 module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic ).onComplete += () => module.OnDeselection.Invoke( module );
                 module.transform.DOLocalRotate( new Vector3( Random.Range( 0, 360 ), Random.Range( 0, 360 ), Random.Range( 0, 360 ) ), duration ).SetEase( Ease.OutCubic );
             }
+            elementModules.Clear();
             for ( int i = 0; i < modifierModules.Count; i++ ) {
-                modifierModules.Remove( modifierModules[i] );
                 float duration = Random.Range(1.5f,3f);
                 Vector3 pos = transform.position + Vector3.up * 2f + Random.insideUnitSphere;
                 TurretModule module = modifierModules[i];
                 module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic ).onComplete += () => module.OnDeselection.Invoke( module );
                 module.transform.DOLocalRotate( new Vector3( Random.Range( 0, 360 ), Random.Range( 0, 360 ), Random.Range( 0, 360 ) ), duration ).SetEase( Ease.OutCubic );
+                modifierModules.Remove( modifierModules[i] );
             }
+            modifierModules.Clear();
         }
 
         private void HandleElementAttachment ( TurretModule elementModule ) {
