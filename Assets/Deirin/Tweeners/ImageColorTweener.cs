@@ -17,21 +17,21 @@
 
         public override void Rewind () {
             target.DOKill();
-            target.DOColor( startColor, duration ).SetEase( ease ).SetLoops( loops ).onComplete += () => OnTweenerEnd.Invoke();
-            OnTweenerRewind.Invoke();
+            target.DOColor( startColor, duration ).SetEase( ease ).SetLoops( loops ).onComplete += () => OnRewindEnd.Invoke();
+            OnRewind.Invoke();
         }
 
         public override void Play () {
             target.DOKill();
-            OnTweenerStart.Invoke();
+            OnPlay.Invoke();
             if ( resetOnPlay == false )
                 startColor = target.color;
-            target.DOColor( targetColor, duration ).SetEase( ease ).SetLoops( loops ).onComplete += () => OnTweenerEnd.Invoke();
+            target.DOColor( targetColor, duration ).SetEase( ease ).SetLoops( loops ).onComplete += () => OnPlayEnd.Invoke();
         }
 
-        public override void StopTween () {
+        public override void Stop () {
             target.DOKill();
-            OnTweenerEnd.Invoke();
+            OnPlayEnd.Invoke();
         }
     }
 }

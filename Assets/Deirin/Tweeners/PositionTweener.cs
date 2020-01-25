@@ -17,20 +17,20 @@
 
         public override void Rewind () {
             target.DOKill();
-            target.DOMove( startPos, duration ).SetEase( ease ).SetLoops( loops ).onComplete += () => OnTweenerEnd.Invoke();
+            target.DOMove( startPos, duration ).SetEase( ease ).SetLoops( loops ).onComplete += () => OnPlayEnd.Invoke();
         }
 
         public override void Play () {
             target.DOKill();
-            OnTweenerStart.Invoke();
+            OnPlay.Invoke();
             if ( resetOnPlay == false )
                 startPos = target.position;
-            target.DOMove( addToOriginal ? startPos + targetPosition : targetPosition, duration ).SetEase( ease ).SetLoops( loops ).onComplete += () => OnTweenerEnd.Invoke();
+            target.DOMove( addToOriginal ? startPos + targetPosition : targetPosition, duration ).SetEase( ease ).SetLoops( loops ).onComplete += () => OnPlayEnd.Invoke();
         }
 
-        public override void StopTween () {
+        public override void Stop () {
             target.DOKill();
-            OnTweenerEnd.Invoke();
+            OnPlayEnd.Invoke();
         }
     }
 }
