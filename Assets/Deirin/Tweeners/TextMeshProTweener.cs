@@ -6,7 +6,9 @@
     public class TextMeshProTweener : BaseTweener {
         [Header("Specific Params")]
         public TextMeshProUGUI target;
+        public bool color;
         public Color targetColor;
+        public bool text;
         [Multiline] public string targetText;
         public bool resetOnPlay = true;
 
@@ -22,7 +24,7 @@
             startText = target.text;
         }
 
-        private void SetText (string value) {
+        private void SetText ( string value ) {
             target.text = value;
         }
 
@@ -34,8 +36,10 @@
             target.DOKill();
             OnRewind.Invoke();
 
-            DOTween.To( GetText, SetText, startText, duration ).SetEase( ease );
-            target.DOColor( startColor, duration ).SetEase( ease ).SetLoops( loops ).onComplete += () => OnRewindEnd.Invoke();
+            if ( text )
+                DOTween.To( GetText, SetText, startText, duration ).SetEase( ease );
+            if ( color )
+                target.DOColor( startColor, duration ).SetEase( ease ).SetLoops( loops ).onComplete += () => OnRewindEnd.Invoke();
         }
 
         public override void Play () {
@@ -45,8 +49,10 @@
             if ( resetOnPlay == false )
                 SetStartVars();
 
-            DOTween.To( GetText, SetText, targetText, duration ).SetEase( ease );
-            target.DOColor( targetColor, duration ).SetEase( ease ).SetLoops( loops ).onComplete += () => OnPlayEnd.Invoke();
+            if ( text )
+                DOTween.To( GetText, SetText, targetText, duration ).SetEase( ease );
+            if ( color )
+                target.DOColor( targetColor, duration ).SetEase( ease ).SetLoops( loops ).onComplete += () => OnPlayEnd.Invoke();
         }
 
         public override void Stop () {
