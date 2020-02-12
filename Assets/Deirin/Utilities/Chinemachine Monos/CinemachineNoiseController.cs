@@ -50,6 +50,18 @@
             End();
         }
 
+        public void SetAmplitudeGain ( float value ) {
+            noise.m_AmplitudeGain = value;
+        }
+
+        public void SetFrequencyGain ( float value ) {
+            noise.m_FrequencyGain = value;
+        }
+
+        public void SetDuration ( float value ) {
+            duration = value;
+        }
+
         private void End () {
             noise.m_AmplitudeGain = 0;
             noise.m_FrequencyGain = 0;
