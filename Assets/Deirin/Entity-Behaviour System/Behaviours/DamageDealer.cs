@@ -1,4 +1,5 @@
 ﻿namespace Deirin.EB {
+    using Deirin.Utilities;
     using UnityEngine;
     using UnityEngine.Events;
 
@@ -8,7 +9,7 @@
         public int damage;
 
         [Header("Events")]
-        public UnityEvent OnDamageDealt;
+        public UnityEntityEvent OnDamageDealt;
 
         DamageReceiver damageReceiver;
 
@@ -16,7 +17,7 @@
             damageReceiver = other.GetComponentInChildren<DamageReceiver>();
             if ( damageReceiver ) {
                 damageReceiver.Damage( damage );
-                OnDamageDealt.Invoke();
+                OnDamageDealt.Invoke(damageReceiver.Entity);
             }
         }
     }
