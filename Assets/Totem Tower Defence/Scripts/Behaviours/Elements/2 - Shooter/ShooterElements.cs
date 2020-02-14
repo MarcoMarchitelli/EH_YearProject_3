@@ -2,10 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ShooterElements : BaseBehaviour
 {
 	private Dictionary<Element.ElementType, int> elementsDictionary;
+
+	public UnityElementTypeIntEvent OnAddElement;
+	public UnityElementTypeIntEvent OnRemoveElement;
+	public UnityEvent OnRemoveAll;
 
 	protected override void CustomSetup()
 	{
@@ -26,6 +31,8 @@ public class ShooterElements : BaseBehaviour
 			{
 				elementsDictionary.Add(curentType, 1);
 			}
+			OnAddElement?.Invoke(curentType, elementsDictionary[curentType]);
+			Debug.LogWarning(Entity + "." + curentType + " --> " + elementsDictionary[curentType]);
 		}
 	}
 
@@ -37,6 +44,7 @@ public class ShooterElements : BaseBehaviour
 			if (elementsDictionary.ContainsKey(curentType) && elementsDictionary[curentType] > 0)
 			{
 				elementsDictionary[curentType]--;
+				OnRemoveElement?.Invoke(curentType, elementsDictionary[curentType]);
 			}
 		}
 	}
@@ -44,6 +52,7 @@ public class ShooterElements : BaseBehaviour
 	public void RemoveAll()
 	{
 		elementsDictionary = new Dictionary<Element.ElementType, int>();
+		OnRemoveAll?.Invoke();
 	}
 
 	public Dictionary<Element.ElementType, int> GetDictionary()
@@ -52,3 +61,6 @@ public class ShooterElements : BaseBehaviour
 	}
 
 }
+
+[System.Serializable]
+public class UnityElementTypeIntEvent : UnityEvent<Element.ElementType, int> { }

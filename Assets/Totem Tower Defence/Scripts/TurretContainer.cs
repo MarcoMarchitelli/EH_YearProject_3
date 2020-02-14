@@ -41,7 +41,17 @@
         public void AddModule ( TurretModule module ) {
             switch ( previewModule.type ) {
                 case TurretModule.ModuleType.shooter:
-                shooterModules.Add( module );
+					shooterModules.Add( module );
+					ShooterElements shooterElements;
+					module.TryGetBehaviour(out shooterElements);
+					foreach(TurretModule elementModule in elementModules)
+					{
+						Element element;
+						if (elementModule.TryGetBehaviour(out element))
+						{
+							shooterElements.Add(element);
+						}
+					}
                 break;
                 case TurretModule.ModuleType.element:
                 elementModules.Add( module );
