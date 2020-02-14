@@ -42,7 +42,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1333847053637959379}
-  - component: {fileID: 8398689913871479448}
+  - component: {fileID: 7617580116360903122}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Untagged
@@ -64,7 +64,7 @@ Transform:
   m_Father: {fileID: 6491391082161058691}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8398689913871479448
+--- !u!114 &7617580116360903122
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -76,8 +76,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac795af322e456458fd83a1aec717db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DPS: 2
-  duration: 2
+  DPS: 0
+  duration: 0
 --- !u!1 &7407614526049578289
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,6 +357,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1321562719269217632, guid: fe09fd00172514e4eba9e60ae22ce163,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 437727999053047935, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -391,11 +396,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1321562719269217632, guid: fe09fd00172514e4eba9e60ae22ce163,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe09fd00172514e4eba9e60ae22ce163, type: 3}

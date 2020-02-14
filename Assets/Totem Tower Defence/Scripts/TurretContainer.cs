@@ -57,8 +57,13 @@
         public void RemoveModule ( TurretModule module ) {
             switch ( module.type ) {
                 case TurretModule.ModuleType.shooter:
-                if ( shooterModules.Contains( module ) == true )
-                    shooterModules.Remove( module );
+					if (shooterModules.Contains(module) == true)
+					{
+						ShooterElements sEle;
+						module.TryGetBehaviour(out sEle);
+						sEle?.RemoveAll();
+						shooterModules.Remove(module);
+					}
                 break;
                 case TurretModule.ModuleType.element:
                 if ( elementModules.Contains( module ) == true ) {
@@ -107,7 +112,8 @@
                 float duration = Random.Range(1.5f,3f);
                 Vector3 pos = transform.position + Vector3.up * 2f + Random.insideUnitSphere;
                 TurretModule module = elementModules[i];
-                module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic ).onComplete += () => module.OnDeselection.Invoke( module );
+				HandleElementDetachment(elementModules[i]);
+				module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic ).onComplete += () => module.OnDeselection.Invoke( module );
                 module.transform.DOLocalRotate( new Vector3( Random.Range( 0, 360 ), Random.Range( 0, 360 ), Random.Range( 0, 360 ) ), duration ).SetEase( Ease.OutCubic );
             }
             elementModules.Clear();
@@ -115,6 +121,7 @@
                 float duration = Random.Range(1.5f,3f);
                 Vector3 pos = transform.position + Vector3.up * 2f + Random.insideUnitSphere;
                 TurretModule module = modifierModules[i];
+				//HandleModifierDeatachment(modifierModules[i]);
                 module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic ).onComplete += () => module.OnDeselection.Invoke( module );
                 module.transform.DOLocalRotate( new Vector3( Random.Range( 0, 360 ), Random.Range( 0, 360 ), Random.Range( 0, 360 ) ), duration ).SetEase( Ease.OutCubic );
                 modifierModules.Remove( modifierModules[i] );
@@ -123,24 +130,24 @@
         }
 
         private void HandleElementAttachment ( TurretModule elementModule ) {
-            Element e;
+			Element e;
             if ( elementModule.TryGetBehaviour( out e ) ) {
                 foreach ( var item in shooterModules ) {
-                    ElementStatusHandler esh;
+					ShooterElements esh;
                     if ( item.TryGetBehaviour( out esh ) ) {
-                        esh.Apply( e );
+                        esh.Add( e );
                     }
                 }
             }
         }
 
         private void HandleElementDetachment ( TurretModule elementModule ) {
-            Element e;
+			Element e;
             if ( elementModule.TryGetBehaviour( out e ) ) {
                 foreach ( var item in shooterModules ) {
-                    ElementStatusHandler esh;
-                    if ( item.TryGetBehaviour( out esh ) && esh.element == e ) {
-                        esh.Remove();
+					ShooterElements esh;
+                    if ( item.TryGetBehaviour( out esh ) ) {
+                        esh.Remove(e);
                     }
                 }
             }

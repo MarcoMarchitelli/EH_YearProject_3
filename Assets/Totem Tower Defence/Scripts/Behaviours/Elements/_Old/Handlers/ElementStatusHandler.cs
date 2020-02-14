@@ -1,4 +1,4 @@
-﻿namespace TotemTD {
+﻿/*namespace TotemTD {
     using UnityEngine;
     using UnityEngine.Events;
     using Deirin.EB;
@@ -30,4 +30,4 @@
 
         }
     }
-}
+}*/

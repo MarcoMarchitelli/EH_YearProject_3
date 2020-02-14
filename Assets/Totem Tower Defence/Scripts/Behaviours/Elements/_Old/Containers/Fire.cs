@@ -1,4 +1,4 @@
-﻿namespace TotemTD {
+﻿/*namespace TotemTD {
     using UnityEngine;
 
     public class Fire : Element {
@@ -6,4 +6,4 @@
         public float DPS;
         public float duration;
     }
-}
+}*/

@@ -1,4 +1,4 @@
-﻿namespace TotemTD {
+﻿/*namespace TotemTD {
     using UnityEngine;
 
     public class Ice : Element {
@@ -6,4 +6,4 @@
         [Range(0,1)] public float slowPercent = .1f;
         public float duration;
     }
-}
+}*/

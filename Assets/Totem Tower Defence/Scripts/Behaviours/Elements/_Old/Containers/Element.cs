@@ -1,4 +1,4 @@
-﻿namespace TotemTD {
+﻿/*namespace TotemTD {
     using Deirin.EB;
 
     public abstract class Element : BaseBehaviour {
@@ -11,4 +11,4 @@
 
         }
     } 
-}
+}*/

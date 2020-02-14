@@ -245,7 +245,6 @@ GameObject:
   - component: {fileID: 6088998830640842071}
   - component: {fileID: 6088998830640842064}
   - component: {fileID: 7265592237151404317}
-  - component: {fileID: 6088998830640842066}
   - component: {fileID: 1924833558216316174}
   - component: {fileID: 6601913494771780501}
   - component: {fileID: -7539954008673375503}
@@ -386,6 +385,31 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: TotemTD.UnityTurretModuleEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  OnDeplacement:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnMouseEnter:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnMouseExit:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnMouseDown:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnMouseUp:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &6088998830640842064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,20 +447,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   rayMaxDistance: 0
---- !u!114 &6088998830640842066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6088998830640842067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cac795af322e456458fd83a1aec717db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DPS: 0.5
-  duration: 3
 --- !u!114 &1924833558216316174
 MonoBehaviour:
   m_ObjectHideFlags: 0

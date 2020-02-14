@@ -1,4 +1,4 @@
-﻿namespace TotemTD {
+﻿/*namespace TotemTD {
     using UnityEngine;
     using System.Collections;
     using Deirin.EB;
@@ -25,4 +25,4 @@
             yield return new WaitForSeconds( iceElement.duration );
         }
     }
-}
+}*/
