@@ -21,7 +21,6 @@ public class ShooterElements : BaseBehaviour
 			if (elementsDictionary.ContainsKey(curentType))
 			{
 				elementsDictionary[curentType]++;
-				Debug.LogWarning(curentType + " | " + elementsDictionary[curentType]);
 			}
 			else
 			{
@@ -38,7 +37,6 @@ public class ShooterElements : BaseBehaviour
 			if (elementsDictionary.ContainsKey(curentType) && elementsDictionary[curentType] > 0)
 			{
 				elementsDictionary[curentType]--;
-				Debug.LogWarning(curentType + " | " + elementsDictionary[curentType]);
 			}
 		}
 	}
