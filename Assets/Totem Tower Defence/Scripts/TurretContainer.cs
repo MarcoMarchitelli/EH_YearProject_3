@@ -42,11 +42,11 @@
             switch ( previewModule.type ) {
                 case TurretModule.ModuleType.shooter:
 					shooterModules.Add( module );
-					ShooterElements shooterElements;
+					ElementsContainer shooterElements;
 					module.TryGetBehaviour(out shooterElements);
 					foreach(TurretModule elementModule in elementModules)
 					{
-						Element element;
+						ElementSource element;
 						if (elementModule.TryGetBehaviour(out element))
 						{
 							shooterElements.Add(element);
@@ -69,7 +69,7 @@
                 case TurretModule.ModuleType.shooter:
 					if (shooterModules.Contains(module) == true)
 					{
-						ShooterElements sEle;
+						ElementsContainer sEle;
 						module.TryGetBehaviour(out sEle);
 						sEle?.RemoveAll();
 						shooterModules.Remove(module);
@@ -140,10 +140,10 @@
         }
 
         private void HandleElementAttachment ( TurretModule elementModule ) {
-			Element e;
+			ElementSource e;
             if ( elementModule.TryGetBehaviour( out e ) ) {
                 foreach ( var item in shooterModules ) {
-					ShooterElements esh;
+					ElementsContainer esh;
                     if ( item.TryGetBehaviour( out esh ) ) {
                         esh.Add( e );
                     }
@@ -152,10 +152,10 @@
         }
 
         private void HandleElementDetachment ( TurretModule elementModule ) {
-			Element e;
+			ElementSource e;
             if ( elementModule.TryGetBehaviour( out e ) ) {
                 foreach ( var item in shooterModules ) {
-					ShooterElements esh;
+					ElementsContainer esh;
                     if ( item.TryGetBehaviour( out esh ) ) {
                         esh.Remove(e);
                     }
