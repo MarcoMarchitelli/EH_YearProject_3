@@ -11,8 +11,6 @@ public class EnemyIceHandler : EnemyElementHandler
 	[Space, Tooltip("Percentuale di riduzione del movimento"), Range(0,1)]
 	public float slow = 0.3f;
 
-	public override ElementSource.ElementTypeEnum elementType 
-	{
-		get => ElementSource.ElementTypeEnum.Ice;
-	}
+	
+
 }

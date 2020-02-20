@@ -16,8 +16,4 @@ public class EnemyFireHandler : EnemyElementHandler
 	[Space] 
 	public UnityEvent OnTick;
 
-	public override ElementSource.ElementTypeEnum elementType 
-	{ 
-		get => ElementSource.ElementTypeEnum.Fire; 
-	}
 }

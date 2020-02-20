@@ -5,17 +5,17 @@ using System.Linq;
 
 public class EnemyElementsContainer : ElementsContainer
 {
-	protected Dictionary<ElementSource.ElementTypeEnum, Dictionary<int, float>> elementsChargeExpire = new Dictionary<ElementSource.ElementTypeEnum, Dictionary<int, float>>();
+	protected Dictionary<ElementScriptableEnum, Dictionary<int, float>> elementsChargeExpire = new Dictionary<ElementScriptableEnum, Dictionary<int, float>>();
 
 
-	protected void AddNewElementToElementChargeExpire(ElementSource.ElementTypeEnum element, int charge, float time, float extraTime, bool forceReset = false)
+	protected void AddNewElementToElementChargeExpire(ElementScriptableEnum element, int charge, float time, float extraTime, bool forceReset = false)
 	{
 		time = Mathf.Max(time, 0);
 		extraTime = Mathf.Max(extraTime, 0);
 
 		if (elementsChargeExpire == null)
 		{
-			elementsChargeExpire = new Dictionary<ElementSource.ElementTypeEnum, Dictionary<int, float>>();
+			elementsChargeExpire = new Dictionary<ElementScriptableEnum, Dictionary<int, float>>();
 		}
 
 		if (!elementsChargeExpire.ContainsKey(element))
@@ -41,7 +41,7 @@ public class EnemyElementsContainer : ElementsContainer
 	}
 
 
-	public override void Add(ElementSource.ElementTypeEnum element, int charge)
+	public override void Add(ElementScriptableEnum element, int charge)
 	{
 		if (charge > 0)
 		{
@@ -75,7 +75,7 @@ public class EnemyElementsContainer : ElementsContainer
 		}
 	}
 
-	public override void Remove(ElementSource.ElementTypeEnum element, int charge)
+	public override void Remove(ElementScriptableEnum element, int charge)
 	{
 		int actMaxCharge = 0;
 		elementsChargeExpire[element].Remove(charge);

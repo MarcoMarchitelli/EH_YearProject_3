@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 public abstract class EnemyElementHandler : BaseBehaviour
 {
+	[SerializeField] private ElementScriptableEnum _elementType;
 	private int charge = 0;
 
 	[Header("Params"), Tooltip("Numero massimo di livelli consentiti per l'effetto")]
@@ -16,6 +17,8 @@ public abstract class EnemyElementHandler : BaseBehaviour
 	[Tooltip("Tempo extra aggiunto all'effetto se viene riapplicato mentre è ancora in corso")]
 	public float extraTime = 1f;
 
-	public abstract ElementSource.ElementTypeEnum elementType { get; }
-
+	public ElementScriptableEnum elementType 
+	{
+		get => _elementType;
+	}
 }

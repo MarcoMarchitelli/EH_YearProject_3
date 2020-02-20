@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class ElementsContainer : BaseBehaviour
 {
-	protected Dictionary<ElementSource.ElementTypeEnum, int> elementsDictionary = new Dictionary<ElementSource.ElementTypeEnum, int>();
+	protected Dictionary<ElementScriptableEnum, int> elementsDictionary = new Dictionary<ElementScriptableEnum, int>();
 	public int maxCharge = 3;
 
 	public UnityElementTypeIntEvent OnAddElement;
@@ -20,7 +20,7 @@ public class ElementsContainer : BaseBehaviour
 		maxCharge = Mathf.Max(maxCharge, 0);
 	}
 
-	public virtual void Add(ElementSource.ElementTypeEnum element, int charge)
+	public virtual void Add(ElementScriptableEnum element, int charge)
 	{
 		if (charge > 0)
 		{
@@ -45,7 +45,7 @@ public class ElementsContainer : BaseBehaviour
 		}
 	}
 
-	public virtual void Remove(ElementSource.ElementTypeEnum element, int charge)
+	public virtual void Remove(ElementScriptableEnum element, int charge)
 	{
 		if (charge > 0)
 		{
@@ -76,9 +76,9 @@ public class ElementsContainer : BaseBehaviour
 		OnRemoveAll?.Invoke();
 	}
 
-	public Dictionary<ElementSource.ElementTypeEnum, int> GetDictionary()
+	public Dictionary<ElementScriptableEnum, int> GetDictionary()
 	{
-		return new Dictionary<ElementSource.ElementTypeEnum, int>(elementsDictionary);
+		return new Dictionary<ElementScriptableEnum, int>(elementsDictionary);
 	}
 
 	public void SendElementsToOtherContainers(BaseEntity reciver)
@@ -96,4 +96,4 @@ public class ElementsContainer : BaseBehaviour
 }
 
 [System.Serializable]
-public class UnityElementTypeIntEvent : UnityEvent<ElementSource.ElementTypeEnum, int> { }
+public class UnityElementTypeIntEvent : UnityEvent<ElementScriptableEnum, int> { }
