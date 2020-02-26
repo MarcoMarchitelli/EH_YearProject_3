@@ -8,14 +8,14 @@
 	using UnityEngine.Events;
 
 
-	public class EnemyFireHandler : EnemyElementHandler
+	public class EnemyFireHandler : AbsEnemyElementHandler
 	{
-		[Space, Tooltip("Danni inflitti ad ogni tick")]
+		[Header("Fire Params"), Tooltip("Danni inflitti ad ogni tick"), Space]
 		public float dps = 1;
 		[Tooltip("Frequenza di applicazione dei danni")]
 		public float tickFrequence = 0.5f;
 
-		[Space]
+		[Header("Fire Events"), Space]
 		public UnityEvent OnTick;
 
 	}

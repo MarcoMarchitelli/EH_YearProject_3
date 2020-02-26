@@ -8,9 +8,9 @@
 	using UnityEngine.Events;
 
 
-	public class EnemyIceHandler : EnemyElementHandler
+	public class EnemyIceHandler : AbsEnemyElementHandler
 	{
-		[Space, Tooltip("Percentuale di riduzione del movimento"), Range(0, 1)]
+		[Header("Ice Params"), Tooltip("Percentuale di riduzione del movimento"), Range(0, 1), Space]
 		public float slow = 0.3f;
 
 

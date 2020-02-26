@@ -47,8 +47,8 @@
 		{
 			if (charge > 0)
 			{
-				List<EnemyElementHandler> eehList = Entity.GetBehaviours<EnemyElementHandler>();
-				EnemyElementHandler selectedElementHandler = eehList.Find(x => x.elementType == element);
+				List<AbsEnemyElementHandler> eehList = Entity.GetBehaviours<AbsEnemyElementHandler>();
+				AbsEnemyElementHandler selectedElementHandler = eehList.Find(x => x.elementType == element);
 				if (selectedElementHandler != null)
 				{
 					int realCharge = Mathf.Min(maxCharge, selectedElementHandler.maxCharge, charge);
@@ -56,7 +56,7 @@
 					{
 						effectsDictionary.Add(element, realCharge);
 						//TODO: replace Time.time with some value that indicate real game time, to avoid some weird case
-						AddNewElementToElementChargeExpire(element,
+						AddNewElementToElementChargeExpire( element,
 															realCharge,
 															selectedElementHandler.duration + Time.time,
 															selectedElementHandler.extraTime,
@@ -65,11 +65,14 @@
 
 					//TODO: replace Time.time with some value that indicate real game time, to avoid some weird case
 					effectsDictionary[element] = Mathf.Max(effectsDictionary[element], realCharge);
-					AddNewElementToElementChargeExpire(element,
+					AddNewElementToElementChargeExpire( element,
 														realCharge,
 														selectedElementHandler.duration + Time.time,
 														selectedElementHandler.extraTime,
 														false);
+
+					int elementHandlerCurrentCharge = Mathf.Max(realCharge, selectedElementHandler.GetCurrentCharge());
+					selectedElementHandler.SetCurrentCharge(elementHandlerCurrentCharge);
 
 					OnAddEffect?.Invoke(element, effectsDictionary[element]);
 					//Debug.LogWarning(elementsDictionary[element] + " | " + Time.time);
@@ -81,6 +84,9 @@
 		{
 			int actMaxCharge = 0;
 			elementsChargeExpire[element].Remove(charge);
+
+			List<AbsEnemyElementHandler> eehList = Entity.GetBehaviours<AbsEnemyElementHandler>();
+			AbsEnemyElementHandler selectedElementHandler = eehList.Find(x => x.elementType == element);
 
 			for (int i = 1; i <= maxCharge; i++)
 			{
@@ -98,6 +104,7 @@
 				elementsChargeExpire.Remove(element);
 			}
 
+			selectedElementHandler.SetCurrentCharge(actMaxCharge);
 			OnRemoveEffect?.Invoke(element, actMaxCharge);
 			//Debug.LogWarning(actMaxCharge + " | " + Time.time);
 		}
