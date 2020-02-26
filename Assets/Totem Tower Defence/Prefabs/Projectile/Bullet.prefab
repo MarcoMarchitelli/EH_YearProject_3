@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 7576496883784882021}
   - component: {fileID: 7576496883784882020}
   - component: {fileID: 4469002279124670513}
-  - component: {fileID: 750561552157507226}
+  - component: {fileID: 7265847181680027798}
+  - component: {fileID: 2538496433223308115}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -94,8 +95,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 750561552157507226}
-        m_MethodName: SendElementsToOtherContainers
+      - m_Target: {fileID: 7265847181680027798}
+        m_MethodName: SendEffectsToOtherContainers
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2538496433223308115}
+        m_MethodName: SendEffectsToOtherContainers
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -232,7 +244,7 @@ MonoBehaviour:
         m_Calls: []
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
---- !u!114 &750561552157507226
+--- !u!114 &7265847181680027798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -241,20 +253,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 7576496883784882042}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ade1f3d1ed4842e4fac969268b1ac2f7, type: 3}
+  m_Script: {fileID: 11500000, guid: c3c2c3dcc4dbb2346a7cd87440468e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxCharge: 3
-  OnAddElement:
+  OnAddEffect:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityElementTypeIntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  OnRemoveElement:
+    m_TypeName: TotemTD.Unity_IEffectEnum_Int_Event, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnRemoveEffect:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityElementTypeIntEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+    m_TypeName: TotemTD.Unity_IEffectEnum_Int_Event, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnRemoveAll:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &2538496433223308115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7576496883784882042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec74d302c16c4584b9178aaeebec087c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxCharge: 3
+  OnAddEffect:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: TotemTD.Unity_IEffectEnum_Int_Event, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnRemoveEffect:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: TotemTD.Unity_IEffectEnum_Int_Event, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   OnRemoveAll:
     m_PersistentCalls:
       m_Calls: []
