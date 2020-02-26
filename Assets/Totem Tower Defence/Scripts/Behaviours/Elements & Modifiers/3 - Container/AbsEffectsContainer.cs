@@ -10,12 +10,17 @@
 		where GenericEffectSource : IEffectSource
 		where GenericEffectHandler : AbsEffectHandler<GenericEffectEnum>
 	{
+
 		protected Dictionary<GenericEffectEnum, int> effectsDictionary = new Dictionary<GenericEffectEnum, int>();
+		
+		[Header("AbsEffectsContainer Params")]
 		public int maxCharge = 3;
 
+		[Header("AbsEffectsContainer Events"), Space]
 		public Unity_IEffectEnum_Int_Event OnAddEffect;
 		public Unity_IEffectEnum_Int_Event OnRemoveEffect;
 		public UnityEvent OnRemoveAll;
+
 
 		protected override void CustomSetup()
 		{
