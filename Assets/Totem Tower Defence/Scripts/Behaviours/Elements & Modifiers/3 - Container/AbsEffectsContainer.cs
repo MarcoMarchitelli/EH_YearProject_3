@@ -5,9 +5,10 @@
 	using UnityEngine;
 	using UnityEngine.Events;
 
-	public abstract class AbsEffectsContainer<GenericEffectEnum, GenericEffectSource> : BaseBehaviour
+	public abstract class AbsEffectsContainer<GenericEffectEnum, GenericEffectSource, GenericEffectHandler> : BaseBehaviour
 		where GenericEffectEnum : IEffectEnum
 		where GenericEffectSource : IEffectSource
+		where GenericEffectHandler : AbsEffectHandler<GenericEffectEnum>
 	{
 		protected Dictionary<GenericEffectEnum, int> effectsDictionary = new Dictionary<GenericEffectEnum, int>();
 		public int maxCharge = 3;
@@ -34,6 +35,17 @@
 				{
 					effectsDictionary.Add(effect, Mathf.Min(maxCharge, charge));
 				}
+
+				List<GenericEffectHandler> GenericEffectHandlersList = Entity.GetBehaviours<GenericEffectHandler>();
+				if(GenericEffectHandlersList != null)
+				{
+					GenericEffectHandler selectedEffectHandler = GenericEffectHandlersList.Find(x => x.effectType == (IEffectEnum)effect);
+					if(selectedEffectHandler != null)
+					{
+						selectedEffectHandler.SetCurrentCharge(effectsDictionary[effect]);
+					}
+				}
+
 				OnAddEffect?.Invoke(effect, effectsDictionary[effect]);
 				//Debug.LogWarning(Entity + "." + element + " --> " + elementsDictionary[element]);
 			}
@@ -59,6 +71,17 @@
 					{
 						effectsDictionary.Remove(effect);
 					}
+
+					List<GenericEffectHandler> GenericEffectHandlersList = Entity.GetBehaviours<GenericEffectHandler>();
+					if (GenericEffectHandlersList != null)
+					{
+						GenericEffectHandler selectedEffectHandler = GenericEffectHandlersList.Find(x => x.effectType == (IEffectEnum)effect);
+						if (selectedEffectHandler != null)
+						{
+							selectedEffectHandler.SetCurrentCharge(newChargeValue);
+						}
+					}
+
 					OnRemoveEffect?.Invoke(effect, newChargeValue);
 				}
 			}
@@ -74,6 +97,17 @@
 
 		public void RemoveAll()
 		{
+			List<GenericEffectHandler> genericEffectHandlers = Entity.GetBehaviours<GenericEffectHandler>();
+			if(genericEffectHandlers != null)
+			{
+				List<GenericEffectHandler> selectedEffectHandlers = genericEffectHandlers.FindAll(x => x.effectType is GenericEffectEnum);
+				foreach (var item in selectedEffectHandlers)
+				{
+					item.SetCurrentCharge(0);
+				}
+			}
+			
+
 			effectsDictionary.Clear();
 			OnRemoveAll?.Invoke();
 		}
@@ -85,7 +119,7 @@
 
 		public void SendEffectsToOtherContainers(BaseEntity reciver)
 		{
-			AbsEffectsContainer<GenericEffectEnum, GenericEffectSource> ec;
+			AbsEffectsContainer<GenericEffectEnum, GenericEffectSource, GenericEffectHandler> ec;
 			if (reciver != null && reciver.TryGetBehaviour(out ec) && effectsDictionary != null)
 			{
 				foreach (var item in effectsDictionary)

@@ -48,7 +48,7 @@
 			if (charge > 0)
 			{
 				List<AbsEnemyElementHandler> eehList = Entity.GetBehaviours<AbsEnemyElementHandler>();
-				AbsEnemyElementHandler selectedElementHandler = eehList.Find(x => x.elementType == element);
+				AbsEnemyElementHandler selectedElementHandler = eehList.Find(x => x.effectType == element);
 				if (selectedElementHandler != null)
 				{
 					int realCharge = Mathf.Min(maxCharge, selectedElementHandler.maxCharge, charge);
@@ -69,7 +69,7 @@
 														realCharge,
 														selectedElementHandler.duration + Time.time,
 														selectedElementHandler.extraTime,
-														false);
+														selectedElementHandler.refreshDuration);
 
 					int elementHandlerCurrentCharge = Mathf.Max(realCharge, selectedElementHandler.GetCurrentCharge());
 					selectedElementHandler.SetCurrentCharge(elementHandlerCurrentCharge);
@@ -86,7 +86,7 @@
 			elementsChargeExpire[element].Remove(charge);
 
 			List<AbsEnemyElementHandler> eehList = Entity.GetBehaviours<AbsEnemyElementHandler>();
-			AbsEnemyElementHandler selectedElementHandler = eehList.Find(x => x.elementType == element);
+			AbsEnemyElementHandler selectedElementHandler = eehList.Find(x => x.effectType == element);
 
 			for (int i = 1; i <= maxCharge; i++)
 			{

@@ -1,5 +1,10 @@
 ﻿namespace TotemTD
 {
-	public class ModifiersContainer : AbsEffectsContainer<ModifierScriptableEnum, ModifierSource> { }
+	public class ModifiersContainer : AbsEffectsContainer<ModifierScriptableEnum, 
+														  ModifierSource,
+														  AbsEffectHandler<ModifierScriptableEnum>> 
+	{ 
+	
+	}
 
 }
