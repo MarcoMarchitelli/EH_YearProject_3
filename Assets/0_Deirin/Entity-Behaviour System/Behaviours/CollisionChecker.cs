@@ -196,8 +196,8 @@
         public LayerMask layer;
         public MonoBehaviour component;
         public string tag;
-        public UnityStringEvent onTagCollisionEnter, onTagCollisionStay, onTagCollisionExit;
-        public UnityComponentEvent onComponentCollisionEnter, onComponentCollisionStay, onComponentCollisionExit;
+        public UnityEvent_String onTagCollisionEnter, onTagCollisionStay, onTagCollisionExit;
+        public UnityEvent_Component onComponentCollisionEnter, onComponentCollisionStay, onComponentCollisionExit;
         public UnityEvent onLayerCollisionEnter, onLayerCollisionStay, onLayerCollisionExit;
     } 
 }

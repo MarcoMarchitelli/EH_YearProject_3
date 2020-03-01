@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu( menuName = "Deirin/Global Variables/Int" )]
 public class IntVariable : ScriptableObject {
     [SerializeField] int value;
 

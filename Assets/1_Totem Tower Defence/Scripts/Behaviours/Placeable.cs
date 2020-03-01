@@ -16,7 +16,7 @@
         [Header("Events")]
         public UnityEvent OnPlacement;
         public UnityEvent OnDeplacement;
-        public UnityColorEvent OnPlaceStateChangeColor;
+        public UnityEvent_Color OnPlaceStateChangeColor;
         public UnityTurretModuleEvent OnContainerMouseOver;
 
         bool placed, onContainer;

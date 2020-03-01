@@ -8,29 +8,29 @@
     }
 
     [System.Serializable]
-    public class UnityFloatEvent : UnityEvent<float> { }
+    public class UnityEvent_Float : UnityEvent<float> { }
 
     [System.Serializable]
-    public class UnityIntEvent : UnityEvent<int> { }
+    public class UnityEvent_Int : UnityEvent<int> { }
 
     [System.Serializable]
-    public class UnityStringEvent : UnityEvent<string> { }
+    public class UnityEvent_String : UnityEvent<string> { }
 
     [System.Serializable]
-    public class UnityBoolEvent : UnityEvent<bool> { }
+    public class UnityEvent_Bool : UnityEvent<bool> { }
 
     [System.Serializable]
-    public class UnityComponentEvent : UnityEvent<Component> { }
+    public class UnityEvent_Component : UnityEvent<Component> { }
 
     [System.Serializable]
-    public class UnityVector3ArrayEvent : UnityEvent<Vector3[]> { }
+    public class UnityEvent_Vector3Array : UnityEvent<Vector3[]> { }
 
     [System.Serializable]
-    public class UnityColorEvent : UnityEvent<Color> { }
+    public class UnityEvent_Color : UnityEvent<Color> { }
 
     [System.Serializable]
-    public class UnityEntityEvent : UnityEvent<BaseEntity> { }
+    public class UnityEvent_Entity : UnityEvent<BaseEntity> { }
 
     [System.Serializable]
-    public class UnityBehaviourEvent : UnityEvent<BaseBehaviour> { }
+    public class UnityEvent_Behaviour : UnityEvent<BaseBehaviour> { }
 }

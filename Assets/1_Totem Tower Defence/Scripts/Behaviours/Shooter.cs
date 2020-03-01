@@ -13,7 +13,7 @@
         public float fireRate;
 
         [Header("Events")]
-        public UnityEntityEvent OnShoot;
+        public UnityEvent_Entity OnShoot;
 
         private bool shooting;
 

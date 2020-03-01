@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu( menuName = "Deirin/Global Variables/Bool" )]
 public class BoolVariable : ScriptableObject {
     [SerializeField] bool value;
 

@@ -14,7 +14,7 @@
         public Vector3ArrayVariable pathPoints;
 
         [Header("Events")]
-        public UnityFloatEvent OnPlaceTimeStart;
+        public UnityEvent_Float OnPlaceTimeStart;
         public UnityEvent OnPlaceTimeEnd;
 
         private bool counting;

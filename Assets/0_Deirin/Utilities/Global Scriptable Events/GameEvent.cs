@@ -2,7 +2,7 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    [CreateAssetMenu(menuName = "Deirin/Utilities/Game Event")]
+    [CreateAssetMenu( menuName = "Deirin/Utilities/Global Game Events/Void" )]
     public class GameEvent : ScriptableObject {
         private List<GameEventListener> listeners = new List<GameEventListener>();
 

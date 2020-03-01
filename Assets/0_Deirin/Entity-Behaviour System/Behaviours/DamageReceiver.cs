@@ -9,8 +9,8 @@
         public bool maxLifeOnAwake = true;
 
         [Header("Events")]
-        public UnityFloatEvent OnLifeChanged;
-        public UnityFloatEvent OnLifeChangedPercent;
+        public UnityEvent_Float OnLifeChanged;
+        public UnityEvent_Float OnLifeChangedPercent;
         public UnityEvent OnLifeDepeleated;
 
         private float currentLife;

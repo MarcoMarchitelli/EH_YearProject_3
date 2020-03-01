@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu( menuName = "Deirin/Global Variables/Float" )]
 public class FloatVariable : ScriptableObject {
     [SerializeField] float value;
 
