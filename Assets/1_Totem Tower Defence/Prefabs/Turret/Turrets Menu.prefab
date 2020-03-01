@@ -120,7 +120,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 857778698}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99746835
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 0
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 25
   m_Viewport: {fileID: 1386663872}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 10940182}
@@ -247,6 +247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 604424112}
   - component: {fileID: 114153475}
+  - component: {fileID: 1980390747617717268}
   m_Layer: 0
   m_Name: Content
   m_TagString: Untagged
@@ -270,8 +271,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.00001}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 172.29999, y: 1.999939}
-  m_SizeDelta: {x: 614.5, y: 172.3}
+  m_AnchoredPosition: {x: 172.29999, y: 0}
+  m_SizeDelta: {x: 0, y: 172.3}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &114153475
 MonoBehaviour:
@@ -298,6 +299,20 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &1980390747617717268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604424111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
 --- !u!1 &857778697
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,20 +816,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46af90835ccb05f468099e10c020412e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoresContainer: 0
   duration: 0.2
   ease: 9
   loops: 0
-  OnTweenerStart:
+  OnPlay:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  OnTweenerRewind:
+  OnRewind:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  OnTweenerEnd:
+  OnPlayEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnRewindEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnStop:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -901,20 +927,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94b510521cd55ea48934aa393c6d542f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoresContainer: 0
   duration: 0.35
   ease: 6
   loops: 0
-  OnTweenerStart:
+  OnPlay:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  OnTweenerRewind:
+  OnRewind:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  OnTweenerEnd:
+  OnPlayEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnRewindEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnStop:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -1089,20 +1126,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46af90835ccb05f468099e10c020412e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoresContainer: 0
   duration: 0.2
   ease: 9
   loops: 0
-  OnTweenerStart:
+  OnPlay:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  OnTweenerRewind:
+  OnRewind:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  OnTweenerEnd:
+  OnPlayEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnRewindEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnStop:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,

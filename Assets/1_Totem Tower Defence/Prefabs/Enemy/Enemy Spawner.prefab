@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3595872175102658652}
   - component: {fileID: 402158184}
+  - component: {fileID: 3595872175592909066}
   m_Layer: 0
   m_Name: Enemy Spawner
   m_TagString: Untagged
@@ -47,12 +48,11 @@ MonoBehaviour:
     type: 3}
   waveData: {fileID: 11400000, guid: 7f0b336664e72554f859e356af9fe43e, type: 2}
   pathPoints: {fileID: 11400000, guid: 5dd93ad0134dcf543847a43784d81ef0, type: 2}
-  turretModules: {fileID: 11400000, guid: 7ef6e5d38c454f74e9e584a6f8d0379b, type: 2}
   OnPlaceTimeStart:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: SetTime
+      - m_Target: {fileID: 11400000, guid: 82221b2fc890aec4f9cde10d0c2a01ba, type: 2}
+        m_MethodName: Invoke
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -62,8 +62,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: StartCounting
+    m_TypeName: Deirin.Utilities.UnityEvent_Float, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnPlaceTimeEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 42bbcac87a446d94c9b03773f9991df4, type: 2}
+        m_MethodName: Invoke
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -73,13 +78,26 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: Deirin.Utilities.UnityFloatEvent, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  OnPlaceTimeEnd:
+--- !u!114 &3595872175592909066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3595872175102658650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b43da1bf4255af4a86a13fc4e3dc034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: dd356d745532a6f45ae8f7eb2f54d4b0, type: 2}
+  response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: Close
+      - m_Target: {fileID: 402158184}
+        m_MethodName: SkipPlaceTime
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
