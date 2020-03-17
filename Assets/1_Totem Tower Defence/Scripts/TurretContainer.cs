@@ -42,6 +42,25 @@
             switch ( previewModule.type ) {
                 case TurretModule.ModuleType.shooter:
                 shooterModules.Add( module );
+
+                ElementsContainer shooterElements;
+                module.TryGetBehaviour( out shooterElements );
+                foreach ( TurretModule elementModule in elementModules ) {
+                    ElementSource element;
+                    if ( elementModule.TryGetBehaviour( out element ) ) {
+                        shooterElements.Add( element );
+                    }
+                }
+
+                ModifiersContainer shooterModifiers;
+                module.TryGetBehaviour( out shooterModifiers );
+                foreach ( TurretModule modifierModule in modifierModules ) {
+                    ModifierSource modifier;
+                    if ( modifierModule.TryGetBehaviour( out modifier ) ) {
+                        shooterModifiers.Add( modifier );
+                    }
+                }
+
                 break;
                 case TurretModule.ModuleType.element:
                 elementModules.Add( module );
@@ -49,6 +68,8 @@
                 break;
                 case TurretModule.ModuleType.modifier:
                 modifierModules.Add( module );
+                HandleModifierAttachment( module );
+
                 break;
             }
             SortModules();
@@ -57,8 +78,17 @@
         public void RemoveModule ( TurretModule module ) {
             switch ( module.type ) {
                 case TurretModule.ModuleType.shooter:
-                if ( shooterModules.Contains( module ) == true )
+                if ( shooterModules.Contains( module ) == true ) {
+                    ElementsContainer sEle;
+                    module.TryGetBehaviour( out sEle );
+                    sEle?.RemoveAll();
+
+                    ModifiersContainer sMod;
+                    module.TryGetBehaviour( out sMod );
+                    sMod?.RemoveAll();
+
                     shooterModules.Remove( module );
+                }
                 break;
                 case TurretModule.ModuleType.element:
                 if ( elementModules.Contains( module ) == true ) {
@@ -67,8 +97,10 @@
                 }
                 break;
                 case TurretModule.ModuleType.modifier:
-                if ( modifierModules.Contains( module ) == true )
+                if ( modifierModules.Contains( module ) == true ) {
                     modifierModules.Remove( module );
+                    HandleModiferDetachment( module );
+                }
                 break;
             }
             SortModules();
@@ -107,6 +139,7 @@
                 float duration = Random.Range(1.5f,3f);
                 Vector3 pos = transform.position + Vector3.up * 2f + Random.insideUnitSphere;
                 TurretModule module = elementModules[i];
+                HandleElementDetachment( elementModules[i] );
                 module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic ).onComplete += () => module.OnDeselection.Invoke( module );
                 module.transform.DOLocalRotate( new Vector3( Random.Range( 0, 360 ), Random.Range( 0, 360 ), Random.Range( 0, 360 ) ), duration ).SetEase( Ease.OutCubic );
             }
@@ -115,6 +148,7 @@
                 float duration = Random.Range(1.5f,3f);
                 Vector3 pos = transform.position + Vector3.up * 2f + Random.insideUnitSphere;
                 TurretModule module = modifierModules[i];
+                HandleModiferDetachment( modifierModules[i] );
                 module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic ).onComplete += () => module.OnDeselection.Invoke( module );
                 module.transform.DOLocalRotate( new Vector3( Random.Range( 0, 360 ), Random.Range( 0, 360 ), Random.Range( 0, 360 ) ), duration ).SetEase( Ease.OutCubic );
                 modifierModules.Remove( modifierModules[i] );
@@ -123,28 +157,54 @@
         }
 
         private void HandleElementAttachment ( TurretModule elementModule ) {
-            Element e;
+            ElementSource e;
             if ( elementModule.TryGetBehaviour( out e ) ) {
                 foreach ( var item in shooterModules ) {
-                    ElementStatusHandler esh;
+                    ElementsContainer esh;
                     if ( item.TryGetBehaviour( out esh ) ) {
-                        esh.Apply( e );
+                        esh.Add( e );
                     }
                 }
             }
         }
 
         private void HandleElementDetachment ( TurretModule elementModule ) {
-            Element e;
+            ElementSource e;
             if ( elementModule.TryGetBehaviour( out e ) ) {
                 foreach ( var item in shooterModules ) {
-                    ElementStatusHandler esh;
-                    if ( item.TryGetBehaviour( out esh ) && esh.element == e ) {
-                        esh.Remove();
+                    ElementsContainer esh;
+                    if ( item.TryGetBehaviour( out esh ) ) {
+                        esh.Remove( e );
                     }
                 }
             }
         }
+
+        private void HandleModifierAttachment ( TurretModule elementModule ) {
+            ModifierSource e;
+            if ( elementModule.TryGetBehaviour( out e ) ) {
+                foreach ( var item in shooterModules ) {
+                    ModifiersContainer esh;
+                    if ( item.TryGetBehaviour( out esh ) ) {
+                        esh.Add( e );
+                    }
+                }
+            }
+        }
+
+        private void HandleModiferDetachment ( TurretModule elementModule ) {
+            ModifierSource e;
+            if ( elementModule.TryGetBehaviour( out e ) ) {
+                foreach ( var item in shooterModules ) {
+                    ModifiersContainer esh;
+                    if ( item.TryGetBehaviour( out esh ) ) {
+                        esh.Remove( e );
+                    }
+                }
+            }
+        }
+
+
     }
     [System.Serializable]
     public class UnityTurretContainerEvent : UnityEvent<TurretContainer> { }

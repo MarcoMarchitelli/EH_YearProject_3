@@ -122,8 +122,6 @@ GameObject:
   - component: {fileID: 2370915912159039557}
   - component: {fileID: 5384056428285394822}
   - component: {fileID: 267902806678347246}
-  - component: {fileID: 5394848929931838133}
-  - component: {fileID: 3149174468593954769}
   - component: {fileID: 3434651522411145754}
   m_Layer: 0
   m_Name: Enemy 01
@@ -179,7 +177,7 @@ MonoBehaviour:
   OnLifeChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: Deirin.Utilities.UnityFloatEvent, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: Deirin.Utilities.UnityEvent_Float, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   OnLifeChangedPercent:
     m_PersistentCalls:
@@ -206,7 +204,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: Deirin.Utilities.UnityFloatEvent, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: Deirin.Utilities.UnityEvent_Float, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   OnLifeDepeleated:
     m_PersistentCalls:
@@ -280,54 +278,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &5394848929931838133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1285193917929420043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8f91713a7130524ba51cab1689aad8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnStatusApply:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnStatusRemove:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  element: {fileID: 0}
-  pathPatroller: {fileID: 267902806678347246}
---- !u!114 &3149174468593954769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1285193917929420043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56b9f44a227b98b48910b92b5f8214a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnStatusApply:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnStatusRemove:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  element: {fileID: 0}
-  damageReceiver: {fileID: 2370915912159039557}
 --- !u!65 &3434651522411145754
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -663,20 +613,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46af90835ccb05f468099e10c020412e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoresContainer: 0
   duration: 0.5
   ease: 6
   loops: 0
-  OnTweenerStart:
+  OnPlay:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  OnTweenerRewind:
+  OnRewind:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  OnTweenerEnd:
+  OnPlayEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnRewindEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnStop:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -789,33 +750,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46af90835ccb05f468099e10c020412e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoresContainer: 0
   duration: 0.5
   ease: 6
   loops: 0
-  OnTweenerStart:
+  OnPlay:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  OnTweenerRewind:
+  OnRewind:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  OnTweenerEnd:
+  OnPlayEnd:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnRewindEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnStop:
+    m_PersistentCalls:
+      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   target: {fileID: 4964278068648616644}

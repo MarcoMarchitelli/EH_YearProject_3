@@ -1,6 +1,6 @@
 ﻿namespace Deirin.EB {
+    using Deirin.Utilities;
     using UnityEngine;
-    using UnityEngine.Events;
 
     [RequireComponent( typeof( Collider ) )]
     public class DamageDealer : BaseBehaviour {
@@ -8,7 +8,7 @@
         public int damage;
 
         [Header("Events")]
-        public UnityEvent OnDamageDealt;
+        public UnityEvent_Entity OnDamageDealt;
 
         DamageReceiver damageReceiver;
 
@@ -16,7 +16,7 @@
             damageReceiver = other.GetComponentInChildren<DamageReceiver>();
             if ( damageReceiver ) {
                 damageReceiver.Damage( damage );
-                OnDamageDealt.Invoke();
+                OnDamageDealt.Invoke( damageReceiver.Entity );
             }
         }
     }
