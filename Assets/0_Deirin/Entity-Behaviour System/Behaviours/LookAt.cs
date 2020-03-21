@@ -25,8 +25,8 @@
 
             Vector3 targetPos = target.position + targetOffset;
             targetPos = new Vector3( X ? targetPos.x : transform.position.x, Y ? targetPos.y : transform.position.y, Z ? targetPos.z : transform.position.z );
-            Quaternion currentRotation = transform.localRotation;
             transform.localRotation = Quaternion.identity;
+            Quaternion currentRotation = transform.localRotation;
             Quaternion targetRotation = Quaternion.LookRotation((targetPos - transform.position).normalized, transform.up);
 
             transform.rotation = Quaternion.Slerp(
