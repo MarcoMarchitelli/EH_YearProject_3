@@ -3,7 +3,8 @@
     using UnityEngine;
     using UnityEngine.Events;
 
-    public class Timer : BaseBehaviour {
+    public class Timer : BaseBehaviour, IStoppable
+	{
         [Header("Params")]
         public float duration;
         public bool unscaledTime = false;
@@ -16,20 +17,27 @@
         bool count;
         float timer;
 
-        public void Play () {
-            if ( unscaledTime )
+		public bool Stopped { get; private set; } = true;
+
+
+		public void Play () {
+			Stopped = false;
+
+			if ( unscaledTime )
                 StartCoroutine( CountUnscaled() );
             else
                 StartCoroutine( Count() );
-        }
+		}
 
         public void Pause () {
             count = false;
             OnTimerPause.Invoke();
         }
 
-        public void Stop () {
-            if ( unscaledTime )
+        public void Stop (bool callEvent = false) {
+			Stopped = true;
+
+			if ( unscaledTime )
                 StopCoroutine( CountUnscaled() );
             else
                 StopCoroutine( Count() );

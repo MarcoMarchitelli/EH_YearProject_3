@@ -6,49 +6,66 @@
 	using System.Collections.Generic;
     using Deirin.Utilities;
     using UnityEngine.Events;
+    using System.Linq;
 
-	[DisallowMultipleComponent]
-    public class Spawner : BaseBehaviour
+    [DisallowMultipleComponent]
+    public class Spawner : BaseBehaviour, IStoppable
 	{
 		[Header("Params")]
 		public Enemy enemy;
 		public Vector3ArrayVariable pathPoints;
 		public int enemeyToSpawnChunk = 1;
-		public bool disableSpawner = false;
-
-		[ReadOnly, Space]
-		public int spawnedEnemy = 0;
 
 		[Header("Events"), Space]
 		public UnityEvent onSpawnerStart;
 		public UnityEvent onSpawnerStop;
 		public UnityEvent onEnemySpawn;
 
+		//Property
+		public int SpawnedEnemy { get; private set; }
+		public bool Stopped { get; private set; }
+		public IStoppable[] StoppableItems { get; private set; }
+
+
+
 		protected override void CustomSetup()
 		{
 			base.CustomSetup();
-			enemeyToSpawnChunk = Mathf.Max(0, enemeyToSpawnChunk);
-			spawnedEnemy = 0;
+
+			enemeyToSpawnChunk = Mathf.Max(1, enemeyToSpawnChunk);
+			SpawnedEnemy = 0;
+			List<IStoppable> tmpStoppableItems = GetComponentsInChildren<IStoppable>().ToList();
+			tmpStoppableItems.Remove(this);
+			StoppableItems = tmpStoppableItems.ToArray();
+			Stopped = true;
 		}
 
 		public void StartSpawner()
 		{
-			disableSpawner = false;
-			onSpawnerStart?.Invoke();
+			if(Stopped)
+			{
+				Stopped = false;
+				onSpawnerStart?.Invoke();
+			}
 		}
 
-		public void StopSpawner()
+		public void Stop(bool callEvent = true)
 		{
-			disableSpawner = true;
-			onSpawnerStop?.Invoke();
+			if(!Stopped)
+			{
+				Stopped = true;
+				StopAllStoppableChilds();
+				if(callEvent)
+					onSpawnerStop?.Invoke();
+			}
 		}
 
 		public void SpawnEnemy()
 		{
-			if(enemy && !disableSpawner && pathPoints)
+			if(enemy && !Stopped && pathPoints)
 			{
 				InstantiateEnemy();
-				spawnedEnemy += enemeyToSpawnChunk;
+				SpawnedEnemy += enemeyToSpawnChunk;
 				onEnemySpawn?.Invoke();
 			}
 		}
@@ -56,6 +73,15 @@
 		private void InstantiateEnemy()
 		{
 			//Da Implementare
+			//Debug.Log("Enemy Spawn" + spawnedEnemy);
+		}
+
+		private void StopAllStoppableChilds()
+		{
+			foreach (var stoppableItem in StoppableItems)
+			{
+				stoppableItem.Stop(false);
+			}
 		}
 
 
