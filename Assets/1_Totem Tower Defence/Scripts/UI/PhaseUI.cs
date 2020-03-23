@@ -1,6 +1,7 @@
 ﻿namespace TotemTD {
     using System.Collections.Generic;
     using UnityEngine;
+    using UnityEngine.Events;
     using UnityEngine.UI;
     using TMPro;
     using DG.Tweening;
@@ -10,6 +11,9 @@
         public TextMeshProUGUI textPrefab;
         public Transform textsContainer;
         public Image background;
+
+        [Header("Events")]
+        public UnityEvent OnPlay;
 
         private Sequence s;
         private List<TextMeshProUGUI> texts = new List<TextMeshProUGUI>();
@@ -29,6 +33,8 @@
             }
             s.AppendInterval( endWaitTime );
             s.onComplete += () => func?.Invoke();
+
+            OnPlay.Invoke();
         }
 
         public void Rewind ( System.Action func = null ) {
