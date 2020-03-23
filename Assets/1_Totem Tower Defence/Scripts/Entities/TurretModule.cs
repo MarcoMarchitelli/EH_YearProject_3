@@ -74,8 +74,16 @@
         }
 
         public void ModuleEnterHandler ( TurretModule module ) {
-            if ( state == State.placed && module == this )
-                OnMouseEnter.Invoke();
+            if ( state == State.placed ) {
+                if ( module == this ) {
+                    mouseEntered = true;
+                    OnMouseEnter.Invoke();
+                }
+                else if ( mouseEntered ) {
+                    mouseEntered = false;
+                    OnMouseExit.Invoke();
+                }
+            }
         }
 
         public void ModuleExitHandler ( TurretModule module ) {
@@ -83,6 +91,7 @@
                 if ( mouseDowned )
                     Deplace();
                 mouseDowned = false;
+                mouseEntered = false;
                 OnMouseExit.Invoke();
             }
         }
