@@ -7,8 +7,8 @@
             gameData.waveManager.Setup();
 
             //turret menu UI update
-            gameData.turretMenu.UpdateUI();
-            gameData.turretMenu.Activate( false );
+            gameData.modulesMenuUI.UpdateUI();
+            gameData.modulesMenuUI.Activate( false );
 
             //phase UI setup
             gameData.phaseUI.Setup();

@@ -1,10 +1,10 @@
 ﻿namespace Deirin.EB {
     using UnityEngine;
-    using DG.Tweening;
 
     public class LookAt : BaseBehaviour {
         [Header("Refs")]
         public Transform target;
+        public Transform startTarget;
 
         [Header("Params")]
         public bool X;
@@ -12,12 +12,6 @@
         public bool Z;
         public Vector3 targetOffset;
         public float turnSpeed;
-
-        private Quaternion startRotation;
-
-        protected override void CustomSetup () {
-            startRotation = transform.rotation;
-        }
 
         public override void OnUpdate () {
             if ( !target )
@@ -41,8 +35,7 @@
         }
 
         public void ReturnToTargetRotation () {
-            target = null;
-            transform.DOLocalRotateQuaternion( startRotation, .2f );
+            target = startTarget;
         }
     }
 }

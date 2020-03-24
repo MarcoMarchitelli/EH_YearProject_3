@@ -35,7 +35,7 @@
         public WaveManager waveManager;
         public PhaseUI phaseUI;
         public PlaceTimeUI placeTimeUI;
-        public TurretMenu turretMenu;
+        public ModulesMenuUI modulesMenuUI;
 
         public System.Action Next, Win, Loss;
 

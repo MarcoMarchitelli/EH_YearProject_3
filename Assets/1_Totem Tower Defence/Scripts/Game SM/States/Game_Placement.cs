@@ -26,7 +26,7 @@
 
         private void PhaseUIEndHandler () {
             //activate turret menu
-            gameData.turretMenu.Activate( true );
+            gameData.modulesMenuUI.Activate( true );
             //time graphics
             //gameData.placeTimeUI.Open();
             //HACK

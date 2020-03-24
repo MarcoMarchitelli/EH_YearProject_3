@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7576496883784882021}
   - component: {fileID: 7576496883784882020}
   - component: {fileID: 4469002279124670513}
+  - component: {fileID: 2496480252374842432}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -93,7 +94,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+    m_TypeName: Deirin.Utilities.UnityEvent_Entity, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &8827982524610186904
 MonoBehaviour:
@@ -111,7 +112,18 @@ MonoBehaviour:
   delay: 0
   OnDestruction:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2496480252374842432}
+        m_MethodName: InstantiateObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!54 &7576496883784882021
@@ -167,32 +179,32 @@ MonoBehaviour:
     onTagCollisionEnter:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: Deirin.Utilities.UnityStringEvent, Assembly-CSharp, Version=0.0.0.0,
+      m_TypeName: Deirin.Utilities.UnityEvent_String, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     onTagCollisionStay:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: Deirin.Utilities.UnityStringEvent, Assembly-CSharp, Version=0.0.0.0,
+      m_TypeName: Deirin.Utilities.UnityEvent_String, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     onTagCollisionExit:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: Deirin.Utilities.UnityStringEvent, Assembly-CSharp, Version=0.0.0.0,
+      m_TypeName: Deirin.Utilities.UnityEvent_String, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     onComponentCollisionEnter:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: Deirin.Utilities.UnityComponentEvent, Assembly-CSharp, Version=0.0.0.0,
+      m_TypeName: Deirin.Utilities.UnityEvent_Component, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     onComponentCollisionStay:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: Deirin.Utilities.UnityComponentEvent, Assembly-CSharp, Version=0.0.0.0,
+      m_TypeName: Deirin.Utilities.UnityEvent_Component, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     onComponentCollisionExit:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: Deirin.Utilities.UnityComponentEvent, Assembly-CSharp, Version=0.0.0.0,
+      m_TypeName: Deirin.Utilities.UnityEvent_Component, Assembly-CSharp, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     onLayerCollisionEnter:
       m_PersistentCalls:
@@ -220,6 +232,31 @@ MonoBehaviour:
         m_Calls: []
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
+--- !u!114 &2496480252374842432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7576496883784882042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 171c5e8a17a48d646abdde5064e22ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objPrefab: {fileID: 8577357247728867210, guid: 9e3c5a94e16e070489090bcd70a0b423,
+    type: 3}
+  referenceTransform: {fileID: 7576496883784882043}
+  setAsParent: 0
+  usePosition: 1
+  position: {x: 0, y: 0, z: 0}
+  useRotation: 1
+  rotationEulers: {x: 0, y: 0, z: 0}
+  OnInstantiate:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &7576496884699244885
 GameObject:
   m_ObjectHideFlags: 0
