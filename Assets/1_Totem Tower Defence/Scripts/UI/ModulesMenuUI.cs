@@ -13,19 +13,20 @@
 
         public void UpdateUI () {
             int count = shootersMenu.childCount;
-            for ( int i = 0; i < count; i++ ) {
+            int i;
+            for ( i = 0; i < count; i++ ) {
                 Destroy( shootersMenu.GetChild( i ).gameObject );
             }
             count = elementsMenu.childCount;
-            for ( int i = 0; i < count; i++ ) {
+            for ( i = 0; i < count; i++ ) {
                 Destroy( elementsMenu.GetChild( i ).gameObject );
             }
             count = modifiersMenu.childCount;
-            for ( int i = 0; i < count; i++ ) {
+            for ( i = 0; i < count; i++ ) {
                 Destroy( modifiersMenu.GetChild( i ).gameObject );
             }
 
-            for ( int i = 0; i < RuntimeLevelData.turretModules.Count; i++ ) {
+            for ( i = 0; i < RuntimeLevelData.turretModules.Count; i++ ) {
                 TurretModule tm = RuntimeLevelData.turretModules[i];
                 TurretModuleUI tmUI;
                 switch ( tm.type ) {

@@ -108,6 +108,7 @@
 
         private void SortModules () {
             currentTopPosition = transform.position;
+            TurretModule tempModule;
 
             if ( shooterModules.Count == 0 ) {
                 Disassemble();
@@ -115,22 +116,25 @@
             }
 
             for ( int i = 0; i < shooterModules.Count; i++ ) {
-                shooterModules[i].transform.DOMove( currentTopPosition, .2f ).SetEase( Ease.OutCubic );
+                tempModule = shooterModules[i];
+                tempModule.transform.DOMove( currentTopPosition, .2f ).SetEase( Ease.OutCubic );
                 //shooterModules[i].transform.position = currentTopPosition;
-                shooterModules[i].transform.rotation = Quaternion.identity;
-                currentTopPosition += Vector3.up * moduleHeight;
+                tempModule.transform.rotation = Quaternion.identity;
+                currentTopPosition = tempModule.topModuleSpot.position;
             }
             for ( int i = 0; i < elementModules.Count; i++ ) {
-                elementModules[i].transform.DOMove( currentTopPosition, .2f ).SetEase( Ease.OutCubic );
+                tempModule = elementModules[i];
+                tempModule.transform.DOMove( currentTopPosition, .2f ).SetEase( Ease.OutCubic );
                 //elementModules[i].transform.position = currentTopPosition;
-                elementModules[i].transform.rotation = Quaternion.identity;
-                currentTopPosition += Vector3.up * moduleHeight;
+                tempModule.transform.rotation = Quaternion.identity;
+                currentTopPosition = tempModule.topModuleSpot.position;
             }
             for ( int i = 0; i < modifierModules.Count; i++ ) {
-                modifierModules[i].transform.DOMove( currentTopPosition, .2f ).SetEase( Ease.OutCubic );
+                tempModule = modifierModules[i];
+                tempModule.transform.DOMove( currentTopPosition, .2f ).SetEase( Ease.OutCubic );
                 //modifierModules[i].transform.position = currentTopPosition;
-                modifierModules[i].transform.rotation = Quaternion.identity;
-                currentTopPosition += Vector3.up * moduleHeight;
+                tempModule.transform.rotation = Quaternion.identity;
+                currentTopPosition = tempModule.topModuleSpot.position;
             }
         }
 
