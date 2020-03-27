@@ -59,8 +59,8 @@
         }
 
         IEnumerator WaveRoutine () {
-            foreach ( var item in waveData.enemies ) {
-                Enemy e = Instantiate( enemyPrefab, pathPoints.Value[0], Quaternion.identity );
+            for ( int i = 0; i < waveData.enemies.Count; i++ ) {
+                Instantiate( enemyPrefab, pathPoints.Value[0], Quaternion.identity );
                 yield return new WaitForSeconds( waveData.spawnInterval );
             }
         }

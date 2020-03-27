@@ -12,6 +12,10 @@
         public ModuleType type;
         [ReadOnly] public State state;
 
+        [Header("References")]
+        [Tooltip("The point in which the next module will be stacked in the turret container.")]
+        public Transform topModuleSpot;
+
         [Header("Gameplay State Events")]
         public UnityEvent OnCanBePlaced;
         public UnityEvent OnCannotBePlaced;
@@ -121,6 +125,7 @@
         }
         #endregion
     }
+
     [System.Serializable]
     public class UnityTurretModuleEvent : UnityEvent<TurretModule> { }
 }
