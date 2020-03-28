@@ -11,6 +11,7 @@
         [Header("Parameters")]
         public int maxModules;
         public float moduleHeight;
+        public float modulesAnimationDuration = .5f;
         [ReadOnly] public State state;
 
         private List<TurretModule> shooterModules = new List<TurretModule>();
@@ -47,9 +48,8 @@
                 if ( module.TryGetBehaviour( out shooterElements ) )
                     foreach ( TurretModule elementModule in elementModules ) {
                         ElementSource element;
-                        if ( elementModule.TryGetBehaviour( out element ) ) {
+                        if ( elementModule.TryGetBehaviour( out element ) )
                             shooterElements.Add( element );
-                        }
                     }
 
                 ModifiersContainer shooterModifiers;
@@ -103,6 +103,8 @@
                 }
                 break;
             }
+            module.graphics.DOKill();
+            module.graphics.position = module.transform.position;
             SortModules();
         }
 
@@ -116,8 +118,10 @@
 
             void SetModuleToPosition ( TurretModule module ) {
                 module.transform.rotation = Quaternion.identity;
-                module.graphics.DOMove( currentTopPosition, .2f ).SetEase( Ease.OutCubic );
+                Vector3 prevGraphic = module.graphics.position;
                 module.transform.position = currentTopPosition;
+                module.graphics.position = prevGraphic;
+                module.graphics.DOMove( currentTopPosition, modulesAnimationDuration ).SetEase( Ease.OutCubic );
                 currentTopPosition = module.topModuleSpot.position;
             }
 
