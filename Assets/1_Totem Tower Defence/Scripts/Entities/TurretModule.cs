@@ -13,6 +13,7 @@
         [ReadOnly] public State state;
 
         [Header("References")]
+        public Transform graphics;
         [Tooltip("The point in which the next module will be stacked in the turret container.")]
         public Transform topModuleSpot;
 

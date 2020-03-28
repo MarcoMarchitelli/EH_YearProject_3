@@ -115,9 +115,8 @@
             }
 
             void SetModuleToPosition ( TurretModule module ) {
-                //Vector3 pos = new Vector3(currentTopPosition.x,currentTopPosition.y,currentTopPosition.z);
                 module.transform.rotation = Quaternion.identity;
-                //module.transform.DOMove( pos, .2f ).SetEase( Ease.OutCubic );
+                module.graphics.DOMove( currentTopPosition, .2f ).SetEase( Ease.OutCubic );
                 module.transform.position = currentTopPosition;
                 currentTopPosition = module.topModuleSpot.position;
             }
