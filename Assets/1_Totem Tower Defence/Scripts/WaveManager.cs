@@ -25,10 +25,12 @@
 
             RuntimeLevelData.turretModules = new List<TurretModule>();
 
-            for ( int i = 0; i < waveData.turretModules.Count; i++ ) {
-                TurretModule t = Instantiate( waveData.turretModules[i], modulesContainer.transform );
-                t.gameObject.SetActive( false );
-                RuntimeLevelData.turretModules.Add( t );
+            foreach ( var moduleGroup in waveData.moduleGroups ) {
+                for ( int i = 0; i < moduleGroup.quantity; i++ ) {
+                    TurretModule t = Instantiate( moduleGroup.module, modulesContainer.transform );
+                    t.gameObject.SetActive( false );
+                    RuntimeLevelData.turretModules.Add( t );
+                }
             }
         }
 

@@ -26,19 +26,20 @@
             }
 
             //instantiate
-            int modules = waveData.turretModules.Count;
-            for ( int i = 0; i < modules; i++ ) {
-                TurretModule t =  waveData.turretModules[i];
-                switch ( t.type ) {
-                    case TurretModule.ModuleType.shooter:
-                    TurretModuleBuildUI tUI = Instantiate(turretModuleUIPrefab, shootersContainer);
-                    tUI.SetData( t );
-                    break;
-                    case TurretModule.ModuleType.element:
-                    case TurretModule.ModuleType.modifier:
-                    TurretModuleBuildUI tmUI = Instantiate(turretModuleUIPrefab, modsContainer);
-                    tmUI.SetData( t );
-                    break;
+            foreach ( var moduleGroup in waveData.moduleGroups ) {
+                for ( int i = 0; i < moduleGroup.quantity; i++ ) {
+                    TurretModule t = moduleGroup.module;
+                    switch ( t.type ) {
+                        case TurretModule.ModuleType.shooter:
+                        TurretModuleBuildUI tUI = Instantiate(turretModuleUIPrefab, shootersContainer);
+                        tUI.SetData( t );
+                        break;
+                        case TurretModule.ModuleType.element:
+                        case TurretModule.ModuleType.modifier:
+                        TurretModuleBuildUI tmUI = Instantiate(turretModuleUIPrefab, modsContainer);
+                        tmUI.SetData( t );
+                        break;
+                    }
                 }
             }
         }
@@ -60,7 +61,13 @@
 
         #region API
         public void AddModule ( TurretModule module ) {
-            waveData.turretModules.Add( module );
+            foreach ( var moduleGroup in waveData.moduleGroups ) {
+                TurretModule t = moduleGroup.module;
+                if ( module == t ) {
+                    moduleGroup.AddModule();
+                }
+            }
+            //waveData.turretModules.Add( module );
             UpdateModulesUI();
         }
 
@@ -70,7 +77,13 @@
         }
 
         public void RemoveModule ( TurretModule module ) {
-            waveData.turretModules.Remove( module );
+            foreach ( var moduleGroup in waveData.moduleGroups ) {
+                TurretModule t = moduleGroup.module;
+                if ( module == t ) {
+                    moduleGroup.RemoveModule();
+                }
+            }
+            //waveData.turretModules.Remove( module );
             UpdateModulesUI();
         }
         public void RemoveEnemy ( Enemy enemy ) {
@@ -81,7 +94,7 @@
         public void UpdateUI () {
             UpdateModulesUI();
             UpdateEnemiesUI();
-        } 
+        }
         #endregion
     }
 }
