@@ -38,7 +38,7 @@
                 if ( onContainer == false ) {
                     turretContainer = hit.collider.GetComponent<TurretContainer>();
                     OnContainerEnter.Invoke( turretContainer );
-                    print( turretContainer.name + " enter" );
+                    //print( turretContainer.name + " enter" );
                     onContainer = true;
                 }
             }
@@ -46,7 +46,7 @@
                 if ( onContainer == true ) {
                     onContainer = false;
                     OnContainerExit.Invoke( turretContainer );
-                    print( turretContainer.name + " exit" );
+                    //print( turretContainer.name + " exit" );
                 }
             }
 
@@ -55,7 +55,7 @@
                 if ( onModule == false ) {
                     turretModule = hit.collider.GetComponentInParent<TurretModule>();
                     OnModuleEnter.Invoke( turretModule );
-                    print( turretModule.name + " enter" );
+                    //print( turretModule.name + " enter" );
                     onModule = true;
                 }
             }
@@ -63,7 +63,7 @@
                 if ( onModule == true ) {
                     onModule = false;
                     OnModuleExit.Invoke( turretModule );
-                    print( turretModule.name + " exit" );
+                    //print( turretModule.name + " exit" );
                 }
             }
 

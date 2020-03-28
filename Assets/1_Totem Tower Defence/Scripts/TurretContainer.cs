@@ -44,22 +44,22 @@
                 shooterModules.Add( module );
 
                 ElementsContainer shooterElements;
-                module.TryGetBehaviour( out shooterElements );
-                foreach ( TurretModule elementModule in elementModules ) {
-                    ElementSource element;
-                    if ( elementModule.TryGetBehaviour( out element ) ) {
-                        shooterElements.Add( element );
+                if ( module.TryGetBehaviour( out shooterElements ) )
+                    foreach ( TurretModule elementModule in elementModules ) {
+                        ElementSource element;
+                        if ( elementModule.TryGetBehaviour( out element ) ) {
+                            shooterElements.Add( element );
+                        }
                     }
-                }
 
                 ModifiersContainer shooterModifiers;
-                module.TryGetBehaviour( out shooterModifiers );
-                foreach ( TurretModule modifierModule in modifierModules ) {
-                    ModifierSource modifier;
-                    if ( modifierModule.TryGetBehaviour( out modifier ) ) {
-                        shooterModifiers.Add( modifier );
+                if ( module.TryGetBehaviour( out shooterModifiers ) )
+                    foreach ( TurretModule modifierModule in modifierModules ) {
+                        ModifierSource modifier;
+                        if ( modifierModule.TryGetBehaviour( out modifier ) ) {
+                            shooterModifiers.Add( modifier );
+                        }
                     }
-                }
 
                 break;
                 case TurretModule.ModuleType.element:
@@ -108,33 +108,29 @@
 
         private void SortModules () {
             currentTopPosition = transform.position;
-            TurretModule tempModule;
 
             if ( shooterModules.Count == 0 ) {
                 Disassemble();
                 return;
             }
 
-            for ( int i = 0; i < shooterModules.Count; i++ ) {
-                tempModule = shooterModules[i];
-                tempModule.transform.DOMove( currentTopPosition, .2f ).SetEase( Ease.OutCubic );
-                //shooterModules[i].transform.position = currentTopPosition;
-                tempModule.transform.rotation = Quaternion.identity;
-                currentTopPosition = tempModule.topModuleSpot.position;
+            void SetModuleToPosition ( TurretModule module ) {
+                //Vector3 pos = new Vector3(currentTopPosition.x,currentTopPosition.y,currentTopPosition.z);
+                module.transform.rotation = Quaternion.identity;
+                //module.transform.DOMove( pos, .2f ).SetEase( Ease.OutCubic );
+                module.transform.position = currentTopPosition;
+                currentTopPosition = module.topModuleSpot.position;
             }
-            for ( int i = 0; i < elementModules.Count; i++ ) {
-                tempModule = elementModules[i];
-                tempModule.transform.DOMove( currentTopPosition, .2f ).SetEase( Ease.OutCubic );
-                //elementModules[i].transform.position = currentTopPosition;
-                tempModule.transform.rotation = Quaternion.identity;
-                currentTopPosition = tempModule.topModuleSpot.position;
+
+            int i;
+            for ( i = 0; i < shooterModules.Count; i++ ) {
+                SetModuleToPosition( shooterModules[i] );
             }
-            for ( int i = 0; i < modifierModules.Count; i++ ) {
-                tempModule = modifierModules[i];
-                tempModule.transform.DOMove( currentTopPosition, .2f ).SetEase( Ease.OutCubic );
-                //modifierModules[i].transform.position = currentTopPosition;
-                tempModule.transform.rotation = Quaternion.identity;
-                currentTopPosition = tempModule.topModuleSpot.position;
+            for ( i = 0; i < elementModules.Count; i++ ) {
+                SetModuleToPosition( elementModules[i] );
+            }
+            for ( i = 0; i < modifierModules.Count; i++ ) {
+                SetModuleToPosition( modifierModules[i] );
             }
         }
 
