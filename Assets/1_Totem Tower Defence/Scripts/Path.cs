@@ -1,7 +1,9 @@
 ﻿namespace TotemTD {
     using UnityEngine;
     using System.Collections.Generic;
-    using Deirin.Utilities;
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
 
     public class Path : MonoBehaviour {
         [Header("Refs")]
@@ -39,6 +41,9 @@
             }
 
             pathPoints.Value = points;
+#if UNITY_EDITOR
+            EditorUtility.SetDirty( pathPoints );
+#endif
         }
 
         public void ConstructMesh () {
