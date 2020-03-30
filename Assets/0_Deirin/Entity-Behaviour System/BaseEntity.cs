@@ -66,6 +66,14 @@
             return objs;
         }
 
+        private void OnEnable () {
+            if ( !active )
+                return;
+            for ( int i = 0; i < Behaviours.Length; i++ ) {
+                Behaviours[i].OnOnEnable();
+            }
+        }
+
         private void Awake () {
             if ( setupOnAwake )
                 Setup();

@@ -325,7 +325,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: TotemTD.UnityTurretContainerEvent, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: SweetRage.UnityTurretContainerEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &437727999787386351
 MonoBehaviour:
@@ -354,7 +354,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: TotemTD.UnityTurretContainerEvent, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: SweetRage.UnityTurretContainerEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &437727999787386350
 MonoBehaviour:
@@ -412,7 +412,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: TotemTD.UnityTurretModuleEvent, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: SweetRage.UnityTurretModuleEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &437727999787386349
 MonoBehaviour:
@@ -441,7 +441,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: TotemTD.UnityTurretModuleEvent, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: SweetRage.UnityTurretModuleEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &437727999787386352
 MonoBehaviour:
@@ -470,7 +470,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: TotemTD.UnityTurretModuleEvent, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: SweetRage.UnityTurretModuleEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &437727999787386355
 MonoBehaviour:
@@ -499,7 +499,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: TotemTD.UnityTurretModuleEvent, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: SweetRage.UnityTurretModuleEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &437727999856975426
 GameObject:
@@ -513,6 +513,7 @@ GameObject:
   - component: {fileID: 437727999856975430}
   - component: {fileID: 437727999856975424}
   - component: {fileID: 437727999856975427}
+  - component: {fileID: 8876741565104320640}
   m_Layer: 0
   m_Name: Module Base
   m_TagString: Untagged
@@ -554,8 +555,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setupOnAwake: 0
-  type: 0
   state: 0
+  turretType: {fileID: 0}
   graphics: {fileID: 437727998874078300}
   topModuleSpot: {fileID: 6667478233339810326}
   OnCanBePlaced:
@@ -653,7 +654,7 @@ MonoBehaviour:
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 437727999856975430}
-          m_ObjectArgumentAssemblyTypeName: TotemTD.TurretModule, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: SweetRage.TurretModule, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -708,22 +709,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: TotemTD.UnityTurretModuleEvent, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: SweetRage.UnityTurretModuleEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   OnDeplacement:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 437727999856975430}
-        m_MethodName: SetState
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 437727999856975427}
         m_MethodName: Follow
         m_Mode: 6
@@ -828,7 +818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 437727999856975425}
   followMode: 1
-  startFollowingOnSetup: 1
+  startFollowingOnSetup: 0
   useMainCam: 1
   cam: {fileID: 0}
   positionOffset: {x: 0, y: 0, z: 0}
@@ -838,6 +828,34 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   rayMaxDistance: 600
+--- !u!114 &8876741565104320640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437727999856975426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5cfc32dbae4e82449dfe40336d84d2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEnable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 437727999856975427}
+        m_MethodName: Follow
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &2262532862275252717
 GameObject:
   m_ObjectHideFlags: 0
@@ -1279,15 +1297,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e8e94d2ea9f3f046aec9ec2e87a8ca8, type: 3}
---- !u!4 &8142484577863620804 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6108669519942881829, guid: 1e8e94d2ea9f3f046aec9ec2e87a8ca8,
-    type: 3}
-  m_PrefabInstance: {fileID: 2610310994674305761}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &3407768939933662666 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 825112896164935467, guid: 1e8e94d2ea9f3f046aec9ec2e87a8ca8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2610310994674305761}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8142484577863620804 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6108669519942881829, guid: 1e8e94d2ea9f3f046aec9ec2e87a8ca8,
     type: 3}
   m_PrefabInstance: {fileID: 2610310994674305761}
   m_PrefabAsset: {fileID: 0}

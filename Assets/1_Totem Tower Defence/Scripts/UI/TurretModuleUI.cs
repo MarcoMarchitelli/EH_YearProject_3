@@ -28,6 +28,7 @@
 
         public void SelectTurret () {
             turretModule.gameObject.SetActive( true );
+            turretModule.SetState( TurretModule.State.selected );
             OnTurretSelection.Invoke( turretModule );
         }
     }

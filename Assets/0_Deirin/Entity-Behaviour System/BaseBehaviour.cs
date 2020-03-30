@@ -25,6 +25,10 @@
 
         }
 
+        public virtual void OnOnEnable () {
+
+        }
+
         public virtual void OnLateUpdate () {
 
         }

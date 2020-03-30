@@ -14,20 +14,14 @@
         private List<TurretModule> modules;
 
         #region API
+        public int ModuleCount => modules.Count;
+
         public void UpdateUI () {
             int modulesCount = modules.Count;
             if ( modulesCount > 0 ) {
-                if ( countText.gameObject.activeSelf == false )
-                    countText.gameObject.SetActive( true );
-                if ( turretModuleUI.gameObject.activeSelf == false )
-                    turretModuleUI.gameObject.SetActive( true );
                 countText.text = modulesCount.ToString();
                 turretModuleUI.SetTurretModule( modules[modulesCount - 1] );
                 turretModuleUI.UpdateUI();
-            }
-            else {
-                countText.gameObject.SetActive( false );
-                turretModuleUI.gameObject.SetActive( false );
             }
         }
 

@@ -41,6 +41,7 @@
 
         private void Deplace () {
             turretContainer.RemoveModule( this );
+            SetState( State.selected );
             OnDeplacement.Invoke();
         }
 
@@ -74,6 +75,7 @@
                 OnPlace.Invoke();
             }
             else if ( state == State.selected ) {
+                SetState( State.inMenu );
                 OnDeselection.Invoke( this );
             }
         }
@@ -121,9 +123,9 @@
             this.state = state;
         }
 
-        public void SetState ( int state ) {
-            this.state = ( State ) state;
-        }
+        //public void SetState ( int state ) {
+        //    this.state = ( State ) state;
+        //}
         #endregion
     }
 

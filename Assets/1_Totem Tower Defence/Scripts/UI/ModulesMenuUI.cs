@@ -54,6 +54,9 @@
                     }
                 }
             }
+            foreach ( var moduleGroupUI in moduleGroupUIs ) {
+                moduleGroupUI.gameObject.SetActive( moduleGroupUI.ModuleCount != 0 );
+            }
         }
 
         public void Activate ( bool value ) {
