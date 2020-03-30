@@ -14,7 +14,7 @@
         private List<TurretModule> modules;
 
         #region API
-        public int ModuleCount => modules.Count;
+        public int ModuleCount => modules != null ? modules.Count : 0;
 
         public void UpdateUI () {
             int modulesCount = modules.Count;
