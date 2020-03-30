@@ -59,5 +59,18 @@
                 this.texts.Add( t );
             }
         }
+
+        public void SetTexts ( string texts ) {
+            string[] words = texts.Split(' ');
+            for ( int i = 0; i < textsContainer.childCount; i++ ) {
+                Destroy( textsContainer.GetChild( i ).gameObject );
+            }
+            for ( int i = 0; i < words.Length; i++ ) {
+                TextMeshProUGUI t = Instantiate(textPrefab, textsContainer);
+                t.text = words[i];
+                t.autoSizeTextContainer = true;
+                this.texts.Add( t );
+            }
+        }
     }
 }

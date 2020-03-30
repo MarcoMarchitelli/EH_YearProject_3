@@ -34,6 +34,10 @@
             counting = true;
         }
 
+        public void StopCounting () {
+
+        }
+
         public void SetTime ( float time ) {
             this.time = time;
         }

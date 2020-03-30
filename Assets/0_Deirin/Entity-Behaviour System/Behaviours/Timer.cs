@@ -1,60 +1,63 @@
 ﻿namespace Deirin.EB {
+    using Deirin.Utilities;
     using System.Collections;
     using UnityEngine;
     using UnityEngine.Events;
 
-    public class Timer : BaseBehaviour, IStoppable
-	{
+    public class Timer : BaseBehaviour, IStoppable {
         [Header("Params")]
         public float duration;
         public bool unscaledTime = false;
 
         [Header("Events")]
-        public UnityEvent OnTimerStart;
+        public UnityEvent_Float OnTimerStart;
         public UnityEvent OnTimerPause;
-        public UnityEvent OnTimerEnd;
+        public UnityEvent_Float OnTimerEnd;
 
         bool count;
         float timer;
 
-		public bool Stopped { get; private set; } = true;
+        public bool Stopped { get; private set; } = true;
 
 
-		public void Play () {
-			Stopped = false;
+        public void Play () {
+            Stopped = false;
 
-			if ( unscaledTime )
+            if ( unscaledTime )
                 StartCoroutine( CountUnscaled() );
             else
                 StartCoroutine( Count() );
-		}
+        }
 
         public void Pause () {
             count = false;
             OnTimerPause.Invoke();
         }
 
-        public void Stop (bool callEvent = false) {
-			Stopped = true;
+        public void Stop ( bool callEvent = false ) {
+            Stopped = true;
 
-			if ( unscaledTime )
+            if ( unscaledTime )
                 StopCoroutine( CountUnscaled() );
             else
                 StopCoroutine( Count() );
+
+            if ( callEvent )
+                OnTimerEnd.Invoke( duration );
         }
 
         IEnumerator Count () {
             timer = 0;
             count = true;
 
-            OnTimerStart.Invoke();
+            OnTimerStart.Invoke( duration );
 
             while ( count == true && timer < duration ) {
                 timer += Time.deltaTime;
                 yield return null;
             }
 
-            OnTimerEnd.Invoke();
+            OnTimerEnd.Invoke( duration );
         }
 
         IEnumerator CountUnscaled () {
@@ -62,14 +65,14 @@
             timer = startTime;
             count = true;
 
-            OnTimerStart.Invoke();
+            OnTimerStart.Invoke( duration );
 
-            while ( count == true && (timer - startTime) < duration ) {
+            while ( count == true && ( timer - startTime ) < duration ) {
                 timer = Time.time;
                 yield return null;
             }
 
-            OnTimerEnd.Invoke();
+            OnTimerEnd.Invoke( duration );
         }
     }
 }

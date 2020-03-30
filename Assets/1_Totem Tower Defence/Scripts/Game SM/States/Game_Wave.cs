@@ -10,16 +10,20 @@
         public override void Enter () {
             base.Enter();
 
+            //turret menu setup and UI update
+            gameData.modulesMenuUI.Setup();
+            gameData.modulesMenuUI.UpdateUI();
+
+            //Local func
+            void Rewind () {
+                gameData.phaseUI.Rewind();
+            }
+
             //wave phase graphics
-            gameData.phaseUI.SetTexts( "WAVE", "INCOMING" );
-            gameData.phaseUI.Play( .5f, () =>
-                gameData.phaseUI.Rewind( () => {
-                    //close time graphics
-                    gameData.placeTimeUI.gameObject.SetActive( false );
-                    gameData.waveManager.StartWave();
-                }
-                )
-            );
+            gameData.phaseUI.SetTexts( gameData.levelTD.CurrentWave.preWaveText );
+            gameData.phaseUI.Play( .5f, Rewind );
+
+            gameData.levelTD.CurrentWave.onPreWaveEnd.AddListener( PreWaveEndHandler );
         }
 
         public override void Tick () {
@@ -27,6 +31,27 @@
                 OnLeftMouseDown.Invoke();
             else if ( Input.GetMouseButtonUp( 0 ) )
                 OnLeftMouseUp.Invoke();
+        }
+
+        public override void Exit () {
+            base.Exit();
+
+            gameData.levelTD.CurrentWave.onPreWaveEnd.RemoveListener( PreWaveEndHandler );
+        }
+
+        public void LossHandler () {
+            gameData.GoLoss();
+        }
+
+        private void PreWaveEndHandler ( int id ) {
+            //Local func
+            void Rewind () {
+                gameData.phaseUI.Rewind();
+            }
+
+            //wave phase graphics
+            gameData.phaseUI.SetTexts( gameData.levelTD.CurrentWave.waveText );
+            gameData.phaseUI.Play( .5f, Rewind );
         }
     }
 }

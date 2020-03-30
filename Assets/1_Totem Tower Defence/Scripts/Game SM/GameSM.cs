@@ -32,7 +32,7 @@
 
     [System.Serializable]
     public class GameData : IStateMachineData {
-        public WaveManager waveManager;
+        public LevelTD levelTD;
         public PhaseUI phaseUI;
         public PlaceTimeUI placeTimeUI;
         public ModulesMenuUI modulesMenuUI;

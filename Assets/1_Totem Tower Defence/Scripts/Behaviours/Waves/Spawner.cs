@@ -36,7 +36,7 @@
         public void StartSpawner () {
             if ( Stopped ) {
                 Stopped = false;
-                onSpawnerStart?.Invoke();
+                onSpawnerStart.Invoke();
             }
         }
 
@@ -45,7 +45,7 @@
                 Stopped = true;
                 StopAllStoppableChilds();
                 if ( callEvent )
-                    onSpawnerStop?.Invoke();
+                    onSpawnerStop.Invoke();
             }
         }
 
@@ -53,7 +53,7 @@
             if ( !Stopped && pathPoints ) {
                 InstantiateEnemy();
                 SpawnedEnemy += enemeyToSpawnChunk;
-                onEnemySpawn?.Invoke();
+                onEnemySpawn.Invoke();
             }
         }
 

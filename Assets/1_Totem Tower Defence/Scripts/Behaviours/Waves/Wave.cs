@@ -10,6 +10,11 @@
         [Min(1)] int index = 0;
         //public TurretModule
 
+        [Header("Parameters")]
+        public string preWaveText;
+        public string waveText;
+        public TurretModule[] modules;
+
         [Header("Events"), Space]
         public UnityEvent_Int onPreWaveStart;
         public UnityEvent_Int onPreWaveEnd;
@@ -19,8 +24,6 @@
         //Property
         public bool Stopped { get; private set; }
         public IStoppable[] StoppableItems { get; private set; }
-
-
 
         protected override void CustomSetup () {
             base.CustomSetup();
@@ -32,11 +35,11 @@
         }
 
         public void StartPreWave () {
-            onPreWaveStart?.Invoke( index );
+            onPreWaveStart.Invoke( index );
         }
 
         public void EndPreWave () {
-            onPreWaveStart?.Invoke( index );
+            onPreWaveEnd.Invoke( index );
         }
 
 
@@ -52,7 +55,7 @@
                 Stopped = true;
                 StopAllStoppableChilds();
                 if ( callEvent )
-                    onWaveEnd?.Invoke( index );
+                    onWaveEnd.Invoke( index );
             }
         }
 
