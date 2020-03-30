@@ -1,4 +1,4 @@
-﻿namespace TotemTD {
+﻿namespace SweetRage {
     using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.Events;
@@ -28,7 +28,7 @@
         }
 
         public bool CanPlace ( TurretModule module ) {
-            if ( moduleCount >= maxModules || ( hasShooter == false && module.type != TurretModule.ModuleType.shooter ) )
+            if ( moduleCount >= maxModules || ( hasShooter == false && module.turretType.moduleType != TurretType.ModuleType.shooter ) )
                 return false;
             else
                 return true;
@@ -40,8 +40,8 @@
         }
 
         public void AddModule ( TurretModule module ) {
-            switch ( previewModule.type ) {
-                case TurretModule.ModuleType.shooter:
+            switch ( previewModule.turretType.moduleType ) {
+                case TurretType.ModuleType.shooter:
                 shooterModules.Add( module );
 
                 ElementsContainer shooterElements;
@@ -62,11 +62,11 @@
                     }
 
                 break;
-                case TurretModule.ModuleType.element:
+                case TurretType.ModuleType.element:
                 elementModules.Add( module );
                 HandleElementAttachment( module );
                 break;
-                case TurretModule.ModuleType.modifier:
+                case TurretType.ModuleType.modifier:
                 modifierModules.Add( module );
                 HandleModifierAttachment( module );
 
@@ -76,8 +76,8 @@
         }
 
         public void RemoveModule ( TurretModule module ) {
-            switch ( module.type ) {
-                case TurretModule.ModuleType.shooter:
+            switch ( module.turretType.moduleType ) {
+                case TurretType.ModuleType.shooter:
                 if ( shooterModules.Contains( module ) == true ) {
                     ElementsContainer sEle;
                     module.TryGetBehaviour( out sEle );
@@ -90,13 +90,13 @@
                     shooterModules.Remove( module );
                 }
                 break;
-                case TurretModule.ModuleType.element:
+                case TurretType.ModuleType.element:
                 if ( elementModules.Contains( module ) == true ) {
                     elementModules.Remove( module );
                     HandleElementDetachment( module );
                 }
                 break;
-                case TurretModule.ModuleType.modifier:
+                case TurretType.ModuleType.modifier:
                 if ( modifierModules.Contains( module ) == true ) {
                     modifierModules.Remove( module );
                     HandleModiferDetachment( module );

@@ -1,4 +1,4 @@
-﻿namespace TotemTD {
+﻿namespace SweetRage {
     using UnityEngine;
     using UnityEngine.UI;
     using TMPro;

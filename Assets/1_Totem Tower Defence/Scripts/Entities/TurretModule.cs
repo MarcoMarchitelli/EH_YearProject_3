@@ -1,16 +1,16 @@
-﻿namespace TotemTD {
+﻿namespace SweetRage {
     using Deirin.EB;
     using UnityEngine;
     using UnityEngine.Events;
     using Deirin.Utilities;
 
     public class TurretModule : BaseEntity {
-        public enum ModuleType { shooter, element, modifier }
         public enum State { inMenu, selected, placed, preview }
 
-        [Header("Parameters")]
-        public ModuleType type;
-        [ReadOnly] public State state;
+        [ReadOnly]public State state;
+
+        [Header("Data")]
+        public TurretType turretType;
 
         [Header("References")]
         public Transform graphics;

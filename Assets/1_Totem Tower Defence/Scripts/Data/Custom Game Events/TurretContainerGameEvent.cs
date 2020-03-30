@@ -1,4 +1,4 @@
-﻿namespace TotemTD {
+﻿namespace SweetRage {
     using System.Collections.Generic;
     using UnityEngine;
 

@@ -1,4 +1,4 @@
-﻿namespace TotemTD {
+﻿namespace SweetRage {
     using System.Collections;
     using UnityEngine;
     using UnityEngine.Events;
@@ -27,6 +27,7 @@
 
             for ( int i = 0; i < waveData.turretModules.Count; i++ ) {
                 TurretModule t = Instantiate( waveData.turretModules[i], modulesContainer.transform );
+                t.Setup();
                 t.gameObject.SetActive( false );
                 RuntimeLevelData.turretModules.Add( t );
             }

@@ -1,4 +1,4 @@
-﻿namespace TotemTD {
+﻿namespace SweetRage {
     using UnityEngine.Events;
     using Deirin.EB;
 

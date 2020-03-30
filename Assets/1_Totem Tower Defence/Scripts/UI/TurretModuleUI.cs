@@ -1,4 +1,4 @@
-﻿namespace TotemTD {
+﻿namespace SweetRage {
     using UnityEngine;
     using UnityEngine.UI;
     using Deirin.CustomButton;
@@ -19,7 +19,7 @@
 
         public void SetTurretModule ( TurretModule turretModule ) {
             this.turretModule = turretModule;
-            spriteGetter = this.turretModule.GetComponentInChildren<SpriteGetter>();
+            spriteGetter = this.turretModule.GetBehaviour<SpriteGetter>();
         }
 
         public void UpdateUI () {
@@ -28,7 +28,6 @@
 
         public void SelectTurret () {
             turretModule.gameObject.SetActive( true );
-            turretModule.Setup();
             OnTurretSelection.Invoke( turretModule );
         }
     }

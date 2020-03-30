@@ -1,4 +1,4 @@
-﻿namespace TotemTD {
+﻿namespace SweetRage {
     using Deirin.StateMachine;
 
     public class TurretModuleStateBase : StateBase {

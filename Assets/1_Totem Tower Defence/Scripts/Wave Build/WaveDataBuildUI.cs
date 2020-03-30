@@ -1,4 +1,4 @@
-﻿namespace TotemTD {
+﻿namespace SweetRage {
     using UnityEngine;
 
     public class WaveDataBuildUI : MonoBehaviour {
@@ -29,13 +29,13 @@
             int modules = waveData.turretModules.Count;
             for ( int i = 0; i < modules; i++ ) {
                 TurretModule t =  waveData.turretModules[i];
-                switch ( t.type ) {
-                    case TurretModule.ModuleType.shooter:
+                switch ( t.turretType.moduleType ) {
+                    case TurretType.ModuleType.shooter:
                     TurretModuleBuildUI tUI = Instantiate(turretModuleUIPrefab, shootersContainer);
                     tUI.SetData( t );
                     break;
-                    case TurretModule.ModuleType.element:
-                    case TurretModule.ModuleType.modifier:
+                    case TurretType.ModuleType.element:
+                    case TurretType.ModuleType.modifier:
                     TurretModuleBuildUI tmUI = Instantiate(turretModuleUIPrefab, modsContainer);
                     tmUI.SetData( t );
                     break;

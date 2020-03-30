@@ -1,4 +1,4 @@
-﻿namespace TotemTD {
+﻿namespace SweetRage {
     using UnityEngine;
 
     public class TurretModuleGameEventListener : MonoBehaviour {

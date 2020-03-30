@@ -1,7 +1,11 @@
-﻿namespace TotemTD {
+﻿namespace SweetRage {
     using UnityEngine;
+    using System.Collections.Generic;
 
     public class ModulesMenuUI : MonoBehaviour {
+        [Header("Data")]
+        public TurretType[] turretTypes;
+
         [Header("Refs")]
         public Transform shootersMenu;
         public Transform elementsMenu;
@@ -9,42 +13,45 @@
         public CanvasGroup canvasGroup;
 
         [Header("Prefabs")]
-        public TurretModuleUI turretModuleUIPrefab;
+        public ModuleGroupUI moduleGroupUIPrefab;
+
+        private List<ModuleGroupUI> moduleGroupUIs;
+
+        public void Setup () {
+            moduleGroupUIs = new List<ModuleGroupUI>();
+            ModuleGroupUI mgUI;
+            foreach ( var turretType in turretTypes ) {
+                switch ( turretType.moduleType ) {
+                    case TurretType.ModuleType.shooter:
+                    mgUI = Instantiate( moduleGroupUIPrefab, shootersMenu );
+                    mgUI.turretType = turretType;
+                    moduleGroupUIs.Add( mgUI );
+                    break;
+                    case TurretType.ModuleType.element:
+                    mgUI = Instantiate( moduleGroupUIPrefab, elementsMenu );
+                    mgUI.turretType = turretType;
+                    moduleGroupUIs.Add( mgUI );
+                    break;
+                    case TurretType.ModuleType.modifier:
+                    mgUI = Instantiate( moduleGroupUIPrefab, modifiersMenu );
+                    mgUI.turretType = turretType;
+                    moduleGroupUIs.Add( mgUI );
+                    break;
+                }
+            }
+        }
 
         public void UpdateUI () {
-            int count = shootersMenu.childCount;
-            int i;
-            for ( i = 0; i < count; i++ ) {
-                Destroy( shootersMenu.GetChild( i ).gameObject );
+            foreach ( var moduleGroupUI in moduleGroupUIs ) {
+                moduleGroupUI.ClearModules();
             }
-            count = elementsMenu.childCount;
-            for ( i = 0; i < count; i++ ) {
-                Destroy( elementsMenu.GetChild( i ).gameObject );
-            }
-            count = modifiersMenu.childCount;
-            for ( i = 0; i < count; i++ ) {
-                Destroy( modifiersMenu.GetChild( i ).gameObject );
-            }
-
-            for ( i = 0; i < RuntimeLevelData.turretModules.Count; i++ ) {
+            for ( int i = 0; i < RuntimeLevelData.turretModules.Count; i++ ) {
                 TurretModule tm = RuntimeLevelData.turretModules[i];
-                TurretModuleUI tmUI;
-                switch ( tm.type ) {
-                    case TurretModule.ModuleType.shooter:
-                    tmUI = Instantiate( turretModuleUIPrefab, shootersMenu );
-                    tmUI.SetTurretModule( tm );
-                    tmUI.UpdateUI();
-                    break;
-                    case TurretModule.ModuleType.element:
-                    tmUI = Instantiate( turretModuleUIPrefab, elementsMenu );
-                    tmUI.SetTurretModule( tm );
-                    tmUI.UpdateUI();
-                    break;
-                    case TurretModule.ModuleType.modifier:
-                    tmUI = Instantiate( turretModuleUIPrefab, modifiersMenu );
-                    tmUI.SetTurretModule( tm );
-                    tmUI.UpdateUI();
-                    break;
+                foreach ( var moduleGroupUI in moduleGroupUIs ) {
+                    if ( moduleGroupUI.turretType == tm.turretType ) {
+                        moduleGroupUI.AddModule( tm );
+                        moduleGroupUI.UpdateUI();
+                    }
                 }
             }
         }

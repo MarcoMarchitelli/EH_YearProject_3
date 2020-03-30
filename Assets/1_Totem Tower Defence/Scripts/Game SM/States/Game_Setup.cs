@@ -1,4 +1,4 @@
-﻿namespace TotemTD {
+﻿namespace SweetRage {
     public class Game_Setup : Game_BaseState {
         public override void Enter () {
             base.Enter();
@@ -7,6 +7,7 @@
             gameData.waveManager.Setup();
 
             //turret menu UI update
+            gameData.modulesMenuUI.Setup();
             gameData.modulesMenuUI.UpdateUI();
             gameData.modulesMenuUI.Activate( false );
 

@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 1050, y: 0}
-  m_SizeDelta: {x: 0, y: 100}
+  m_SizeDelta: {x: 0, y: 65.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &971574282306355973
 CanvasRenderer:
@@ -188,11 +188,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8dd517ebff64c64da41943cf47ad4be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turretTypes:
+  - {fileID: 11400000, guid: ef9783c00798ed6448349ff4510b491f, type: 2}
+  - {fileID: 11400000, guid: 7f120092fe5e24a4589d118b24d2b9c6, type: 2}
+  - {fileID: 11400000, guid: 15b7c533ea52ecd4aa37a9865efc3025, type: 2}
+  - {fileID: 11400000, guid: c17676cd9a1ff844e9b9e825aefb6fa1, type: 2}
   shootersMenu: {fileID: 971574283034412808}
   elementsMenu: {fileID: 971574283732756127}
   modifiersMenu: {fileID: 971574282306355968}
   canvasGroup: {fileID: 971574282607090366}
-  turretModuleUIPrefab: {fileID: 26266284368193660, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
+  moduleGroupUIPrefab: {fileID: 890616433230066054, guid: 23c3500bda0becd4886b3623b1879ae0,
     type: 3}
 --- !u!114 &971574282607090336
 MonoBehaviour:
@@ -221,7 +226,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: TotemTD.UnityTurretModuleEvent, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: SweetRage.UnityTurretModuleEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &971574282607090367
 MonoBehaviour:
@@ -250,7 +255,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: TotemTD.UnityTurretModuleEvent, Assembly-CSharp, Version=0.0.0.0,
+    m_TypeName: SweetRage.UnityTurretModuleEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &971574282607090365
 MonoBehaviour:
@@ -327,7 +332,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 870, y: 0}
-  m_SizeDelta: {x: 0, y: 100}
+  m_SizeDelta: {x: 0, y: 65.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &971574283034412811
 CanvasRenderer:
@@ -460,7 +465,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 960, y: 0}
-  m_SizeDelta: {x: 0, y: 100}
+  m_SizeDelta: {x: 0, y: 65.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &971574283732756100
 CanvasRenderer:

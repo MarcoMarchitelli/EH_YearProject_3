@@ -1,10 +1,10 @@
-﻿namespace TotemTD
+﻿namespace SweetRage
 {
 	using Deirin.EB;
 	using Deirin.Utilities;
 	using System.Collections;
 	using System.Collections.Generic;
-	using TotemTD;
+	using SweetRage;
 	using UnityEngine;
 
 	public abstract class AbsEffectHandler<GenericEffectEnum> : BaseBehaviour

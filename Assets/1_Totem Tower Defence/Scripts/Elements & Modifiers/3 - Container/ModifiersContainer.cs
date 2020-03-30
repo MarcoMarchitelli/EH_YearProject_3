@@ -1,4 +1,4 @@
-﻿namespace TotemTD
+﻿namespace SweetRage
 {
 	public class ModifiersContainer : AbsEffectsContainer<ModifierScriptableEnum, 
 														  ModifierSource,
