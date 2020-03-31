@@ -50,5 +50,9 @@
         public void ReturnToTargetRotation () {
             target = startTarget;
         }
+
+        public void RemoveTarget () {
+            target = null;
+        }
     }
 }
