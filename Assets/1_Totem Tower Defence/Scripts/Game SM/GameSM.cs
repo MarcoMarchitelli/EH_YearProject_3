@@ -32,7 +32,7 @@
 
     [System.Serializable]
     public class GameData : IStateMachineData {
-        public LevelTD levelTD;
+        public LevelEntity levelTD;
         public PhaseUI phaseUI;
         public PlaceTimeUI placeTimeUI;
         public ModulesMenuUI modulesMenuUI;

@@ -5,7 +5,7 @@
     using Deirin.Utilities;
     using System.Collections.Generic;
 
-    public class LevelTD : BaseEntity {
+    public class LevelEntity : BaseEntity {
         [Header("Events")]
         public UnityEvent_Float OnPlaceTimeStart;
         public UnityEvent OnPlaceTimeEnd;
