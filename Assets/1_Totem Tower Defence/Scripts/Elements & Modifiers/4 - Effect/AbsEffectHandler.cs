@@ -2,9 +2,6 @@
 {
 	using Deirin.EB;
 	using Deirin.Utilities;
-	using System.Collections;
-	using System.Collections.Generic;
-	using SweetRage;
 	using UnityEngine;
 
 	public abstract class AbsEffectHandler<GenericEffectEnum> : BaseBehaviour
@@ -17,9 +14,9 @@
 		protected int currentCharge = 0;
 
 		[Header("AbsEffectHandler Events"), Space]
-		public Unity_Int_Event OnCurrentChargeRefresh;
-		public Unity_Int_Event OnCurrentChargeIncreases;
-		public Unity_Int_Event OnCurrentChargeDecreases;
+		public UnityEvent_Int OnCurrentChargeRefresh;
+		public UnityEvent_Int OnCurrentChargeIncreases;
+		public UnityEvent_Int OnCurrentChargeDecreases;
 
 
 		public abstract IEffectEnum effectType { get; }

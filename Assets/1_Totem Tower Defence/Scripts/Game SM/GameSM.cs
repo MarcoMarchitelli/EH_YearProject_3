@@ -39,6 +39,7 @@
         [HideInInspector] public ModulesMenuUI modulesMenuUI;
         [HideInInspector] public LevelData[] levelsData;
         [HideInInspector] public MainMenuUI mainMenuUI;
+        public Animator animator;
 
         public System.Action Next, Win, Loss;
 

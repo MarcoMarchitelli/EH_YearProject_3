@@ -3,6 +3,6 @@
 	using UnityEngine.Events;
 
 	[System.Serializable]
-	public class Unity_Int_Event : UnityEvent<int> { }
+	public class UnityEvent_IEffectEnum_Int : UnityEvent<IEffectEnum, int> { }
 
 }
