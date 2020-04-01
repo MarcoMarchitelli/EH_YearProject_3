@@ -4,16 +4,17 @@ using SweetRage;
 using System.IO;
 
 public class LevelCreationWindow : EditorWindow {
-    private const string LEVEL_PATH = "Assets/1_Totem Tower Defence/Data/Levels/";
+    private static string LEVEL_PATH = "Assets/1_Totem Tower Defence/Data/Resources/Levels/";
     private const string PREFAB_PATH = "Assets/1_Totem Tower Defence/Prefabs/Levels/";
     private static LevelData levelData;
 
-    [SerializeField] private WaveInfo[] wavesInfo;
+    private static SerializedObject levelDataSerializedObject;
 
     [MenuItem( "SweetRage/Create Level" )]
     public static void Open () {
         GetWindow<LevelCreationWindow>( "Level Creation" );
         levelData = CreateInstance<LevelData>();
+        levelDataSerializedObject = new SerializedObject( levelData );
     }
 
     public void CreateLevel ( LevelData level ) {
@@ -26,10 +27,15 @@ public class LevelCreationWindow : EditorWindow {
 
         GameObject go = new GameObject("Level Prefab");
         go.AddComponent<LevelEntity>();
-        for ( int i = 0; i < wavesInfo.Length; i++ ) {
+        for ( int i = 0; i < levelData.wavesInfo.Length; i++ ) {
             GameObject waveGo = new GameObject("Wave_" + (i + 1).ToString());
             Wave wave = waveGo.AddComponent<Wave>();
-            wave.modules = wavesInfo[i].modules;
+            wave.modules = levelData.wavesInfo[i].modules;
+            for ( int j = 0; j < levelData.wavesInfo[i].spawnerCount; j++ ) {
+                GameObject spawnerGo = new GameObject("Spawner_" + (j + 1).ToString());
+                spawnerGo.AddComponent<Spawner>();
+                spawnerGo.transform.SetParent( waveGo.transform );
+            }
             waveGo.transform.SetParent( go.transform );
         }
 
@@ -44,14 +50,13 @@ public class LevelCreationWindow : EditorWindow {
     }
 
     private void OnGUI () {
-        SerializedObject so = new SerializedObject(this);
-        so.Update();
+        levelDataSerializedObject.Update();
 
         EditorGUILayout.Space();
         EditorGUILayout.Space();
         EditorGUI.indentLevel++;
 
-        EditorGUILayout.PropertyField( so.FindProperty( "wavesInfo" ), true );
+        EditorGUILayout.PropertyField( levelDataSerializedObject.FindProperty( "wavesInfo" ), true );
 
         EditorGUILayout.Space();
         EditorGUILayout.Space();
@@ -61,13 +66,6 @@ public class LevelCreationWindow : EditorWindow {
 
         EditorGUI.indentLevel--;
 
-        so.ApplyModifiedProperties();
+        levelDataSerializedObject.ApplyModifiedProperties();
     }
-}
-
-[System.Serializable]
-public class WaveInfo {
-    [Min(0)] public float placementTime;
-    [Min(0)] public int spawnerCount;
-    public TurretModule[] modules;
 }

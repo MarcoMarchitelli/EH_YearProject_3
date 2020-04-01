@@ -1,10 +1,10 @@
 ﻿namespace SweetRage {
-    public class Game_Setup : Game_BaseState {
+    public class Game_LevelSetup : Game_BaseState {
         public override void Enter () {
             base.Enter();
 
             //wave manager setup
-            gameData.levelTD.Setup();
+            gameData.currentLevelEntity.Setup();
 
             //phase UI setup
             gameData.phaseUI.Setup();

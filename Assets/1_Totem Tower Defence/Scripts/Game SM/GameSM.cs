@@ -6,7 +6,7 @@
         [Header("Data")]
         [SerializeField] GameData gameData = null;
 
-        private void Start () {
+        private void Awake () {
             Setup();
         }
 
@@ -32,10 +32,13 @@
 
     [System.Serializable]
     public class GameData : IStateMachineData {
-        public LevelEntity levelTD;
-        public PhaseUI phaseUI;
-        public PlaceTimeUI placeTimeUI;
-        public ModulesMenuUI modulesMenuUI;
+        [HideInInspector] public LevelData currentLevelData;
+        [HideInInspector] public LevelEntity currentLevelEntity;
+        [HideInInspector] public PhaseUI phaseUI;
+        [HideInInspector] public PlaceTimeUI placeTimeUI;
+        [HideInInspector] public ModulesMenuUI modulesMenuUI;
+        [HideInInspector] public LevelData[] levelsData;
+        [HideInInspector] public MainMenuUI mainMenuUI;
 
         public System.Action Next, Win, Loss;
 
