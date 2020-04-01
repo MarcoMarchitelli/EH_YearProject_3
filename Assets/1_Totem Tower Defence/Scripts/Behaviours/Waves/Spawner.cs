@@ -7,25 +7,43 @@
 
     [DisallowMultipleComponent]
     public class Spawner : BaseBehaviour, IStoppable {
+        #region Inspector
         [Header("Params")]
         public Enemy enemyPrefab;
         public Vector3ArrayVariable pathPoints;
-        public int enemeyToSpawnChunk = 1;
+        [Min(0)] public int amountToSpawn;
 
         [Header("Events"), Space]
-        public UnityEvent onSpawnerStart;
-        public UnityEvent onSpawnerStop;
-        public UnityEvent onEnemySpawn;
+        public UnityEvent OnSpawnerStart;
+        public UnityEvent OnEnemySpawn;
+        [SerializeField] private UnityEvent onStop;
+        #endregion
 
-        //Property
+        public System.Action OnDutyFullfilled;
         public int SpawnedEnemy { get; private set; }
+
+        private List<Enemy> enemies;
+        private bool hasFinished => allSpawned && enemies.Count == 0;
+        private bool allSpawned => SpawnedEnemy == amountToSpawn;
+
+        #region IStoppable
         public bool Stopped { get; private set; }
         public IStoppable[] StoppableItems { get; private set; }
+        public UnityEvent OnStop { get => onStop; set => onStop = value; }
+        public void Stop ( bool callEvent = true ) {
+            if ( !Stopped ) {
+                Stopped = true;
+                StopAllStoppableChilds();
+                if ( callEvent )
+                    OnStop.Invoke();
+            }
+        }
+        #endregion
 
         protected override void CustomSetup () {
             base.CustomSetup();
 
-            enemeyToSpawnChunk = Mathf.Max( 1, enemeyToSpawnChunk );
+            enemies = new List<Enemy>();
             SpawnedEnemy = 0;
             List<IStoppable> tmpStoppableItems = GetComponentsInChildren<IStoppable>().ToList();
             tmpStoppableItems.Remove( this );
@@ -33,32 +51,37 @@
             Stopped = true;
         }
 
+        #region API
         public void StartSpawner () {
             if ( Stopped ) {
                 Stopped = false;
-                onSpawnerStart.Invoke();
-            }
-        }
-
-        public void Stop ( bool callEvent = true ) {
-            if ( !Stopped ) {
-                Stopped = true;
-                StopAllStoppableChilds();
-                if ( callEvent )
-                    onSpawnerStop.Invoke();
+                OnSpawnerStart.Invoke();
             }
         }
 
         public void SpawnEnemy () {
             if ( !Stopped && pathPoints ) {
                 InstantiateEnemy();
-                SpawnedEnemy += enemeyToSpawnChunk;
-                onEnemySpawn.Invoke();
+                OnEnemySpawn.Invoke();
             }
         }
 
+        public void RemoveEnemy ( Enemy e ) {
+            if ( enemies == null )
+                return;
+            if ( enemies.Contains( e ) ) {
+                enemies.Remove( e );
+                if ( hasFinished )
+                    OnDutyFullfilled?.Invoke();
+            }
+        }
+        #endregion
+
+        #region Privates
         private void InstantiateEnemy () {
             Enemy e = Instantiate(enemyPrefab, pathPoints.Value[0], Quaternion.identity);
+            enemies.Add( e );
+            SpawnedEnemy++;
             PathPatroller pp;
             if ( e.TryGetBehaviour( out pp ) ) {
                 pp.pathPoints = pathPoints;
@@ -68,6 +91,8 @@
                 Debug.LogWarning( "Enemy " + e.name + " does not have a PathPatroller behaviour!" );
             }
 #endif
+            if ( hasFinished )
+                OnDutyFullfilled?.Invoke();
         }
 
         private void StopAllStoppableChilds () {
@@ -75,5 +100,6 @@
                 stoppableItem.Stop( false );
             }
         }
+        #endregion
     }
 }

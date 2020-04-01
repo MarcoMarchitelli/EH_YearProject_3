@@ -13,12 +13,26 @@
         public UnityEvent_Float OnTimerStart;
         public UnityEvent OnTimerPause;
         public UnityEvent_Float OnTimerEnd;
+        [SerializeField] private UnityEvent onStop;
 
         bool count;
         float timer;
 
+        #region IStoppable
         public bool Stopped { get; private set; } = true;
+        public UnityEvent OnStop { get => onStop; set => onStop = value; }
+        public void Stop ( bool callEvent = false ) {
+            Stopped = true;
 
+            if ( unscaledTime )
+                StopCoroutine( CountUnscaled() );
+            else
+                StopCoroutine( Count() );
+
+            if ( callEvent )
+                OnStop.Invoke();
+        } 
+        #endregion
 
         public void Play () {
             Stopped = false;
@@ -32,18 +46,6 @@
         public void Pause () {
             count = false;
             OnTimerPause.Invoke();
-        }
-
-        public void Stop ( bool callEvent = false ) {
-            Stopped = true;
-
-            if ( unscaledTime )
-                StopCoroutine( CountUnscaled() );
-            else
-                StopCoroutine( Count() );
-
-            if ( callEvent )
-                OnTimerEnd.Invoke( duration );
         }
 
         IEnumerator Count () {

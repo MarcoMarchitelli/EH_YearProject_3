@@ -23,7 +23,7 @@
             gameData.phaseUI.SetTexts( gameData.levelTD.CurrentWave.preWaveText );
             gameData.phaseUI.Play( .5f, Rewind );
 
-            gameData.levelTD.CurrentWave.onPreWaveEnd.AddListener( PreWaveEndHandler );
+            gameData.levelTD.CurrentWave.OnPreWaveEnd.AddListener( PreWaveEndHandler );
         }
 
         public override void Tick () {
@@ -36,7 +36,8 @@
         public override void Exit () {
             base.Exit();
 
-            gameData.levelTD.CurrentWave.onPreWaveEnd.RemoveListener( PreWaveEndHandler );
+            gameData.levelTD.CurrentWave.OnPreWaveEnd.RemoveListener( PreWaveEndHandler );
+            gameData.levelTD.CurrentWave.OnWaveEnd.RemoveListener( WaveEndHandler );
         }
 
         public void LossHandler () {
@@ -52,6 +53,12 @@
             //wave phase graphics
             gameData.phaseUI.SetTexts( gameData.levelTD.CurrentWave.waveText );
             gameData.phaseUI.Play( .5f, Rewind );
+
+            gameData.levelTD.CurrentWave.OnWaveEnd.AddListener( WaveEndHandler );
+        }
+
+        private void WaveEndHandler ( int id ) {
+            gameData.GoNext();
         }
     }
 }

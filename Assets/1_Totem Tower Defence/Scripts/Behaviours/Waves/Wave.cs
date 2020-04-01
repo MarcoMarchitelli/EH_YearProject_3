@@ -4,11 +4,12 @@
     using System.Collections.Generic;
     using System.Linq;
     using Deirin.Utilities;
+    using UnityEngine.Events;
 
     [DisallowMultipleComponent]
     public class Wave : BaseBehaviour, IStoppable {
+        #region Inspector
         [Min(1)] int index = 0;
-        //public TurretModule
 
         [Header("Parameters")]
         public string preWaveText;
@@ -16,17 +17,40 @@
         public TurretModule[] modules;
 
         [Header("Events"), Space]
-        public UnityEvent_Int onPreWaveStart;
-        public UnityEvent_Int onPreWaveEnd;
-        public UnityEvent_Int onWaveStart;
-        public UnityEvent_Int onWaveEnd;
+        public UnityEvent_Int OnPreWaveStart;
+        public UnityEvent_Int OnPreWaveEnd;
+        public UnityEvent_Int OnWaveStart;
+        public UnityEvent_Int OnWaveEnd;
+        [SerializeField] private UnityEvent onStop;
+        
+        #endregion
 
-        //Property
+        #region IStoppable
         public bool Stopped { get; private set; }
         public IStoppable[] StoppableItems { get; private set; }
+        public UnityEvent OnStop { get => onStop; set { onStop = value; } }
+        public void Stop ( bool callEvent = true ) {
+            if ( !Stopped ) {
+                Stopped = true;
+                StopAllStoppableChilds();
+                if ( callEvent )
+                    OnStop.Invoke();
+            }
+        }
+        #endregion
+
+        private bool isOver => completedSpawnerCount == spawners.Length;
+        private Spawner[] spawners;
+        private int completedSpawnerCount;
 
         protected override void CustomSetup () {
             base.CustomSetup();
+
+            completedSpawnerCount = 0;
+            spawners = GetComponentsInChildren<Spawner>();
+            foreach ( var spawner in spawners ) {
+                spawner.OnDutyFullfilled += SpawnerDutyHandler;
+            }
 
             List<IStoppable> tmpStoppableItems = GetComponentsInChildren<IStoppable>().ToList();
             tmpStoppableItems.Remove( this );
@@ -35,27 +59,17 @@
         }
 
         public void StartPreWave () {
-            onPreWaveStart.Invoke( index );
+            OnPreWaveStart.Invoke( index );
         }
 
         public void EndPreWave () {
-            onPreWaveEnd.Invoke( index );
+            OnPreWaveEnd.Invoke( index );
         }
-
 
         public void StartWave () {
             if ( Stopped ) {
                 Stopped = false;
-                onWaveStart?.Invoke( index );
-            }
-        }
-
-        public void Stop ( bool callEvent = true ) {
-            if ( !Stopped ) {
-                Stopped = true;
-                StopAllStoppableChilds();
-                if ( callEvent )
-                    onWaveEnd.Invoke( index );
+                OnWaveStart?.Invoke( index );
             }
         }
 
@@ -65,6 +79,10 @@
             }
         }
 
+        private void SpawnerDutyHandler () {
+            completedSpawnerCount++;
+            if ( isOver )
+                OnWaveEnd.Invoke( index );
+        }
     }
-
 }
