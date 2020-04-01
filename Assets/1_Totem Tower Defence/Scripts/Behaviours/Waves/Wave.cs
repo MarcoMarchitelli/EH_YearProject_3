@@ -59,16 +59,19 @@
         }
 
         public void StartPreWave () {
+            print( name + " pre wave start" );
             OnPreWaveStart.Invoke( index );
         }
 
         public void EndPreWave () {
+            print( name + " pre wave end" );
             OnPreWaveEnd.Invoke( index );
         }
 
         public void StartWave () {
             if ( Stopped ) {
                 Stopped = false;
+                print( name + " wave start" );
                 OnWaveStart?.Invoke( index );
             }
         }
@@ -81,8 +84,10 @@
 
         private void SpawnerDutyHandler () {
             completedSpawnerCount++;
-            if ( isOver )
+            if ( isOver ) {
+                print( name + " wave end" );
                 OnWaveEnd.Invoke( index );
+            }
         }
     }
 }

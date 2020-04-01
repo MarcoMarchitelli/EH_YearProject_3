@@ -58,6 +58,7 @@
         }
 
         private void WaveEndHandler ( int id ) {
+            gameData.levelTD.CurrentWave.gameObject.SetActive( false );
             gameData.GoNext();
         }
     }

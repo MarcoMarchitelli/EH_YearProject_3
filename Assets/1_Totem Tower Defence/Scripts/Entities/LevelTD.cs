@@ -34,7 +34,7 @@
             }
             
             currentWave = waves[currentWaveIndex];
-            RuntimeLevelData.turretModules.Clear();
+            //RuntimeLevelData.turretModules.Clear();
             foreach ( var module in currentWave.modules ) {
                 TurretModule t = Instantiate( module, modulesContainer.transform );
                 t.Setup();
