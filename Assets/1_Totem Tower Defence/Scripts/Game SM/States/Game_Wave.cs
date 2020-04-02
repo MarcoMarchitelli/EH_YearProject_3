@@ -1,11 +1,15 @@
 ﻿namespace SweetRage {
     using UnityEngine;
     using UnityEngine.Events;
+    using Deirin.Utilities;
 
     public class Game_Wave : Game_BaseState {
         [Header("Events")]
         public UnityEvent OnLeftMouseDown;
         public UnityEvent OnLeftMouseUp;
+
+        [Header("Global Events")]
+        public GameEvent OnEnemyReachedEnd;
 
         public override void Enter () {
             base.Enter();
@@ -20,7 +24,9 @@
             gameData.phaseUI.Play( .5f, Rewind );
 
             gameData.currentLevel.CurrentWave.StartWave();
+
             gameData.currentLevel.CurrentWave.OnWaveEnd.AddListener( WaveEndHandler );
+            OnEnemyReachedEnd.OnInvoke += LossHandler;
         }
 
         public override void Tick () {
@@ -43,6 +49,7 @@
             base.Exit();
 
             gameData.currentLevel.CurrentWave.OnWaveEnd.RemoveListener( WaveEndHandler );
+            OnEnemyReachedEnd.OnInvoke -= LossHandler;
         }
     }
 }
