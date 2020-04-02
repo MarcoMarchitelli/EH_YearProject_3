@@ -6,15 +6,17 @@
         [Header("Prefabs")]
         public MainMenuUI mainMenuUIPrefab;
 
-        [Header("Global Events")]
-        public LevelEntityGameEvent OnLevelButtonClick;
-
+        private LevelEntityGameEventListener_SM listener;
         private LevelEntity selectedLevelPrefab;
 
         public override void Enter () {
             base.Enter();
 
-            OnLevelButtonClick.OnInvoke += LevelSelectionHandler;
+            //-------------------- HACK: PER ORA LO FETCHO
+            listener = gameData.animator.GetBehaviour<LevelEntityGameEventListener_SM>();
+            listener.response.AddListener( LevelSelectionHandler );
+            listener.Subscribe();
+            //-------------------- HACK
 
             gameData.mainMenuUI = Instantiate( mainMenuUIPrefab );
 
@@ -35,7 +37,8 @@
         }
 
         public override void Exit () {
-            OnLevelButtonClick.OnInvoke -= LevelSelectionHandler;
+            listener.response.RemoveListener( LevelSelectionHandler );
+            listener.Unsubscribe();
         }
     }
 }
