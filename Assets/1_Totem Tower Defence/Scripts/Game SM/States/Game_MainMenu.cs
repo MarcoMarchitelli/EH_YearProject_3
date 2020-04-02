@@ -1,5 +1,6 @@
 ﻿namespace SweetRage {
     using UnityEngine;
+    using UnityEngine.SceneManagement;
 
     public class Game_MainMenu : Game_BaseState {
         [Header("Prefabs")]
@@ -25,6 +26,11 @@
 
         private void LevelSelectionHandler ( LevelData level ) {
             gameData.currentLevelData = level;
+            SceneManager.LoadScene( "2_Level" );
+            SceneManager.sceneLoaded += SceneLoadedHandler;
+        }
+
+        private void SceneLoadedHandler ( Scene arg0, LoadSceneMode arg1 ) {
             gameData.GoNext();
         }
 

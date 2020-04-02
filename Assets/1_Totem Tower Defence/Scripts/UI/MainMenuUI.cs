@@ -22,7 +22,9 @@
             }
 
             for ( int i = 0; i < levelsData.Length; i++ ) {
-                Instantiate( levelButtonPrefab, levelButtonsContainer ).UpdateUI();
+                LevelButtonUI lbUI = Instantiate( levelButtonPrefab, levelButtonsContainer );
+                lbUI.level = levelsData[i];
+                lbUI.UpdateUI();
             }
         }
     }

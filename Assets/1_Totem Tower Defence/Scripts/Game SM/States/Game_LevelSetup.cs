@@ -1,9 +1,21 @@
 ﻿namespace SweetRage {
+    using UnityEngine;
+
     public class Game_LevelSetup : Game_BaseState {
+        [Header("Prefabs")]
+        public PhaseUI phaseUIPrefab;
+        public PlaceTimeUI placeTimeUIPrefab;
+        public ModulesMenuUI modulesMenuUIPrefab;
+
         public override void Enter () {
             base.Enter();
 
-            //wave manager setup
+            gameData.phaseUI = FindObjectOfType<PhaseUI>();
+            gameData.placeTimeUI = FindObjectOfType<PlaceTimeUI>();
+            gameData.modulesMenuUI = FindObjectOfType<ModulesMenuUI>();
+
+            //level instantation and setup
+            gameData.currentLevelEntity = Instantiate( gameData.currentLevelData.levelPrefab );
             gameData.currentLevelEntity.Setup();
 
             //phase UI setup

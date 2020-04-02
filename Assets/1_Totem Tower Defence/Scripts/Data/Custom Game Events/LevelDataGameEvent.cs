@@ -35,5 +35,11 @@
                 listeners_SM[i].OnInvoke( ld );
             }
         }
+
+        [ContextMenu("Clear All")]
+        public void ClearAll () {
+            listeners.Clear();
+            listeners_SM.Clear();
+        }
     }
 }
