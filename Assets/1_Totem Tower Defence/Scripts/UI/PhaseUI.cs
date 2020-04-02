@@ -27,8 +27,8 @@
             s = DOTween.Sequence();
             s.Append( background.DOFade( .9f, 1f ).SetEase( Ease.OutCubic ) );
             s.Join( background.transform.DOScaleY( 1, 1f ).SetEase( Ease.OutCubic ) );
-            s.Append( texts[0].DOFade( 1, .3f ) );
-            for ( int i = 1; i < texts.Count; i++ ) {
+            //s.Append( texts[0].DOFade( 1, .3f ) );
+            for ( int i = 0; i < texts.Count; i++ ) {
                 s.Append( texts[i].DOFade( 1, .3f ) );
             }
             s.AppendInterval( endWaitTime );

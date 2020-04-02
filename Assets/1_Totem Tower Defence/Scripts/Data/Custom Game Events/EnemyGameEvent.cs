@@ -2,7 +2,7 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    [CreateAssetMenu( menuName = "TotemTD/Custom Game Events/Enemy Game Event" )]
+    [CreateAssetMenu( menuName = "Sweet Rage/Custom Game Events/Enemy Game Event" )]
     public class EnemyGameEvent : ScriptableObject {
         public Enemy enemy;
         private List<EnemyGameEventListener> listeners = new List<EnemyGameEventListener>();

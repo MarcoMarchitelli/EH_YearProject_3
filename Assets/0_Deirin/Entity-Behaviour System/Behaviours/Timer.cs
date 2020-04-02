@@ -22,6 +22,9 @@
         public bool Stopped { get; private set; } = true;
         public UnityEvent OnStop { get => onStop; set => onStop = value; }
         public void Stop ( bool callEvent = false ) {
+            if ( Stopped )
+                return;
+
             Stopped = true;
 
             if ( unscaledTime )
@@ -31,7 +34,7 @@
 
             if ( callEvent )
                 OnStop.Invoke();
-        } 
+        }
         #endregion
 
         public void Play () {

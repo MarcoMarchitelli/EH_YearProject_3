@@ -1,14 +1,11 @@
 ﻿namespace SweetRage {
     using UnityEngine;
-    using UnityEngine.Events;
     using Deirin.EB;
-    using Deirin.Utilities;
     using System.Collections.Generic;
 
     public class LevelEntity : BaseEntity {
-        [Header("Events")]
-        public UnityEvent_Float OnPlaceTimeStart;
-        public UnityEvent OnPlaceTimeEnd;
+        [Header("Params")]
+        public string levelName;
 
         private int currentWaveIndex;
         private GameObject modulesContainer;
@@ -41,8 +38,6 @@
                 t.gameObject.SetActive( false );
                 RuntimeLevelData.turretModules.Add( t );
             }
-
-            currentWave.StartPreWave();
 
             return true;
         }

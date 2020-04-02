@@ -6,13 +6,14 @@
         [Header("Prefabs")]
         public MainMenuUI mainMenuUIPrefab;
 
-        private LevelDataGameEventListener_SM listener;
+        private LevelEntityGameEventListener_SM listener;
+        private LevelEntity selectedLevelPrefab;
 
         public override void Enter () {
             base.Enter();
 
             //-------------------- HACK: PER ORA LO FETCHO
-            listener = gameData.animator.GetBehaviour<LevelDataGameEventListener_SM>();
+            listener = gameData.animator.GetBehaviour<LevelEntityGameEventListener_SM>();
             listener.response.AddListener( LevelSelectionHandler );
             listener.Subscribe();
             //-------------------- HACK
@@ -20,17 +21,18 @@
             gameData.mainMenuUI = Instantiate( mainMenuUIPrefab );
 
             //update level UI based on loaded levels
-            gameData.mainMenuUI.SetLevelsData( gameData.levelsData );
+            gameData.mainMenuUI.SetLevelsData( gameData.levelsEntities );
             gameData.mainMenuUI.UpdateUI();
         }
 
-        private void LevelSelectionHandler ( LevelData level ) {
-            gameData.currentLevelData = level;
+        private void LevelSelectionHandler ( LevelEntity level ) {
+            selectedLevelPrefab = level;
             SceneManager.LoadScene( "2_Level" );
             SceneManager.sceneLoaded += SceneLoadedHandler;
         }
 
         private void SceneLoadedHandler ( Scene arg0, LoadSceneMode arg1 ) {
+            gameData.currentLevel = Instantiate( selectedLevelPrefab.transform.parent ).GetComponentInChildren<LevelEntity>();
             gameData.GoNext();
         }
 

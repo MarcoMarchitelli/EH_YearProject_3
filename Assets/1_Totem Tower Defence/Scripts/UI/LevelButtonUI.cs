@@ -4,14 +4,14 @@
     using TMPro;
 
     public class LevelButtonUI : MonoBehaviour {
-        [ReadOnly] public LevelData level;
+        [ReadOnly] public LevelEntity level;
         [Header("Refs")]
         public TextMeshProUGUI text;
         [Header("Events")]
-        public UnityEvent_LevelData OnClick;
+        public UnityEvent_LevelEntity OnClick;
 
         public void UpdateUI () {
-            text.text = level?.name;
+            text.text = level?.levelName;
         }
 
         public void Click () {

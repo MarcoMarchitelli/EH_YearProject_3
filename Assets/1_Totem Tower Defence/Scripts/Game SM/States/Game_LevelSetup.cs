@@ -10,13 +10,14 @@
         public override void Enter () {
             base.Enter();
 
+            //----- HACK ------
             gameData.phaseUI = FindObjectOfType<PhaseUI>();
             gameData.placeTimeUI = FindObjectOfType<PlaceTimeUI>();
             gameData.modulesMenuUI = FindObjectOfType<ModulesMenuUI>();
+            //----- HACK ------
 
             //level instantation and setup
-            gameData.currentLevelEntity = Instantiate( gameData.currentLevelData.levelPrefab );
-            gameData.currentLevelEntity.Setup();
+            gameData.currentLevel.Setup();
 
             //phase UI setup
             gameData.phaseUI.Setup();

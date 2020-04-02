@@ -8,10 +8,10 @@
         [Header("References")]
         public Transform levelButtonsContainer;
 
-        private LevelData[] levelsData;
+        private LevelEntity[] levels;
 
-        public void SetLevelsData ( LevelData[] levelsData ) {
-            this.levelsData = levelsData;
+        public void SetLevelsData ( LevelEntity[] levels ) {
+            this.levels = levels;
         }
 
         public void UpdateUI () {
@@ -21,9 +21,9 @@
                 Destroy( levelButtonsContainer.GetChild( i ).gameObject );
             }
 
-            for ( int i = 0; i < levelsData.Length; i++ ) {
+            for ( int i = 0; i < levels.Length; i++ ) {
                 LevelButtonUI lbUI = Instantiate( levelButtonPrefab, levelButtonsContainer );
-                lbUI.level = levelsData[i];
+                lbUI.level = levels[i];
                 lbUI.UpdateUI();
             }
         }

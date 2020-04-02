@@ -32,12 +32,11 @@
 
     [System.Serializable]
     public class GameData : IStateMachineData {
-        [HideInInspector] public LevelData currentLevelData;
-        [HideInInspector] public LevelEntity currentLevelEntity;
+        [HideInInspector] public LevelEntity currentLevel;
+        [HideInInspector] public LevelEntity[] levelsEntities;
         [HideInInspector] public PhaseUI phaseUI;
         [HideInInspector] public PlaceTimeUI placeTimeUI;
         [HideInInspector] public ModulesMenuUI modulesMenuUI;
-        [HideInInspector] public LevelData[] levelsData;
         [HideInInspector] public MainMenuUI mainMenuUI;
         public Animator animator;
 

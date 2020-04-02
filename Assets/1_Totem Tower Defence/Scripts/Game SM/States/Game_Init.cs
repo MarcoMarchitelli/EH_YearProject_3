@@ -7,7 +7,13 @@
             base.Enter();
 
             //load levels
-            gameData.levelsData = Resources.LoadAll<LevelData>( "Levels/" );
+            GameObject[] levelContainers = Resources.LoadAll<GameObject>( "Levels/" );
+
+            int count = levelContainers.Length;
+            gameData.levelsEntities = new LevelEntity[count];
+            for ( int i = 0; i < count; i++ ) {
+                gameData.levelsEntities[i] = levelContainers[i].GetComponentInChildren<LevelEntity>();
+            }
 
             //------ audio setup happens in scene ------
 

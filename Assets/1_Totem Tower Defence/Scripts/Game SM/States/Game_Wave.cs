@@ -10,20 +10,17 @@
         public override void Enter () {
             base.Enter();
 
-            //turret menu setup and UI update
-            gameData.modulesMenuUI.Setup();
-            gameData.modulesMenuUI.UpdateUI();
-
             //Local func
             void Rewind () {
                 gameData.phaseUI.Rewind();
             }
 
             //wave phase graphics
-            gameData.phaseUI.SetTexts( gameData.currentLevelEntity.CurrentWave.preWaveText );
+            gameData.phaseUI.SetTexts( gameData.currentLevel.CurrentWave.waveText );
             gameData.phaseUI.Play( .5f, Rewind );
 
-            gameData.currentLevelEntity.CurrentWave.OnPreWaveEnd.AddListener( PreWaveEndHandler );
+            gameData.currentLevel.CurrentWave.StartWave();
+            gameData.currentLevel.CurrentWave.OnWaveEnd.AddListener( WaveEndHandler );
         }
 
         public override void Tick () {
@@ -33,33 +30,19 @@
                 OnLeftMouseUp.Invoke();
         }
 
-        public override void Exit () {
-            base.Exit();
-
-            gameData.currentLevelEntity.CurrentWave.OnPreWaveEnd.RemoveListener( PreWaveEndHandler );
-            gameData.currentLevelEntity.CurrentWave.OnWaveEnd.RemoveListener( WaveEndHandler );
-        }
-
         public void LossHandler () {
             gameData.GoLoss();
         }
 
-        private void PreWaveEndHandler ( int id ) {
-            //Local func
-            void Rewind () {
-                gameData.phaseUI.Rewind();
-            }
-
-            //wave phase graphics
-            gameData.phaseUI.SetTexts( gameData.currentLevelEntity.CurrentWave.waveText );
-            gameData.phaseUI.Play( .5f, Rewind );
-
-            gameData.currentLevelEntity.CurrentWave.OnWaveEnd.AddListener( WaveEndHandler );
+        private void WaveEndHandler ( int id ) {
+            gameData.currentLevel.CurrentWave.gameObject.SetActive( false );
+            gameData.GoNext();
         }
 
-        private void WaveEndHandler ( int id ) {
-            gameData.currentLevelEntity.CurrentWave.gameObject.SetActive( false );
-            gameData.GoNext();
+        public override void Exit () {
+            base.Exit();
+
+            gameData.currentLevel.CurrentWave.OnWaveEnd.RemoveListener( WaveEndHandler );
         }
     }
 }

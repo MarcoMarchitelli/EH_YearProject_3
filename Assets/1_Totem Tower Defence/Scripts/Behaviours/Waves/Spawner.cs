@@ -16,6 +16,7 @@
         [Header("Events"), Space]
         public UnityEvent OnSpawnerStart;
         public UnityEvent OnEnemySpawn;
+        public UnityEvent OnAllSpawned;
         [SerializeField] private UnityEvent onStop;
         #endregion
 
@@ -23,8 +24,7 @@
         public int SpawnedEnemy { get; private set; }
 
         private List<Enemy> enemies;
-        private bool hasFinished => allSpawned && enemies.Count == 0;
-        private bool allSpawned => SpawnedEnemy == amountToSpawn;
+        private bool allSpawned => SpawnedEnemy >= amountToSpawn;
 
         #region IStoppable
         public bool Stopped { get; private set; }
@@ -56,13 +56,15 @@
             if ( Stopped ) {
                 Stopped = false;
                 OnSpawnerStart.Invoke();
+#if UNITY_EDITOR
+                print( name + " started spawning" );
+#endif
             }
         }
 
         public void SpawnEnemy () {
             if ( !Stopped && pathPoints ) {
                 InstantiateEnemy();
-                OnEnemySpawn.Invoke();
             }
         }
 
@@ -71,17 +73,21 @@
                 return;
             if ( enemies.Contains( e ) ) {
                 enemies.Remove( e );
-                if ( hasFinished )
-                    OnDutyFullfilled?.Invoke();
+                CheckDuty();
             }
         }
         #endregion
 
         #region Privates
         private void InstantiateEnemy () {
+            print( "OOOOH" );
+            if ( allSpawned )
+                return;
+
             Enemy e = Instantiate(enemyPrefab, pathPoints.Value[0], Quaternion.identity);
             enemies.Add( e );
             SpawnedEnemy++;
+            OnEnemySpawn.Invoke();
             PathPatroller pp;
             if ( e.TryGetBehaviour( out pp ) ) {
                 pp.pathPoints = pathPoints;
@@ -91,13 +97,27 @@
                 Debug.LogWarning( "Enemy " + e.name + " does not have a PathPatroller behaviour!" );
             }
 #endif
-            if ( hasFinished )
-                OnDutyFullfilled?.Invoke();
+            CheckDuty();
         }
 
         private void StopAllStoppableChilds () {
             foreach ( var stoppableItem in StoppableItems ) {
                 stoppableItem.Stop( false );
+            }
+        }
+
+        private void CheckDuty () {
+            if ( allSpawned ) {
+                OnAllSpawned.Invoke();
+#if UNITY_EDITOR
+                print( name + " finished spawning" );
+#endif
+                if ( enemies.Count == 0 ) {
+                    OnDutyFullfilled?.Invoke();
+#if UNITY_EDITOR
+                    print( name + " finished duty" );
+#endif
+                }
             }
         }
         #endregion

@@ -2,9 +2,9 @@
     using UnityEngine;
     using UnityEngine.Events;
 
-    public class LevelDataGameEventListener : MonoBehaviour {
-        public LevelDataGameEvent gameEvent;
-        public UnityEvent_LevelData response;
+    public class LevelEntityGameEventListener : MonoBehaviour {
+        public LevelEntityGameEvent gameEvent;
+        public UnityEvent_LevelEntity response;
 
         private void OnEnable () {
             gameEvent.Subscribe( this );
@@ -14,13 +14,13 @@
             gameEvent.Unsubscribe( this );
         }
 
-        public void OnInvoke ( LevelData ld ) {
+        public void OnInvoke ( LevelEntity ld ) {
             response.Invoke( ld );
         }
     }
 
     [System.Serializable]
-    public class UnityEvent_LevelData : UnityEvent<LevelData> {
+    public class UnityEvent_LevelEntity : UnityEvent<LevelEntity> {
 
     }
 }

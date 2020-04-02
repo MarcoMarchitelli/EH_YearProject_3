@@ -1,12 +1,12 @@
 ﻿namespace SweetRage {
     using UnityEngine;
 
-    public class LevelDataGameEventListener_SM : StateMachineBehaviour {
+    public class LevelEntityGameEventListener_SM : StateMachineBehaviour {
         public bool subscribeOnEnter = false;
         public bool unsubscribeOnExit = false;
         public bool unsubscribeOnDisable = false;
-        public LevelDataGameEvent gameEvent;
-        public UnityEvent_LevelData response;
+        public LevelEntityGameEvent gameEvent;
+        public UnityEvent_LevelEntity response;
 
         public override void OnStateEnter ( Animator animator, AnimatorStateInfo stateInfo, int layerIndex ) {
             if ( !subscribeOnEnter )
@@ -26,7 +26,7 @@
             Unsubscribe();
         }
 
-        public void OnInvoke ( LevelData ld ) {
+        public void OnInvoke ( LevelEntity ld ) {
             response.Invoke( ld );
         }
 
