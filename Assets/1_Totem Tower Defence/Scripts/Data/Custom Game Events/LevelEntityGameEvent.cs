@@ -8,6 +8,8 @@
         private List<LevelEntityGameEventListener> listeners = new List<LevelEntityGameEventListener>();
         private List<LevelEntityGameEventListener_SM> listeners_SM = new List<LevelEntityGameEventListener_SM>();
 
+        public System.Action<LevelEntity> OnInvoke;
+
         public void Subscribe ( LevelEntityGameEventListener listener ) {
             listeners.Add( listener );
         }
@@ -34,6 +36,8 @@
             for ( int i = 0; i < listeners_SM.Count; i++ ) {
                 listeners_SM[i].OnInvoke( ld );
             }
+
+            OnInvoke?.Invoke( ld );
         }
 
         [ContextMenu("Clear All")]

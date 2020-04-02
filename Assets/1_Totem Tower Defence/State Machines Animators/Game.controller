@@ -48,6 +48,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   mainMenuUIPrefab: {fileID: 2068510715, guid: 1d364094db524c64cb2108d5cb38ee0e, type: 3}
+  OnLevelButtonClick: {fileID: 11400000, guid: 9547c30882ab19a4fa4154cc084fea20, type: 2}
 --- !u!1101 &-6140014824574295329
 AnimatorStateTransition:
   m_ObjectHideFlags: 3
@@ -269,27 +270,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
---- !u!114 &-1271941855360742152
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 647e8c939a577c54184a4094aaa4b5a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  subscribeOnEnter: 0
-  unsubscribeOnExit: 0
-  unsubscribeOnDisable: 1
-  gameEvent: {fileID: 11400000, guid: 9547c30882ab19a4fa4154cc084fea20, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: SweetRage.UnityEvent_LevelEntity, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1102 &-1112385375279770234
 AnimatorState:
@@ -625,7 +605,6 @@ AnimatorState:
   - {fileID: -4754548432011267764}
   m_StateMachineBehaviours:
   - {fileID: -8680962299237056147}
-  - {fileID: -1271941855360742152}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
