@@ -229,7 +229,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &4816848189310710585
 Rigidbody:
@@ -694,17 +694,17 @@ PrefabInstance:
     - target: {fileID: 2849538729979986692, guid: 1518e5445fe8f2d4697e50f9aaf63532,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 48
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 2849538729979986692, guid: 1518e5445fe8f2d4697e50f9aaf63532,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 48
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 2849538729979986692, guid: 1518e5445fe8f2d4697e50f9aaf63532,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 48
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1518e5445fe8f2d4697e50f9aaf63532, type: 3}
@@ -733,11 +733,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 437727999856975426, guid: fe09fd00172514e4eba9e60ae22ce163,
-        type: 3}
-      propertyPath: m_Name
-      value: Sniper
-      objectReference: {fileID: 0}
     - target: {fileID: 437727999856975430, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
       propertyPath: OnCanBePlaced.m_PersistentCalls.m_Calls.Array.size
@@ -1190,7 +1185,7 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 437727998137443776, guid: fe09fd00172514e4eba9e60ae22ce163,
+    - target: {fileID: 437727998947485499, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
       propertyPath: target
       value: 
@@ -1205,11 +1200,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 437727998947485499, guid: fe09fd00172514e4eba9e60ae22ce163,
+    - target: {fileID: 437727998137443776, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 4378660615271315120}
+    - target: {fileID: 437727999856975426, guid: fe09fd00172514e4eba9e60ae22ce163,
+        type: 3}
+      propertyPath: m_Name
+      value: Sniper
+      objectReference: {fileID: 0}
     - target: {fileID: 437727999856975424, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
       propertyPath: sprite
@@ -1379,11 +1379,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6166750829624221392}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: ec3d997ef25008d49a0a41933479f1af,
-        type: 3}
-      propertyPath: m_Name
-      value: Look At Horizontal
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ec3d997ef25008d49a0a41933479f1af,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1439,6 +1434,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: ec3d997ef25008d49a0a41933479f1af,
+        type: 3}
+      propertyPath: m_Name
+      value: Look At Horizontal
+      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: ec3d997ef25008d49a0a41933479f1af,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1465,11 +1465,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8107028362274197203}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: a8d797bf67d283e46a593dc33c59bbda,
-        type: 3}
-      propertyPath: m_Name
-      value: SKM_Cannon
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: a8d797bf67d283e46a593dc33c59bbda,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1539,6 +1534,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: a8d797bf67d283e46a593dc33c59bbda,
+        type: 3}
+      propertyPath: m_Name
+      value: SKM_Cannon
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: a8d797bf67d283e46a593dc33c59bbda,
         type: 3}

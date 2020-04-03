@@ -28,7 +28,7 @@
             enemiesInRange = new List<Enemy>();
             Activate( activeOnSetup );
             sphereCollider.radius = range;
-            rangeGraphics.transform.localScale = Vector3.one * ( range + 2 );
+            rangeGraphics.transform.localScale = Vector3.one * ( range * 5 );
         }
 
         private void OnTriggerEnter ( Collider other ) {
