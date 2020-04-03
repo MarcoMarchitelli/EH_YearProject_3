@@ -57,12 +57,12 @@
         }
 
         public void RemoveEnemy ( Enemy e ) {
-            if ( enemiesInRange.Contains( e ) == false )
-                return;
+            //if ( enemiesInRange.Contains( e ) == false )
+            //    return;
             enemiesInRange.Remove( e );
             if ( enemiesInRange.Count == 0 ) {
-                OnEnemiesLost.Invoke();
                 currentTarget = null;
+                OnEnemiesLost.Invoke();
                 return;
             }
             if ( e == currentTarget )
