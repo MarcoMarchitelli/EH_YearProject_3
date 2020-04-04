@@ -80,7 +80,6 @@
 
         #region Privates
         private void InstantiateEnemy () {
-            print( "OOOOH" );
             if ( allSpawned )
                 return;
 

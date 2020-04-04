@@ -3,17 +3,18 @@
     using Deirin.StateMachine;
 
     public class GameSM : StateMachineBase {
-        [Header("Data")]
-        [SerializeField] GameData gameData = null;
+        private GameData gameData;
 
         private void Awake () {
             Setup();
         }
 
         protected override void CustomDataSetup () {
+            gameData = new GameData();
             gameData.Next += Next;
             gameData.Win += Win;
             gameData.Loss += Loss;
+            gameData.animator = animator;
             data = gameData;  
         }
 
@@ -38,7 +39,7 @@
         [HideInInspector] public PlaceTimeUI placeTimeUI;
         [HideInInspector] public ModulesMenuUI modulesMenuUI;
         [HideInInspector] public MainMenuUI mainMenuUI;
-        public Animator animator;
+        [HideInInspector] public Animator animator;
 
         public System.Action Next, Win, Loss;
 

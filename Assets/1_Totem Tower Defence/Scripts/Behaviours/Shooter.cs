@@ -35,8 +35,8 @@
         }
 
         private void Shoot () {
-
             Projectile b = Instantiate( projectilePrefab, spawnPoint.position, Quaternion.LookRotation( spawnPoint.forward ) );
+            b.shooter = this;
             OnShoot.Invoke( b );
         }
     }

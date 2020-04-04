@@ -36,6 +36,7 @@
 
         public override void Exit () {
             OnLevelButtonClick.OnInvoke -= LevelSelectionHandler;
+            SceneManager.sceneLoaded -= SceneLoadedHandler;
         }
     }
 }

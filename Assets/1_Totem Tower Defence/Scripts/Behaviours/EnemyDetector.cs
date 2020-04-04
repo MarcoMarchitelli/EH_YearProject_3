@@ -16,7 +16,7 @@
         public float range = 6;
 
         [Header("Events")]
-        public UnityTransformEvent OnEnemyDetected;
+        public UnityEvent_Entity OnTargetSet;
         public UnityEvent OnEnemiesLost;
 
         [ReadOnly] public List<Enemy> enemiesInRange;
@@ -77,7 +77,7 @@
 
         private void SetCurrentTarget ( Enemy target ) {
             currentTarget = target;
-            OnEnemyDetected.Invoke( currentTarget.transform );
+            OnTargetSet.Invoke( currentTarget );
         }
 
         private void FindClosestTarget () {
