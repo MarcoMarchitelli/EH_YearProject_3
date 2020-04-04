@@ -140,6 +140,9 @@ MonoBehaviour:
   rangeGraphics: {fileID: 7954925038175942850}
   activeOnSetup: 0
   range: 10
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 1024
   OnTargetSet:
     m_PersistentCalls:
       m_Calls:
@@ -854,6 +857,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 437727999856975426, guid: fe09fd00172514e4eba9e60ae22ce163,
+        type: 3}
+      propertyPath: m_Name
+      value: MachineGun
+      objectReference: {fileID: 0}
     - target: {fileID: 437727999856975430, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
       propertyPath: OnCanBePlaced.m_PersistentCalls.m_Calls.Array.size
@@ -1239,7 +1247,7 @@ PrefabInstance:
     - target: {fileID: 437727999856975430, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
       propertyPath: OnDeplacement.m_PersistentCalls.m_Calls.Array.data[5].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 437727999856975430, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
@@ -1255,11 +1263,11 @@ PrefabInstance:
         type: 3}
       propertyPath: OnDeplacement.m_PersistentCalls.m_Calls.Array.data[5].m_Target
       value: 
-      objectReference: {fileID: 1047037247401903080}
+      objectReference: {fileID: 4914491675996663135}
     - target: {fileID: 437727999856975430, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
       propertyPath: OnDeplacement.m_PersistentCalls.m_Calls.Array.data[5].m_MethodName
-      value: SetColor
+      value: ClearEnemies
       objectReference: {fileID: 0}
     - target: {fileID: 437727999856975430, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
@@ -1326,11 +1334,6 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 4378660615271315120}
-    - target: {fileID: 437727999856975426, guid: fe09fd00172514e4eba9e60ae22ce163,
-        type: 3}
-      propertyPath: m_Name
-      value: MachineGun
-      objectReference: {fileID: 0}
     - target: {fileID: 437727999856975424, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
       propertyPath: sprite
@@ -1500,6 +1503,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6166750829624221392}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: ec3d997ef25008d49a0a41933479f1af,
+        type: 3}
+      propertyPath: m_Name
+      value: Look At Horizontal
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ec3d997ef25008d49a0a41933479f1af,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1554,11 +1562,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: ec3d997ef25008d49a0a41933479f1af,
-        type: 3}
-      propertyPath: m_Name
-      value: Look At Horizontal
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: ec3d997ef25008d49a0a41933479f1af,
         type: 3}

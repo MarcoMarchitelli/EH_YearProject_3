@@ -14,6 +14,7 @@
         [Header("Params")]
         public bool activeOnSetup;
         public float range = 6;
+        public LayerMask enemyMask;
 
         [Header("Events")]
         public UnityEvent_Entity OnTargetSet;
@@ -23,6 +24,8 @@
         [ReadOnly] public Enemy currentTarget;
 
         private bool active;
+        private Collider[] objs;
+        private Enemy tempEnemy;
 
         protected override void CustomSetup () {
             enemiesInRange = new List<Enemy>();
@@ -31,34 +34,44 @@
             rangeGraphics.transform.localScale = Vector3.one * ( range * 5 );
         }
 
+        #region Monos
         private void OnTriggerEnter ( Collider other ) {
             if ( !active )
                 return;
-            Enemy e = other.GetComponentInParent<Enemy>();
-            if ( e ) {
-                if ( !enemiesInRange.Contains( e ) )
-                    AddEnemy( e );
+            if ( enemyMask == ( enemyMask | ( 1 << other.gameObject.layer ) ) ) {
+                tempEnemy = other.GetComponentInParent<Enemy>();
+                if ( tempEnemy ) {
+                    if ( !enemiesInRange.Contains( tempEnemy ) )
+                        AddEnemy( tempEnemy );
+                }
             }
         }
 
         private void OnTriggerExit ( Collider other ) {
             if ( !active )
                 return;
-            Enemy e = other.GetComponentInParent<Enemy>();
-            if ( e ) {
-                if ( enemiesInRange.Contains( e ) )
-                    RemoveEnemy( e );
+            if ( enemyMask == ( enemyMask | ( 1 << other.gameObject.layer ) ) ) {
+                tempEnemy = other.GetComponentInParent<Enemy>();
+                if ( tempEnemy ) {
+                    RemoveEnemy( tempEnemy );
+                }
             }
         }
+        #endregion
 
+        #region API
         public void Activate ( bool value ) {
+            if ( value == active )
+                return;
+
             active = value;
             sphereCollider.enabled = value;
+            ClearEnemies();
+            if ( active )
+                FindAllEnemiesInRange();
         }
 
         public void RemoveEnemy ( Enemy e ) {
-            //if ( enemiesInRange.Contains( e ) == false )
-            //    return;
             enemiesInRange.Remove( e );
             if ( enemiesInRange.Count == 0 ) {
                 currentTarget = null;
@@ -67,6 +80,12 @@
             }
             if ( e == currentTarget )
                 FindClosestTarget();
+        } 
+        #endregion
+
+        #region Privates
+        private void ClearEnemies () {
+            enemiesInRange.Clear();
         }
 
         private void AddEnemy ( Enemy e ) {
@@ -95,6 +114,16 @@
             }
             SetCurrentTarget( t );
         }
+
+        private void FindAllEnemiesInRange () {
+            objs = Physics.OverlapSphere( sphereCollider.transform.position, sphereCollider.radius, enemyMask );
+            for ( int i = 0; i < objs.Length; i++ ) {
+                if ( objs[i].TryGetComponent( out tempEnemy ) )
+                    enemiesInRange.Add( tempEnemy );
+            }
+            FindClosestTarget();
+        }
+        #endregion
     }
 
     [System.Serializable]

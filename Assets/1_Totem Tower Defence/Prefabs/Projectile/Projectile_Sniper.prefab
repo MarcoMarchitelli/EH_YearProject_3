@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 4469002279124670513}
   - component: {fileID: 2496480252374842432}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Projectile_Sniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,6 +165,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  shooter: {fileID: 0}
 --- !u!114 &7576496883784882023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc9fc0351cd1d04e9a4a3a3a34c75b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 10
   OnDamageDealt:
     m_PersistentCalls:
       m_Calls:
