@@ -5,7 +5,7 @@
 
     public class PathPatroller : BaseBehaviour {
         [Header("Params")]
-        public float speed;
+        [SerializeField] private float speed;
         public Ease ease;
         public Vector3ArrayVariable pathPoints;
         public bool patrolOnSetup;
@@ -14,10 +14,14 @@
         public UnityEvent OnPatrolEnd;
         public UnityEvent OnPointReached;
 
+        public float Speed => speed;
+
         private Vector3 currentTarget;
         int currentTargetIndex = 0;
+        private float startSpeed, currentSpeed;
 
         protected override void CustomSetup () {
+            currentSpeed = startSpeed = speed;
             if ( patrolOnSetup )
                 Patrol( true );
         }
@@ -29,10 +33,18 @@
                 transform.DOKill();
         }
 
+        public void ResetSpeed () {
+            currentSpeed = startSpeed;
+        }
+
+        public void SetSpeed ( float value ) {
+            currentSpeed = value;
+        }
+
         private void GetToTarget () {
             currentTarget = pathPoints.Value[currentTargetIndex];
             float distance = Vector3.Distance( transform.position, currentTarget );
-            float duration = distance / speed;
+            float duration = distance / currentSpeed;
             transform.DOMove( currentTarget, duration ).SetEase( ease ).onComplete += () => {
                 OnPointReached.Invoke();
                 currentTargetIndex++;

@@ -1,12 +1,6 @@
 ﻿namespace SweetRage
 {
-	using Deirin.EB;
-    using Deirin.Utilities;
-    using System;
-	using System.Collections;
-	using System.Collections.Generic;
 	using UnityEngine;
-	using UnityEngine.Events;
 
 	public abstract class AbsEnemyElementHandler : AbsEffectHandler<ElementScriptableEnum>
 	{
@@ -23,7 +17,5 @@
 		{
 			get => _elementType;
 		}	
-
 	}
-
 }
