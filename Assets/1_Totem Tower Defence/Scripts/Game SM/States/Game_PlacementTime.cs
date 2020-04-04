@@ -9,7 +9,7 @@
         public UnityEvent OnLeftMouseUp;
 
         [Header("Global Events")]
-        public GameEvent OnPlaceTimeSkipClick; 
+        public GameEvent OnPlaceTimeSkipClick;
 
         private bool count;
         private float timer, duration;
@@ -31,6 +31,7 @@
             gameData.phaseUI.Play( .5f, Rewind );
 
             duration = gameData.currentLevel.CurrentWave.placementTime;
+            timer = 0;
             count = true;
 
             OnPlaceTimeSkipClick.OnInvoke += SkipHandler;
@@ -52,6 +53,7 @@
         }
 
         private void SkipHandler () {
+            gameData.placeTimeUI.SetPercent( 0 );
             gameData.GoNext();
         }
 
