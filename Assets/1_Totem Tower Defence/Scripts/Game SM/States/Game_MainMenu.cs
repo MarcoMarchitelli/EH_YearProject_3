@@ -1,6 +1,7 @@
 ﻿namespace SweetRage {
     using UnityEngine;
     using UnityEngine.SceneManagement;
+    using Deirin.Utilities;
 
     public class Game_MainMenu : Game_BaseState {
         [Header("Prefabs")]
@@ -8,6 +9,7 @@
 
         [Header("Global Events")]
         public LevelEntityGameEvent OnLevelButtonClick;
+        public GameEvent OnMainMenuFadeOut;
 
         private LevelEntity selectedLevelPrefab;
 
@@ -15,6 +17,7 @@
             base.Enter();
 
             OnLevelButtonClick.OnInvoke += LevelSelectionHandler;
+            OnMainMenuFadeOut.OnInvoke += FadeOutHandler;
 
             gameData.mainMenuUI = Instantiate( mainMenuUIPrefab );
 
@@ -25,6 +28,9 @@
 
         private void LevelSelectionHandler ( LevelEntity level ) {
             selectedLevelPrefab = level;
+        }
+
+        private void FadeOutHandler () {
             SceneManager.LoadScene( "2_Level" );
             SceneManager.sceneLoaded += SceneLoadedHandler;
         }
@@ -36,6 +42,7 @@
 
         public override void Exit () {
             OnLevelButtonClick.OnInvoke -= LevelSelectionHandler;
+            OnMainMenuFadeOut.OnInvoke -= FadeOutHandler;
             SceneManager.sceneLoaded -= SceneLoadedHandler;
         }
     }
