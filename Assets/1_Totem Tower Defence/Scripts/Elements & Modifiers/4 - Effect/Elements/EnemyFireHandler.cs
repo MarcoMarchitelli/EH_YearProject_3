@@ -1,8 +1,5 @@
 ﻿namespace SweetRage {
     using Deirin.EB;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.Events;
 
@@ -18,19 +15,26 @@
         private bool active;
         private float timer;
 
-        //private void OnDisable () {
-        //    OnCurrentChargeIncreases.RemoveListener( ChargeChangeHandler );
-        //    OnCurrentChargeDecreases.RemoveListener( ChargeChangeHandler );
-        //}
+        private void OnDisable () {
+            OnCurrentChargeIncreases.RemoveListener( ChargeChangeHandler );
+            OnCurrentChargeDecreases.RemoveListener( ChargeChangeHandler );
+        }
 
-        //protected override void CustomSetup () {
-        //    base.CustomSetup();
+        protected override void CustomSetup () {
+            base.CustomSetup();
 
-        //    Entity.TryGetBehaviour( out damageReceiver );
+            Entity.TryGetBehaviour( out damageReceiver );
 
-        //    OnCurrentChargeIncreases.AddListener( ChargeChangeHandler );
-        //    OnCurrentChargeDecreases.AddListener( ChargeChangeHandler );
-        //}
+            if ( damageReceiver ) {
+                OnCurrentChargeIncreases.AddListener( ChargeChangeHandler );
+                OnCurrentChargeDecreases.AddListener( ChargeChangeHandler );
+            }
+#if UNITY_EDITOR
+            else {
+                print( name + " could not find damage receiver" );
+            }
+#endif
+        }
 
         public override void OnUpdate () {
             if ( !active )
@@ -44,11 +48,11 @@
         }
 
         private void ChargeChangeHandler ( int currentCharge ) {
-            if ( !damageReceiver || fireTickValues.Length >= currentCharge )
-                return;
-
-            active = currentCharge > 0;
-            currentTickValue = fireTickValues[currentCharge - 1];
+            int count = fireTickValues.Length;
+            if ( damageReceiver && count > 0 && count >= currentCharge ) {
+                active = currentCharge > 0;
+                currentTickValue = fireTickValues[currentCharge - 1];
+            }
         }
     }
 

@@ -363,7 +363,11 @@ MonoBehaviour:
   refreshDuration: 1
   extraTime: 1
   fireTickValues:
-  - dpt: 3
+  - dpt: 0.1
+    tickFrequence: 0.8
+  - dpt: 0.2
+    tickFrequence: 0.7
+  - dpt: 0.3
     tickFrequence: 0.5
   OnTick:
     m_PersistentCalls:
@@ -991,10 +995,10 @@ MonoBehaviour:
   duration: 1
   refreshDuration: 1
   extraTime: 1
-  slows:
-  - 0.2
+  slowPercents:
   - 0.3
   - 0.4
+  - 0.5
 --- !u!1001 &7745859978022989841
 PrefabInstance:
   m_ObjectHideFlags: 0

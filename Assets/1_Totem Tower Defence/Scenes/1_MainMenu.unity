@@ -575,5 +575,83 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6572430896977654331, guid: 197b5584708fed94d9bd0804b07d86a4,
+        type: 3}
+      propertyPath: OnRewindEnd.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6572430896977654331, guid: 197b5584708fed94d9bd0804b07d86a4,
+        type: 3}
+      propertyPath: OnRewindEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6572430896977654331, guid: 197b5584708fed94d9bd0804b07d86a4,
+        type: 3}
+      propertyPath: OnRewindEnd.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6572430896977654331, guid: 197b5584708fed94d9bd0804b07d86a4,
+        type: 3}
+      propertyPath: OnRewindEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 38dc30ca23c1dc147bb24b2fccbaa3fd,
+        type: 2}
+    - target: {fileID: 6572430896977654331, guid: 197b5584708fed94d9bd0804b07d86a4,
+        type: 3}
+      propertyPath: OnRewindEnd.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Invoke
+      objectReference: {fileID: 0}
+    - target: {fileID: 6572430896977654331, guid: 197b5584708fed94d9bd0804b07d86a4,
+        type: 3}
+      propertyPath: OnRewindEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 197b5584708fed94d9bd0804b07d86a4, type: 3}
+--- !u!1 &6572430897535285037 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6572430896977654329, guid: 197b5584708fed94d9bd0804b07d86a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 6572430897535285036}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6572430897535285038 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6572430896977654331, guid: 197b5584708fed94d9bd0804b07d86a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 6572430897535285036}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6572430897535285037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46af90835ccb05f468099e10c020412e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6572430897535285039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6572430897535285037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d9bc25865c5b03499e3275abd85af74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 9547c30882ab19a4fa4154cc084fea20, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6572430897535285038}
+        m_MethodName: Rewind
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: SweetRage.UnityEvent_LevelEntity, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

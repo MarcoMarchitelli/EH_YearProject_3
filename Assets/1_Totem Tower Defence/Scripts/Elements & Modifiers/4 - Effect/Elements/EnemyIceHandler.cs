@@ -1,38 +1,40 @@
 ﻿namespace SweetRage {
     using Deirin.EB;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
-    using UnityEngine.Events;
-
 
     public class EnemyIceHandler : AbsEnemyElementHandler {
         [Header("Ice Params"), Tooltip("Percentuale di riduzione del movimento"), Range(0, 1), Space]
-        public float[] slows;
+        public float[] slowPercents;
 
         private PathPatroller pathPatroller;
 
-        //private void OnDisable () {
-        //    OnCurrentChargeIncreases.RemoveListener( ChargeChangeHandler );
-        //    OnCurrentChargeDecreases.RemoveListener( ChargeChangeHandler );
-        //}
+        private void OnDisable () {
+            OnCurrentChargeIncreases.RemoveListener( ChargeChangeHandler );
+            OnCurrentChargeDecreases.RemoveListener( ChargeChangeHandler );
+        }
 
-        //protected override void CustomSetup () {
-        //    base.CustomSetup();
+        protected override void CustomSetup () {
+            base.CustomSetup();
 
-        //    Entity.TryGetBehaviour( out pathPatroller );
+            Entity.TryGetBehaviour( out pathPatroller );
 
-        //    OnCurrentChargeIncreases.AddListener( ChargeChangeHandler );
-        //    OnCurrentChargeDecreases.AddListener( ChargeChangeHandler );
-        //}
+            if ( pathPatroller ) {
+                OnCurrentChargeIncreases.AddListener( ChargeChangeHandler );
+                OnCurrentChargeDecreases.AddListener( ChargeChangeHandler );
+            }
+#if UNITY_EDITOR
+            else {
+                print( name + " could not find path patroller" );
+            }
+#endif
+        }
 
         private void ChargeChangeHandler ( int currentCharge ) {
-            if ( !pathPatroller || slows.Length >= currentCharge )
-                return;
-
-            pathPatroller.ResetSpeed();
-            pathPatroller.SetSpeed( pathPatroller.Speed - pathPatroller.Speed * slows[currentCharge - 1] );
+            int count = slowPercents.Length;
+            if ( pathPatroller && count > 0 && count >= currentCharge ) {
+                pathPatroller.ResetSpeed();
+                pathPatroller.SetSpeed( pathPatroller.Speed - pathPatroller.Speed * slowPercents[currentCharge - 1] );
+            }
         }
     }
 }
