@@ -6,7 +6,7 @@
     public class PathPatroller : BaseBehaviour {
         [Header("Params")]
         [SerializeField] private float speed;
-        public Ease ease;
+        public float minWaypointDistance;
         public Vector3ArrayVariable pathPoints;
         public bool patrolOnSetup;
 
@@ -15,22 +15,30 @@
         public UnityEvent OnPointReached;
 
         public float Speed => speed;
+        public float CurrentSpeed => currentSpeed;
 
         private Vector3 currentTarget;
-        int currentTargetIndex = 0;
+        private int currentTargetIndex = 0;
         private float startSpeed, currentSpeed;
+        private bool patrolling;
+        private Vector3 orientation, direction;
+        private float sqrDistance;
 
         protected override void CustomSetup () {
             currentSpeed = startSpeed = speed;
+            UpdateTargetPoint( currentTargetIndex );
             if ( patrolOnSetup )
                 Patrol( true );
         }
 
+        public override void OnUpdate () {
+            if ( !patrolling )
+                return;
+            PatrolMovement();
+        }
+
         public void Patrol ( bool value ) {
-            if ( value )
-                GetToTarget();
-            else
-                transform.DOKill();
+            patrolling = value;
         }
 
         public void ResetSpeed () {
@@ -41,18 +49,28 @@
             currentSpeed = value;
         }
 
-        private void GetToTarget () {
-            currentTarget = pathPoints.Value[currentTargetIndex];
-            float distance = Vector3.Distance( transform.position, currentTarget );
-            float duration = distance / currentSpeed;
-            transform.DOMove( currentTarget, duration ).SetEase( ease ).onComplete += () => {
-                OnPointReached.Invoke();
-                currentTargetIndex++;
-                if ( currentTargetIndex < pathPoints.Value.Length )
-                    GetToTarget();
-                else
-                    OnPatrolEnd.Invoke();
-            };
+        private void PatrolMovement () {
+            CheckDistance();
+
+            transform.Translate( direction * currentSpeed * Time.deltaTime );
+        }
+
+        private void UpdateTargetPoint ( int index ) {
+            if ( index > pathPoints.Value.Length - 1 || index < 0 ) {
+                patrolling = false;
+                return;
+            }
+            currentTarget = pathPoints.Value[index];
+        }
+
+        private void CheckDistance () {
+            orientation = currentTarget - transform.position;
+            sqrDistance = orientation.sqrMagnitude;
+            direction = orientation.normalized;
+            float sqrMinDist = minWaypointDistance * minWaypointDistance;
+            if ( sqrDistance <= sqrMinDist ) {
+                UpdateTargetPoint( currentTargetIndex++ );
+            }
         }
     }
 }
