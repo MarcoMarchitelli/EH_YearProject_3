@@ -4,7 +4,7 @@
 	using UnityEngine;
     using UnityEngine.Events;
 
-    [CreateAssetMenu(menuName = "TotemTD/Custom Game Events/Int Game Event")]
+    [CreateAssetMenu(menuName = "Sweet Rage/Custom Game Events/Int Game Event")]
 	public class IntGameEvent : ScriptableObject
 	{
 		[HideInInspector]

@@ -36,7 +36,7 @@
         public System.Action OnTurretContainerEnter, OnTurretContainerExit, OnLeftMouseUp;
 
         protected override void CustomSetup () {
-            SetState( State.selected );
+            SetState( State.inMenu );
         }
 
         private void Deplace () {

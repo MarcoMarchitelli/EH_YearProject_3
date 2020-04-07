@@ -24,11 +24,12 @@
         }
 
         public void Play ( float endWaitTime = 0, System.Action func = null ) {
+            s.Kill();
             s = DOTween.Sequence();
             s.Append( background.DOFade( .9f, 1f ).SetEase( Ease.OutCubic ) );
             s.Join( background.transform.DOScaleY( 1, 1f ).SetEase( Ease.OutCubic ) );
-            s.Append( texts[0].DOFade( 1, .3f ) );
-            for ( int i = 1; i < texts.Count; i++ ) {
+            //s.Append( texts[0].DOFade( 1, .3f ) );
+            for ( int i = 0; i < texts.Count; i++ ) {
                 s.Append( texts[i].DOFade( 1, .3f ) );
             }
             s.AppendInterval( endWaitTime );
@@ -38,6 +39,7 @@
         }
 
         public void Rewind ( System.Action func = null ) {
+            s.Kill();
             s = DOTween.Sequence();
             s.Append( texts[0].DOFade( 0, .3f ) );
             for ( int i = 1; i < texts.Count; i++ ) {
@@ -49,6 +51,7 @@
         }
 
         public void SetTexts ( params string[] texts ) {
+            this.texts.Clear();
             for ( int i = 0; i < textsContainer.childCount; i++ ) {
                 Destroy( textsContainer.GetChild( i ).gameObject );
             }
@@ -61,6 +64,7 @@
         }
 
         public void SetTexts ( string texts ) {
+            this.texts.Clear();
             string[] words = texts.Split(' ');
             for ( int i = 0; i < textsContainer.childCount; i++ ) {
                 Destroy( textsContainer.GetChild( i ).gameObject );

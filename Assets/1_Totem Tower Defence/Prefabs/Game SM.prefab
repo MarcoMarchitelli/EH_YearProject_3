@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1799010133417785761}
   - component: {fileID: 1799010133417785762}
   - component: {fileID: 1799010133417785763}
+  - component: {fileID: 1799010133825249478}
   m_Layer: 0
   m_Name: Game SM
   m_TagString: Untagged
@@ -46,10 +47,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1799010133417785763}
   gameData:
-    waveManager: {fileID: 0}
+    currentLevelData: {fileID: 0}
+    currentLevelEntity: {fileID: 0}
     phaseUI: {fileID: 0}
     placeTimeUI: {fileID: 0}
-    turretMenu: {fileID: 0}
+    modulesMenuUI: {fileID: 0}
+    levelsData: []
+    mainMenuUI: {fileID: 0}
+    animator: {fileID: 1799010133417785763}
 --- !u!95 &1799010133417785763
 Animator:
   serializedVersion: 3
@@ -69,3 +74,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1799010133825249478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799010133417785760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fec652c65cf6c64bb4dfe748aa9ade5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

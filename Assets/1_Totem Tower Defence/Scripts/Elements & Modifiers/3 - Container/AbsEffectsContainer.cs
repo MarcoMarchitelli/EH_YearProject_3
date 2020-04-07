@@ -17,8 +17,8 @@
 		public int maxCharge = 3;
 
 		[Header("AbsEffectsContainer Events"), Space]
-		public Unity_IEffectEnum_Int_Event OnAddEffect;
-		public Unity_IEffectEnum_Int_Event OnRemoveEffect;
+		public UnityEvent_IEffectEnum_Int OnAddEffect;
+		public UnityEvent_IEffectEnum_Int OnRemoveEffect;
 		public UnityEvent OnRemoveAll;
 
 

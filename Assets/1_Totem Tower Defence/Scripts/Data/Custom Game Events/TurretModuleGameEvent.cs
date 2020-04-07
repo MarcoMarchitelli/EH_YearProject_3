@@ -2,7 +2,7 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    [CreateAssetMenu( menuName = "TotemTD/Custom Game Events/Turret Game Event" )]
+    [CreateAssetMenu( menuName = "Sweet Rage/Custom Game Events/Turret Game Event" )]
     public class TurretModuleGameEvent : ScriptableObject {
         public TurretModule turret;
         private List<TurretModuleGameEventListener> listeners = new List<TurretModuleGameEventListener>();

@@ -17,7 +17,10 @@
 
         private List<ModuleGroupUI> moduleGroupUIs;
 
+        #region API
         public void Setup () {
+            DestroyModuleGroupsUIs();
+
             moduleGroupUIs = new List<ModuleGroupUI>();
             ModuleGroupUI mgUI;
             foreach ( var turretType in turretTypes ) {
@@ -72,6 +75,23 @@
         public void RemoveTurretModule ( TurretModule module ) {
             RuntimeLevelData.turretModules.Remove( module );
             UpdateUI();
+        } 
+        #endregion
+
+        private void DestroyModuleGroupsUIs () {
+            int count = shootersMenu.childCount;
+            int i;
+            for ( i = 0; i < count; i++ ) {
+                Destroy( shootersMenu.GetChild( i ).gameObject );
+            }
+            count = elementsMenu.childCount;
+            for ( i = 0; i < count; i++ ) {
+                Destroy( elementsMenu.GetChild( i ).gameObject );
+            }
+            count = modifiersMenu.childCount;
+            for ( i = 0; i < count; i++ ) {
+                Destroy( modifiersMenu.GetChild( i ).gameObject );
+            }
         }
     }
 }

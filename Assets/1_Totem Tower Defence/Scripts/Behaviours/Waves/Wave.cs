@@ -14,11 +14,10 @@
         [Header("Parameters")]
         public string preWaveText;
         public string waveText;
+        public float placementTime;
         public TurretModule[] modules;
 
         [Header("Events"), Space]
-        public UnityEvent_Int OnPreWaveStart;
-        public UnityEvent_Int OnPreWaveEnd;
         public UnityEvent_Int OnWaveStart;
         public UnityEvent_Int OnWaveEnd;
         [SerializeField] private UnityEvent onStop;
@@ -58,18 +57,13 @@
             Stopped = true;
         }
 
-        public void StartPreWave () {
-            OnPreWaveStart.Invoke( index );
-        }
-
-        public void EndPreWave () {
-            OnPreWaveEnd.Invoke( index );
-        }
-
         public void StartWave () {
             if ( Stopped ) {
                 Stopped = false;
                 OnWaveStart?.Invoke( index );
+#if UNITY_EDITOR
+                print( name + " started" );
+#endif
             }
         }
 
@@ -81,8 +75,12 @@
 
         private void SpawnerDutyHandler () {
             completedSpawnerCount++;
-            if ( isOver )
+            if ( isOver ) {
                 OnWaveEnd.Invoke( index );
+#if UNITY_EDITOR
+                print( name + " ended" );
+#endif
+            }
         }
     }
 }
