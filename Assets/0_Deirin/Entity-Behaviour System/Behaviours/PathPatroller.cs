@@ -1,11 +1,11 @@
 ﻿namespace Deirin.EB {
     using UnityEngine;
     using UnityEngine.Events;
-    using DG.Tweening;
 
     public class PathPatroller : BaseBehaviour {
         [Header("Params")]
         [SerializeField] private float speed;
+        public float minSpeed = 0;
         public float minWaypointDistance;
         public Vector3ArrayVariable pathPoints;
         public bool patrolOnSetup;
@@ -46,7 +46,7 @@
         }
 
         public void SetSpeed ( float value ) {
-            currentSpeed = value;
+            currentSpeed = Mathf.Max( minSpeed, value );
         }
 
         private void PatrolMovement () {

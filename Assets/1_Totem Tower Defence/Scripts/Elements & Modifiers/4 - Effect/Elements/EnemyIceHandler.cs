@@ -31,8 +31,8 @@
 
         private void ChargeChangeHandler ( int currentCharge ) {
             int count = slowPercents.Length;
+            pathPatroller.ResetSpeed();
             if ( pathPatroller && currentCharge > 0 && count > 0 && count >= currentCharge ) {
-                pathPatroller.ResetSpeed();
                 pathPatroller.SetSpeed( pathPatroller.Speed - pathPatroller.Speed * slowPercents[currentCharge - 1] );
             }
         }
