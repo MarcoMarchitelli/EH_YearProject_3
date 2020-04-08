@@ -1,0 +1,163 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8208637568886113953
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8830862272730310561}
+  - component: {fileID: 840939223130095858}
+  m_Layer: 0
+  m_Name: Wave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8830862272730310561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8208637568886113953}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7885521624271510345}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &840939223130095858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8208637568886113953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bcd746d843976747859d246986962ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preWaveText: New Wave approaching
+  waveText: Wave incoming
+  placementTime: 40
+  modules: []
+  OnWaveStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 372458859481458455}
+        m_MethodName: StartSpawner
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Deirin.Utilities.UnityEvent_Int, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnWaveEnd:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Deirin.Utilities.UnityEvent_Int, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onStop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!1001 &6307435157570880953
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8830862272730310561}
+    m_Modifications:
+    - target: {fileID: 4701065883521991222, guid: 6f59e6091d5f9334cbb99f42463a6b6c,
+        type: 3}
+      propertyPath: m_Name
+      value: First Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244505179133566704, guid: 6f59e6091d5f9334cbb99f42463a6b6c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244505179133566704, guid: 6f59e6091d5f9334cbb99f42463a6b6c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244505179133566704, guid: 6f59e6091d5f9334cbb99f42463a6b6c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244505179133566704, guid: 6f59e6091d5f9334cbb99f42463a6b6c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244505179133566704, guid: 6f59e6091d5f9334cbb99f42463a6b6c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244505179133566704, guid: 6f59e6091d5f9334cbb99f42463a6b6c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244505179133566704, guid: 6f59e6091d5f9334cbb99f42463a6b6c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244505179133566704, guid: 6f59e6091d5f9334cbb99f42463a6b6c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244505179133566704, guid: 6f59e6091d5f9334cbb99f42463a6b6c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244505179133566704, guid: 6f59e6091d5f9334cbb99f42463a6b6c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244505179133566704, guid: 6f59e6091d5f9334cbb99f42463a6b6c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6f59e6091d5f9334cbb99f42463a6b6c, type: 3}
+--- !u!4 &7885521624271510345 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4244505179133566704, guid: 6f59e6091d5f9334cbb99f42463a6b6c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6307435157570880953}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &372458859481458455 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5954813690770645678, guid: 6f59e6091d5f9334cbb99f42463a6b6c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6307435157570880953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d859c697707dec8488f5f5356ae78b66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

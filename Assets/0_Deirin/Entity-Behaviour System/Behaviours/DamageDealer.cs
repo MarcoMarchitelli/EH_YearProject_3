@@ -5,7 +5,7 @@
     [RequireComponent( typeof( Collider ) )]
     public class DamageDealer : BaseBehaviour {
         [Header("Params")]
-        public int damage;
+        public float damage;
 
         [Header("Events")]
         public UnityEvent_Entity OnDamageDealt;

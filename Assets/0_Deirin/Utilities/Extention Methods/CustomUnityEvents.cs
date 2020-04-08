@@ -33,4 +33,7 @@
 
     [System.Serializable]
     public class UnityEvent_Behaviour : UnityEvent<BaseBehaviour> { }
+
+    [System.Serializable]
+    public class UnityEvent_Transform : UnityEvent<Transform> { }
 }
