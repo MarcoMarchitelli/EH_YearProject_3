@@ -12,6 +12,7 @@
         public Vector3ArrayVariable pathPoints;
 
         [Header("Params")]
+        public bool generateMesh;
         public float meshWidth;
         public float meshHeight;
         public bool autoGenerateFakeMesh;
@@ -22,27 +23,29 @@
         private Vector3[] points;
 
         public void ConstructFakeMesh () {
-            if ( meshContainer )
-                DestroyImmediate( meshContainer );
-            meshContainer = new GameObject( "Path Mesh Container" );
-            meshContainer.transform.SetParent( transform );
-
             int pointsCount = pointsContainer.childCount;
             points = new Vector3[pointsCount];
             for ( int i = 0; i < pointsCount; i++ ) {
                 points[i] = pointsContainer.GetChild( i ).position;
             }
 
-            for ( int i = 0; i < points.Length - 1; i++ ) {
-                Vector3 orientationToNext = (points[i+1] -points[i]);
-                GameObject g = Instantiate( pathPiecePrefab, points[i] + orientationToNext/2, Quaternion.LookRotation(orientationToNext.normalized, Vector3.up ));
-                g.transform.localScale = new Vector3( meshWidth, meshHeight, orientationToNext.magnitude + meshWidth );
-                g.transform.SetParent( meshContainer.transform );
+            if ( generateMesh ) {
+                if ( meshContainer )
+                    DestroyImmediate( meshContainer );
+                meshContainer = new GameObject( "Path Mesh Container" );
+                meshContainer.transform.SetParent( transform );
+                for ( int i = 0; i < points.Length - 1; i++ ) {
+                    Vector3 orientationToNext = (points[i+1] -points[i]);
+                    GameObject g = Instantiate( pathPiecePrefab, points[i] + orientationToNext/2, Quaternion.LookRotation(orientationToNext.normalized, Vector3.up ));
+                    g.transform.localScale = new Vector3( meshWidth, meshHeight, orientationToNext.magnitude + meshWidth );
+                    g.transform.SetParent( meshContainer.transform );
+                }
             }
 
             pathPoints.Value = points;
 #if UNITY_EDITOR
             EditorUtility.SetDirty( pathPoints );
+            AssetDatabase.SaveAssets();
 #endif
         }
 

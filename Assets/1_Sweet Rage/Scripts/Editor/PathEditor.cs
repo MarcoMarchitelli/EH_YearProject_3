@@ -16,7 +16,7 @@
             //    p.ConstructMesh();
             if ( p.autoGenerateFakeMesh )
                 p.ConstructFakeMesh();
-            else if ( GUILayout.Button( "Generate Fake Mesh" ) )
+            else if ( GUILayout.Button( "Generate" ) )
                 p.ConstructFakeMesh();
         }
     }
