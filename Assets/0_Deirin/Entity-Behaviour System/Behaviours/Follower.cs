@@ -1,7 +1,6 @@
 ﻿namespace Deirin.EB {
     using UnityEngine;
     using UnityEngine.Events;
-    using SweetRage;
 
     public class Follower : BaseBehaviour {
         [Header("Parameters")]
@@ -12,18 +11,27 @@
 
         [Header("Events")]
         public UnityEvent OnTargetReached;
+        public UnityEvent OnTargetLost;
 
         private BaseEntity target;
-        private Vector3 orientation;
+        private Vector3 orientation, targetPosition;
         private bool follow;
 
         #region Overrides
-        public override void OnUpdate () {
+        public override void OnFixedUpdate () {
             if ( !follow )
                 return;
 
-            orientation = (target.transform.position + targetPositionOffset) - transform.position;
-            transform.Translate( orientation.normalized * speed * Time.deltaTime );
+            if ( target == null ) {
+                OnTargetLost.Invoke();
+                StopFollowing();
+                return;
+            }
+
+            targetPosition = target.transform.position + targetPositionOffset;
+            orientation = targetPosition - transform.position;
+            transform.Translate( orientation.normalized * speed * Time.fixedDeltaTime, Space.World );
+            transform.LookAt( targetPosition );
             CheckDistance();
         }
         #endregion
@@ -48,7 +56,7 @@
         #endregion
 
         private void CheckDistance () {
-            if ( orientation.magnitude <= targetDistanceOffset ) {
+            if ( orientation.sqrMagnitude <= targetDistanceOffset * targetDistanceOffset ) {
                 OnTargetReached.Invoke();
                 if ( stopFollowingOnReach )
                     StopFollowing();
