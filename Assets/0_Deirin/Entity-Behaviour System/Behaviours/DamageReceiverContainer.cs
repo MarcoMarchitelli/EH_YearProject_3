@@ -1,4 +1,4 @@
-﻿namespace SweetRage {
+﻿namespace Deirin.EB {
     using UnityEngine;
     using UnityEngine.Events;
     using Deirin.EB;
