@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Toon_VertexColor
-  m_Shader: {fileID: 4800000, guid: c6028cec840812946976e2efb59d9fcd, type: 3}
+  m_Name: Toon_VertexColor_Outline
+  m_Shader: {fileID: 4800000, guid: 57466e469a6caa043aa97892db465cb6, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,24 +19,18 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Palette:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _node_282:
+    - _ShadingPalette:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _LightAttenuationIntensity: 0.533
+    - _DistanceInfluence: 0
+    - _Glossiness: 0.26
     - _LightColorIntensity: 0
-    - _OutlineHueShift: 0
-    - _OutlineSaturation: 0
-    - _OutlineVal: 0
-    - _OutlineVertexColorWeight: 0
-    - _OutlineWidth: 0.02
-    - _PaletteIntensity: 0.25
+    - _Metallic: 0
+    - _OutlineWidth: 3
+    - _ShadingIntensity: 0
     m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutlineTint: {r: 1, g: 1, b: 1, a: 1}
     - _Tint: {r: 1, g: 1, b: 1, a: 1}
