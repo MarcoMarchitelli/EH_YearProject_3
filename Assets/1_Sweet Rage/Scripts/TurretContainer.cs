@@ -8,9 +8,11 @@
     public class TurretContainer : MonoBehaviour {
         public enum State { disasbled, enabled }
 
+        [Header("References")]
+        public Transform firstModulePlacementPosition;
+
         [Header("Parameters")]
         public int maxModules;
-        public float moduleHeight;
         public float modulesAnimationDuration = .5f;
         [ReadOnly] public State state;
 
@@ -109,7 +111,7 @@
         }
 
         private void SortModules () {
-            currentTopPosition = transform.position;
+            currentTopPosition = firstModulePlacementPosition.position;
 
             if ( shooterModules.Count == 0 ) {
                 Disassemble();
