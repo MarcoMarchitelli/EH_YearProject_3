@@ -1,5 +1,6 @@
 ﻿namespace SweetRage {
     using UnityEngine;
+    using UnityEngine.UI;
     using System.Collections.Generic;
 
     public class ModulesMenuUI : MonoBehaviour {
@@ -11,6 +12,7 @@
         public Transform elementsMenu;
         public Transform modifiersMenu;
         public CanvasGroup canvasGroup;
+        public RectTransform rectTransform;
 
         [Header("Prefabs")]
         public ModuleGroupUI moduleGroupUIPrefab;
@@ -42,6 +44,7 @@
                     break;
                 }
             }
+            LayoutRebuilder.ForceRebuildLayoutImmediate( rectTransform );
         }
 
         public void UpdateUI () {
@@ -60,6 +63,7 @@
             foreach ( var moduleGroupUI in moduleGroupUIs ) {
                 moduleGroupUI.gameObject.SetActive( moduleGroupUI.ModuleCount != 0 );
             }
+            LayoutRebuilder.ForceRebuildLayoutImmediate( rectTransform );
         }
 
         public void Activate ( bool value ) {
