@@ -272,6 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  minSpeed: 0
   minWaypointDistance: 0.05
   pathPoints: {fileID: 11400000, guid: 5dd93ad0134dcf543847a43784d81ef0, type: 2}
   patrolOnSetup: 1
@@ -1006,11 +1007,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1285193917471189190}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 82b63e4e0bff5cd42a110a9190584d41,
-        type: 3}
-      propertyPath: m_Name
-      value: SKM_Canestrello
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 82b63e4e0bff5cd42a110a9190584d41,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1066,11 +1062,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 82b63e4e0bff5cd42a110a9190584d41,
+        type: 3}
+      propertyPath: m_Name
+      value: SKM_Canestrello
+      objectReference: {fileID: 0}
     - target: {fileID: 7044847421753761315, guid: 82b63e4e0bff5cd42a110a9190584d41,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4f1f27b6457c7ce45adec85ccfbdaa09, type: 2}
+      objectReference: {fileID: 2100000, guid: 78e8e1e9a74569b458ccabcbe0a6c82d, type: 2}
     - target: {fileID: 7044847421753761315, guid: 82b63e4e0bff5cd42a110a9190584d41,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
