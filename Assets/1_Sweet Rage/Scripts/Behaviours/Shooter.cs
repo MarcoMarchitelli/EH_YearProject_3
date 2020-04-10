@@ -10,13 +10,21 @@
         public Transform spawnPoint;
 
         [Header("Params")]
-        public float fireRate;
+        [SerializeField] private float fireRate;
 
         [Header("Events")]
         public UnityEvent_Entity OnShoot;
 
-        private bool shooting;
+        public float FireRate => fireRate;
 
+        private bool shooting;
+        private float startFireRate;
+
+        protected override void CustomSetup () {
+            startFireRate = fireRate;
+        }
+
+        #region API
         public void StartShooting () {
             if ( !shooting )
                 StartCoroutine( ShootSequence() );
@@ -25,6 +33,15 @@
         public void StopShooting () {
             shooting = false;
         }
+
+        public void SetFireRate ( float value ) {
+            fireRate = value;
+        } 
+
+        public void ResetFireRate () {
+            fireRate = startFireRate;
+        }
+        #endregion
 
         IEnumerator ShootSequence () {
             shooting = true;
