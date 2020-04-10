@@ -25,6 +25,7 @@
         private bool hasShooter => shooterModules.Count > 0;
         private int moduleCount => shooterModules.Count + elementModules.Count + modifierModules.Count;
 
+        #region API
         public void SetState ( int state ) {
             this.state = ( State ) state;
         }
@@ -42,7 +43,7 @@
         }
 
         public void AddModule ( TurretModule module ) {
-            switch ( previewModule.turretType.moduleType ) {
+            switch ( module.turretType.moduleType ) {
                 case TurretType.ModuleType.shooter:
                 shooterModules.Add( module );
 
@@ -109,7 +110,9 @@
             module.graphics.position = module.transform.position;
             SortModules();
         }
+        #endregion
 
+        #region Privates
         private void SortModules () {
             currentTopPosition = firstModulePlacementPosition.position;
 
@@ -140,7 +143,8 @@
         }
 
         private void Disassemble () {
-            for ( int i = 0; i < elementModules.Count; i++ ) {
+            int i = 0;
+            for ( i = 0; i < elementModules.Count; i++ ) {
                 float duration = Random.Range(1.5f,3f);
                 Vector3 pos = transform.position + Vector3.up * 2f + Random.insideUnitSphere;
                 TurretModule module = elementModules[i];
@@ -148,19 +152,20 @@
                 module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic ).onComplete += () => module.OnDeselection.Invoke( module );
                 module.transform.DOLocalRotate( new Vector3( Random.Range( 0, 360 ), Random.Range( 0, 360 ), Random.Range( 0, 360 ) ), duration ).SetEase( Ease.OutCubic );
             }
-            elementModules.Clear();
-            for ( int i = 0; i < modifierModules.Count; i++ ) {
+            for ( i = 0; i < modifierModules.Count; i++ ) {
                 float duration = Random.Range(1.5f,3f);
                 Vector3 pos = transform.position + Vector3.up * 2f + Random.insideUnitSphere;
                 TurretModule module = modifierModules[i];
                 HandleModiferDetachment( modifierModules[i] );
                 module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic ).onComplete += () => module.OnDeselection.Invoke( module );
                 module.transform.DOLocalRotate( new Vector3( Random.Range( 0, 360 ), Random.Range( 0, 360 ), Random.Range( 0, 360 ) ), duration ).SetEase( Ease.OutCubic );
-                modifierModules.Remove( modifierModules[i] );
             }
+            elementModules.Clear();
             modifierModules.Clear();
         }
+        #endregion
 
+        #region Event Handlers
         private void HandleElementAttachment ( TurretModule elementModule ) {
             ElementSource e;
             if ( elementModule.TryGetBehaviour( out e ) ) {
@@ -208,6 +213,7 @@
                 }
             }
         }
+        #endregion
 
 
     }
