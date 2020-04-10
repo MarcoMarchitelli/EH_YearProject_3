@@ -6,6 +6,7 @@
     public class DamageReceiverContainer : BaseBehaviour {
         [Header("Parameters")]
         public DamageReceiver damageReceiver;
+        public float defaultDamage;
 
         [Header("Events")]
         public UnityEvent OnDamageDealerSet;
@@ -23,6 +24,13 @@
                 return;
             OnDamageDealt.Invoke( damageReceiver.Entity );
             damageReceiver.Damage( damage );
+        }
+
+        public void DealDamage () {
+            if ( damageReceiver == null )
+                return;
+            OnDamageDealt.Invoke( damageReceiver.Entity );
+            damageReceiver.Damage( defaultDamage );
         }
         #endregion
     }

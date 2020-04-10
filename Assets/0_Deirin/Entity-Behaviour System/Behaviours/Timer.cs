@@ -15,8 +15,9 @@
         public UnityEvent_Float OnTimerEnd;
         [SerializeField] private UnityEvent onStop;
 
-        bool count;
-        float timer;
+        private bool count;
+        private float timer;
+        private Coroutine currentRoutine;
 
         #region IStoppable
         public bool Stopped { get; private set; } = true;
@@ -27,10 +28,8 @@
 
             Stopped = true;
 
-            if ( unscaledTime )
-                StopCoroutine( CountUnscaled() );
-            else
-                StopCoroutine( Count() );
+            if ( currentRoutine != null )
+                StopCoroutine( currentRoutine );
 
             if ( callEvent )
                 OnStop.Invoke();
@@ -40,10 +39,7 @@
         public void Play () {
             Stopped = false;
 
-            if ( unscaledTime )
-                StartCoroutine( CountUnscaled() );
-            else
-                StartCoroutine( Count() );
+            currentRoutine = unscaledTime ? StartCoroutine( "CountUnscaled" ) : StartCoroutine( "Count" );
         }
 
         public void Pause () {

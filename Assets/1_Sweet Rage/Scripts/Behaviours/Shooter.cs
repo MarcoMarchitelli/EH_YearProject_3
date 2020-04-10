@@ -19,6 +19,7 @@
 
         private bool shooting;
         private float startFireRate;
+        private Coroutine shootRoutine;
 
         protected override void CustomSetup () {
             startFireRate = fireRate;
@@ -27,11 +28,17 @@
         #region API
         public void StartShooting () {
             if ( !shooting )
-                StartCoroutine( ShootSequence() );
+                shootRoutine = StartCoroutine( "ShootSequence" );
         }
 
         public void StopShooting () {
-            shooting = false;
+            if ( shooting ) {
+                StopCoroutine( shootRoutine );
+                shooting = false;
+#if UNITY_EDITOR
+                print( name + " stopped shooting" );
+#endif
+            }
         }
 
         public void SetFireRate ( float value ) {
@@ -44,6 +51,9 @@
         #endregion
 
         IEnumerator ShootSequence () {
+#if UNITY_EDITOR
+            print( name + " started shooting" );
+#endif
             shooting = true;
             while ( shooting ) {
                 Shoot();

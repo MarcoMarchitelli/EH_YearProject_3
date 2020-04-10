@@ -86,6 +86,7 @@
         #region Privates
         private void ClearEnemies () {
             enemiesInRange.Clear();
+            OnEnemiesLost.Invoke();
         }
 
         private void AddEnemy ( Enemy e ) {

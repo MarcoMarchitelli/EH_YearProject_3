@@ -142,7 +142,7 @@ MonoBehaviour:
   sphereCollider: {fileID: 5548012301240531002}
   rangeGraphics: {fileID: 7954925038175942850}
   activeOnSetup: 0
-  range: 10
+  range: 5
   enemyMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -320,17 +320,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4434595995856103039}
-        m_MethodName: StopShooting
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &6942573808001629260
@@ -352,17 +341,6 @@ MonoBehaviour:
       - m_Target: {fileID: 4914491675996663135}
         m_MethodName: Activate
         m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4434595995856103039}
-        m_MethodName: StopShooting
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1139,7 +1117,7 @@ PrefabInstance:
     - target: {fileID: 437727999856975430, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
       propertyPath: OnDeplacement.m_PersistentCalls.m_Calls.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 437727999856975430, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
@@ -1421,12 +1399,12 @@ PrefabInstance:
     - target: {fileID: 437727999856975430, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
       propertyPath: OnDeplacement.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 437727999856975430, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
       propertyPath: OnDeplacement.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 437727999856975430, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
@@ -1437,11 +1415,11 @@ PrefabInstance:
         type: 3}
       propertyPath: OnDeplacement.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 4434595995856103039}
+      objectReference: {fileID: 7954925038175942850}
     - target: {fileID: 437727999856975430, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
       propertyPath: OnDeplacement.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: StopShooting
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 437727999856975430, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
@@ -1451,7 +1429,7 @@ PrefabInstance:
     - target: {fileID: 437727999856975430, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
       propertyPath: OnDeplacement.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 437727999856975430, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
@@ -1462,11 +1440,11 @@ PrefabInstance:
         type: 3}
       propertyPath: OnDeplacement.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 7954925038175942850}
+      objectReference: {fileID: 1047037247401903080}
     - target: {fileID: 437727999856975430, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
       propertyPath: OnDeplacement.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
-      value: SetActive
+      value: SetColor
       objectReference: {fileID: 0}
     - target: {fileID: 437727999856975430, guid: fe09fd00172514e4eba9e60ae22ce163,
         type: 3}
