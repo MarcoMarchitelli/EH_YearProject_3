@@ -5,10 +5,10 @@
 #endif
 
     public class ShooterFireRateHandler : AbsShooterModifierHandler {
-        public FireRateMod[] fireRates;
+        public Buff[] fireRates;
 
         private Shooter shooter;
-        private FireRateMod currentFireRateMod;
+        private Buff currentFireRateMod;
 
         private void OnDestroy () {
             OnCurrentChargeIncreases.RemoveListener( ChargeChangeHandler );
@@ -37,7 +37,7 @@
                 shooter.ResetFireRate();
             if ( currentCharge > 0 && count > 0 && count >= currentCharge ) {
                 currentFireRateMod = fireRates[currentCharge - 1];
-                if ( currentFireRateMod.buffMode == FireRateMod.BuffMode.Percentage )
+                if ( currentFireRateMod.buffMode == Buff.BuffMode.Percentage )
                     shooter.SetFireRate( shooter.FireRate + shooter.FireRate * currentFireRateMod.percentBuff );
                 else
                     shooter.SetFireRate( shooter.FireRate + currentFireRateMod.flatBuff );
@@ -46,7 +46,7 @@
     }
 
     [System.Serializable]
-    public class FireRateMod {
+    public class Buff {
         public enum BuffMode { Flat = 0, Percentage = 1 }
         public BuffMode buffMode;
         [Tooltip("Fire rate percent to add")]

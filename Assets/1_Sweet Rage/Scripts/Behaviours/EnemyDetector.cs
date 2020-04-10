@@ -13,7 +13,7 @@
 
         [Header("Params")]
         public bool activeOnSetup;
-        public float range = 6;
+        [SerializeField] private float range = 6;
         public LayerMask enemyMask;
 
         [Header("Events")]
@@ -23,15 +23,18 @@
         [ReadOnly] public List<Enemy> enemiesInRange;
         [ReadOnly] public Enemy currentTarget;
 
+        public float Range => range;
+
         private bool active;
         private Collider[] objs;
         private Enemy tempEnemy;
+        private float startRange;
 
         protected override void CustomSetup () {
+            startRange = range;
             enemiesInRange = new List<Enemy>();
             Activate( activeOnSetup );
-            sphereCollider.radius = range;
-            rangeGraphics.transform.localScale = Vector3.one * ( range * 5 );
+            RangeSetHandler();
         }
 
         #region Monos
@@ -80,7 +83,17 @@
             }
             if ( e == currentTarget )
                 FindClosestTarget();
-        } 
+        }
+
+        public void ResetRange () {
+            range = startRange;
+            RangeSetHandler();
+        }
+
+        public void SetRange ( float value ) {
+            range = value;
+            RangeSetHandler();
+        }
         #endregion
 
         #region Privates
@@ -123,6 +136,11 @@
                     enemiesInRange.Add( tempEnemy );
             }
             FindClosestTarget();
+        }
+
+        private void RangeSetHandler () {
+            sphereCollider.radius = range;
+            rangeGraphics.transform.localScale = Vector3.one * ( range * 5 );
         }
         #endregion
     }
