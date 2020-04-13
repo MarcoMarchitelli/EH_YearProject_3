@@ -20,25 +20,33 @@
         private Vector3 currentTarget;
         private int currentTargetIndex = 0;
         private float startSpeed, currentSpeed;
-        private bool patrolling;
+        private bool patrolling = false;
         private Vector3 orientation, direction;
         private float sqrDistance;
 
         protected override void CustomSetup () {
-            currentSpeed = startSpeed = speed;
-            UpdateTargetPoint( currentTargetIndex );
+            startSpeed = speed;
             if ( patrolOnSetup )
-                Patrol( true );
+                StartPatrolling();
         }
 
         public override void OnUpdate () {
-            if ( !patrolling )
-                return;
-            PatrolMovement();
+            if ( patrolling )
+                PatrolMovement();
         }
 
-        public void Patrol ( bool value ) {
-            patrolling = value;
+        public void StartPatrolling () {
+            currentSpeed = startSpeed;
+            UpdateTargetPoint( currentTargetIndex );
+            Resume();
+        }
+
+        public void Pause () {
+            patrolling = false;
+        }
+
+        public void Resume () {
+            patrolling = true;
         }
 
         public void ResetSpeed () {

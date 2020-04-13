@@ -57,7 +57,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4f1f27b6457c7ce45adec85ccfbdaa09, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -161,10 +161,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f10ff6350377c324fbebb2637a2a3edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setupOnAwake: 1
+  setupOnAwake: 0
   OnSetup:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2370915912159039557
@@ -274,8 +285,8 @@ MonoBehaviour:
   speed: 5
   minSpeed: 0
   minWaypointDistance: 0.05
-  pathPoints: {fileID: 11400000, guid: 5dd93ad0134dcf543847a43784d81ef0, type: 2}
-  patrolOnSetup: 1
+  pathPoints: {fileID: 0}
+  patrolOnSetup: 0
   OnPatrolEnd:
     m_PersistentCalls:
       m_Calls: []
@@ -1007,6 +1018,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1285193917471189190}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 82b63e4e0bff5cd42a110a9190584d41,
+        type: 3}
+      propertyPath: m_Name
+      value: SKM_Canestrello
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 82b63e4e0bff5cd42a110a9190584d41,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1061,11 +1077,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 82b63e4e0bff5cd42a110a9190584d41,
-        type: 3}
-      propertyPath: m_Name
-      value: SKM_Canestrello
       objectReference: {fileID: 0}
     - target: {fileID: 7044847421753761315, guid: 82b63e4e0bff5cd42a110a9190584d41,
         type: 3}
