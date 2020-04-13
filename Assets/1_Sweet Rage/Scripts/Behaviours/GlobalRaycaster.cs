@@ -1,8 +1,6 @@
 ﻿namespace SweetRage {
-    using System.Collections;
     using UnityEngine;
     using Deirin.EB;
-    using Deirin.Utilities;
 
     public class GlobalRaycaster : BaseBehaviour {
         [Header("Params")]
@@ -15,8 +13,6 @@
         public UnityTurretContainerEvent OnContainerExit;
         public UnityTurretModuleEvent OnModuleEnter;
         public UnityTurretModuleEvent OnModuleExit;
-        public UnityTurretModuleEvent OnModuleDown;
-        public UnityTurretModuleEvent OnModuleUp;
 
         private bool onContainer;
         private bool onModule;
@@ -24,7 +20,7 @@
         private RaycastHit hit;
         private Camera cam;
         private TurretContainer turretContainer;
-        private TurretModule turretModule;
+        private TurretModule currentModule, tempModule;
 
         protected override void CustomSetup () {
             cam = Camera.main;
@@ -52,25 +48,21 @@
 
             //casting for modules
             if ( Physics.Raycast( ray, out hit, rayLength, moduleMask ) ) {
-                if ( onModule == false ) {
-                    turretModule = hit.collider.GetComponentInParent<TurretModule>();
-                    OnModuleEnter.Invoke( turretModule );
-                    onModule = true;
+                tempModule = hit.collider.GetComponentInParent<TurretModule>();
+                if ( tempModule ) {
+                    if ( onModule == false || currentModule != tempModule ) {
+                        currentModule = tempModule;
+                        OnModuleEnter.Invoke( currentModule );
+                        onModule = true;
+                    }
                 }
             }
             else {
                 if ( onModule == true ) {
                     onModule = false;
-                    OnModuleExit.Invoke( turretModule );
+                    OnModuleExit.Invoke( currentModule );
                 }
             }
-
-            //mouse input reading for modules
-            if ( onModule )
-                if ( Input.GetMouseButtonDown( 0 ) )
-                    OnModuleDown.Invoke( turretModule );
-                else if ( Input.GetMouseButtonUp( 0 ) )
-                    OnModuleUp.Invoke( turretModule );
         }
     }
 }
