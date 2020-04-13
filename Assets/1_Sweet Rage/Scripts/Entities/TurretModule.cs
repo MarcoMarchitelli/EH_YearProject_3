@@ -78,6 +78,22 @@
                 SetState( State.inMenu );
                 OnDeselection.Invoke( this );
             }
+
+            if ( mouseDowned ) {
+                if ( state == State.placed ) {
+                    mouseDowned = false;
+                    OnMouseUp.Invoke();
+                }
+            }
+        }
+
+        public void LeftMouseDownHandler () {
+            if ( mouseEntered ) {
+                if ( state == State.placed ) {
+                    mouseDowned = true;
+                    OnMouseDown.Invoke();
+                }
+            }
         }
 
         public void ModuleEnterHandler ( TurretModule module ) {
@@ -102,30 +118,12 @@
                 OnMouseExit.Invoke();
             }
         }
-
-        public void ModuleDownHandler ( TurretModule module ) {
-            if ( state == State.placed && module == this ) {
-                mouseDowned = true;
-                OnMouseDown.Invoke();
-            }
-        }
-
-        public void ModuleUpHandler ( TurretModule module ) {
-            if ( state == State.placed && module == this ) {
-                mouseDowned = false;
-                OnMouseUp.Invoke();
-            }
-        }
         #endregion
 
         #region API
         public void SetState ( State state ) {
             this.state = state;
         }
-
-        //public void SetState ( int state ) {
-        //    this.state = ( State ) state;
-        //}
         #endregion
     }
 

@@ -36,17 +36,17 @@
             //casting for containers
             if ( Physics.Raycast( ray, out hit, rayLength, containerMask ) ) {
                 if ( onContainer == false ) {
-                    turretContainer = hit.collider.GetComponent<TurretContainer>();
-                    OnContainerEnter.Invoke( turretContainer );
-                    //print( turretContainer.name + " enter" );
-                    onContainer = true;
+                    if ( hit.collider.TryGetComponent( out turretContainer ) ) {
+                        turretContainer = hit.collider.GetComponent<TurretContainer>();
+                        OnContainerEnter.Invoke( turretContainer );
+                        onContainer = true;
+                    }
                 }
             }
             else {
                 if ( onContainer == true ) {
                     onContainer = false;
                     OnContainerExit.Invoke( turretContainer );
-                    //print( turretContainer.name + " exit" );
                 }
             }
 
@@ -55,7 +55,6 @@
                 if ( onModule == false ) {
                     turretModule = hit.collider.GetComponentInParent<TurretModule>();
                     OnModuleEnter.Invoke( turretModule );
-                    //print( turretModule.name + " enter" );
                     onModule = true;
                 }
             }
@@ -63,7 +62,6 @@
                 if ( onModule == true ) {
                     onModule = false;
                     OnModuleExit.Invoke( turretModule );
-                    //print( turretModule.name + " exit" );
                 }
             }
 
