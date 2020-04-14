@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f10ff6350377c324fbebb2637a2a3edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setupOnAwake: 1
+  setupOnAwake: 0
   OnSetup:
     m_PersistentCalls:
       m_Calls: []
@@ -274,8 +274,8 @@ MonoBehaviour:
   speed: 4
   minSpeed: 0
   minWaypointDistance: 0.05
-  pathPoints: {fileID: 11400000, guid: dfe3bb5181bf2e14a86729267641dea6, type: 2}
-  patrolOnSetup: 1
+  pathPoints: {fileID: 0}
+  patrolOnSetup: 0
   OnPatrolEnd:
     m_PersistentCalls:
       m_Calls: []
@@ -597,7 +597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  searchMainCameraOnAwake: 1
+  searchMainCameraOnSetup: 1
 --- !u!1 &3967393366647826757
 GameObject:
   m_ObjectHideFlags: 0
