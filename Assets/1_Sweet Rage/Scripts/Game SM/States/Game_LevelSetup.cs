@@ -6,6 +6,7 @@
         public PhaseUI phaseUIPrefab;
         public PlaceTimeUI placeTimeUIPrefab;
         public ModulesMenuUI modulesMenuUIPrefab;
+        public GlobalRaycaster globalRaycasterPrefab;
 
         public override void Enter () {
             base.Enter();
@@ -18,6 +19,9 @@
 
             //level instantation and setup
             gameData.currentLevel.Setup();
+
+            //global raycaster instantiation and setup
+            Instantiate( globalRaycasterPrefab ).Setup();
 
             //phase UI setup
             gameData.phaseUI.Setup();

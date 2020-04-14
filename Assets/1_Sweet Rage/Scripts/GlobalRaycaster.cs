@@ -1,8 +1,7 @@
 ﻿namespace SweetRage {
     using UnityEngine;
-    using Deirin.EB;
 
-    public class GlobalRaycaster : BaseBehaviour {
+    public class GlobalRaycaster : MonoBehaviour {
         [Header("Params")]
         public LayerMask moduleMask;
         public LayerMask containerMask;
@@ -22,11 +21,11 @@
         private TurretContainer turretContainer;
         private TurretModule currentModule, tempModule;
 
-        protected override void CustomSetup () {
+        public void Setup () {
             cam = Camera.main;
         }
 
-        public override void OnUpdate () {
+        public void Update () {
             ray = cam.ScreenPointToRay( Input.mousePosition );
 
             //casting for containers
