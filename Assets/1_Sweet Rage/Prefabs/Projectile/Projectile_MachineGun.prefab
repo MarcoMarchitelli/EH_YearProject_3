@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageReceiver: {fileID: 0}
-  defaultDamage: 1
+  defaultDamage: 0.4
   OnDamageDealerSet:
     m_PersistentCalls:
       m_Calls: []
@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5012ea3c00a45bc4db3ea79bb28abc41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 360
   targetPositionOffset: {x: 0, y: 1, z: 0}
   targetDistanceOffset: 1
   stopFollowingOnReach: 1
@@ -729,12 +729,12 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   modifierType: {fileID: 11400000, guid: f56858c5a739a254e8bad232bdaf6c22, type: 2}
   buffs:
-  - buffMode: 1
-    percentBuff: 0.2
-    flatBuff: 0
-  - buffMode: 1
-    percentBuff: 0.4
-    flatBuff: 0
-  - buffMode: 1
-    percentBuff: 0.5
-    flatBuff: 0
+  - buffMode: 0
+    percentBuff: 0
+    flatBuff: 1
+  - buffMode: 0
+    percentBuff: 0
+    flatBuff: 2
+  - buffMode: 0
+    percentBuff: 0
+    flatBuff: 3

@@ -158,15 +158,15 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   modifierType: {fileID: 11400000, guid: f56858c5a739a254e8bad232bdaf6c22, type: 2}
   buffs:
-  - buffMode: 1
-    percentBuff: 0.2
-    flatBuff: 0
-  - buffMode: 1
-    percentBuff: 0.4
-    flatBuff: 0
-  - buffMode: 1
-    percentBuff: 0.5
-    flatBuff: 0
+  - buffMode: 0
+    percentBuff: 0
+    flatBuff: 1
+  - buffMode: 0
+    percentBuff: 0
+    flatBuff: 2
+  - buffMode: 0
+    percentBuff: 0
+    flatBuff: 3
 --- !u!1 &2238416362931494584
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d2e9cae38451974b921a439710ed781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 120
+  speed: 80
   orientation: {x: 0, y: 0, z: 1}
   space: 1
 --- !u!114 &7576496883784882022
@@ -385,7 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc9fc0351cd1d04e9a4a3a3a34c75b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 3
   OnDamageDealt:
     m_PersistentCalls:
       m_Calls:
@@ -470,7 +470,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.3, z: 0.7}
+  m_Size: {x: 0.6, y: 0.6, z: 1.4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4469002279124670513
 MonoBehaviour:
