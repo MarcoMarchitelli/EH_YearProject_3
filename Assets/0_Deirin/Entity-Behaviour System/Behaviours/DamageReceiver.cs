@@ -6,7 +6,7 @@
     public class DamageReceiver : BaseBehaviour {
         [Header("Params")]
         public float maxLife;
-        public bool maxLifeOnAwake = true;
+        public bool maxLifeOnSetup = true;
 
         [Header("Events")]
         public UnityEvent_Float OnLifeChanged;
@@ -15,8 +15,8 @@
 
         private float currentLife;
 
-        public override void OnAwake () {
-            if ( maxLifeOnAwake )
+        protected override void CustomSetup () {
+            if ( maxLifeOnSetup )
                 currentLife = maxLife;
         }
 
