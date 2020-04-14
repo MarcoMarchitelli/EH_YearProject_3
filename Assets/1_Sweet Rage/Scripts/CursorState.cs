@@ -1,49 +1,58 @@
 ﻿namespace SweetRage {
     using UnityEngine;
     using UnityEngine.Events;
+    using Deirin.Utilities;
 
     public class CursorState : MonoBehaviour {
-        public enum State { Free = 0, Grab = 1 }
-        public static CursorState Instance;
+        public enum State { Free = 0, PreGrab = 1, Grab = 2 }
 
         [Header("Events")]
-        public UnityEvent OnModuleEnter;
-        public UnityEvent OnModuleExit;
-        public UnityEvent OnModuleDown;
+        public UnityEvent Free;
+        public UnityEvent PreGrab;
+        public UnityEvent Grab;
 
-        private State state = State.Free;
-        public State CurrentState => state;
-
-        private void Awake () {
-            if ( Instance == null )
-                Instance = this;
-            else
-                Destroy( gameObject );
-        }
+        [ReadOnly] public State state = State.Free;
 
         public void ModuleEnterHandler () {
-            if ( state == State.Free )
-                OnModuleEnter.Invoke();
+            if ( state == State.Free ) {
+                state = State.PreGrab;
+                PreGrab.Invoke();
+            }
         }
 
         public void ModuleExitHandler () {
-            if ( state == State.Free )
-                OnModuleExit.Invoke();
+            if ( state == State.PreGrab ) {
+                state = State.Free;
+                Free.Invoke();
+            }
         }
 
-        public void ModuleDownHandler () {
-            if ( state == State.Free )
-                OnModuleDown.Invoke();
+        public void MouseDownHandler () {
+            if ( state == State.PreGrab ) {
+                state = State.Grab;
+                Grab.Invoke();
+            }
+        }
+
+        public void MouseUpHandler () {
+            if ( state == State.Grab ) {
+                state = State.Free;
+                Free.Invoke();
+            }
         }
 
         public void ModuleDeselectionHandler () {
-            //if ( state == State.Grab )
-            //    state = State.Free;
+            if ( state == State.Grab ) {
+                state = State.Free;
+                Free.Invoke();
+            }
         }
 
         public void ModuleSelectionHandler () {
-            //if ( state == State.Free )
-            //    state = State.Grab;
+            if ( state == State.Free ) {
+                state = State.Grab;
+                Grab.Invoke();
+            }
         }
     }
 }

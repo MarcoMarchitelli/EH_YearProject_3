@@ -84,12 +84,14 @@
                 return;
 
             Enemy e = Instantiate(enemyPrefab, pathPoints.Value[0], Quaternion.identity);
+            e.Setup();
             enemies.Add( e );
             SpawnedEnemy++;
             OnEnemySpawn.Invoke();
             PathPatroller pp;
             if ( e.TryGetBehaviour( out pp ) ) {
                 pp.pathPoints = pathPoints;
+                pp.StartPatrolling();
             }
 #if UNITY_EDITOR
             else {
