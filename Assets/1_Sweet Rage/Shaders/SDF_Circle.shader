@@ -20,7 +20,7 @@
             #pragma vertex vert
             #pragma fragment frag
             // make fog work
-            #pragma multi_compile_fog
+           /* #pragma multi_compile_fog*/
 
             #include "UnityCG.cginc"
 
@@ -33,11 +33,11 @@
             struct v2f
             {
                 float2 uv : TEXCOORD0;
-                UNITY_FOG_COORDS(1)
+                //UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
             };
 
-            float4 _Color;
+            fixed4 _Color;
             float _Radius;
 			float _SmoothstepMin;
 			float _SmoothstepMax;
@@ -51,17 +51,17 @@
                 return o;
             }
 
-            float4 frag (v2f i) : SV_Target
+            fixed4 frag (v2f i) : SV_Target
             {
 				i.uv -= .5;
 
                 float d = length(i.uv) - _Radius;
 				d = 1-smoothstep(_SmoothstepMin,_SmoothstepMax,d);
 
-                float4 color = (_Color.rgb, _Color.a*d);
+                fixed4 color = fixed4(_Color.rgb, _Color.a*d);
 
                 // apply fog
-                UNITY_APPLY_FOG(i.fogCoord, color);
+              /*  UNITY_APPLY_FOG(i.fogCoord, color);*/
 
                 return color;
             }
