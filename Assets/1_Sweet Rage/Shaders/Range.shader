@@ -1,4 +1,4 @@
-﻿Shader "Unlit/Range"
+﻿Shader "Deirin/Range"
 {
     Properties
     {
@@ -8,10 +8,10 @@
     }
     SubShader
     {
-        Tags { "RenderType"="Transparent" }
+        Tags { "QUEUE" = "Transparent" "RenderType"="Transparent" }
         LOD 100
 
-		Blend One OneMinusSrcAlpha
+		Blend SrcAlpha OneMinusSrcAlpha
 
         Pass
         {

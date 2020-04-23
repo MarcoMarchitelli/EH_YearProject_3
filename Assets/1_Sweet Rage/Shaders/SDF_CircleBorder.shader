@@ -1,19 +1,19 @@
-﻿Shader "Deirin/SDF_Quad"
+﻿Shader "Deirin/SDF_CircleBorder"
 {
     Properties
     {
 		_Color ( "Tint", Color ) = (1,1,1,1)
-		_SizeX ("x", Range(0,1)) = .4
-		_SizeY ("y", Range(0,1)) = .4
+        _Radius("Radius", Range(0,1)) = .4
+		_Thickness("Thickness", Range(0,1)) = .5
 		_SmoothstepMin("Smoothstep Min", Range(-1,1) )= -1
 		_SmoothstepMax("Smoothstep Max", Range(-1,1) )= 1
     }
     SubShader
     {
-        Tags { "QUEUE" = "Transparent" "RenderType"="Transparent" }
+        Tags { "QUEUE"="Transparent" "RenderType"="Transparent" }
         LOD 100
 
-		Blend One OneMinusSrcAlpha
+		Blend SrcAlpha OneMinusSrcAlpha
 
         Pass
         {
@@ -45,8 +45,8 @@
 			}
 
 			fixed4 _Color;
-			float _SizeX;
-			float _SizeY;
+            float _Radius;
+			float _Thickness;
 			float _SmoothstepMin;
 			float _SmoothstepMax;
 
@@ -61,12 +61,13 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-				i.uv -= .5;
+                i.uv -= .5;
 
-				float d = sdBox(i.uv, float2(_SizeX, _SizeY) );
-				d = 1-smoothstep(_SmoothstepMin,_SmoothstepMax,d);
+                float d = length(i.uv) - _Radius;
+                d = abs(d) - _Thickness;
+                d = 1 - smoothstep(_SmoothstepMin,_SmoothstepMax,d);
 
-                fixed4 color = (_Color.rgb, _Color.a*d);
+                fixed4 color = (_Color.r, _Color.g, _Color.b, _Color.a * d);
 
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, color);
