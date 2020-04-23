@@ -2,7 +2,9 @@
 	Properties{
 		_ShadingPalette("Shading Palette", 2D) = "white" {}
 		_Tint("Tint", Color) = (1, 1, 1, 1)
+
 		_LightColorIntensity("Light Color Intensity", Range(0,1)) = 0
+		_ShadowIntesity("Shadow Intesity", Range(0,1)) = 0
 
 		_OutlineColor("Outline Color", Color) = (0, 0, 0, 1)
 		_OutlineWidth("Outline Width", Range(0, 400)) = 0.03
@@ -11,9 +13,9 @@
 
 		Subshader{
 
-			//Tags {
-			//	"RenderType" = "Opaque"
-			//}
+			Tags {
+				"RenderType" = "Opaque"
+			}
 
 			Pass {
 				Tags {
@@ -32,16 +34,16 @@
 				#include "AutoLight.cginc"
 
 				struct vertexInput {
-					float4 vertex : POSITION;
+					float4 pos : POSITION;
 					float3 normal : NORMAL;
 					float4 vertexColor : COLOR;
 				};
 
 				struct v2f {
-					float4 vertex : SV_POSITION;
+					float4 pos : SV_POSITION;
 					float3 worldNormal : NORMAL;
 					float4 vertexColor : COLOR;
-					LIGHTING_COORDS(0,1)
+					LIGHTING_COORDS(1,2)
 				};
 
 				sampler2D _ShadingPalette;
@@ -49,6 +51,7 @@
 				float _Glossiness;
 				float _Metallic;
 				float _LightColorIntensity;
+				float _ShadowIntesity;
 
 				float map(float s, float a1, float a2, float b1, float b2)
 				{
@@ -57,10 +60,10 @@
 
 				v2f vertexShader(vertexInput IN) {
 					v2f OUT;
-					OUT.vertex = UnityObjectToClipPos(IN.vertex);
+					OUT.pos = UnityObjectToClipPos(IN.pos);
 					OUT.worldNormal = UnityObjectToWorldNormal(IN.normal);
 					OUT.vertexColor = IN.vertexColor;
-					//TRANSFER_VERTEX_TO_FRAGMENT(OUT);
+					TRANSFER_VERTEX_TO_FRAGMENT(OUT);
 					return OUT;
 				}
 
@@ -78,14 +81,14 @@
 					fixed4 shadingColor = tex2D(_ShadingPalette, shadingUV);
 
 					//light attenuation
-					//float shadow = SHADOW_ATTENUATION(IN);
+					float shadow = SHADOW_ATTENUATION(IN);
 
 					//color
 					fixed4 color = IN.vertexColor;
 					color *= _Tint;
 					color *= lerp(1, _LightColor0, _LightColorIntensity);
 					color *= shadingColor;
-					//color *= shadow;
+					color *= lerp(1, shadow, _ShadowIntesity);
 
 					return saturate(color);
 				}
