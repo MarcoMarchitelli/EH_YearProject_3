@@ -1,6 +1,7 @@
 ﻿Shader "Custom/Toon_VertexColor_Outline" {
 	Properties{
 		_ShadingPalette("Shading Palette", 2D) = "white" {}
+		_ShadingIntesity("Shading Palette Intensity", Range(0,1)) = 0
 		_Tint("Tint", Color) = (1, 1, 1, 1)
 
 		_LightColorIntensity("Light Color Intensity", Range(0,1)) = 0
@@ -52,6 +53,7 @@
 				float _Metallic;
 				float _LightColorIntensity;
 				float _ShadowIntesity;
+				float _ShadingIntesity;
 
 				float map(float s, float a1, float a2, float b1, float b2)
 				{
@@ -87,7 +89,7 @@
 					fixed4 color = IN.vertexColor;
 					color *= _Tint;
 					color *= lerp(1, _LightColor0, _LightColorIntensity);
-					color *= shadingColor;
+					color *= lerp(1, shadingColor, _ShadingIntesity);
 					color *= lerp(1, shadow, _ShadowIntesity);
 
 					return saturate(color);
