@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLife: 96
-  maxLifeOnAwake: 1
+  maxLifeOnSetup: 1
   OnLifeChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -993,13 +993,13 @@ MonoBehaviour:
     m_TypeName: Deirin.Utilities.UnityEvent_Int, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   _elementType: {fileID: 11400000, guid: 7c237fb287a45684f8e2086790a2b85a, type: 2}
-  duration: 1
+  duration: 0.3
   refreshDuration: 1
   extraTime: 1
   slowPercents:
   - 0.3
   - 0.4
-  - 0.5
+  - 0.6
 --- !u!1001 &1919173709311891433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1007,11 +1007,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1285193917471189190}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: d7bea040581283044a600d0155420838,
-        type: 3}
-      propertyPath: m_Name
-      value: SKM_Croissant
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d7bea040581283044a600d0155420838,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1066,6 +1061,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: d7bea040581283044a600d0155420838,
+        type: 3}
+      propertyPath: m_Name
+      value: SKM_Croissant
       objectReference: {fileID: 0}
     - target: {fileID: -9187865827438998743, guid: d7bea040581283044a600d0155420838,
         type: 3}
