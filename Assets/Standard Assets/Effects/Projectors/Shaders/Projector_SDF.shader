@@ -4,7 +4,7 @@
 Shader "Deirin/Projector_SDF" {
 	Properties {
 		_Color ("Main Color", Color) = (1,1,1,1)
-		_Radius ("Radius", Range(0,1)) = .5
+		_Radius ("Radius", Range(0,10)) = .5
 		_Thickness("Thickness", Range(0,1)) = .5
 		_Smoothstep("Smoothstep", Vector) = (0,0.1,0,0)
 		//_ShadowTex ("Cookie", 2D) = "" {}

@@ -9,7 +9,6 @@
     public class EnemyDetector : BaseBehaviour {
         [Header("Refs")]
         public SphereCollider sphereCollider;
-        public GameObject rangeGraphics;
 
         [Header("Params")]
         public bool activeOnSetup;
@@ -19,6 +18,7 @@
         [Header("Events")]
         public UnityEvent_Entity OnTargetSet;
         public UnityEvent OnEnemiesLost;
+        public UnityEvent_Float OnRangeSet;
 
         [ReadOnly] public List<Enemy> enemiesInRange;
         [ReadOnly] public Enemy currentTarget;
@@ -140,7 +140,7 @@
 
         private void RangeSetHandler () {
             sphereCollider.radius = range;
-            rangeGraphics.transform.localScale = Vector3.one * ( range * 5 );
+            OnRangeSet.Invoke( range );
         }
         #endregion
     }
