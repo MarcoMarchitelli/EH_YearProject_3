@@ -9,7 +9,6 @@
     public class EnemyDetector : BaseBehaviour {
         [Header("Refs")]
         public SphereCollider sphereCollider;
-        public GameObject rangeGraphics;
 
         [Header("Params")]
         public bool activeOnSetup;
@@ -19,6 +18,7 @@
         [Header("Events")]
         public UnityEvent_Entity OnTargetSet;
         public UnityEvent OnEnemiesLost;
+        public UnityEvent_Float OnRangeSet;
 
         [ReadOnly] public List<Enemy> enemiesInRange;
         [ReadOnly] public Enemy currentTarget;
@@ -44,6 +44,7 @@
             if ( enemyMask == ( enemyMask | ( 1 << other.gameObject.layer ) ) ) {
                 tempEnemy = other.GetComponentInParent<Enemy>();
                 if ( tempEnemy ) {
+                    print( name + " found enemy!" );
                     if ( !enemiesInRange.Contains( tempEnemy ) )
                         AddEnemy( tempEnemy );
                 }
@@ -56,6 +57,7 @@
             if ( enemyMask == ( enemyMask | ( 1 << other.gameObject.layer ) ) ) {
                 tempEnemy = other.GetComponentInParent<Enemy>();
                 if ( tempEnemy ) {
+                    print( name + " lost enemy!" );
                     RemoveEnemy( tempEnemy );
                 }
             }
@@ -64,14 +66,16 @@
 
         #region API
         public void Activate ( bool value ) {
-            if ( value == active )
-                return;
+            //if ( value == active )
+            //    return;
 
             active = value;
             sphereCollider.enabled = value;
             ClearEnemies();
-            if ( active )
+            if ( active ) {
+                print( name + " activated!" );
                 FindAllEnemiesInRange();
+            }
         }
 
         public void RemoveEnemy ( Enemy e ) {
@@ -99,6 +103,7 @@
         #region Privates
         private void ClearEnemies () {
             enemiesInRange.Clear();
+            currentTarget = null;
             OnEnemiesLost.Invoke();
         }
 
@@ -140,7 +145,7 @@
 
         private void RangeSetHandler () {
             sphereCollider.radius = range;
-            rangeGraphics.transform.localScale = Vector3.one * ( range * 5 );
+            OnRangeSet.Invoke( range );
         }
         #endregion
     }

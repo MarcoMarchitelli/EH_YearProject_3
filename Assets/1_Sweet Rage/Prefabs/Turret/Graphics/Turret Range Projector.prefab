@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2861037352712403031}
   - component: {fileID: 2861037352706930357}
-  - component: {fileID: 5657257920119504746}
+  - component: {fileID: 8383678215195570587}
   m_Layer: 0
   m_Name: Turret Range Projector
   m_TagString: Untagged
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2861037352712430711}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 4.16, y: 45.5, z: 21.24}
+  m_LocalPosition: {x: 0, y: 40, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -46,12 +46,12 @@ Projector:
   m_FieldOfView: 30
   m_AspectRatio: 1
   m_Orthographic: 1
-  m_OrthographicSize: 20
+  m_OrthographicSize: 40
   m_Material: {fileID: 2100000, guid: be9534c1cfe50e94a9269fed80946109, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
     m_Bits: 0
---- !u!114 &5657257920119504746
+--- !u!114 &8383678215195570587
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,12 +60,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2861037352712430711}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47442ceecbb692648bdccd5d0b722d5f, type: 3}
+  m_Script: {fileID: 11500000, guid: 466c5f9fea4b913428deddfa0ef15c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   projector: {fileID: 2861037352706930357}
-  propertyName: _Color
+  valuePropertyName: _Radius
+  values: []
+  valueMultiplier: 0.025
+  useFirstValueAtStart: 0
+  colorPropertyName: _Color
   colors:
   - {r: 1, g: 0.39215687, b: 0.39215687, a: 1}
   - {r: 0.39215687, g: 0.78431374, b: 1, a: 1}
-  useFirstColorAsStart: 0
+  useFirstColorAsStart: 1
