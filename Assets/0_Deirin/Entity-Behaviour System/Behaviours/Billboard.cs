@@ -6,10 +6,10 @@
         public Camera cam;
 
         [Header("Params")]
-        public bool searchMainCameraOnAwake = true;
+        public bool searchMainCameraOnSetup = true;
 
-        public override void OnAwake () {
-            if ( searchMainCameraOnAwake )
+        protected override void CustomSetup () {
+            if ( searchMainCameraOnSetup )
                 cam = Camera.main;
         }
 

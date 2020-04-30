@@ -1,9 +1,11 @@
 ﻿namespace Deirin.EB {
     using System.Collections.Generic;
     using UnityEngine;
+    using UnityEngine.Events;
 
     public abstract class BaseEntity : MonoBehaviour {
         public bool setupOnAwake = false;
+        public UnityEvent OnSetup;
 
         public BaseBehaviour[] Behaviours { get; private set; }
         public bool active { get; private set; }
@@ -15,6 +17,7 @@
             }
             active = true;
             CustomSetup();
+            OnSetup.Invoke();
         }
 
         protected virtual void CustomSetup () {
@@ -64,6 +67,14 @@
                     objs.Add( Behaviours[i] as T );
             }
             return objs;
+        }
+
+        private void OnEnable () {
+            if ( !active )
+                return;
+            for ( int i = 0; i < Behaviours.Length; i++ ) {
+                Behaviours[i].OnOnEnable();
+            }
         }
 
         private void Awake () {

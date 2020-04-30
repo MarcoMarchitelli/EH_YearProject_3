@@ -11,7 +11,7 @@
         public UnityEvent OnDestruction;
 
         public void Destroy () {
-            Destroy( gameObject );
+            Destroy( target.gameObject );
             OnDestruction.Invoke();
         }
     }

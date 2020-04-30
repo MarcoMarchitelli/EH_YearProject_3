@@ -1,26 +1,45 @@
 ﻿namespace Deirin.EB {
+    using Deirin.Utilities;
     using System.Collections;
     using UnityEngine;
     using UnityEngine.Events;
 
-    public class Timer : BaseBehaviour {
+    public class Timer : BaseBehaviour, IStoppable {
         [Header("Params")]
         public float duration;
         public bool unscaledTime = false;
 
         [Header("Events")]
-        public UnityEvent OnTimerStart;
+        public UnityEvent_Float OnTimerStart;
         public UnityEvent OnTimerPause;
-        public UnityEvent OnTimerEnd;
+        public UnityEvent_Float OnTimerEnd;
+        [SerializeField] private UnityEvent onStop;
 
-        bool count;
-        float timer;
+        private bool count;
+        private float timer;
+        private Coroutine currentRoutine;
+
+        #region IStoppable
+        public bool Stopped { get; private set; } = true;
+        public UnityEvent OnStop { get => onStop; set => onStop = value; }
+        public void Stop ( bool callEvent = false ) {
+            if ( Stopped )
+                return;
+
+            Stopped = true;
+
+            if ( currentRoutine != null )
+                StopCoroutine( currentRoutine );
+
+            if ( callEvent )
+                OnStop.Invoke();
+        }
+        #endregion
 
         public void Play () {
-            if ( unscaledTime )
-                StartCoroutine( CountUnscaled() );
-            else
-                StartCoroutine( Count() );
+            Stopped = false;
+
+            currentRoutine = unscaledTime ? StartCoroutine( "CountUnscaled" ) : StartCoroutine( "Count" );
         }
 
         public void Pause () {
@@ -28,25 +47,18 @@
             OnTimerPause.Invoke();
         }
 
-        public void Stop () {
-            if ( unscaledTime )
-                StopCoroutine( CountUnscaled() );
-            else
-                StopCoroutine( Count() );
-        }
-
         IEnumerator Count () {
             timer = 0;
             count = true;
 
-            OnTimerStart.Invoke();
+            OnTimerStart.Invoke( duration );
 
             while ( count == true && timer < duration ) {
                 timer += Time.deltaTime;
                 yield return null;
             }
 
-            OnTimerEnd.Invoke();
+            OnTimerEnd.Invoke( duration );
         }
 
         IEnumerator CountUnscaled () {
@@ -54,14 +66,14 @@
             timer = startTime;
             count = true;
 
-            OnTimerStart.Invoke();
+            OnTimerStart.Invoke( duration );
 
-            while ( count == true && (timer - startTime) < duration ) {
+            while ( count == true && ( timer - startTime ) < duration ) {
                 timer = Time.time;
                 yield return null;
             }
 
-            OnTimerEnd.Invoke();
+            OnTimerEnd.Invoke( duration );
         }
     }
 }

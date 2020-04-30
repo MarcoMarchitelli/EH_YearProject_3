@@ -11,6 +11,7 @@
         public bool Y;
         public bool Z;
         public Vector3 targetOffset;
+        public float maxTurnAngle = 360;
         public float turnSpeed;
 
         public override void OnUpdate () {
@@ -19,14 +20,26 @@
 
             Vector3 targetPos = target.position + targetOffset;
             targetPos = new Vector3( X ? targetPos.x : transform.position.x, Y ? targetPos.y : transform.position.y, Z ? targetPos.z : transform.position.z );
-            transform.localRotation = Quaternion.identity;
-            Quaternion currentRotation = transform.localRotation;
-            Quaternion targetRotation = Quaternion.LookRotation((targetPos - transform.position).normalized, transform.up);
 
-            transform.rotation = Quaternion.Slerp(
-                currentRotation,
-                targetRotation,
-                1 - Mathf.Exp( -turnSpeed * Time.deltaTime )
+            Quaternion currentLocalRotation = transform.localRotation;
+            transform.localRotation = Quaternion.identity;
+
+            Vector3 targetWorldLookDir = targetPos - transform.position;
+            Vector3 targetLocalLookDir = transform.InverseTransformDirection(targetWorldLookDir);
+
+            targetLocalLookDir = Vector3.RotateTowards(
+              Vector3.forward,
+              targetLocalLookDir,
+              Mathf.Deg2Rad * maxTurnAngle,
+              0
+            );
+
+            Quaternion targetLocalRotation = Quaternion.LookRotation(targetLocalLookDir, Vector3.up);
+
+            transform.localRotation = Quaternion.Slerp(
+              currentLocalRotation,
+              targetLocalRotation,
+              1 - Mathf.Exp( -turnSpeed * Time.deltaTime )
             );
         }
 
@@ -36,6 +49,10 @@
 
         public void ReturnToTargetRotation () {
             target = startTarget;
+        }
+
+        public void RemoveTarget () {
+            target = null;
         }
     }
 }
