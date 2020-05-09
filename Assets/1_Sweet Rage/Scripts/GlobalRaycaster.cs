@@ -48,19 +48,32 @@
             //casting for modules
             if ( Physics.Raycast( ray, out hit, rayLength, moduleMask ) ) {
                 tempModule = hit.collider.GetComponentInParent<TurretModule>();
+                //if we hit a module
                 if ( tempModule ) {
-                    if ( onModule == false || currentModule != tempModule ) {
+                    //if we weren't on a module
+                    if ( onModule == false ) {
+                        //now we are and we tell everyone
+                        currentModule = tempModule;
+                        OnModuleEnter.Invoke( currentModule );
+                        onModule = true;
+                    }
+                    //if we were on a module AND the module we hit is different
+                    else if ( currentModule != tempModule ) {
+                        //we exit from the old one
+                        OnModuleExit.Invoke( currentModule );
+                        //we enter in the new one
                         currentModule = tempModule;
                         OnModuleEnter.Invoke( currentModule );
                         onModule = true;
                     }
                 }
             }
-            else {
-                if ( onModule == true ) {
-                    onModule = false;
-                    OnModuleExit.Invoke( currentModule );
-                }
+            //if we don't hit a module AND we were on one
+            else if ( onModule == true ) {
+                //we exit from it
+                onModule = false;
+                OnModuleExit.Invoke( currentModule );
+                currentModule = null;
             }
         }
     }

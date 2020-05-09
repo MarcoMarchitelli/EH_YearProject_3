@@ -97,6 +97,8 @@
         }
 
         public void ModuleEnterHandler ( TurretModule module ) {
+            if ( CursorState.instance.state == CursorState.State.Grab )
+                return;
             if ( state == State.placed ) {
                 if ( module == this ) {
                     mouseEntered = true;

@@ -6,12 +6,19 @@
     public class CursorState : MonoBehaviour {
         public enum State { Free = 0, PreGrab = 1, Grab = 2 }
 
+        public static CursorState instance;
+
         [Header("Events")]
         public UnityEvent Free;
         public UnityEvent PreGrab;
         public UnityEvent Grab;
 
         [ReadOnly] public State state = State.Free;
+
+        private void Awake () {
+            if ( instance == null )
+                instance = this;
+        }
 
         public void ModuleEnterHandler () {
             if ( state == State.Free ) {
