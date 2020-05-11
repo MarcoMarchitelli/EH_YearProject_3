@@ -1,37 +1,43 @@
 ﻿namespace SweetRage {
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
+    using DG.Tweening;
 
     public class GameTimer : MonoBehaviour {
         [SerializeField] private float timeMultiplier;
+        [SerializeField] private float tweenDuration;
 
         public static GameTimer instance;
-        public static float TimeMultiplier => instance.timeMultiplier;
-
-        private float previousTimeMultiplier;
         private bool paused;
+        private float previousTimeScale;
 
         private void Awake () {
             if ( !instance )
                 instance = this;
         }
 
+        #region API
         public void Pause () {
-            previousTimeMultiplier = timeMultiplier;
-            timeMultiplier = 0;
+            previousTimeScale = Time.timeScale;
+            DOTween.To( GetTimeScale, SetTimeScale, 0, tweenDuration );
             paused = true;
         }
 
         public void Resume () {
             if ( paused ) {
-                timeMultiplier = previousTimeMultiplier;
+                DOTween.To( GetTimeScale, SetTimeScale, previousTimeScale, tweenDuration );
                 paused = false;
             }
         }
 
         public void SetTimeMultiplier ( float value ) {
-            timeMultiplier = value;
+            DOTween.To( GetTimeScale, SetTimeScale, value, tweenDuration );
+        } 
+        #endregion
+
+        private void SetTimeScale ( float value ) {
+            Time.timeScale = value;
         }
+
+        private float GetTimeScale() => Time.timeScale;
     }
 }

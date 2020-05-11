@@ -9,6 +9,7 @@
         [Min(0)] public float duration;
         public Ease ease;
         [Min(-1)] public int loops;
+        public bool ignoresTimescale;
         public UnityEvent OnPlay;
         public UnityEvent OnRewind;
         public UnityEvent OnPlayEnd;
