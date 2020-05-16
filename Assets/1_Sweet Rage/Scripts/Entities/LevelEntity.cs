@@ -6,6 +6,7 @@
     public class LevelEntity : BaseEntity {
         [Header("Params")]
         public string levelName;
+        public Sprite mapSprite;
 
         private int currentWaveIndex;
         private GameObject modulesContainer;

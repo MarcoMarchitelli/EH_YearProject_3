@@ -9,6 +9,7 @@
 
         [Header("Refs")]
         public TextMeshProUGUI nameText;
+        public Image mapImage;
         public Image star1;
         public Image star2;
         public Image star3;
@@ -37,6 +38,9 @@
 
             if ( nameText )
                 nameText.text = level?.levelName;
+
+            if ( mapImage )
+                mapImage.sprite = level?.mapSprite;
 
             UpdateScoreUI();
         }

@@ -18,19 +18,19 @@
         #region API
         public void Pause () {
             previousTimeScale = Time.timeScale;
-            DOTween.To( GetTimeScale, SetTimeScale, 0, tweenDuration );
+            DOTween.To( GetTimeScale, SetTimeScale, 0, tweenDuration ).Play();
             paused = true;
         }
 
         public void Resume () {
             if ( paused ) {
-                DOTween.To( GetTimeScale, SetTimeScale, previousTimeScale, tweenDuration );
+                DOTween.To( GetTimeScale, SetTimeScale, previousTimeScale, tweenDuration ).Play();
                 paused = false;
             }
         }
 
         public void SetTimeMultiplier ( float value ) {
-            DOTween.To( GetTimeScale, SetTimeScale, value, tweenDuration );
+            DOTween.To( GetTimeScale, SetTimeScale, value, tweenDuration ).Play();
         } 
         #endregion
 

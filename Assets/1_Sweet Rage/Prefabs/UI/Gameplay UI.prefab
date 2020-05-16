@@ -45,9 +45,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignoresContainer: 0
   duration: 0.5
+  ignoresTimescale: 1
+  delay: 0
+  relative: 0
   ease: 0
   loops: 0
-  ignoresTimescale: 0
+  loopType: 0
+  autoKill: 0
   OnPlay:
     m_PersistentCalls:
       m_Calls: []
@@ -68,16 +72,13 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  OnStop:
+  OnKill:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   target: {fileID: 3353344525896621476}
   targetScale: {x: 0, y: 0, z: 0}
-  addToOriginal: 0
-  multiply: 0
-  resetOnPlay: 1
 --- !u!1 &3353344524363975885
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,9 +495,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignoresContainer: 0
   duration: 0.3
+  ignoresTimescale: 1
+  delay: 0
+  relative: 0
   ease: 0
   loops: 0
-  ignoresTimescale: 1
+  loopType: 0
+  autoKill: 0
   OnPlay:
     m_PersistentCalls:
       m_Calls: []
@@ -517,14 +522,13 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  OnStop:
+  OnKill:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   target: {fileID: 3353344526263351836}
   targetColor: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
-  resetOnPlay: 1
 --- !u!1 &3353344525754684668
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,9 +878,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignoresContainer: 0
   duration: 0.3
+  ignoresTimescale: 1
+  delay: 0
+  relative: 0
   ease: 0
   loops: 0
-  ignoresTimescale: 0
+  loopType: 0
+  autoKill: 0
   OnPlay:
     m_PersistentCalls:
       m_Calls: []
@@ -897,14 +905,13 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  OnStop:
+  OnKill:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   target: {fileID: 3353344525653831089}
   targetColor: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
-  resetOnPlay: 1
 --- !u!1 &3353344526263351835
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,6 +1236,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: Place Time Controller
       objectReference: {fileID: 0}
+    - target: {fileID: 1398956947577068539, guid: 49bc5070e43455f41945b76653310592,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398956947577068539, guid: 49bc5070e43455f41945b76653310592,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398956948399941629, guid: 49bc5070e43455f41945b76653310592,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398956948399941629, guid: 49bc5070e43455f41945b76653310592,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398956948590413558, guid: 49bc5070e43455f41945b76653310592,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398956948590413558, guid: 49bc5070e43455f41945b76653310592,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1398956948399941631, guid: 49bc5070e43455f41945b76653310592,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1334,36 +1371,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1398956947577068539, guid: 49bc5070e43455f41945b76653310592,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1398956947577068539, guid: 49bc5070e43455f41945b76653310592,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1398956948399941629, guid: 49bc5070e43455f41945b76653310592,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1398956948399941629, guid: 49bc5070e43455f41945b76653310592,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1398956948590413558, guid: 49bc5070e43455f41945b76653310592,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1398956948590413558, guid: 49bc5070e43455f41945b76653310592,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7334620819887985864, guid: 49bc5070e43455f41945b76653310592,
         type: 3}
       propertyPath: m_IsActive
@@ -1373,6 +1380,11 @@ PrefabInstance:
         type: 3}
       propertyPath: duration
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6034634465133539107, guid: 49bc5070e43455f41945b76653310592,
+        type: 3}
+      propertyPath: response.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RewindFromEnd
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7884740781821634365, guid: 49bc5070e43455f41945b76653310592, type: 3}

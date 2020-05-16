@@ -13,7 +13,6 @@
         public Ease ease;
         [Min(-1)] public int loops;
         public LoopType loopType;
-        public bool smoothRewind = false;
         public bool autoKill = false;
         [Header("Events")]
         public UnityEvent OnPlay;
@@ -47,6 +46,7 @@
             tween.onRewind += OnRewindEnd.Invoke;
         }
 
+        #region API
         public void Play () {
             OnPlay.Invoke();
             tween.PlayForward();
@@ -54,15 +54,18 @@
 
         public void Rewind () {
             OnRewind.Invoke();
-            //if ( smoothRewind )
-            //    tween.SmoothRewind();
-            //else
             tween.PlayBackwards();
+        }
+
+        public void RewindFromEnd () {
+            tween.Goto( duration );
+            Rewind();
         }
 
         public void Kill () {
             OnKill.Invoke();
             tween.Kill();
         }
+        #endregion
     }
 }

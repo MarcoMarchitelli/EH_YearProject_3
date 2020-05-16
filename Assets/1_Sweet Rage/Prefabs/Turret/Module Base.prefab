@@ -45,8 +45,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignoresContainer: 0
   duration: 0.2
+  ignoresTimescale: 1
+  delay: 0
+  relative: 0
   ease: 30
   loops: 0
+  loopType: 0
+  autoKill: 0
   OnPlay:
     m_PersistentCalls:
       m_Calls: []
@@ -67,16 +72,13 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  OnStop:
+  OnKill:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   target: {fileID: 437727998874078300}
   targetScale: {x: 1.5, y: 1.5, z: 1.5}
-  addToOriginal: 0
-  multiply: 1
-  resetOnPlay: 1
 --- !u!1 &437727998874078303
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,8 +154,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignoresContainer: 0
   duration: 0.2
+  ignoresTimescale: 1
+  delay: 0
+  relative: 0
   ease: 6
   loops: 0
+  loopType: 0
+  autoKill: 0
   OnPlay:
     m_PersistentCalls:
       m_Calls: []
@@ -174,16 +181,13 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  OnStop:
+  OnKill:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   target: {fileID: 437727998874078300}
   targetScale: {x: 1.3, y: 1.3, z: 1.3}
-  addToOriginal: 0
-  multiply: 1
-  resetOnPlay: 1
 --- !u!1 &437727999053047934
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,6 +1311,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Placement Smoke
+      objectReference: {fileID: 0}
+    - target: {fileID: 825112896164935467, guid: 1e8e94d2ea9f3f046aec9ec2e87a8ca8,
+        type: 3}
+      propertyPath: useUnscaledTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6108669519942881829, guid: 1e8e94d2ea9f3f046aec9ec2e87a8ca8,
         type: 3}
