@@ -1,13 +1,17 @@
 ﻿namespace SweetRage {
+    using System.Collections.Generic;
+    using TMPro;
     using UnityEngine;
 
     public class MainMenuUI : MonoBehaviour {
         [Header("Prefabs")]
-        public LevelButtonUI levelButtonPrefab;
+        public LevelUI levelUIPrefab;
 
         [Header("References")]
-        public Transform levelButtonsContainer;
+        public Transform levelUIsContainer;
+        public LevelUI selectedLevelUI;
 
+        private List<LevelUI> levelUIs = new List<LevelUI>();
         private LevelEntity[] levels;
 
         public void SetLevelsData ( LevelEntity[] levels ) {
@@ -15,17 +19,21 @@
         }
 
         public void UpdateUI () {
-            int count = levelButtonsContainer.childCount;
+            int count = levelUIsContainer.childCount;
 
             for ( int i = 0; i < count; i++ ) {
-                Destroy( levelButtonsContainer.GetChild( i ).gameObject );
+                Destroy( levelUIsContainer.GetChild( i ).gameObject );
             }
 
             for ( int i = 0; i < levels.Length; i++ ) {
-                LevelButtonUI lbUI = Instantiate( levelButtonPrefab, levelButtonsContainer );
-                lbUI.level = levels[i];
-                lbUI.UpdateUI();
+                LevelUI lUI = Instantiate( levelUIPrefab, levelUIsContainer );
+                lUI.level = levels[i];
+                lUI.UpdateUI();
+                lUI.nameText.text = ( i + 1 ).ToString();
+                levelUIs.Add( lUI );
             }
+
+            levelUIs[0]?.Click();
         }
     }
 }

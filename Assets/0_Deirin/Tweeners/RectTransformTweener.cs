@@ -45,34 +45,13 @@
         }
         #endregion
 
-        #region API
-        public override void Rewind () {
-            sequence = DOTween.Sequence();
-            sequence.Append( DOTween.To( GetOffsetMin, SetOffsetMin, startOffsetMin, duration ).SetEase( ease ) );
-            sequence.Join( DOTween.To( GetOffsetMax, SetOffsetMax, startOffsetMax, duration ).SetEase( ease ) );
-            sequence.Join( target.DOSizeDelta( startSize, duration ).SetEase( ease ).SetLoops( loops ) );
-            sequence.onComplete += () => OnRewindEnd.Invoke();
-            //sequence.PlayBackwards();
-            //sequence.onRewind += () => OnRewindEnd.Invoke();
-        }
-
-        public override void Play () {
-            OnPlay.Invoke();
-
-            if ( resetOnPlay == false )
-                SetStartVars();
-
+        protected override void AssignTween () {
             sequence = DOTween.Sequence();
             sequence.Append( DOTween.To( GetOffsetMin, SetOffsetMin, targetOffsetMin, duration ).SetEase( ease ) );
             sequence.Join( DOTween.To( GetOffsetMax, SetOffsetMax, targetOffsetMax, duration ).SetEase( ease ) );
             sequence.Join( target.DOSizeDelta( addToOriginal ? startSize + targetSize : targetSize, duration ).SetEase( ease ).SetLoops( loops ) );
-            sequence.onComplete += () => OnPlayEnd.Invoke();
-        }
 
-        public override void Stop () {
-            target.DOKill();
-            OnStop.Invoke();
+            tween = sequence;
         }
-        #endregion
     }
 }

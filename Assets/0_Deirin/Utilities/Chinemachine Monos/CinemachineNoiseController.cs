@@ -38,10 +38,13 @@
             noise.m_AmplitudeGain = amplitudeGain;
             noise.m_FrequencyGain = frequencyGain;
             noise.m_PivotOffset = pivotOffset;
-            //noise.m_NoiseProfile = noiseProfile;
+
             s = DOTween.Sequence();
             s.AppendInterval( duration );
             s.onComplete += End;
+
+            s.PlayForward();
+
             OnPlay.Invoke();
         }
 
@@ -66,6 +69,8 @@
             noise.m_AmplitudeGain = 0;
             noise.m_FrequencyGain = 0;
             noise.m_PivotOffset = Vector3.zero;
+            s.Kill();
+
             OnEnd.Invoke();
         }
     }

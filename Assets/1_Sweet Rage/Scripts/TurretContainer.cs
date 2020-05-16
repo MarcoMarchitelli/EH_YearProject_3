@@ -127,6 +127,7 @@
                 module.transform.position = currentTopPosition;
                 module.graphics.position = prevGraphic;
                 module.graphics.DOMove( currentTopPosition, modulesAnimationDuration ).SetEase( Ease.OutCubic );
+                module.graphics.DOPlay();
                 currentTopPosition = module.topModuleSpot.position;
             }
 
@@ -151,6 +152,7 @@
                 HandleElementDetachment( elementModules[i] );
                 module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic ).onComplete += () => module.OnDeselection.Invoke( module );
                 module.transform.DOLocalRotate( new Vector3( Random.Range( 0, 360 ), Random.Range( 0, 360 ), Random.Range( 0, 360 ) ), duration ).SetEase( Ease.OutCubic );
+                module.transform.DOPlay();
             }
             for ( i = 0; i < modifierModules.Count; i++ ) {
                 float duration = Random.Range(1.5f,3f);
@@ -159,6 +161,7 @@
                 HandleModiferDetachment( modifierModules[i] );
                 module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic ).onComplete += () => module.OnDeselection.Invoke( module );
                 module.transform.DOLocalRotate( new Vector3( Random.Range( 0, 360 ), Random.Range( 0, 360 ), Random.Range( 0, 360 ) ), duration ).SetEase( Ease.OutCubic );
+                module.transform.DOPlay();
             }
             elementModules.Clear();
             modifierModules.Clear();

@@ -35,6 +35,8 @@
             s.AppendInterval( endWaitTime );
             s.onComplete += () => func?.Invoke();
 
+            s.PlayForward();
+
             OnPlay.Invoke();
         }
 
@@ -47,7 +49,10 @@
             }
             s.Append( background.DOFade( 0f, 1f ).SetEase( Ease.InCubic ) );
             s.Join( background.transform.DOScaleY( 0, 1f ).SetEase( Ease.InCubic ) );
+
             s.onComplete += () => func?.Invoke();
+
+            s.PlayForward();
         }
 
         public void SetTexts ( params string[] texts ) {

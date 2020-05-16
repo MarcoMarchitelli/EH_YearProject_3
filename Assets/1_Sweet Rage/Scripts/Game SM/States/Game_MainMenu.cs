@@ -8,7 +8,7 @@
         public MainMenuUI mainMenuUIPrefab;
 
         [Header("Global Events")]
-        public LevelEntityGameEvent OnLevelButtonClick;
+        public LevelEntityGameEvent LevelPlayClick;
         public GameEvent OnMainMenuFadeOut;
 
         private LevelEntity selectedLevelPrefab;
@@ -16,7 +16,7 @@
         public override void Enter () {
             base.Enter();
 
-            OnLevelButtonClick.OnInvoke += LevelSelectionHandler;
+            LevelPlayClick.OnInvoke += LevelPlayClickHandler;
             OnMainMenuFadeOut.OnInvoke += FadeOutHandler;
 
             gameData.mainMenuUI = Instantiate( mainMenuUIPrefab );
@@ -26,7 +26,7 @@
             gameData.mainMenuUI.UpdateUI();
         }
 
-        private void LevelSelectionHandler ( LevelEntity level ) {
+        private void LevelPlayClickHandler ( LevelEntity level ) {
             selectedLevelPrefab = level;
         }
 
@@ -41,7 +41,7 @@
         }
 
         public override void Exit () {
-            OnLevelButtonClick.OnInvoke -= LevelSelectionHandler;
+            LevelPlayClick.OnInvoke -= LevelPlayClickHandler;
             OnMainMenuFadeOut.OnInvoke -= FadeOutHandler;
             SceneManager.sceneLoaded -= SceneLoadedHandler;
         }
