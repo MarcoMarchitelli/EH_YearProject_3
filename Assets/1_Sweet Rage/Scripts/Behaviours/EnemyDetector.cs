@@ -5,10 +5,10 @@
     using Deirin.EB;
     using Deirin.Utilities;
 
-    [RequireComponent( typeof( SphereCollider ) )]
+    [RequireComponent( typeof( CapsuleCollider ) )]
     public class EnemyDetector : BaseBehaviour {
         [Header("Refs")]
-        public SphereCollider sphereCollider;
+        public CapsuleCollider capsuleCollider;
 
         [Header("Params")]
         public bool activeOnSetup;
@@ -70,7 +70,7 @@
             //    return;
 
             active = value;
-            sphereCollider.enabled = value;
+            capsuleCollider.enabled = value;
             ClearEnemies();
             if ( active ) {
                 print( name + " activated!" );
@@ -135,7 +135,7 @@
         }
 
         private void FindAllEnemiesInRange () {
-            objs = Physics.OverlapSphere( sphereCollider.transform.position, sphereCollider.radius, enemyMask );
+            objs = Physics.OverlapSphere( capsuleCollider.transform.position, capsuleCollider.radius, enemyMask );
             for ( int i = 0; i < objs.Length; i++ ) {
                 if ( objs[i].TryGetComponent( out tempEnemy ) )
                     enemiesInRange.Add( tempEnemy );
@@ -144,7 +144,7 @@
         }
 
         private void RangeSetHandler () {
-            sphereCollider.radius = range;
+            capsuleCollider.radius = range;
             OnRangeSet.Invoke( range );
         }
         #endregion
