@@ -91,7 +91,7 @@
             PathPatroller pp;
             if ( e.TryGetBehaviour( out pp ) ) {
                 pp.pathPoints = pathPoints;
-                pp.StartPatrolling();
+                pp.StartPatrol();
             }
 #if UNITY_EDITOR
             else {

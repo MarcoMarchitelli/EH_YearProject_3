@@ -1,5 +1,4 @@
 ﻿namespace SweetRage {
-    using System.Collections;
     using UnityEngine;
     using Deirin.EB;
     using Deirin.Utilities;
@@ -17,49 +16,58 @@
 
         public float FireRate => fireRate;
 
+        private float timer, timeBewteenShots;
         private bool shooting;
         private float startFireRate;
-        private Coroutine shootRoutine;
 
         protected override void CustomSetup () {
             startFireRate = fireRate;
+            timeBewteenShots = 1f / fireRate;
+        }
+
+        public override void OnUpdate () {
+            if ( shooting ) {
+                timer += Time.deltaTime;
+                if ( timer >= timeBewteenShots ) {
+                    Shoot();
+                    timer = 0;
+                }
+            }
         }
 
         #region API
         public void StartShooting () {
-            if ( !shooting )
-                shootRoutine = StartCoroutine( "ShootSequence" );
+            if ( !shooting ) {
+                shooting = true;
+#if UNITY_EDITOR
+                Debug.Log( name + " started shooting!" );
+#endif
+            }
         }
 
         public void StopShooting () {
             if ( shooting ) {
-                StopCoroutine( shootRoutine );
                 shooting = false;
+                timer = 0;
 #if UNITY_EDITOR
                 print( name + " stopped shooting" );
 #endif
             }
         }
 
+        public void PauseShooting () {
+            if ( shooting )
+                shooting = false;
+        }
+
         public void SetFireRate ( float value ) {
             fireRate = value;
-        } 
+        }
 
         public void ResetFireRate () {
             fireRate = startFireRate;
         }
         #endregion
-
-        IEnumerator ShootSequence () {
-#if UNITY_EDITOR
-            print( name + " started shooting" );
-#endif
-            shooting = true;
-            while ( shooting ) {
-                Shoot();
-                yield return new WaitForSeconds( 1f / fireRate );
-            }
-        }
 
         private void Shoot () {
             Projectile b = Instantiate( projectilePrefab, spawnPoint.position, Quaternion.LookRotation( spawnPoint.forward ) );

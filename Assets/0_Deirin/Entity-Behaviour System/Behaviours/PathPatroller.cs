@@ -3,41 +3,54 @@
     using UnityEngine.Events;
 
     public class PathPatroller : BaseBehaviour {
+        #region Inspector
         [Header("Params")]
+        public Vector3ArrayVariable pathPoints;
         [SerializeField] private float speed;
         public float minSpeed = 0;
-        public float minWaypointDistance;
-        public Vector3ArrayVariable pathPoints;
         public bool patrolOnSetup;
 
         [Header("Events")]
         public UnityEvent OnPatrolEnd;
         public UnityEvent OnPointReached;
+        #endregion
 
         public float Speed => speed;
         public float CurrentSpeed => currentSpeed;
 
-        private Vector3 currentTarget;
-        private int currentTargetIndex = 0;
+        private Vector3 pointA, pointB;
+        private int currentTargetIndex;
         private float startSpeed, currentSpeed;
-        private bool patrolling = false;
-        private Vector3 orientation, direction;
-        private float sqrDistance;
+        private bool patrolling;
+        private float percent, currentSegmentLenght;
 
+        #region Overrides
         protected override void CustomSetup () {
+            //initial setup
+            patrolling = false;
+            currentTargetIndex = 1;
+
             startSpeed = speed;
+
             if ( patrolOnSetup )
-                StartPatrolling();
+                StartPatrol();
         }
 
         public override void OnUpdate () {
             if ( patrolling )
-                PatrolMovement();
+                Patrol();
         }
+        #endregion
 
-        public void StartPatrolling () {
+        #region API
+        public void StartPatrol () {
+            CheckIfPatrolIsPossible();
+
+            pointA = pathPoints.Value[0];
+            pointB = pathPoints.Value[currentTargetIndex];
+            currentSegmentLenght = Vector3.Distance( pointA, pointB );
             currentSpeed = startSpeed;
-            UpdateTargetPoint( currentTargetIndex );
+
             Resume();
         }
 
@@ -56,28 +69,46 @@
         public void SetSpeed ( float value ) {
             currentSpeed = Mathf.Max( minSpeed, value );
         }
+        #endregion
 
-        private void PatrolMovement () {
-            CheckDistance();
+        private void Patrol () {
+            percent += Time.deltaTime * currentSpeed / currentSegmentLenght;
+            percent = Mathf.Clamp01( percent );
+            transform.position = Vector3.Lerp( pointA, pointB, percent );
 
-            transform.Translate( direction * currentSpeed * Time.deltaTime );
+            if ( percent == 1 ) {
+                UpdatePoints();
+            }
         }
 
-        private void UpdateTargetPoint ( int index ) {
-            if ( index > pathPoints.Value.Length - 1 || index < 0 ) {
+        private void UpdatePoints () {
+            currentTargetIndex++;
+
+            if ( currentTargetIndex > pathPoints.Value.Length - 1 || currentTargetIndex < 0 ) {
                 patrolling = false;
                 return;
             }
-            currentTarget = pathPoints.Value[index];
+
+            pointA = pointB;
+            pointB = pathPoints.Value[currentTargetIndex];
+            currentSegmentLenght = Vector3.Distance( pointA, pointB );
+            percent = 0;
         }
 
-        private void CheckDistance () {
-            orientation = currentTarget - transform.position;
-            sqrDistance = orientation.sqrMagnitude;
-            direction = orientation.normalized;
-            float sqrMinDist = minWaypointDistance * minWaypointDistance;
-            if ( sqrDistance <= sqrMinDist ) {
-                UpdateTargetPoint( currentTargetIndex++ );
+        private void CheckIfPatrolIsPossible () {
+            if ( pathPoints == null ) {
+#if UNITY_EDITOR
+                Debug.LogError( name + "'s path points variable is not set!" );
+#endif
+                return;
+            }
+
+            //if 1 or 0 points gtfo
+            if ( pathPoints.Value.Length <= 1 ) {
+#if UNITY_EDITOR
+                Debug.LogError( name + "'s path points variable has 1 or less points in it!" );
+#endif
+                return;
             }
         }
     }
