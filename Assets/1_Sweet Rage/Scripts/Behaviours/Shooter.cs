@@ -39,6 +39,7 @@
         public void StartShooting () {
             if ( !shooting ) {
                 shooting = true;
+                timer = 0;
 #if UNITY_EDITOR
                 Debug.Log( name + " started shooting!" );
 #endif
@@ -53,6 +54,11 @@
                 print( name + " stopped shooting" );
 #endif
             }
+        }
+
+        public void ResumeShooting () {
+            if ( !shooting )
+                shooting = true;
         }
 
         public void PauseShooting () {

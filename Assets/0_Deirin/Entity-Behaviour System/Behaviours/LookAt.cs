@@ -2,6 +2,7 @@
     using UnityEditor;
     using UnityEngine;
     using UnityEngine.Events;
+    using DG.Tweening;
 
     public class LookAt : BaseBehaviour {
         #region Inspector
@@ -25,14 +26,29 @@
 
         private bool inView = false;
         private Vector3 targetWorldLookDir;
+        private Vector3 startRotation;
+
+        protected override void CustomSetup () => startRotation = transform.localEulerAngles;
 
         public override void OnUpdate () {
-            if ( !target )
-                return;
+            if ( target ) {
+                RotateTowardsTarget();
+                ViewAngleCheck();
+            }
+            else {
+                RotateTowardsStartPos();
+            }
+        }
 
-            RotateTowardsTarget();
+        private void RotateTowardsStartPos () {
+            Quaternion currentLocalRotation = transform.localRotation;
+            transform.localRotation = Quaternion.identity;
 
-            ViewAngleCheck();
+            transform.localRotation = Quaternion.Slerp(
+              currentLocalRotation,
+              Quaternion.Euler( startRotation) ,
+              1 - Mathf.Exp( -turnSpeed * Time.deltaTime )
+            );
         }
 
         private void RotateTowardsTarget () {
@@ -69,15 +85,19 @@
                 OnTargetSeen.Invoke();
                 inView = true;
             }
-            else if ( inView == true ) {
+            else if ( inView == true && angle > viewAngle ) {
                 OnTargetLost.Invoke();
                 inView = false;
             }
         }
 
+#if UNITY_EDITOR
         private void OnDrawGizmos () {
             Handles.Label( transform.position + Vector3.up * 2, angle.ToString( "f2" ), EditorStyles.boldLabel );
+            Gizmos.color = inView ? Color.green : Color.red;
+            Gizmos.DrawSphere( transform.position, 1f );
         }
+#endif
 
         #region API
         public void SetTarget ( Transform target ) {
@@ -85,11 +105,15 @@
         }
 
         public void ReturnToTargetRotation () {
-            target = startTarget;
+            this.target = null;
+            inView = false;
+            OnTargetLost.Invoke();
         }
 
         public void RemoveTarget () {
             target = null;
+            inView = false;
+            OnTargetLost.Invoke();
         }
         #endregion
     }
