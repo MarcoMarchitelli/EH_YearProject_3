@@ -10,6 +10,7 @@
 
         [Header("Global Events")]
         public GameEvent OnPlaceTimeSkipClick;
+        public GameEvent OnLevelEndClick;
 
         private bool count;
         private float timer, duration;
@@ -35,6 +36,7 @@
             count = true;
 
             OnPlaceTimeSkipClick.OnInvoke += SkipHandler;
+            OnLevelEndClick.OnInvoke += LevelEndClickHandler;
         }
 
         public override void Tick () {
@@ -52,6 +54,10 @@
             }
         }
 
+        private void LevelEndClickHandler () {
+            gameData.GoToMainMenu();
+        }
+
         private void SkipHandler () {
             gameData.placeTimeUI.SetPercent( 0 );
             gameData.GoNext();
@@ -59,6 +65,7 @@
 
         public override void Exit () {
             OnPlaceTimeSkipClick.OnInvoke -= SkipHandler;
+            OnLevelEndClick.OnInvoke -= LevelEndClickHandler;
         }
     }
 }
