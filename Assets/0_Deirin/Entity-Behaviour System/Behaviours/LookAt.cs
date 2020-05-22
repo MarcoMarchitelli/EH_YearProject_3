@@ -1,4 +1,5 @@
 ﻿namespace Deirin.EB {
+    using UnityEditor;
     using UnityEngine;
     using UnityEngine.Events;
 
@@ -23,6 +24,7 @@
         #endregion
 
         private bool inView = false;
+        private Vector3 targetWorldLookDir;
 
         public override void OnUpdate () {
             if ( !target )
@@ -40,11 +42,11 @@
             Quaternion currentLocalRotation = transform.localRotation;
             transform.localRotation = Quaternion.identity;
 
-            Vector3 targetWorldLookDir = targetPos - transform.position;
+            targetWorldLookDir = targetPos - transform.position;
             Vector3 targetLocalLookDir = transform.InverseTransformDirection(targetWorldLookDir);
 
             targetLocalLookDir = Vector3.RotateTowards(
-              Vector3.forward,
+              transform.forward,
               targetLocalLookDir,
               Mathf.Deg2Rad * maxTurnAngle,
               0
@@ -59,9 +61,9 @@
             );
         }
 
+        float angle;
         private void ViewAngleCheck () {
-            Vector3 orientationToTarget = target.position - transform.position;
-            float angle = Vector3.Angle( transform.forward, orientationToTarget );
+            angle = Vector3.Angle( transform.forward, targetWorldLookDir );
 
             if ( inView == false && angle <= viewAngle ) {
                 OnTargetSeen.Invoke();
@@ -71,6 +73,10 @@
                 OnTargetLost.Invoke();
                 inView = false;
             }
+        }
+
+        private void OnDrawGizmos () {
+            Handles.Label( transform.position + Vector3.up * 2, angle.ToString( "f2" ), EditorStyles.boldLabel );
         }
 
         #region API

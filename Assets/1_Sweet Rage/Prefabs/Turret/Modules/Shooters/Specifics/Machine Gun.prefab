@@ -56,11 +56,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6166750828390419662, guid: af1e27d07ffe71942bb70847c89f0a41,
-        type: 3}
-      propertyPath: m_Name
-      value: Machine Gun
-      objectReference: {fileID: 0}
     - target: {fileID: 6166750828390419661, guid: af1e27d07ffe71942bb70847c89f0a41,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -116,6 +111,52 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
+        type: 3}
+      propertyPath: OnShoot.m_PersistentCalls.m_Calls.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
+        type: 3}
+      propertyPath: OnShoot.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
+        type: 3}
+      propertyPath: OnShoot.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
+        type: 3}
+      propertyPath: OnShoot.m_PersistentCalls.m_Calls.Array.data[4].m_Target
+      value: 
+      objectReference: {fileID: 1336072530964444597}
+    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
+        type: 3}
+      propertyPath: OnShoot.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
+      value: SendEntityToContainer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
+        type: 3}
+      propertyPath: OnShoot.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
+        type: 3}
+      propertyPath: fireRate
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
+        type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 6237022291049161715, guid: 2fbc08f27e765cc45a87244a26198054,
+        type: 3}
+    - target: {fileID: 6166750828390419662, guid: af1e27d07ffe71942bb70847c89f0a41,
+        type: 3}
+      propertyPath: m_Name
+      value: Machine Gun
+      objectReference: {fileID: 0}
     - target: {fileID: 6166750828390419658, guid: af1e27d07ffe71942bb70847c89f0a41,
         type: 3}
       propertyPath: turretType
@@ -131,7 +172,7 @@ PrefabInstance:
     - target: {fileID: 4914491675996663135, guid: af1e27d07ffe71942bb70847c89f0a41,
         type: 3}
       propertyPath: OnTargetSet.m_PersistentCalls.m_Calls.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4914491675996663135, guid: af1e27d07ffe71942bb70847c89f0a41,
         type: 3}
@@ -193,47 +234,6 @@ PrefabInstance:
       propertyPath: OnCast.m_PersistentCalls.m_Calls.Array.size
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
-        type: 3}
-      propertyPath: OnShoot.m_PersistentCalls.m_Calls.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
-        type: 3}
-      propertyPath: OnShoot.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
-        type: 3}
-      propertyPath: OnShoot.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
-        type: 3}
-      propertyPath: OnShoot.m_PersistentCalls.m_Calls.Array.data[4].m_Target
-      value: 
-      objectReference: {fileID: 1336072530964444597}
-    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
-        type: 3}
-      propertyPath: OnShoot.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
-      value: SendEntityToContainer
-      objectReference: {fileID: 0}
-    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
-        type: 3}
-      propertyPath: OnShoot.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
-        type: 3}
-      propertyPath: fireRate
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
-        type: 3}
-      propertyPath: projectilePrefab
-      value: 
-      objectReference: {fileID: 6237022291049161715, guid: 2fbc08f27e765cc45a87244a26198054,
-        type: 3}
     - target: {fileID: 4859916245005401493, guid: af1e27d07ffe71942bb70847c89f0a41,
         type: 3}
       propertyPath: m_Mesh

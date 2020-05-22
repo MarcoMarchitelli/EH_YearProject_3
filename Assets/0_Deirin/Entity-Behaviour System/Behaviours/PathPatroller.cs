@@ -17,18 +17,20 @@
 
         public float Speed => speed;
         public float CurrentSpeed => currentSpeed;
+        public float PathPercent => pathPercent;
 
         private Vector3 pointA, pointB;
         private int currentTargetIndex;
         private float startSpeed, currentSpeed;
         private bool patrolling;
-        private float percent, currentSegmentLenght;
+        private float percent, currentSegmentLenght, pathPercent;
 
         #region Overrides
         protected override void CustomSetup () {
             //initial setup
             patrolling = false;
             currentTargetIndex = 1;
+            pathPercent = 0;
 
             startSpeed = speed;
 
@@ -75,6 +77,7 @@
             percent += Time.deltaTime * currentSpeed / currentSegmentLenght;
             percent = Mathf.Clamp01( percent );
             transform.position = Vector3.Lerp( pointA, pointB, percent );
+            pathPercent = ( currentTargetIndex - 1 + percent ) / pathPoints.Value.Length;
 
             if ( percent == 1 ) {
                 UpdatePoints();

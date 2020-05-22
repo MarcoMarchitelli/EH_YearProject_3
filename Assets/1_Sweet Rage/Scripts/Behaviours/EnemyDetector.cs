@@ -86,7 +86,7 @@
                 return;
             }
             if ( e == currentTarget )
-                FindClosestTarget();
+                GetFurtherEnemyAlongPath();
         }
 
         public void ResetRange () {
@@ -118,19 +118,23 @@
             OnTargetSet.Invoke( currentTarget );
         }
 
-        private void FindClosestTarget () {
+        private void GetFurtherEnemyAlongPath () {
             int enemyCount = enemiesInRange.Count;
             if ( enemyCount == 0 )
                 return;
+
             Enemy t = enemiesInRange[0];
-            float dist = Vector3.Distance( t.transform.position, transform.position );
+            float maxPathPercent = t.pathPatroller.PathPercent;
+
             for ( int i = 1; i < enemyCount; i++ ) {
-                float newDist = Vector3.Distance( enemiesInRange[i].transform.position, transform.position );
-                if ( newDist < dist ) {
-                    dist = newDist;
-                    t = enemiesInRange[i];
+                Enemy tempEnemy = enemiesInRange[i];
+                float tempPercent = tempEnemy.pathPatroller.PathPercent;
+                if ( maxPathPercent < tempPercent ) {
+                    maxPathPercent = tempPercent;
+                    t = tempEnemy;
                 }
             }
+
             SetCurrentTarget( t );
         }
 
@@ -140,7 +144,7 @@
                 if ( objs[i].TryGetComponent( out tempEnemy ) )
                     enemiesInRange.Add( tempEnemy );
             }
-            FindClosestTarget();
+            GetFurtherEnemyAlongPath();
         }
 
         private void RangeSetHandler () {
