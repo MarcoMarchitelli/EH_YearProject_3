@@ -113,11 +113,11 @@
 
         public void ModuleExitHandler ( TurretModule module ) {
             if ( state == State.placed && module == this ) {
+                OnMouseExit.Invoke();
                 if ( mouseDowned )
                     Deplace();
                 mouseDowned = false;
                 mouseEntered = false;
-                OnMouseExit.Invoke();
             }
         }
         #endregion
