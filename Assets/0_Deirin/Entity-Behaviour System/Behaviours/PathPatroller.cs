@@ -8,6 +8,9 @@
         public Vector3ArrayVariable pathPoints;
         [SerializeField] private float speed;
         public float minSpeed = 0;
+        public bool randomOffset;
+        public Vector3 randomOffsetMin;
+        public Vector3 randomOffsetMax;
         public bool patrolOnSetup;
 
         [Header("Events")]
@@ -24,6 +27,7 @@
         private float startSpeed, currentSpeed;
         private bool patrolling;
         private float percent, currentSegmentLenght, pathPercent;
+        private Vector3 offset;
 
         #region Overrides
         protected override void CustomSetup () {
@@ -33,6 +37,12 @@
             pathPercent = 0;
 
             startSpeed = speed;
+
+            offset = new Vector3(
+                Random.Range( randomOffsetMin.x, randomOffsetMax.x ),
+                Random.Range( randomOffsetMin.y, randomOffsetMax.y ),
+                Random.Range( randomOffsetMin.z, randomOffsetMax.z )
+            );
 
             if ( patrolOnSetup )
                 StartPatrol();
@@ -50,6 +60,9 @@
 
             pointA = pathPoints.Value[0];
             pointB = pathPoints.Value[currentTargetIndex];
+
+            AddOffsetToPoints();
+
             currentSegmentLenght = Vector3.Distance( pointA, pointB );
             currentSpeed = startSpeed;
 
@@ -93,7 +106,10 @@
             }
 
             pointA = pointB;
-            pointB = pathPoints.Value[currentTargetIndex];
+            pointB = pathPoints.Value[currentTargetIndex] + offset;
+
+            AddOffsetToPoints();
+
             currentSegmentLenght = Vector3.Distance( pointA, pointB );
             percent = 0;
         }
@@ -113,6 +129,13 @@
 #endif
                 return;
             }
+        }
+
+        private void AddOffsetToPoints () {
+            Quaternion lookRot = Quaternion.LookRotation( (pointB - pointA).normalized, transform.up );
+            offset = lookRot * offset;
+            pointA += offset;
+            pointB += offset;
         }
     }
 }
