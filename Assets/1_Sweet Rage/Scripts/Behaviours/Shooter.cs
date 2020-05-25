@@ -17,29 +17,39 @@
         public float FireRate => fireRate;
 
         private float timer, timeBewteenShots;
-        private bool shooting;
+        private bool counting, canShoot, shooting;
         private float startFireRate;
 
         protected override void CustomSetup () {
             startFireRate = fireRate;
             timeBewteenShots = 1f / fireRate;
+            timer = timeBewteenShots;
+            shooting = false;
+            counting = true;
         }
 
         public override void OnUpdate () {
-            if ( shooting ) {
+            if ( counting ) {
                 timer += Time.deltaTime;
                 if ( timer >= timeBewteenShots ) {
-                    Shoot();
-                    timer = 0;
+                    canShoot = true;
+                    counting = false;
                 }
             }
+
+            if ( shooting )
+                if ( canShoot ) {
+                    Shoot();
+                    timer = 0;
+                    canShoot = false;
+                    counting = true;
+                }
         }
 
         #region API
         public void StartShooting () {
             if ( !shooting ) {
                 shooting = true;
-                timer = 0;
 #if UNITY_EDITOR
                 Debug.Log( name + " started shooting!" );
 #endif
@@ -49,21 +59,10 @@
         public void StopShooting () {
             if ( shooting ) {
                 shooting = false;
-                timer = 0;
 #if UNITY_EDITOR
                 print( name + " stopped shooting" );
 #endif
             }
-        }
-
-        public void ResumeShooting () {
-            if ( !shooting )
-                shooting = true;
-        }
-
-        public void PauseShooting () {
-            if ( shooting )
-                shooting = false;
         }
 
         public void SetFireRate ( float value ) {

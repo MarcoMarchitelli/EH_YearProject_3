@@ -48,6 +48,9 @@
         }
 
         private void ChargeChangeHandler ( int currentCharge ) {
+            if ( currentCharge == 0 )
+                active = false;
+
             int count = fireTickValues.Length;
             if ( damageReceiver && currentCharge > 0 && count > 0 && count >= currentCharge ) {
                 active = true;
