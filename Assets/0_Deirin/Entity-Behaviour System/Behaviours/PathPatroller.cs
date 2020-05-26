@@ -8,9 +8,8 @@
         public Vector3ArrayVariable pathPoints;
         [SerializeField] private float speed;
         public float minSpeed = 0;
-        public bool randomOffset;
-        public Vector3 randomOffsetMin;
-        public Vector3 randomOffsetMax;
+        public float horizontalOffsetMin;
+        public float horizontalOffsetMax;
         public bool patrolOnSetup;
 
         [Header("Events")]
@@ -27,7 +26,7 @@
         private float startSpeed, currentSpeed;
         private bool patrolling;
         private float percent, currentSegmentLenght, pathPercent;
-        private Vector3 offset;
+        private float offset;
 
         #region Overrides
         protected override void CustomSetup () {
@@ -38,11 +37,7 @@
 
             startSpeed = speed;
 
-            offset = new Vector3(
-                Random.Range( randomOffsetMin.x, randomOffsetMax.x ),
-                Random.Range( randomOffsetMin.y, randomOffsetMax.y ),
-                Random.Range( randomOffsetMin.z, randomOffsetMax.z )
-            );
+            offset = Random.Range( horizontalOffsetMin, horizontalOffsetMax );
 
             if ( patrolOnSetup )
                 StartPatrol();
@@ -106,7 +101,7 @@
             }
 
             pointA = pointB;
-            pointB = pathPoints.Value[currentTargetIndex] + offset;
+            pointB = pathPoints.Value[currentTargetIndex];
 
             AddOffsetToPoints();
 
@@ -132,10 +127,17 @@
         }
 
         private void AddOffsetToPoints () {
-            Quaternion lookRot = Quaternion.LookRotation( (pointB - pointA).normalized, transform.up );
-            offset = lookRot * offset;
-            pointA += offset;
-            pointB += offset;
+            Vector3 localForward = ( pointB - pointA ).normalized;
+            Vector3 localRight = Vector3.Cross( localForward, Vector3.up );
+
+            pointA += offset * localRight;
+            pointB += offset * localRight;
+        }
+
+        private void OnDrawGizmos () {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawSphere( pointA, 1.5f );
+            Gizmos.DrawSphere( pointB, 1.5f );
         }
     }
 }
