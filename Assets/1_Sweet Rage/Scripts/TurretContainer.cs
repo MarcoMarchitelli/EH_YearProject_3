@@ -173,22 +173,24 @@
             modifierModules.Clear();
         }
 
-        private void ActivateArrow () {
+        private void ActivateArrow ( TurretModule module ) {
             if ( moduleCount < maxModules ) {
-                arrow.transform.position = currentTopPosition + arrowOffset;
-                arrow.SetActive( true );
+                if ( module.turretType.moduleType == TurretType.ModuleType.shooter || hasShooter ) {
+                    arrow.transform.position = currentTopPosition + arrowOffset;
+                    arrow.SetActive( true );
+                }
             }
         }
         #endregion
 
         #region Event Handlers
-        public void HandleModuleSelection ( TurretModule module ) => ActivateArrow();
+        public void HandleModuleSelection ( TurretModule module ) => ActivateArrow( module );
 
         public void HandleModuleDeselection ( TurretModule module ) => arrow.SetActive( false );
 
         public void HandleModulePlacement ( TurretModule module ) => arrow.SetActive( false );
 
-        public void HandleModuleDeplacement ( TurretModule module ) => ActivateArrow();
+        public void HandleModuleDeplacement ( TurretModule module ) => ActivateArrow( module );
 
         private void HandleElementAttachment ( TurretModule elementModule ) {
             ElementSource e;
