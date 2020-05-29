@@ -8,11 +8,15 @@
     public class EndGate : MonoBehaviour {
         [Min(0)] public float maxLife;
         public UnityEvent OnLifeDepleated;
-        public UnityEvent_Float OnLifeChanged;
+        public UnityEvent_Float OnLifeChangedPercent;
 
         private float currentLife;
         private DamageReceiver damageReceiver;
-        
+
+        private void Awake () {
+            currentLife = maxLife;
+        }
+
         private void OnTriggerEnter ( Collider other ) {
             Enemy e = other.GetComponentInParent<Enemy>();
             if ( e ) {
@@ -26,7 +30,7 @@
         public void SetLife ( float value ) {
             if ( value != currentLife ) {
                 currentLife = Mathf.Max( 0, value );
-                OnLifeChanged.Invoke( currentLife );
+                OnLifeChangedPercent.Invoke( Mathf.Clamp01( currentLife / maxLife ) );
                 if ( currentLife <= 0 ) {
                     currentLife = 0;
                     OnLifeDepleated.Invoke();
