@@ -2,13 +2,11 @@
     using UnityEditor;
     using UnityEngine;
     using UnityEngine.Events;
-    using DG.Tweening;
 
     public class LookAt : BaseBehaviour {
         #region Inspector
         [Header("Refs")]
         public Transform target;
-        public Transform startTarget;
 
         [Header("Params")]
         public bool X;

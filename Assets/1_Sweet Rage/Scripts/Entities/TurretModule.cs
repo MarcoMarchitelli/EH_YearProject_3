@@ -80,10 +80,9 @@
             }
 
             if ( mouseDowned ) {
-                if ( state == State.placed ) {
-                    mouseDowned = false;
+                mouseDowned = false;
+                if ( state == State.placed )
                     OnMouseUp.Invoke();
-                }
             }
         }
 
