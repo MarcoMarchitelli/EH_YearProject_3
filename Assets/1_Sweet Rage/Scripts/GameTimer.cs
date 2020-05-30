@@ -30,14 +30,16 @@
         }
 
         public void SetTimeMultiplier ( float value ) {
-            DOTween.To( GetTimeScale, SetTimeScale, value, tweenDuration ).Play();
-        } 
+            previousTimeScale = value;
+            if ( paused == false )
+                DOTween.To( GetTimeScale, SetTimeScale, value, tweenDuration ).Play();
+        }
         #endregion
 
         private void SetTimeScale ( float value ) {
             Time.timeScale = value;
         }
 
-        private float GetTimeScale() => Time.timeScale;
+        private float GetTimeScale () => Time.timeScale;
     }
 }
