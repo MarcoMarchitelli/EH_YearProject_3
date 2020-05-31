@@ -11,9 +11,11 @@
         [Header("References")]
         public Transform firstModulePlacementPosition;
         public GameObject arrow;
+        public CapsuleCollider capsuleCollider;
 
         [Header("Parameters")]
         public int maxModules;
+        public float moduleHeight;
         public Vector3 arrowOffset;
         public float modulesAnimationDuration = .5f;
         [ReadOnly] public State state;
@@ -81,6 +83,9 @@
 
                 break;
             }
+
+            capsuleCollider.height += moduleHeight;
+
             SortModules();
         }
 
@@ -114,6 +119,9 @@
             }
             module.graphics.DOKill();
             module.graphics.position = module.transform.position;
+
+            capsuleCollider.height -= moduleHeight;
+
             SortModules();
         }
         #endregion
