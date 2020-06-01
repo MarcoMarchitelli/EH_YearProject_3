@@ -248,9 +248,8 @@
             }
         }
         #endregion
-
-
     }
+
     [System.Serializable]
     public class UnityTurretContainerEvent : UnityEvent<TurretContainer> { }
 }

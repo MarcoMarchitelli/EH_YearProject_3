@@ -8,6 +8,7 @@
         public List<BaseTweener> tweeners = new List<BaseTweener>();
 
         [Header("Events")]
+        public UnityEvent OnPlay;
         public UnityEvent OnAllPlayEnd;
         public UnityEvent OnAllRewindEnd;
 
@@ -36,6 +37,7 @@
         public void Play () {
             foreach ( var tweener in tweeners )
                 tweener.Play();
+            OnPlay.Invoke();
         }
 
         public void Rewind () {
