@@ -1,6 +1,7 @@
 ﻿namespace SweetRage {
     using UnityEngine;
     using DG.Tweening;
+    using System.Collections;
 
     public class GameTimer : MonoBehaviour {
         [SerializeField] private float timeMultiplier;
@@ -8,7 +9,7 @@
 
         public static GameTimer instance;
         private bool paused;
-        private float previousTimeScale;
+        private float previousTimeScale, timer;
 
         private void Awake () {
             if ( !instance )
@@ -18,28 +19,37 @@
         #region API
         public void Pause () {
             previousTimeScale = Time.timeScale;
-            DOTween.To( GetTimeScale, SetTimeScale, 0, tweenDuration ).Play();
+            StopAllCoroutines();
+            StartCoroutine( TimeScaleAnim( 0 ) );
             paused = true;
         }
 
         public void Resume () {
             if ( paused ) {
-                DOTween.To( GetTimeScale, SetTimeScale, previousTimeScale, tweenDuration ).Play();
+                StopAllCoroutines();
+                StartCoroutine( TimeScaleAnim( previousTimeScale ) );
                 paused = false;
             }
         }
 
         public void SetTimeMultiplier ( float value ) {
             previousTimeScale = value;
-            if ( paused == false )
-                DOTween.To( GetTimeScale, SetTimeScale, value, tweenDuration ).Play();
+            if ( paused == false ) {
+                StopAllCoroutines();
+                StartCoroutine( TimeScaleAnim( value ) );
+            }
         }
         #endregion
 
-        private void SetTimeScale ( float value ) {
-            Time.timeScale = value;
-        }
+        private IEnumerator TimeScaleAnim ( float value ) {
+            timer = 0;
+            previousTimeScale = Time.timeScale;
+            while ( timer <= tweenDuration ) {
+                timer += Time.fixedUnscaledDeltaTime;
 
-        private float GetTimeScale () => Time.timeScale;
+                Time.timeScale = Mathf.Lerp( previousTimeScale, value, Mathf.Clamp01( timer / tweenDuration ) );
+                yield return null;
+            }
+        }
     }
 }
