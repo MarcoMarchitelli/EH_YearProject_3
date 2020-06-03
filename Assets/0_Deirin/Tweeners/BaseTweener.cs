@@ -23,9 +23,7 @@
 
         protected Tween tween;
 
-        private void Awake () {
-            TweenSetup();
-        }
+        private void Awake () => TweenSetup();
 
         protected abstract void AssignTween ();
 

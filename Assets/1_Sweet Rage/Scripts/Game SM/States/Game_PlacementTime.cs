@@ -54,9 +54,7 @@
             }
         }
 
-        private void LevelEndClickHandler () {
-            gameData.GoToMainMenu();
-        }
+        private void LevelEndClickHandler () => gameData.GoToMainMenu();
 
         private void SkipHandler () {
             gameData.placeTimeUI.SetPercent( 0 );
@@ -64,6 +62,8 @@
         }
 
         public override void Exit () {
+            base.Exit();
+
             OnPlaceTimeSkipClick.OnInvoke -= SkipHandler;
             OnLevelEndClick.OnInvoke -= LevelEndClickHandler;
         }

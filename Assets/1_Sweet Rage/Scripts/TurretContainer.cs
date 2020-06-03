@@ -29,9 +29,7 @@
         private bool hasShooter => shooterModules.Count > 0;
         private int moduleCount => shooterModules.Count + elementModules.Count + modifierModules.Count;
 
-        private void Awake () {
-            currentTopPosition = transform.position;
-        }
+        private void Awake () => currentTopPosition = transform.position;
 
         #region API
         public void SetState ( int state ) {
