@@ -29,13 +29,18 @@
         private Collider[] objs;
         private Enemy tempEnemy;
         private float startRange;
+        private int enemyCount;
 
         protected override void CustomSetup () {
             startRange = range;
             enemiesInRange = new List<Enemy>();
             Activate( activeOnSetup );
             RangeSetHandler();
+
+            CustomGlobalTick.OnTick += CustomTickHandler;
         }
+
+        private void CustomTickHandler () => CheckForFurthestEnemy();
 
         #region Monos
         private void OnTriggerEnter ( Collider other ) {
@@ -44,7 +49,9 @@
             if ( enemyMask == ( enemyMask | ( 1 << other.gameObject.layer ) ) ) {
                 tempEnemy = other.GetComponentInParent<Enemy>();
                 if ( tempEnemy ) {
+#if UNITY_EDITOR
                     print( name + " found enemy!" );
+#endif
                     if ( !enemiesInRange.Contains( tempEnemy ) )
                         AddEnemy( tempEnemy );
                 }
@@ -57,7 +64,9 @@
             if ( enemyMask == ( enemyMask | ( 1 << other.gameObject.layer ) ) ) {
                 tempEnemy = other.GetComponentInParent<Enemy>();
                 if ( tempEnemy ) {
+#if UNITY_EDITOR
                     print( name + " lost enemy!" );
+#endif
                     RemoveEnemy( tempEnemy );
                 }
             }
@@ -66,27 +75,28 @@
 
         #region API
         public void Activate ( bool value ) {
-            //if ( value == active )
-            //    return;
-
             active = value;
             capsuleCollider.enabled = value;
             ClearEnemies();
             if ( active ) {
+#if UNITY_EDITOR
                 print( name + " activated!" );
+#endif
                 FindAllEnemiesInRange();
             }
         }
 
         public void RemoveEnemy ( Enemy e ) {
             enemiesInRange.Remove( e );
-            if ( enemiesInRange.Count == 0 ) {
+            enemyCount = enemiesInRange.Count;
+
+            if ( enemyCount == 0 ) {
                 currentTarget = null;
                 OnEnemiesLost.Invoke();
                 return;
             }
             if ( e == currentTarget )
-                GetFurtherEnemyAlongPath();
+                GetFurthestEnemyAlongPath();
         }
 
         public void ResetRange () {
@@ -109,6 +119,8 @@
 
         private void AddEnemy ( Enemy e ) {
             enemiesInRange.Add( e );
+            enemyCount = enemiesInRange.Count;
+
             if ( !currentTarget )
                 SetCurrentTarget( e );
         }
@@ -118,8 +130,7 @@
             OnTargetSet.Invoke( currentTarget );
         }
 
-        private void GetFurtherEnemyAlongPath () {
-            int enemyCount = enemiesInRange.Count;
+        private void GetFurthestEnemyAlongPath () {
             if ( enemyCount == 0 )
                 return;
 
@@ -138,13 +149,36 @@
             SetCurrentTarget( t );
         }
 
+        private void CheckForFurthestEnemy () {
+            if ( enemyCount <= 0 )
+                return;
+
+            if ( currentTarget == null )
+                return;
+
+            Enemy t = null;
+            float maxPathPercent = currentTarget.pathPatroller.PathPercent;
+
+            for ( int i = 1; i < enemyCount; i++ ) {
+                Enemy tempEnemy = enemiesInRange[i];
+                float tempPercent = tempEnemy.pathPatroller.PathPercent;
+                if ( maxPathPercent < tempPercent ) {
+                    maxPathPercent = tempPercent;
+                    t = tempEnemy;
+                }
+            }
+
+            if ( t )
+                SetCurrentTarget( t );
+        }
+
         private void FindAllEnemiesInRange () {
             objs = Physics.OverlapSphere( capsuleCollider.transform.position, capsuleCollider.radius, enemyMask );
             for ( int i = 0; i < objs.Length; i++ ) {
                 if ( objs[i].TryGetComponent( out tempEnemy ) )
                     enemiesInRange.Add( tempEnemy );
             }
-            GetFurtherEnemyAlongPath();
+            GetFurthestEnemyAlongPath();
         }
 
         private void RangeSetHandler () {
