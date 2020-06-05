@@ -3,6 +3,7 @@
 		_MainTex("Main Texture",2D) = "white" {}
 		_Tint("Tint", Color) = (1, 1, 1, 1)
 
+		_LambertStep("Lambert Step", Range(0,1)) = 0
 		_ShadingIntesity("Shading Palette Intensity", Range(0,1)) = 0
 		_LightColorIntensity("Light Color Intensity", Range(0,1)) = 0
 		_ShadowIntesity("Shadow Intesity", Range(0,1)) = 0
@@ -48,13 +49,13 @@
 			};
 
 			sampler2D _MainTex;
-			sampler2D _ShadingPalette;
 			fixed4 _Tint;
 			float _Glossiness;
 			float _Metallic;
 			float _LightColorIntensity;
 			float _ShadowIntesity;
 			float _ShadingIntesity;
+			float _LambertStep;
 
 			float map(float s, float a1, float a2, float b1, float b2)
 			{
@@ -82,29 +83,22 @@
 
 			fixed4 fragmentShader(v2f IN) : SV_Target {
 				//lambert
-				float3 normal = normalize(IN.worldNormal);
-				float lambert = dot(_WorldSpaceLightPos0, normal);
-				lambert = map(lambert, -1, 1, 0.01, 0.99);
-
-				//texture sampling order (left to right)
-				lambert = 1 - lambert;
-
-				//shading UV
-				float2 shadingUV = float2(lambert, 0);
-				fixed4 shadingColor = tex2D(_ShadingPalette, shadingUV);
+				float3 normal = normalize( IN.worldNormal );
+				float lambert = dot( _WorldSpaceLightPos0, normal );
+				lambert = map( lambert, -1, 1, 0.01, 0.99 );
+				lambert = step(lambert, _LambertStep);
 
 				//light attenuation
-				float shadow = SHADOW_ATTENUATION(IN);
+				float shadow = SHADOW_ATTENUATION( IN );
 
 				//color
-				fixed4 color = tex2D(_MainTex, IN.uv);
+				fixed4 color = tex2D( _MainTex, IN.uv );
 				color *= _Tint;
-				color *= lerp(1, _LightColor0, _LightColorIntensity);
-				color *= lerp(1, shadow, _ShadowIntesity);
-				//color *= lerp(1, shadingColor, _ShadingIntesity);
-				color = UnityBlendOverlay(color, shadingColor, _ShadingIntesity);
+				color *= lerp( 1, _LightColor0, _LightColorIntensity );
+				color *= lerp( 1, shadow, _ShadowIntesity );
+				color = UnityBlendOverlay( color, lambert, _ShadingIntesity );
 
-				return saturate(color);
+				return saturate( color );
 			}
 
 			ENDCG
@@ -114,33 +108,33 @@
 
 		Pass {
 
-				Cull Front
+			Cull Front
 
-				CGPROGRAM
+			CGPROGRAM
 
-				#pragma vertex VertexProgram
-				#pragma fragment FragmentProgram
+			#pragma vertex VertexProgram
+			#pragma fragment FragmentProgram
 
-				half _OutlineWidth;
-				float _DistanceInfluence;
+			half _OutlineWidth;
+			float _DistanceInfluence;
 
-				float4 VertexProgram(float4 position : POSITION, float3 normal : NORMAL) : SV_POSITION {
-					float4 clipPosition = UnityObjectToClipPos(position);
-					float3 clipNormal = mul((float3x3) UNITY_MATRIX_VP, mul((float3x3) UNITY_MATRIX_M, normal));
-					float distanceInfluence = lerp(1, clipPosition.w, _DistanceInfluence);
-					float2 offset = normalize(clipNormal.xy) / _ScreenParams.xy * _OutlineWidth * distanceInfluence * 2;
-					clipPosition.xy += offset;
-					return clipPosition;
-				}
-
-				half4 _OutlineColor;
-
-				half4 FragmentProgram() : SV_TARGET {
-					return _OutlineColor;
-				}
-
-				ENDCG
-
+			float4 VertexProgram(float4 position : POSITION, float3 normal : NORMAL) : SV_POSITION {
+				float4 clipPosition = UnityObjectToClipPos(position);
+				float3 clipNormal = mul((float3x3) UNITY_MATRIX_VP, mul((float3x3) UNITY_MATRIX_M, normal));
+				float distanceInfluence = lerp(1, clipPosition.w, _DistanceInfluence);
+				float2 offset = normalize(clipNormal.xy) / _ScreenParams.xy * _OutlineWidth * distanceInfluence * 2;
+				clipPosition.xy += offset;
+				return clipPosition;
 			}
+
+			half4 _OutlineColor;
+
+			half4 FragmentProgram() : SV_TARGET {
+				return _OutlineColor;
+			}
+
+			ENDCG
+
+		}
 	}
 }
