@@ -87,6 +87,7 @@
 				float lambert = dot( _WorldSpaceLightPos0, normal );
 				lambert = map( lambert, -1, 1, 0.01, 0.99 );
 				lambert = step(lambert, _LambertStep);
+				lambert = 1 - lambert;
 
 				//light attenuation
 				float shadow = SHADOW_ATTENUATION( IN );
@@ -96,7 +97,9 @@
 				color *= _Tint;
 				color *= lerp( 1, _LightColor0, _LightColorIntensity );
 				color *= lerp( 1, shadow, _ShadowIntesity );
-				color = UnityBlendOverlay( color, lambert, _ShadingIntesity );
+
+				if( lambert <= 0 )
+					color = UnityBlendOverlay( color, lambert, _ShadingIntesity );
 
 				return saturate( color );
 			}
