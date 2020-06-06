@@ -7,7 +7,7 @@
     public class TurretModule : BaseEntity {
         public enum State { inMenu, selected, placed, preview }
 
-        [ReadOnly]public State state;
+        [ReadOnly] public State state;
 
         [Header("Data")]
         public TurretType turretType;

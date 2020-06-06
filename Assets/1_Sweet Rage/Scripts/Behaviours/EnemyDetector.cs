@@ -113,7 +113,9 @@
         #region Privates
         private void ClearEnemies () {
             enemiesInRange.Clear();
+            enemyCount = 0;
             currentTarget = null;
+
             OnEnemiesLost.Invoke();
         }
 
@@ -131,7 +133,7 @@
         }
 
         private void GetFurthestEnemyAlongPath () {
-            if ( enemyCount == 0 )
+            if ( enemyCount <= 0 )
                 return;
 
             Enemy t = enemiesInRange[0];
@@ -178,6 +180,7 @@
                 if ( objs[i].TryGetComponent( out tempEnemy ) )
                     enemiesInRange.Add( tempEnemy );
             }
+            enemyCount = enemiesInRange.Count;
             GetFurthestEnemyAlongPath();
         }
 
