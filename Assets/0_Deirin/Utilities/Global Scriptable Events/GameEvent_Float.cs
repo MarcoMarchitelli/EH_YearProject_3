@@ -5,6 +5,7 @@
     [CreateAssetMenu( menuName = "Deirin/Utilities/Global Game Events/Float" )]
     public class GameEvent_Float : ScriptableObject {
         [SerializeField] private float value;
+        public System.Action<float> OnInvoke;
 
         private List<GameEventListener_Float> listeners = new List<GameEventListener_Float>();
 
@@ -26,6 +27,7 @@
             for ( int i = 0; i < listeners.Count; i++ ) {
                 listeners[i].OnInvoke( value );
             }
+            OnInvoke?.Invoke( value );
         }
     }
 }

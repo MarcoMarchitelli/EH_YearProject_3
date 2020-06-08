@@ -2,7 +2,6 @@
     using UnityEngine;
     using UnityEngine.Events;
     using Deirin.Utilities;
-    using System;
 
     public class Game_Wave : Game_BaseState {
         [Header("Events")]
@@ -12,6 +11,7 @@
         [Header("Global Events")]
         public GameEvent OnEnemyReachedEnd;
         public GameEvent OnLevelEndClick;
+        public GameEvent_Float OnEndGateLifeChange;
 
         public override void Enter () {
             base.Enter();
@@ -30,6 +30,7 @@
             gameData.currentLevel.CurrentWave.OnWaveEnd.AddListener( WaveEndHandler );
             OnEnemyReachedEnd.OnInvoke += LossHandler;
             OnLevelEndClick.OnInvoke += LevelEndClickHandler;
+            OnEndGateLifeChange.OnInvoke += EndGateLifeChangeHandler;
         }
 
         public override void Tick () {
@@ -39,13 +40,11 @@
                 OnLeftMouseUp.Invoke();
         }
 
-        private void LevelEndClickHandler () {
-            gameData.GoToMainMenu();
-        }
+        private void EndGateLifeChangeHandler ( float percent ) => gameData.currentLevel.SetCurrentScore( percent );
 
-        public void LossHandler () {
-            gameData.GoLoss();
-        }
+        private void LevelEndClickHandler () => gameData.GoToMainMenu();
+
+        public void LossHandler () => gameData.GoLoss();
 
         private void WaveEndHandler ( int id ) {
             gameData.currentLevel.CurrentWave.gameObject.SetActive( false );

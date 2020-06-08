@@ -3,6 +3,7 @@
     using UnityEditor;
 
     [CustomEditor( typeof( TweenersContainer ) )]
+    [CanEditMultipleObjects]
     public class TweenersContainerEditor : Editor {
         private TweenersContainer tc;
 

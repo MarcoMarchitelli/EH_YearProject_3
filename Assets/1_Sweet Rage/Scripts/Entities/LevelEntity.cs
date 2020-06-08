@@ -2,11 +2,16 @@
     using UnityEngine;
     using Deirin.EB;
     using System.Collections.Generic;
+    using Deirin.Utilities;
 
     public class LevelEntity : BaseEntity {
         [Header("Params")]
         public string levelName;
         public Sprite mapSprite;
+
+        [ReadOnly] public float maxScore;
+        private float currentScore;
+        public float CurrentScore => currentScore;
 
         private int currentWaveIndex;
         private GameObject modulesContainer;
@@ -30,7 +35,7 @@
             if ( currentWaveIndex >= waves.Length ) {
                 return false;
             }
-            
+
             currentWave = waves[currentWaveIndex];
             //RuntimeLevelData.turretModules.Clear();
             foreach ( var module in currentWave.modules ) {
@@ -41,6 +46,15 @@
             }
 
             return true;
+        }
+
+        public void SetCurrentScore ( float score ) {            
+            currentScore = score.Clamp01();
+        }
+
+        public void SaveMaxScore () {
+            if ( currentScore > maxScore )
+                maxScore = currentScore;
         }
     }
 }

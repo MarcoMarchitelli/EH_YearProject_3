@@ -15,6 +15,7 @@
         public Image star3;
         public Sprite starEmpty;
         public Sprite starFull;
+        public Color emptyStarColor;
 
         [Header("Events")]
         public UnityEvent_LevelEntity OnClick;
@@ -46,14 +47,30 @@
         }
 
         public void UpdateScoreUI () {
-            float percent = 1;
-
-            if ( star1 )
-                star1.sprite = percent >= .3f ? starFull : starEmpty;
-            if ( star2 )
-                star2.sprite = percent >= .6f ? starFull : starEmpty;
-            if ( star3 )
-                star3.sprite = percent >= .9f ? starFull : starEmpty;
+            if ( star1 ) {
+                if ( level.maxScore >= .3f )
+                    star1.sprite = starFull;
+                else {
+                    star1.sprite = starEmpty;
+                    star1.color = emptyStarColor;
+                }
+            }
+            if ( star2 ) {
+                if ( level.maxScore >= .6f )
+                    star2.sprite = starFull;
+                else {
+                    star2.sprite = starEmpty;
+                    star2.color = emptyStarColor;
+                }
+            }
+            if ( star3 ) {
+                if ( level.maxScore >= .9f )
+                    star3.sprite = starFull;
+                else {
+                    star3.sprite = starEmpty;
+                    star3.color = emptyStarColor;
+                }
+            }
         }
 
         public void Click () {

@@ -9,7 +9,13 @@ public class LifebarUI : MonoBehaviour {
     public Image image;
 
     [Header("Parameters")]
-    public Color colorA, colorB, colorC;
+    public float lerpStartOffset = .1f;
+    public Color colorA;
+    [Range(0,1)] public float colorAPercent;
+    public Color colorB;
+    [Range(0,1)] public float colorBPercent;
+    public Color colorC;
+    [Range(0,1)] public float colorCPercent;
     public float lerpSpeed;
 
     public void Lerp ( float t ) {
@@ -18,10 +24,10 @@ public class LifebarUI : MonoBehaviour {
 
         Color targetColor;
 
-        if ( t > .4f )
-            targetColor = t.Remap( 0.6f, 0.7f, colorB, colorA );
+        if ( t > colorCPercent + lerpStartOffset )
+            targetColor = t.Remap( colorBPercent, colorBPercent + lerpStartOffset, colorB, colorA );
         else
-            targetColor = t.Remap( 0.3f, 0.4f, colorC, colorB );
+            targetColor = t.Remap( colorCPercent, colorCPercent + lerpStartOffset, colorC, colorB );
 
         image.DOColor( targetColor, lerpSpeed ).SetEase( Ease.Linear ).Play();
     }
