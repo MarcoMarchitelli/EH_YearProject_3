@@ -10,25 +10,45 @@
         public Transform endGateTransform;
 
         [Header("Parameters")]
+        public float gateOpeningDuration = 1f;
         public FallSequence[] sequences;
 
-        private bool gateOpen;
-        private Tween gateUIOpen, gateUIClose;
-        
-        private void Awake () {
-            gateUIOpen = endGateTransform.DOBlendableLocalMoveBy( Vector3.up * -70, 1 );
-            gateUIOpen.SetUpdate( true );
-            gateUIOpen.SetAutoKill( false );
-            gateUIOpen.onComplete += GateOpenHandler;
+        private bool gateOpen, opening, closing;
+        private float timer;
+        private Vector3 startPos, endPos;
+        private System.Action OnGateOpen;
 
-            gateUIClose = endGateTransform.DOBlendableLocalMoveBy( Vector3.up * 70, 1 );
-            gateUIClose.SetUpdate( true );
-            gateUIClose.SetAutoKill( false );
-            gateUIClose.onPlay += GateCloseHandler;
+        private void Awake () {
+            endPos = endGateTransform.position + Vector3.up * -145;
+            startPos = endPos + Vector3.up * 70;
 
             foreach ( FallSequence sequence in sequences ) {
                 sequence.Setup();
                 sequence.sequence.onComplete += SequenceCompletionHandler;
+            }
+        }
+
+        private void Update () {
+            if ( opening ) {
+                timer += Time.deltaTime;
+                float percent = timer / gateOpeningDuration;
+                endGateTransform.position = Vector3.Lerp( startPos, endPos, percent.Clamp01() );
+                if ( percent == 1 ) {
+                    timer = 0;
+                    gateOpen = true;
+                    opening = false;
+                    OnGateOpen?.Invoke();
+                }
+            }
+            else if ( closing ) {
+                timer += Time.deltaTime;
+                float percent = timer / gateOpeningDuration;
+                endGateTransform.position = Vector3.Lerp( endPos, startPos, percent.Clamp01() );
+                if ( percent == 1 ) {
+                    timer = 0;
+                    gateOpen = false;
+                    closing = false;
+                }
             }
         }
 
@@ -42,13 +62,11 @@
                 }
             }
 
-            if ( allEnded )
-                gateUIClose.PlayForward();
+            if ( allEnded ) {
+                opening = false;
+                closing = true;
+            }
         }
-
-        private void GateOpenHandler () => gateOpen = true;
-
-        private void GateCloseHandler () => gateOpen = false;
 
         public void SetPercent ( float percent ) {
             percent.Clamp01();
@@ -61,9 +79,9 @@
             else {
                 foreach ( FallSequence s in sequences ) {
                     if ( s.started == false && percent < s.healthBarPercent )
-                        s.sequence.PlayForward();
+                        OnGateOpen += s.sequence.PlayForward;
                 }
-                gateUIOpen.PlayForward();
+                opening = true;
             }
         }
     }
@@ -88,9 +106,13 @@
             sequence = DOTween.Sequence();
             Vector3 targetEulers = new Vector3( 0,0,UnityEngine.Random.Range(minTiltAngle, maxTiltAngle) );
 
-            sequence.Append( image.transform.DOShakeRotation( shakeDuration, new Vector3( 0, 0, 30 ) ) );
+            sequence.AppendInterval( 1 );
             sequence.Append( image.transform.DOLocalRotate( targetEulers, rotateDuration ).SetRelative() );
-            sequence.Append( image.transform.DOLocalMoveY( UnityEngine.Random.Range( minFallAmount, maxFallAmount ), fallDuration ).SetRelative().SetEase( Ease.InCubic ) );
+            sequence.Append( 
+                image.transform.DOLocalMoveY( UnityEngine.Random.Range( minFallAmount, maxFallAmount ), fallDuration )
+                .SetRelative()
+                .SetEase( Ease.InCubic ) 
+            );
             sequence.Join( image.DOFade( 0, fadeDuration ).SetEase( Ease.InCubic ) );
 
             sequence.SetUpdate( true );
