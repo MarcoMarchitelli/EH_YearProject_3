@@ -46,16 +46,25 @@
 
         #region API
         public void Play () {
+            if ( tween.IsActive() == false )
+                AssignTween();
+
             OnPlay.Invoke();
             tween.PlayForward();
         }
 
         public void Rewind () {
+            if ( tween.IsActive() == false )
+                AssignTween();
+
             OnRewind.Invoke();
             tween.PlayBackwards();
         }
 
         public void RewindFromEnd () {
+            if ( tween.IsActive() == false )
+                AssignTween();
+
             tween.Goto( duration );
             Rewind();
         }
