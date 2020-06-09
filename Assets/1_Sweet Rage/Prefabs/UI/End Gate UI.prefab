@@ -281,7 +281,7 @@ MonoBehaviour:
   duration: 1
   ignoresTimescale: 0
   delay: 0
-  relative: 0
+  relative: 1
   ease: 0
   loops: 0
   loopType: 0
@@ -312,7 +312,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   target: {fileID: 3405833160723630542}
-  targetPosition: {x: 0, y: -2.5, z: 0}
+  targetPosition: {x: 0, y: 70, z: 0}
   local: 1
 --- !u!1 &3405833158987124903
 GameObject:
@@ -346,7 +346,7 @@ RectTransform:
   - {fileID: 3405833159215964130}
   - {fileID: 3405833159053263128}
   m_Father: {fileID: 3405833160723630542}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -486,7 +486,7 @@ RectTransform:
   m_Children:
   - {fileID: 3405833159937941922}
   m_Father: {fileID: 3405833160723630542}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -875,10 +875,11 @@ MonoBehaviour:
   lerpStartOffset: 0.05
   colorA: {r: 0.2847059, g: 0.9490196, b: 0.2847059, a: 1}
   colorAPercent: 0.9
-  colorB: {r: 0.9490196, g: 0.69098043, b: 0.2847059, a: 1}
+  colorB: {r: 0.9490196, g: 0.86643964, b: 0.28627446, a: 1}
   colorBPercent: 0.66
-  colorC: {r: 0.9490196, g: 0.2847059, b: 0.2847059, a: 1}
+  colorC: {r: 0.9490196, g: 0.5095273, b: 0.28627446, a: 1}
   colorCPercent: 0.33
+  colorD: {r: 0.9490196, g: 0.2847059, b: 0.2847059, a: 1}
   lerpSpeed: 0.2
 --- !u!1 &3405833160723630537
 GameObject:
@@ -911,8 +912,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 305363111384650521}
-  - {fileID: 3405833158987124900}
   - {fileID: 3405833159064714504}
+  - {fileID: 3405833158987124900}
   - {fileID: 3036593233192145354}
   - {fileID: 3405833159871352468}
   - {fileID: 5755155275066511592}
@@ -1829,57 +1830,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2334f569149e7494cb147f31321768fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  star3Percent: 0.9
-  star2Percent: 0.66
-  star1Percent: 0.33
-  On3StarLoss:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3157162876707023252}
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  On2StarLoss:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6823850582043931270}
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  On1StarLoss:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6069143508642221607}
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  endGateTransform: {fileID: 3405833160723630542}
+  sequences:
+  - image: {fileID: 3405833159661303426}
+    healthBarPercent: 0.33
+    minTiltAngle: -30
+    maxTiltAngle: 30
+    minFallAmount: -200
+    maxFallAmount: -400
+    shakeDuration: 0.2
+    rotateDuration: 0.7
+    fallDuration: 1
+    fadeDuration: 1
+    started: 0
+    ended: 0
+  - image: {fileID: 3405833159215964131}
+    healthBarPercent: 0.66
+    minTiltAngle: -30
+    maxTiltAngle: 30
+    minFallAmount: -200
+    maxFallAmount: -400
+    shakeDuration: 0.2
+    rotateDuration: 0.7
+    fallDuration: 1
+    fadeDuration: 1
+    started: 0
+    ended: 0
+  - image: {fileID: 3405833159053263129}
+    healthBarPercent: 0.9
+    minTiltAngle: -30
+    maxTiltAngle: 30
+    minFallAmount: -200
+    maxFallAmount: -400
+    shakeDuration: 0.2
+    rotateDuration: 0.7
+    fallDuration: 1
+    fadeDuration: 1
+    started: 0
+    ended: 0
 --- !u!1 &7828148951787068928
 GameObject:
   m_ObjectHideFlags: 0
@@ -2156,7 +2144,7 @@ MonoBehaviour:
   duration: 1
   ignoresTimescale: 0
   delay: 0
-  relative: 0
+  relative: 1
   ease: 0
   loops: 0
   loopType: 0
@@ -2187,5 +2175,5 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   target: {fileID: 3405833160723630542}
-  targetPosition: {x: 0, y: -72.5, z: 0}
+  targetPosition: {x: 0, y: -70, z: 0}
   local: 1

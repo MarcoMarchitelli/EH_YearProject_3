@@ -16,18 +16,22 @@ public class LifebarUI : MonoBehaviour {
     [Range(0,1)] public float colorBPercent;
     public Color colorC;
     [Range(0,1)] public float colorCPercent;
+    public Color colorD;
     public float lerpSpeed;
 
     public void Lerp ( float t ) {
         t = Mathf.Clamp01( t );
         image.DOFillAmount( t, lerpSpeed ).SetEase( Ease.Linear ).Play();
 
-        Color targetColor;
+        Color targetColor = Color.clear;
 
-        if ( t > colorCPercent + lerpStartOffset )
-            targetColor = t.Remap( colorBPercent, colorBPercent + lerpStartOffset, colorB, colorA );
+        if ( t > colorAPercent - lerpStartOffset )
+            targetColor = t.Remap( colorAPercent - lerpStartOffset, colorAPercent, colorB, colorA );
+        else 
+        if ( t > colorBPercent )
+            targetColor = t.Remap( colorBPercent, colorBPercent + lerpStartOffset, colorC, colorB );
         else
-            targetColor = t.Remap( colorCPercent, colorCPercent + lerpStartOffset, colorC, colorB );
+            targetColor = t.Remap( colorCPercent, colorCPercent + lerpStartOffset, colorD, colorC );
 
         image.DOColor( targetColor, lerpSpeed ).SetEase( Ease.Linear ).Play();
     }
