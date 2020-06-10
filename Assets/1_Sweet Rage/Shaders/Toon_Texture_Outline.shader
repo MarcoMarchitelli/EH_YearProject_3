@@ -4,9 +4,8 @@
 		_Tint("Tint", Color) = (1, 1, 1, 1)
 
 		_LambertStep("Lambert Step", Range(0,1)) = 0
-		_ShadingIntesity("Shading Palette Intensity", Range(0,1)) = 0
+		_ShadingIntesity("Shading Intensity", Range(0,1)) = 0
 		_LightColorIntensity("Light Color Intensity", Range(0,1)) = 0
-		_ShadowIntesity("Shadow Intesity", Range(0,1)) = 0
 
 		_OutlineColor("Outline Color", Color) = (0, 0, 0, 1)
 		_OutlineWidth("Outline Width", Range(0, 400)) = 0.03
@@ -53,7 +52,6 @@
 			float _Glossiness;
 			float _Metallic;
 			float _LightColorIntensity;
-			float _ShadowIntesity;
 			float _ShadingIntesity;
 			float _LambertStep;
 
@@ -86,7 +84,7 @@
 				float3 normal = normalize( IN.worldNormal );
 				float lambert = dot( _WorldSpaceLightPos0, normal );
 				lambert = map( lambert, -1, 1, 0.01, 0.99 );
-				lambert = step(lambert, _LambertStep);
+				lambert = step( lambert, _LambertStep );
 				lambert = 1 - lambert;
 
 				//light attenuation
@@ -96,10 +94,11 @@
 				fixed4 color = tex2D( _MainTex, IN.uv );
 				color *= _Tint;
 				color *= lerp( 1, _LightColor0, _LightColorIntensity );
-				color *= lerp( 1, shadow, _ShadowIntesity );
 
-				if( lambert <= 0 )
-					color = UnityBlendOverlay( color, lambert, _ShadingIntesity );
+				float darkness = min( shadow, lambert );
+
+				if ( darkness <= 0 )
+					color = UnityBlendOverlay( color, darkness, _ShadingIntesity);
 
 				return saturate( color );
 			}

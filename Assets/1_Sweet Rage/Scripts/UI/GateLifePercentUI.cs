@@ -104,14 +104,14 @@
 
         public void Setup () {
             sequence = DOTween.Sequence();
-            Vector3 targetEulers = new Vector3( 0,0,UnityEngine.Random.Range(minTiltAngle, maxTiltAngle) );
+            Vector3 targetEulers = new Vector3( 0, 0, UnityEngine.Random.Range( minTiltAngle, maxTiltAngle ) );
 
-            sequence.AppendInterval( 1 );
+            sequence.AppendInterval( .5f );
             sequence.Append( image.transform.DOLocalRotate( targetEulers, rotateDuration ).SetRelative() );
-            sequence.Append( 
+            sequence.Append(
                 image.transform.DOLocalMoveY( UnityEngine.Random.Range( minFallAmount, maxFallAmount ), fallDuration )
                 .SetRelative()
-                .SetEase( Ease.InCubic ) 
+                .SetEase( Ease.InCubic )
             );
             sequence.Join( image.DOFade( 0, fadeDuration ).SetEase( Ease.InCubic ) );
 
