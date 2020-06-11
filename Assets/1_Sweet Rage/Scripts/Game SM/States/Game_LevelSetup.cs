@@ -1,7 +1,10 @@
 ﻿namespace SweetRage {
+    using Deirin.Utilities;
     using UnityEngine;
 
     public class Game_LevelSetup : Game_BaseState {
+        public GameEvent OnLevelTransitionInEnd;
+
         [Header("Prefabs")]
         public PhaseUI phaseUIPrefab;
         public PlaceTimeUI placeTimeUIPrefab;
@@ -26,12 +29,11 @@
             //phase UI setup
             gameData.phaseUI.Setup();
 
-            ////HACK
-            ////should call an animation or smtn
-            //gameData.placeTimeUI.gameObject.SetActive( false );
-            ////HACK
-
-            gameData.GoNext();
+            OnLevelTransitionInEnd.OnInvoke += LevelTransitionEndHandler;
         }
+
+        private void LevelTransitionEndHandler () => gameData.GoNext();
+
+        public override void Exit () => OnLevelTransitionInEnd.OnInvoke += LevelTransitionEndHandler;
     }
 }

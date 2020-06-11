@@ -10,9 +10,13 @@
 
         [Header("References")]
         public Transform firstModulePlacementPosition;
+        public GameObject arrow;
+        public CapsuleCollider capsuleCollider;
 
         [Header("Parameters")]
         public int maxModules;
+        public float moduleHeight;
+        public Vector3 arrowOffset;
         public float modulesAnimationDuration = .5f;
         [ReadOnly] public State state;
 
@@ -24,6 +28,8 @@
 
         private bool hasShooter => shooterModules.Count > 0;
         private int moduleCount => shooterModules.Count + elementModules.Count + modifierModules.Count;
+
+        private void Awake () => currentTopPosition = transform.position;
 
         #region API
         public void SetState ( int state ) {
@@ -75,6 +81,9 @@
 
                 break;
             }
+
+            capsuleCollider.height += moduleHeight;
+
             SortModules();
         }
 
@@ -108,6 +117,9 @@
             }
             module.graphics.DOKill();
             module.graphics.position = module.transform.position;
+
+            capsuleCollider.height -= moduleHeight;
+
             SortModules();
         }
         #endregion
@@ -126,7 +138,7 @@
                 Vector3 prevGraphic = module.graphics.position;
                 module.transform.position = currentTopPosition;
                 module.graphics.position = prevGraphic;
-                module.graphics.DOMove( currentTopPosition, modulesAnimationDuration ).SetEase( Ease.OutCubic );
+                module.graphics.DOMove( currentTopPosition, modulesAnimationDuration ).SetEase( Ease.OutCubic ).SetUpdate( true );
                 module.graphics.DOPlay();
                 currentTopPosition = module.topModuleSpot.position;
             }
@@ -150,8 +162,8 @@
                 Vector3 pos = transform.position + Vector3.up * 2f + Random.insideUnitSphere;
                 TurretModule module = elementModules[i];
                 HandleElementDetachment( elementModules[i] );
-                module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic ).onComplete += () => module.OnDeselection.Invoke( module );
-                module.transform.DOLocalRotate( new Vector3( Random.Range( 0, 360 ), Random.Range( 0, 360 ), Random.Range( 0, 360 ) ), duration ).SetEase( Ease.OutCubic );
+                module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic ).SetUpdate( true ).onComplete += () => module.OnDeselection.Invoke( module );
+                module.transform.DOLocalRotate( new Vector3( Random.Range( 0, 360 ), Random.Range( 0, 360 ), Random.Range( 0, 360 ) ), duration ).SetUpdate( true ).SetEase( Ease.OutCubic );
                 module.transform.DOPlay();
             }
             for ( i = 0; i < modifierModules.Count; i++ ) {
@@ -159,16 +171,33 @@
                 Vector3 pos = transform.position + Vector3.up * 2f + Random.insideUnitSphere;
                 TurretModule module = modifierModules[i];
                 HandleModiferDetachment( modifierModules[i] );
-                module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic ).onComplete += () => module.OnDeselection.Invoke( module );
-                module.transform.DOLocalRotate( new Vector3( Random.Range( 0, 360 ), Random.Range( 0, 360 ), Random.Range( 0, 360 ) ), duration ).SetEase( Ease.OutCubic );
+                module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic ).SetUpdate( true ).onComplete += () => module.OnDeselection.Invoke( module );
+                module.transform.DOLocalRotate( new Vector3( Random.Range( 0, 360 ), Random.Range( 0, 360 ), Random.Range( 0, 360 ) ), duration ).SetUpdate( true ).SetEase( Ease.OutCubic );
                 module.transform.DOPlay();
             }
             elementModules.Clear();
             modifierModules.Clear();
         }
+
+        private void ActivateArrow ( TurretModule module ) {
+            if ( moduleCount < maxModules ) {
+                if ( module.turretType.moduleType == TurretType.ModuleType.shooter || hasShooter ) {
+                    arrow.transform.position = currentTopPosition + arrowOffset;
+                    arrow.SetActive( true );
+                }
+            }
+        }
         #endregion
 
         #region Event Handlers
+        public void HandleModuleSelection ( TurretModule module ) => ActivateArrow( module );
+
+        public void HandleModuleDeselection ( TurretModule module ) => arrow.SetActive( false );
+
+        public void HandleModulePlacement ( TurretModule module ) => arrow.SetActive( false );
+
+        public void HandleModuleDeplacement ( TurretModule module ) => ActivateArrow( module );
+
         private void HandleElementAttachment ( TurretModule elementModule ) {
             ElementSource e;
             if ( elementModule.TryGetBehaviour( out e ) ) {
@@ -217,9 +246,8 @@
             }
         }
         #endregion
-
-
     }
+
     [System.Serializable]
     public class UnityTurretContainerEvent : UnityEvent<TurretContainer> { }
 }

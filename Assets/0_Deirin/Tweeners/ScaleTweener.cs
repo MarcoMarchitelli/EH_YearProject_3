@@ -7,8 +7,6 @@
         public Transform target;
         public Vector3 targetScale;
 
-        protected override void AssignTween () {
-            tween = target.DOScale( targetScale, duration );
-        }
+        protected override void AssignTween () => tween = target.DOScale( targetScale, duration );
     }
 }

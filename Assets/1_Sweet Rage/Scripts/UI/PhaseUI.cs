@@ -33,6 +33,7 @@
                 s.Append( texts[i].DOFade( 1, .3f ) );
             }
             s.AppendInterval( endWaitTime );
+            s.SetUpdate( true );
             s.onComplete += () => func?.Invoke();
 
             s.PlayForward();
@@ -49,6 +50,7 @@
             }
             s.Append( background.DOFade( 0f, 1f ).SetEase( Ease.InCubic ) );
             s.Join( background.transform.DOScaleY( 0, 1f ).SetEase( Ease.InCubic ) );
+            s.SetUpdate( true );
 
             s.onComplete += () => func?.Invoke();
 

@@ -11,9 +11,12 @@
 
         protected override void CustomDataSetup () {
             gameData = new GameData();
+
             gameData.Next += Next;
             gameData.Win += Win;
             gameData.Loss += Loss;
+            gameData.MainMenu += MainMenu;
+
             gameData.animator = animator;
             data = gameData;  
         }
@@ -29,6 +32,10 @@
         private void Loss () {
             animator.SetTrigger( "Loss" );
         }
+
+        private void MainMenu () {
+            animator.SetTrigger( "MainMenu" );
+        }
     }
 
     [System.Serializable]
@@ -41,7 +48,7 @@
         [HideInInspector] public MainMenuUI mainMenuUI;
         [HideInInspector] public Animator animator;
 
-        public System.Action Next, Win, Loss;
+        public System.Action Next, Win, Loss, MainMenu;
 
         public void GoNext () {
             Next?.Invoke();
@@ -53,6 +60,10 @@
 
         public void GoLoss () {
             Loss?.Invoke();
+        }
+
+        public void GoToMainMenu () {
+            MainMenu?.Invoke();
         }
     }
 }

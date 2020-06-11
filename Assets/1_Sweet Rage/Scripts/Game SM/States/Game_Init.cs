@@ -1,9 +1,12 @@
 ﻿namespace SweetRage {
     using UnityEngine;
+    using DG.Tweening;
 
     public class Game_Init : Game_BaseState {
         public override void Enter () {
             base.Enter();
+
+            DOTween.SetTweensCapacity( 500, 50 );
 
             //load levels
             GameObject[] levelContainers = Resources.LoadAll<GameObject>( "Levels/" );

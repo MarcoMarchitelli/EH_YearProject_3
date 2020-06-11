@@ -5,10 +5,10 @@
     using Deirin.EB;
     using Deirin.Utilities;
 
-    [RequireComponent( typeof( SphereCollider ) )]
+    [RequireComponent( typeof( CapsuleCollider ) )]
     public class EnemyDetector : BaseBehaviour {
         [Header("Refs")]
-        public SphereCollider sphereCollider;
+        public CapsuleCollider capsuleCollider;
 
         [Header("Params")]
         public bool activeOnSetup;
@@ -29,13 +29,18 @@
         private Collider[] objs;
         private Enemy tempEnemy;
         private float startRange;
+        private int enemyCount;
 
         protected override void CustomSetup () {
             startRange = range;
             enemiesInRange = new List<Enemy>();
             Activate( activeOnSetup );
             RangeSetHandler();
+
+            CustomGlobalTick.OnTick += CustomTickHandler;
         }
+
+        private void CustomTickHandler () => CheckForFurthestEnemy();
 
         #region Monos
         private void OnTriggerEnter ( Collider other ) {
@@ -44,7 +49,9 @@
             if ( enemyMask == ( enemyMask | ( 1 << other.gameObject.layer ) ) ) {
                 tempEnemy = other.GetComponentInParent<Enemy>();
                 if ( tempEnemy ) {
+#if UNITY_EDITOR
                     print( name + " found enemy!" );
+#endif
                     if ( !enemiesInRange.Contains( tempEnemy ) )
                         AddEnemy( tempEnemy );
                 }
@@ -57,7 +64,9 @@
             if ( enemyMask == ( enemyMask | ( 1 << other.gameObject.layer ) ) ) {
                 tempEnemy = other.GetComponentInParent<Enemy>();
                 if ( tempEnemy ) {
+#if UNITY_EDITOR
                     print( name + " lost enemy!" );
+#endif
                     RemoveEnemy( tempEnemy );
                 }
             }
@@ -66,27 +75,28 @@
 
         #region API
         public void Activate ( bool value ) {
-            //if ( value == active )
-            //    return;
-
             active = value;
-            sphereCollider.enabled = value;
+            capsuleCollider.enabled = value;
             ClearEnemies();
             if ( active ) {
+#if UNITY_EDITOR
                 print( name + " activated!" );
+#endif
                 FindAllEnemiesInRange();
             }
         }
 
         public void RemoveEnemy ( Enemy e ) {
             enemiesInRange.Remove( e );
-            if ( enemiesInRange.Count == 0 ) {
+            enemyCount = enemiesInRange.Count;
+
+            if ( enemyCount == 0 ) {
                 currentTarget = null;
                 OnEnemiesLost.Invoke();
                 return;
             }
             if ( e == currentTarget )
-                FindClosestTarget();
+                GetFurthestEnemyAlongPath();
         }
 
         public void ResetRange () {
@@ -103,12 +113,16 @@
         #region Privates
         private void ClearEnemies () {
             enemiesInRange.Clear();
+            enemyCount = 0;
             currentTarget = null;
+
             OnEnemiesLost.Invoke();
         }
 
         private void AddEnemy ( Enemy e ) {
             enemiesInRange.Add( e );
+            enemyCount = enemiesInRange.Count;
+
             if ( !currentTarget )
                 SetCurrentTarget( e );
         }
@@ -118,33 +132,60 @@
             OnTargetSet.Invoke( currentTarget );
         }
 
-        private void FindClosestTarget () {
-            int enemyCount = enemiesInRange.Count;
-            if ( enemyCount == 0 )
+        private void GetFurthestEnemyAlongPath () {
+            if ( enemyCount <= 0 )
                 return;
+
             Enemy t = enemiesInRange[0];
-            float dist = Vector3.Distance( t.transform.position, transform.position );
+            float maxPathPercent = t.pathPatroller.PathPercent;
+
             for ( int i = 1; i < enemyCount; i++ ) {
-                float newDist = Vector3.Distance( enemiesInRange[i].transform.position, transform.position );
-                if ( newDist < dist ) {
-                    dist = newDist;
-                    t = enemiesInRange[i];
+                Enemy tempEnemy = enemiesInRange[i];
+                float tempPercent = tempEnemy.pathPatroller.PathPercent;
+                if ( maxPathPercent < tempPercent ) {
+                    maxPathPercent = tempPercent;
+                    t = tempEnemy;
                 }
             }
+
             SetCurrentTarget( t );
         }
 
+        private void CheckForFurthestEnemy () {
+            if ( enemyCount <= 0 )
+                return;
+
+            if ( currentTarget == null )
+                return;
+
+            Enemy t = null;
+            float maxPathPercent = currentTarget.pathPatroller.PathPercent;
+
+            for ( int i = 1; i < enemyCount; i++ ) {
+                Enemy tempEnemy = enemiesInRange[i];
+                float tempPercent = tempEnemy.pathPatroller.PathPercent;
+                if ( maxPathPercent < tempPercent ) {
+                    maxPathPercent = tempPercent;
+                    t = tempEnemy;
+                }
+            }
+
+            if ( t )
+                SetCurrentTarget( t );
+        }
+
         private void FindAllEnemiesInRange () {
-            objs = Physics.OverlapSphere( sphereCollider.transform.position, sphereCollider.radius, enemyMask );
+            objs = Physics.OverlapSphere( capsuleCollider.transform.position, capsuleCollider.radius, enemyMask );
             for ( int i = 0; i < objs.Length; i++ ) {
                 if ( objs[i].TryGetComponent( out tempEnemy ) )
                     enemiesInRange.Add( tempEnemy );
             }
-            FindClosestTarget();
+            enemyCount = enemiesInRange.Count;
+            GetFurthestEnemyAlongPath();
         }
 
         private void RangeSetHandler () {
-            sphereCollider.radius = range;
+            capsuleCollider.radius = range;
             OnRangeSet.Invoke( range );
         }
         #endregion

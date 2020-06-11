@@ -7,7 +7,7 @@
     public class TurretModule : BaseEntity {
         public enum State { inMenu, selected, placed, preview }
 
-        [ReadOnly]public State state;
+        [ReadOnly] public State state;
 
         [Header("Data")]
         public TurretType turretType;
@@ -80,10 +80,9 @@
             }
 
             if ( mouseDowned ) {
-                if ( state == State.placed ) {
-                    mouseDowned = false;
+                mouseDowned = false;
+                if ( state == State.placed )
                     OnMouseUp.Invoke();
-                }
             }
         }
 
@@ -113,11 +112,11 @@
 
         public void ModuleExitHandler ( TurretModule module ) {
             if ( state == State.placed && module == this ) {
+                OnMouseExit.Invoke();
                 if ( mouseDowned )
                     Deplace();
                 mouseDowned = false;
                 mouseEntered = false;
-                OnMouseExit.Invoke();
             }
         }
         #endregion

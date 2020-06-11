@@ -13,7 +13,6 @@
         public Ease ease;
         [Min(-1)] public int loops;
         public LoopType loopType;
-        public bool smoothRewind = false;
         public bool autoKill = false;
         [Header("Events")]
         public UnityEvent OnPlay;
@@ -24,9 +23,7 @@
 
         protected Tween tween;
 
-        private void Awake () {
-            TweenSetup();
-        }
+        private void Awake () => TweenSetup();
 
         protected abstract void AssignTween ();
 
@@ -47,22 +44,35 @@
             tween.onRewind += OnRewindEnd.Invoke;
         }
 
+        #region API
         public void Play () {
+            if ( tween.IsActive() == false )
+                AssignTween();
+
             OnPlay.Invoke();
             tween.PlayForward();
         }
 
         public void Rewind () {
+            if ( tween.IsActive() == false )
+                AssignTween();
+
             OnRewind.Invoke();
-            //if ( smoothRewind )
-            //    tween.SmoothRewind();
-            //else
             tween.PlayBackwards();
+        }
+
+        public void RewindFromEnd () {
+            if ( tween.IsActive() == false )
+                AssignTween();
+
+            tween.Goto( duration );
+            Rewind();
         }
 
         public void Kill () {
             OnKill.Invoke();
             tween.Kill();
         }
+        #endregion
     }
 }

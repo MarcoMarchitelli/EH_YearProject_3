@@ -1,5 +1,4 @@
 ﻿namespace SweetRage {
-    using System.Collections;
     using UnityEngine;
     using Deirin.EB;
     using Deirin.Utilities;
@@ -17,23 +16,48 @@
 
         public float FireRate => fireRate;
 
-        private bool shooting;
+        private float timer, timeBewteenShots;
+        private bool counting, canShoot, shooting;
         private float startFireRate;
-        private Coroutine shootRoutine;
 
         protected override void CustomSetup () {
             startFireRate = fireRate;
+            timeBewteenShots = 1f / fireRate;
+            timer = timeBewteenShots;
+            shooting = false;
+            counting = true;
+        }
+
+        public override void OnUpdate () {
+            if ( counting ) {
+                timer += Time.deltaTime;
+                if ( timer >= timeBewteenShots ) {
+                    canShoot = true;
+                    counting = false;
+                }
+            }
+
+            if ( shooting )
+                if ( canShoot ) {
+                    Shoot();
+                    timer = 0;
+                    canShoot = false;
+                    counting = true;
+                }
         }
 
         #region API
         public void StartShooting () {
-            if ( !shooting )
-                shootRoutine = StartCoroutine( "ShootSequence" );
+            if ( !shooting ) {
+                shooting = true;
+#if UNITY_EDITOR
+                Debug.Log( name + " started shooting!" );
+#endif
+            }
         }
 
         public void StopShooting () {
             if ( shooting ) {
-                StopCoroutine( shootRoutine );
                 shooting = false;
 #if UNITY_EDITOR
                 print( name + " stopped shooting" );
@@ -43,23 +67,12 @@
 
         public void SetFireRate ( float value ) {
             fireRate = value;
-        } 
+        }
 
         public void ResetFireRate () {
             fireRate = startFireRate;
         }
         #endregion
-
-        IEnumerator ShootSequence () {
-#if UNITY_EDITOR
-            print( name + " started shooting" );
-#endif
-            shooting = true;
-            while ( shooting ) {
-                Shoot();
-                yield return new WaitForSeconds( 1f / fireRate );
-            }
-        }
 
         private void Shoot () {
             Projectile b = Instantiate( projectilePrefab, spawnPoint.position, Quaternion.LookRotation( spawnPoint.forward ) );

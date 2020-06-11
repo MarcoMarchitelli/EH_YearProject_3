@@ -10,6 +10,8 @@
 
         [Header("Global Events")]
         public GameEvent OnEnemyReachedEnd;
+        public GameEvent OnLevelEndClick;
+        public GameEvent_Float OnEndGateLifeChange;
 
         public override void Enter () {
             base.Enter();
@@ -27,6 +29,8 @@
 
             gameData.currentLevel.CurrentWave.OnWaveEnd.AddListener( WaveEndHandler );
             OnEnemyReachedEnd.OnInvoke += LossHandler;
+            OnLevelEndClick.OnInvoke += LevelEndClickHandler;
+            OnEndGateLifeChange.OnInvoke += EndGateLifeChangeHandler;
         }
 
         public override void Tick () {
@@ -36,9 +40,11 @@
                 OnLeftMouseUp.Invoke();
         }
 
-        public void LossHandler () {
-            gameData.GoLoss();
-        }
+        private void EndGateLifeChangeHandler ( float percent ) => gameData.currentLevel.SetCurrentScore( percent );
+
+        private void LevelEndClickHandler () => gameData.GoToMainMenu();
+
+        public void LossHandler () => gameData.GoLoss();
 
         private void WaveEndHandler ( int id ) {
             gameData.currentLevel.CurrentWave.gameObject.SetActive( false );
@@ -50,6 +56,7 @@
 
             gameData.currentLevel.CurrentWave.OnWaveEnd.RemoveListener( WaveEndHandler );
             OnEnemyReachedEnd.OnInvoke -= LossHandler;
+            OnLevelEndClick.OnInvoke -= LevelEndClickHandler;
         }
     }
 }

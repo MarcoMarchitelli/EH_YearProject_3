@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &26266282787593556
 CanvasRenderer:
@@ -80,7 +80,7 @@ MonoBehaviour:
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
   borderWidth: 2
-  falloffDistance: 1
+  falloffDistance: 0.2
 --- !u!114 &1848499831785027188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,8 +261,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignoresContainer: 0
   duration: 0.3
+  ignoresTimescale: 0
+  delay: 0
+  relative: 0
   ease: 18
   loops: 0
+  loopType: 0
+  autoKill: 0
   OnPlay:
     m_PersistentCalls:
       m_Calls: []
@@ -283,14 +288,13 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  OnStop:
+  OnKill:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   target: {fileID: 26266282787593557}
   targetColor: {r: 0, g: 0, b: 0, a: 1}
-  resetOnPlay: 1
 --- !u!1 &26266283335744971
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -368,7 +372,7 @@ MonoBehaviour:
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
   borderWidth: 0
-  falloffDistance: 1
+  falloffDistance: 0.2
 --- !u!114 &3281202799177521936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,8 +473,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignoresContainer: 0
   duration: 0.3
+  ignoresTimescale: 0
+  delay: 0
+  relative: 0
   ease: 18
   loops: 0
+  loopType: 0
+  autoKill: 0
   OnPlay:
     m_PersistentCalls:
       m_Calls: []
@@ -491,14 +500,13 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  OnStop:
+  OnKill:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   target: {fileID: 26266282787593557}
-  targetColor: {r: 1, g: 0.90135354, b: 0.4764151, a: 1}
-  resetOnPlay: 1
+  targetColor: {r: 1, g: 0.81343293, b: 0, a: 1}
 --- !u!1 &26266284368193538
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,7 +640,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: d29ea3f9a21f4544cbe782ac4aaac1a4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 751388ef3833ba3479b8e5d5ebf3c536, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
