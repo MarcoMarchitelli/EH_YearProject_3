@@ -2,7 +2,6 @@
     using Deirin.Utilities;
     using DG.Tweening;
     using UnityEngine;
-    using UnityEngine.Events;
     using UnityEngine.UI;
 
     public class GateLifePercentUI : MonoBehaviour {
@@ -43,10 +42,9 @@
             else if ( closing ) {
                 timer += Time.deltaTime;
                 float percent = timer / gateOpeningDuration;
-                endGateTransform.position = Vector3.Lerp( endPos, startPos, percent.Clamp01() );
+                endGateTransform.position = Vector3.Lerp( endPos, startPos, percent.Clamp01() );              
                 if ( percent == 1 ) {
                     timer = 0;
-                    gateOpen = false;
                     closing = false;
                 }
             }
@@ -65,6 +63,7 @@
             if ( allEnded ) {
                 opening = false;
                 closing = true;
+                gateOpen = false;
             }
         }
 
