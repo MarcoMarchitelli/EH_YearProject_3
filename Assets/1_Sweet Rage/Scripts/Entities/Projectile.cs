@@ -1,7 +1,8 @@
 ﻿namespace SweetRage {
     using Deirin.EB;
+    using UnityEngine;
 
     public class Projectile : BaseEntity {
-        public Shooter shooter;
+        [HideInInspector] public Shooter shooter;
     }
 }
