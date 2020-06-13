@@ -73,12 +73,12 @@
 
             if ( gateOpen )
                 foreach ( FallSequence s in sequences ) {
-                    if ( s.started == false && percent < s.healthBarPercent )
+                    if ( s.started == false && percent <= s.healthBarPercent )
                         s.sequence.PlayForward();
                 }
             else {
                 foreach ( FallSequence s in sequences ) {
-                    if ( s.started == false && percent < s.healthBarPercent )
+                    if ( s.started == false && percent <= s.healthBarPercent )
                         OnGateOpen += s.sequence.PlayForward;
                 }
                 opening = true;
@@ -106,7 +106,8 @@
             sequence = DOTween.Sequence();
             Vector3 targetEulers = new Vector3( 0, 0, UnityEngine.Random.Range( minTiltAngle, maxTiltAngle ) );
 
-            sequence.AppendInterval( .5f );
+            sequence.Append( image.transform.DOShakePosition( .8f, new Vector3( 5, 5, 0 ) ) );
+            sequence.Join( image.transform.DOShakeRotation( .8f, new Vector3( 0, 0, 10 ) ) );
             sequence.Append( image.transform.DOLocalRotate( targetEulers, rotateDuration ).SetRelative() );
             sequence.Append(
                 image.transform.DOLocalMoveY( UnityEngine.Random.Range( minFallAmount, maxFallAmount ), fallDuration )
