@@ -70,17 +70,19 @@
         public void SetPercent ( float percent ) {
             percent.Clamp01();
 
-            if ( gateOpen )
+            if ( gateOpen ) {
                 foreach ( FallSequence s in sequences ) {
                     if ( s.started == false && percent <= s.healthBarPercent )
                         s.sequence.PlayForward();
                 }
+            }
             else {
                 foreach ( FallSequence s in sequences ) {
                     if ( s.started == false && percent <= s.healthBarPercent )
                         OnGateOpen += s.sequence.PlayForward;
                 }
                 opening = true;
+                closing = false;
             }
         }
     }
