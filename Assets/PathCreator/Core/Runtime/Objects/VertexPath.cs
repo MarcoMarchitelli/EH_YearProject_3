@@ -12,6 +12,7 @@ namespace PathCreation {
     /// (where time = 0 is the start of the path, and time = 1 is the end of the path).
     /// Other info about the path (tangents, normals, rotation) can also be retrieved in this manner.
 
+    [System.Serializable]
     public class VertexPath {
         #region Fields
 

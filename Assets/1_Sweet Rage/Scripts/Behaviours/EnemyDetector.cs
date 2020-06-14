@@ -137,11 +137,11 @@
                 return;
 
             Enemy t = enemiesInRange[0];
-            float maxPathPercent = t.pathPatroller.PathPercent;
+            float maxPathPercent = t.pathPatroller.CoveredPath;
 
             for ( int i = 1; i < enemyCount; i++ ) {
                 Enemy tempEnemy = enemiesInRange[i];
-                float tempPercent = tempEnemy.pathPatroller.PathPercent;
+                float tempPercent = tempEnemy.pathPatroller.CoveredPath;
                 if ( maxPathPercent < tempPercent ) {
                     maxPathPercent = tempPercent;
                     t = tempEnemy;
@@ -159,11 +159,11 @@
                 return;
 
             Enemy t = null;
-            float maxPathPercent = currentTarget.pathPatroller.PathPercent;
+            float maxPathPercent = currentTarget.pathPatroller.CoveredPath;
 
             for ( int i = 1; i < enemyCount; i++ ) {
                 Enemy tempEnemy = enemiesInRange[i];
-                float tempPercent = tempEnemy.pathPatroller.PathPercent;
+                float tempPercent = tempEnemy.pathPatroller.CoveredPath;
                 if ( maxPathPercent < tempPercent ) {
                     maxPathPercent = tempPercent;
                     t = tempEnemy;
