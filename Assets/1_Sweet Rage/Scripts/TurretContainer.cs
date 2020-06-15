@@ -158,22 +158,14 @@
         private void Disassemble () {
             int i = 0;
             for ( i = 0; i < elementModules.Count; i++ ) {
-                float duration = Random.Range(1.5f,3f);
-                Vector3 pos = transform.position + Vector3.up * 2f + Random.insideUnitSphere;
                 TurretModule module = elementModules[i];
                 HandleElementDetachment( elementModules[i] );
-                module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic ).SetUpdate( true ).onComplete += () => module.OnDeselection.Invoke( module );
-                module.transform.DOLocalRotate( new Vector3( Random.Range( 0, 360 ), Random.Range( 0, 360 ), Random.Range( 0, 360 ) ), duration ).SetUpdate( true ).SetEase( Ease.OutCubic );
-                module.transform.DOPlay();
+                module.OnDeselection.Invoke( module );
             }
             for ( i = 0; i < modifierModules.Count; i++ ) {
-                float duration = Random.Range(1.5f,3f);
-                Vector3 pos = transform.position + Vector3.up * 2f + Random.insideUnitSphere;
                 TurretModule module = modifierModules[i];
                 HandleModiferDetachment( modifierModules[i] );
-                module.transform.DOJump( pos, Random.Range( 3, 5 ), Random.Range( 2, 5 ), 1.5f ).SetEase( Ease.OutCubic ).SetUpdate( true ).onComplete += () => module.OnDeselection.Invoke( module );
-                module.transform.DOLocalRotate( new Vector3( Random.Range( 0, 360 ), Random.Range( 0, 360 ), Random.Range( 0, 360 ) ), duration ).SetUpdate( true ).SetEase( Ease.OutCubic );
-                module.transform.DOPlay();
+                module.OnDeselection.Invoke( module );
             }
             elementModules.Clear();
             modifierModules.Clear();
