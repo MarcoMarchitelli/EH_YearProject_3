@@ -3,10 +3,12 @@ using UnityEngine.UI;
 using DG.Tweening;
 using Deirin.Utilities;
 using System.Collections;
+using UnityEngine.Events;
 
 public class LifebarUI : MonoBehaviour {
     [Header("Reference")]
     public Image image;
+    public Image winImage;
 
     [Header("Parameters")]
     public float lerpStartOffset = .1f;
@@ -19,6 +21,13 @@ public class LifebarUI : MonoBehaviour {
     public Color colorD;
     public float lerpSpeed;
 
+    [Header("Events")]
+    public UnityEvent OnStar1Reached;
+    public UnityEvent OnStar2Reached;
+    public UnityEvent OnStar3Reached;
+
+    private bool star1Reached, star2Reached, star3Reached;
+
     public void Lerp ( float t ) {
         t = Mathf.Clamp01( t );
         image.DOFillAmount( t, lerpSpeed ).SetEase( Ease.Linear ).Play();
@@ -27,7 +36,7 @@ public class LifebarUI : MonoBehaviour {
 
         if ( t > colorAPercent - lerpStartOffset )
             targetColor = t.Remap( colorAPercent - lerpStartOffset, colorAPercent, colorB, colorA );
-        else 
+        else
         if ( t > colorBPercent )
             targetColor = t.Remap( colorBPercent, colorBPercent + lerpStartOffset, colorC, colorB );
         else
@@ -36,8 +45,40 @@ public class LifebarUI : MonoBehaviour {
         image.DOColor( targetColor, lerpSpeed ).SetEase( Ease.Linear ).Play();
     }
 
-    public void AnimLerpTo1 ( float speed ) {
-        StartCoroutine( LerpAnim( 1, speed ) );
+    public void AnimLerpTo1 ( float duration ) {
+        StartCoroutine( LerpAnim( 1, duration ) );
+    }
+
+    public void PlayWinAnim ( float duration ) {
+        StartCoroutine( WinAnim( image.fillAmount, duration ) );
+    }
+
+    private IEnumerator WinAnim ( float targetPercent, float duration ) {
+        float percent = 0;
+        float speed = 1f/duration;
+
+        targetPercent = Mathf.Clamp01( targetPercent );
+
+        while ( percent <= targetPercent ) {
+            winImage.fillAmount = percent;
+
+            if ( star1Reached && percent > colorAPercent ) {
+                OnStar1Reached.Invoke();
+                star1Reached = false;
+            }
+            else if ( star2Reached && percent > colorAPercent ) {
+                OnStar2Reached.Invoke();
+                star2Reached = false;
+            }
+            else if ( star3Reached && percent > colorAPercent ) {
+                OnStar3Reached.Invoke();
+                star3Reached = false;
+            }
+
+            percent += Time.deltaTime * speed;
+
+            yield return null;
+        }
     }
 
     private IEnumerator LerpAnim ( float targetPercent, float duration ) {
