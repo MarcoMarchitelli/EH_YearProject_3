@@ -20,6 +20,7 @@ public class OnlyOneEdgeModifier : ProceduralImageModifier {
 		}
 		set {
 			radius = value;
+			_Graphic.SetVerticesDirty();
 		}
 	}
 
