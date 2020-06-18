@@ -11,6 +11,7 @@ public class UniformModifier : ProceduralImageModifier {
 		}
 		set {
 			radius = value;
+			_Graphic.SetVerticesDirty();
 		}
 	}
 

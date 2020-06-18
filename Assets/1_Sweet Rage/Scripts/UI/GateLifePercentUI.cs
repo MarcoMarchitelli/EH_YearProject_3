@@ -2,7 +2,6 @@
     using Deirin.Utilities;
     using DG.Tweening;
     using UnityEngine;
-    using UnityEngine.Events;
     using UnityEngine.UI;
 
     public class GateLifePercentUI : MonoBehaviour {
@@ -43,10 +42,9 @@
             else if ( closing ) {
                 timer += Time.deltaTime;
                 float percent = timer / gateOpeningDuration;
-                endGateTransform.position = Vector3.Lerp( endPos, startPos, percent.Clamp01() );
+                endGateTransform.position = Vector3.Lerp( endPos, startPos, percent.Clamp01() );              
                 if ( percent == 1 ) {
                     timer = 0;
-                    gateOpen = false;
                     closing = false;
                 }
             }
@@ -65,23 +63,26 @@
             if ( allEnded ) {
                 opening = false;
                 closing = true;
+                gateOpen = false;
             }
         }
 
         public void SetPercent ( float percent ) {
             percent.Clamp01();
 
-            if ( gateOpen )
+            if ( gateOpen ) {
                 foreach ( FallSequence s in sequences ) {
-                    if ( s.started == false && percent < s.healthBarPercent )
+                    if ( s.started == false && percent <= s.healthBarPercent )
                         s.sequence.PlayForward();
                 }
+            }
             else {
                 foreach ( FallSequence s in sequences ) {
-                    if ( s.started == false && percent < s.healthBarPercent )
+                    if ( s.started == false && percent <= s.healthBarPercent )
                         OnGateOpen += s.sequence.PlayForward;
                 }
                 opening = true;
+                closing = false;
             }
         }
     }
@@ -106,7 +107,8 @@
             sequence = DOTween.Sequence();
             Vector3 targetEulers = new Vector3( 0, 0, UnityEngine.Random.Range( minTiltAngle, maxTiltAngle ) );
 
-            sequence.AppendInterval( .5f );
+            sequence.Append( image.transform.DOShakePosition( .8f, new Vector3( 5, 5, 0 ) ) );
+            sequence.Join( image.transform.DOShakeRotation( .8f, new Vector3( 0, 0, 10 ) ) );
             sequence.Append( image.transform.DOLocalRotate( targetEulers, rotateDuration ).SetRelative() );
             sequence.Append(
                 image.transform.DOLocalMoveY( UnityEngine.Random.Range( minFallAmount, maxFallAmount ), fallDuration )

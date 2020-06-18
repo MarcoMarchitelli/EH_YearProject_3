@@ -4,13 +4,14 @@
     using System.Collections.Generic;
     using UnityEngine.Events;
     using System.Linq;
+    using PathCreation;
 
     [DisallowMultipleComponent]
     public class Spawner : BaseBehaviour, IStoppable {
         #region Inspector
         [Header("Params")]
         public Enemy enemyPrefab;
-        public Vector3ArrayVariable pathPoints;
+        public PathCreator pathCreator;
         [Min(0)] public int amountToSpawn;
 
         [Header("Events"), Space]
@@ -63,7 +64,7 @@
         }
 
         public void SpawnEnemy () {
-            if ( !Stopped && pathPoints ) {
+            if ( !Stopped && pathCreator != null ) {
                 InstantiateEnemy();
             }
         }
@@ -83,15 +84,15 @@
             if ( allSpawned )
                 return;
 
-            Enemy e = Instantiate(enemyPrefab, pathPoints.Value[0], Quaternion.identity);
+            Enemy e = Instantiate(enemyPrefab, pathCreator.path.GetPoint(0), Quaternion.identity);
             e.Setup();
             enemies.Add( e );
             SpawnedEnemy++;
             OnEnemySpawn.Invoke();
-            PathPatroller pp;
-            if ( e.TryGetBehaviour( out pp ) ) {
-                pp.pathPoints = pathPoints;
-                pp.StartPatrol();
+
+            if ( e.pathPatroller ) {
+                e.pathPatroller.pathCreator = pathCreator;
+                e.pathPatroller.StartPatrol();
             }
 #if UNITY_EDITOR
             else {
