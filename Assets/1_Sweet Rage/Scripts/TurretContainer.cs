@@ -13,12 +13,26 @@
         public GameObject arrow;
         public CapsuleCollider capsuleCollider;
 
+        [Header("Particles Prefabs")]
+        public GameObject fireBuff;
+        public GameObject iceBuff;
+        public GameObject detectRangeBuff;
+        public GameObject fireRateBuff;
+        public GameObject projectileDamageBuff;
+
         [Header("Parameters")]
         public int maxModules;
         public float moduleHeight;
         public Vector3 arrowOffset;
         public float modulesAnimationDuration = .5f;
         [ReadOnly] public State state;
+
+        [Header("Turret Types")]
+        public ElementScriptableEnum fire;
+        public ElementScriptableEnum ice;
+        public ModifierScriptableEnum detectRange;
+        public ModifierScriptableEnum fireRate;
+        public ModifierScriptableEnum projectileDamage;
 
         private List<TurretModule> shooterModules = new List<TurretModule>();
         private List<TurretModule> elementModules = new List<TurretModule>();
@@ -179,6 +193,41 @@
                 }
             }
         }
+
+        private void StartBuffAnim ( ElementSource e ) {
+            GameObject particle = null;
+            if ( e.elementType == fire )
+                particle = fireBuff;
+            else
+                particle = iceBuff;
+
+            BuffAnim( particle );
+        }
+
+        private void StartBuffAnim ( ModifierSource e ) {
+            GameObject particle;
+            if ( e.modifierType == projectileDamage )
+                particle = projectileDamageBuff;
+            else if ( e.modifierType == detectRange )
+                particle = detectRangeBuff;
+            else
+                particle = fireRateBuff;
+
+            BuffAnim( particle );
+        }
+
+        private void BuffAnim ( GameObject particle ) {
+            if ( particle == null )
+                return;
+
+            int count = shooterModules.Count;
+            for ( int i = count - 1; i >= 0; i-- ) {
+                TurretModule m = shooterModules[i];
+                Tween t = m.graphics.DOPunchScale( Vector3.one * .2f, .7f, 3, 1 );
+                t.SetDelay( .25f * ( count - i ) );
+                t.onPlay += () => Instantiate( particle, m.transform.position, Quaternion.identity );
+            }
+        }
         #endregion
 
         #region Event Handlers
@@ -200,6 +249,7 @@
                     }
                 }
             }
+            StartBuffAnim( e );
         }
 
         private void HandleElementDetachment ( TurretModule elementModule ) {
@@ -224,6 +274,7 @@
                     }
                 }
             }
+            StartBuffAnim( e );
         }
 
         private void HandleModiferDetachment ( TurretModule elementModule ) {

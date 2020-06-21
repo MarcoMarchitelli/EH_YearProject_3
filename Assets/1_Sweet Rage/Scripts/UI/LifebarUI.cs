@@ -62,17 +62,17 @@ public class LifebarUI : MonoBehaviour {
         while ( percent <= targetPercent ) {
             winImage.fillAmount = percent;
 
-            if ( star1Reached && percent > colorAPercent ) {
+            if ( star1Reached == false && percent > colorCPercent ) {
                 OnStar1Reached.Invoke();
-                star1Reached = false;
+                star1Reached = true;
             }
-            else if ( star2Reached && percent > colorAPercent ) {
+            else if ( star2Reached == false && percent > colorBPercent ) {
                 OnStar2Reached.Invoke();
-                star2Reached = false;
+                star2Reached = true;
             }
-            else if ( star3Reached && percent > colorAPercent ) {
+            else if ( star3Reached == false && percent > colorAPercent ) {
                 OnStar3Reached.Invoke();
-                star3Reached = false;
+                star3Reached = true;
             }
 
             percent += Time.deltaTime * speed;

@@ -62,8 +62,8 @@
 
             if ( allEnded ) {
                 opening = false;
-                closing = true;
                 gateOpen = false;
+                closing = true;
             }
         }
 
