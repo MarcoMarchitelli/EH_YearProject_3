@@ -257,7 +257,7 @@
             int count = shooterModules.Count;
             for ( int i = count - 1; i >= 0; i-- ) {
                 TurretModule m = shooterModules[i];
-                Tween t = m.graphics.DOPunchScale( Vector3.one * .2f, .7f, 3, 1 );
+                Tween t = m.graphics.DOPunchScale( Vector3.one * .27f, .5f, 3, 1 );
                 t.SetDelay( .25f * ( count - 1 - i ) );
                 t.PlayForward();
                 t.onPlay += () => Instantiate( particle, m.transform.position, particle.transform.rotation );
