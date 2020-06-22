@@ -260,7 +260,7 @@
                 Tween t = m.graphics.DOPunchScale( Vector3.one * .2f, .7f, 3, 1 );
                 t.SetDelay( .25f * ( count - 1 - i ) );
                 t.PlayForward();
-                t.onPlay += () => Instantiate( particle, m.transform.position, Quaternion.identity );
+                t.onPlay += () => Instantiate( particle, m.transform.position, particle.transform.rotation );
             }
         }
         #endregion
