@@ -40,6 +40,8 @@
         private TurretModule previewModule;
         private Vector3 currentTopPosition;
 
+        private bool shooterPreview, elementPreview, modifierPreview;
+
         private bool hasShooter => shooterModules.Count > 0;
         private int moduleCount => shooterModules.Count + elementModules.Count + modifierModules.Count;
 
@@ -59,14 +61,32 @@
 
         public void Preview ( TurretModule module ) {
             previewModule = module;
-            AddModule( previewModule );
-        }
 
-        public void AddModule ( TurretModule module ) {
             switch ( module.turretType.moduleType ) {
                 case TurretType.ModuleType.shooter:
                 shooterModules.Add( module );
+                shooterPreview = true;
+                break;
+                case TurretType.ModuleType.element:
+                elementModules.Add( module );
+                elementPreview = true;
+                break;
+                case TurretType.ModuleType.modifier:
+                modifierModules.Add( module );
+                modifierPreview = true;
+                break;
+            }
 
+            SortModules();
+        }
+
+        public void AddModule ( TurretModule module ) {
+            //check module type
+            switch ( module.turretType.moduleType ) {
+                //if it is a shooter
+                case TurretType.ModuleType.shooter: 
+
+                //if we have elements placed we apply effect
                 ElementsContainer shooterElements;
                 if ( module.TryGetBehaviour( out shooterElements ) )
                     foreach ( TurretModule elementModule in elementModules ) {
@@ -75,6 +95,7 @@
                             shooterElements.Add( element );
                     }
 
+                //if we have modifiers placed we apply effect
                 ModifiersContainer shooterModifiers;
                 if ( module.TryGetBehaviour( out shooterModifiers ) )
                     foreach ( TurretModule modifierModule in modifierModules ) {
@@ -83,58 +104,71 @@
                             shooterModifiers.Add( modifier );
                         }
                     }
-
                 break;
+
                 case TurretType.ModuleType.element:
-                elementModules.Add( module );
                 HandleElementAttachment( module );
                 break;
-                case TurretType.ModuleType.modifier:
-                modifierModules.Add( module );
-                HandleModifierAttachment( module );
 
+                case TurretType.ModuleType.modifier:
+                HandleModifierAttachment( module );
                 break;
             }
 
             capsuleCollider.height += moduleHeight;
 
-            SortModules();
+            previewModule = null;
+            shooterPreview = elementPreview = modifierPreview = false;
         }
 
         public void RemoveModule ( TurretModule module ) {
-            switch ( module.turretType.moduleType ) {
-                case TurretType.ModuleType.shooter:
-                if ( shooterModules.Contains( module ) == true ) {
-                    ElementsContainer sEle;
-                    module.TryGetBehaviour( out sEle );
-                    sEle?.RemoveAll();
-
-                    ModifiersContainer sMod;
-                    module.TryGetBehaviour( out sMod );
-                    sMod?.RemoveAll();
-
+            if ( module == previewModule ) {
+                if ( shooterPreview )
                     shooterModules.Remove( module );
-                }
-                break;
-                case TurretType.ModuleType.element:
-                if ( elementModules.Contains( module ) == true ) {
+                else if ( elementPreview )
                     elementModules.Remove( module );
-                    HandleElementDetachment( module );
-                }
-                break;
-                case TurretType.ModuleType.modifier:
-                if ( modifierModules.Contains( module ) == true ) {
+                else if ( modifierPreview )
                     modifierModules.Remove( module );
-                    HandleModiferDetachment( module );
-                }
-                break;
+
+                shooterPreview = elementPreview = modifierPreview = false;
+                SortModules();
             }
-            module.graphics.DOKill();
-            module.graphics.position = module.transform.position;
+            else {
+                switch ( module.turretType.moduleType ) {
+                    case TurretType.ModuleType.shooter:
+                    if ( shooterModules.Contains( module ) == true ) {
+                        ElementsContainer sEle;
+                        module.TryGetBehaviour( out sEle );
+                        sEle?.RemoveAll();
 
-            capsuleCollider.height -= moduleHeight;
+                        ModifiersContainer sMod;
+                        module.TryGetBehaviour( out sMod );
+                        sMod?.RemoveAll();
 
-            SortModules();
+                        shooterModules.Remove( module );
+                    }
+                    break;
+                    case TurretType.ModuleType.element:
+                    if ( elementModules.Contains( module ) == true ) {
+                        elementModules.Remove( module );
+                        HandleElementDetachment( module );
+                    }
+                    break;
+                    case TurretType.ModuleType.modifier:
+                    if ( modifierModules.Contains( module ) == true ) {
+                        modifierModules.Remove( module );
+                        HandleModiferDetachment( module );
+                    }
+                    break;
+                }
+
+                module.graphics.DOKill();
+                module.graphics.position = module.transform.position;
+
+                capsuleCollider.height -= moduleHeight;
+
+                SortModules();
+            }
         }
         #endregion
 
@@ -224,7 +258,8 @@
             for ( int i = count - 1; i >= 0; i-- ) {
                 TurretModule m = shooterModules[i];
                 Tween t = m.graphics.DOPunchScale( Vector3.one * .2f, .7f, 3, 1 );
-                t.SetDelay( .25f * ( count - i ) );
+                t.SetDelay( .25f * ( count - 1 - i ) );
+                t.PlayForward();
                 t.onPlay += () => Instantiate( particle, m.transform.position, Quaternion.identity );
             }
         }

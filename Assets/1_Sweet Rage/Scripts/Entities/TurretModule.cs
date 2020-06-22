@@ -72,6 +72,7 @@
         public void LeftMouseUpHandler () {
             if ( state == State.preview ) {
                 SetState( State.placed );
+                turretContainer.AddModule( this );
                 OnPlace.Invoke();
             }
             else if ( state == State.selected ) {
