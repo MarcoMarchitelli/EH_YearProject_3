@@ -45,6 +45,11 @@
                 tweener.Rewind();
         }
 
+        public void ResetTweens () {
+            foreach ( var tweener in tweeners )
+                tweener.ResetTween();
+        }
+
         public void Stop () {
             for ( int i = 0; i < tweeners.Count; i++ ) {
                 tweeners[i].Kill();

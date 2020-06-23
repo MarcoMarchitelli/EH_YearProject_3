@@ -69,6 +69,10 @@
             Rewind();
         }
 
+        public void ResetTween () {
+            tween.Rewind();
+        }
+
         public void Kill () {
             OnKill.Invoke();
             tween.Kill();
