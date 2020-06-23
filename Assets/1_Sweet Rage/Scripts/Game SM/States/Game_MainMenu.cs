@@ -8,26 +8,26 @@
         public MainMenuUI mainMenuUIPrefab;
 
         [Header("Global Events")]
-        public LevelEntityGameEvent LevelPlayClick;
+        public LevelObjectGameEvent OnLevelSelectionClick;
         public GameEvent OnMainMenuFadeOut;
 
-        private LevelEntity selectedLevelPrefab;
+        private LevelObject selectedLevelObject;
 
         public override void Enter () {
             base.Enter();
 
-            LevelPlayClick.OnInvoke += LevelPlayClickHandler;
+            OnLevelSelectionClick.OnInvoke += LevelSelectionClickHandler;
             OnMainMenuFadeOut.OnInvoke += FadeOutHandler;
 
             gameData.mainMenuUI = Instantiate( mainMenuUIPrefab );
 
             //update level UI based on loaded levels
-            gameData.mainMenuUI.SetLevelsData( gameData.levelsEntities );
+            gameData.mainMenuUI.SetLevelsData( gameData.levelObjects );
             gameData.mainMenuUI.UpdateUI();
         }
 
-        private void LevelPlayClickHandler ( LevelEntity level ) {
-            selectedLevelPrefab = level;
+        private void LevelSelectionClickHandler ( LevelObject level ) {
+            selectedLevelObject = level;
         }
 
         private void FadeOutHandler () {
@@ -36,12 +36,12 @@
         }
 
         private void SceneLoadedHandler ( Scene arg0, LoadSceneMode arg1 ) {
-            gameData.currentLevel = Instantiate( selectedLevelPrefab.transform.parent ).GetComponentInChildren<LevelEntity>();
+            gameData.currentLevelObject = selectedLevelObject;
             gameData.GoNext();
         }
 
         public override void Exit () {
-            LevelPlayClick.OnInvoke -= LevelPlayClickHandler;
+            OnLevelSelectionClick.OnInvoke -= LevelSelectionClickHandler;
             OnMainMenuFadeOut.OnInvoke -= FadeOutHandler;
             SceneManager.sceneLoaded -= SceneLoadedHandler;
         }

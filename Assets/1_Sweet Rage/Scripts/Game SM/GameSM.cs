@@ -3,7 +3,7 @@
     using Deirin.StateMachine;
 
     public class GameSM : StateMachineBase {
-        private GameData gameData;
+        [SerializeField] private GameData gameData;
 
         private void Awake () {
             Setup();
@@ -39,14 +39,23 @@
     }
 
     [System.Serializable]
+    public class LevelObject {
+        public GameObject prefab;
+        public LevelEntity entity;
+    }
+
+    [System.Serializable]
     public class GameData : IStateMachineData {
-        [HideInInspector] public LevelEntity currentLevel;
-        [HideInInspector] public LevelEntity[] levelsEntities;
+        [HideInInspector] public LevelObject currentLevelObject;
+        [HideInInspector] public LevelObject[] levelObjects;
         [HideInInspector] public PhaseUI phaseUI;
         [HideInInspector] public PlaceTimeUI placeTimeUI;
         [HideInInspector] public ModulesMenuUI modulesMenuUI;
         [HideInInspector] public MainMenuUI mainMenuUI;
         [HideInInspector] public Animator animator;
+        [HideInInspector] public SaveData saveData;
+
+        public Transform levelContainer;
 
         public System.Action Next, Win, Loss, MainMenu;
 

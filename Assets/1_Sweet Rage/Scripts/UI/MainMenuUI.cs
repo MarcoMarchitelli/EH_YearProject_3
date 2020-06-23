@@ -11,9 +11,9 @@
         public LevelUI selectedLevelUI;
 
         private List<LevelUI> levelUIs = new List<LevelUI>();
-        private LevelEntity[] levels;
+        private LevelObject[] levels;
 
-        public void SetLevelsData ( LevelEntity[] levels ) {
+        public void SetLevelsData ( LevelObject[] levels ) {
             this.levels = levels;
         }
 
@@ -26,7 +26,7 @@
 
             for ( int i = 0; i < levels.Length; i++ ) {
                 LevelUI lUI = Instantiate( levelUIPrefab, levelUIsContainer );
-                lUI.level = levels[i];
+                lUI.levelObject = levels[i];
                 lUI.UpdateUI();
                 lUI.nameText.text = ( i + 1 ).ToString();
                 levelUIs.Add( lUI );

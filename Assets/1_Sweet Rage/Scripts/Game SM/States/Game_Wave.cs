@@ -22,12 +22,12 @@
             }
 
             //wave phase graphics
-            gameData.phaseUI.SetTexts( gameData.currentLevel.CurrentWave.waveText );
+            gameData.phaseUI.SetTexts( gameData.currentLevelObject.entity.CurrentWave.waveText );
             gameData.phaseUI.Play( .5f, Rewind );
 
-            gameData.currentLevel.CurrentWave.StartWave();
+            gameData.currentLevelObject.entity.CurrentWave.StartWave();
 
-            gameData.currentLevel.CurrentWave.OnWaveEnd.AddListener( WaveEndHandler );
+            gameData.currentLevelObject.entity.CurrentWave.OnWaveEnd.AddListener( WaveEndHandler );
             OnEnemyReachedEnd.OnInvoke += LossHandler;
             OnLevelEndClick.OnInvoke += LevelEndClickHandler;
             OnEndGateLifeChange.OnInvoke += EndGateLifeChangeHandler;
@@ -40,21 +40,21 @@
                 OnLeftMouseUp.Invoke();
         }
 
-        private void EndGateLifeChangeHandler ( float percent ) => gameData.currentLevel.SetCurrentScore( percent );
+        private void EndGateLifeChangeHandler ( float percent ) => gameData.currentLevelObject.entity.SetCurrentScore( percent );
 
         private void LevelEndClickHandler () => gameData.GoToMainMenu();
 
         public void LossHandler () => gameData.GoLoss();
 
         private void WaveEndHandler ( int id ) {
-            gameData.currentLevel.CurrentWave.gameObject.SetActive( false );
+            gameData.currentLevelObject.entity.CurrentWave.gameObject.SetActive( false );
             gameData.GoNext();
         }
 
         public override void Exit () {
             base.Exit();
 
-            gameData.currentLevel.CurrentWave.OnWaveEnd.RemoveListener( WaveEndHandler );
+            gameData.currentLevelObject.entity.CurrentWave.OnWaveEnd.RemoveListener( WaveEndHandler );
             OnEnemyReachedEnd.OnInvoke -= LossHandler;
             OnLevelEndClick.OnInvoke -= LevelEndClickHandler;
         }

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1799010133417785761}
   - component: {fileID: 1799010133417785762}
   - component: {fileID: 1799010133417785763}
-  - component: {fileID: 1799010133825249478}
   m_Layer: 0
   m_Name: Game SM
   m_TagString: Untagged
@@ -29,7 +28,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 3410019309640793186}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -47,14 +47,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1799010133417785763}
   gameData:
-    currentLevelData: {fileID: 0}
-    currentLevelEntity: {fileID: 0}
+    currentLevelObject:
+      prefab: {fileID: 0}
+      entity: {fileID: 0}
+    levelObjects: []
     phaseUI: {fileID: 0}
     placeTimeUI: {fileID: 0}
     modulesMenuUI: {fileID: 0}
-    levelsData: []
     mainMenuUI: {fileID: 0}
-    animator: {fileID: 1799010133417785763}
+    animator: {fileID: 0}
+    saveData:
+      profile:
+        masterVolume: 0
+        musicVolume: 0
+        fxVolume: 0
+      levelStates: []
+    levelContainer: {fileID: 3410019309640793186}
 --- !u!95 &1799010133417785763
 Animator:
   serializedVersion: 3
@@ -74,15 +82,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1799010133825249478
-MonoBehaviour:
+--- !u!1 &9202725014296251423
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1799010133417785760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fec652c65cf6c64bb4dfe748aa9ade5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3410019309640793186}
+  m_Layer: 0
+  m_Name: Level Objects Container
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3410019309640793186
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9202725014296251423}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1799010133417785761}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

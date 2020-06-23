@@ -10,7 +10,7 @@
         public override void Enter () {
             base.Enter();
 
-            if ( gameData.currentLevel.GoToNextWave() )
+            if ( gameData.currentLevelObject.entity.GoToNextWave() )
                 gameData.GoNext();
             else
                 gameData.GoWin();

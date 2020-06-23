@@ -21,7 +21,8 @@
             //----- HACK ------
 
             //level instantation and setup
-            gameData.currentLevel.Setup();
+            gameData.currentLevelObject.entity.Setup();
+            gameData.currentLevelObject.entity.SetCurrentScore( 1 );
 
             //global raycaster instantiation and setup
             Instantiate( globalRaycasterPrefab ).Setup();

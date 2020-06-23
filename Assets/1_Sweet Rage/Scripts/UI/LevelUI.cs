@@ -5,7 +5,7 @@
     using UnityEngine.UI;
 
     public class LevelUI : MonoBehaviour {
-        [ReadOnly] public LevelEntity level;
+        [ReadOnly] public LevelObject levelObject;
 
         [Header("Refs")]
         public TextMeshProUGUI nameText;
@@ -13,42 +13,51 @@
         public Image star1;
         public Image star2;
         public Image star3;
+        public Image lockedImage;
         public Sprite starEmpty;
         public Sprite starFull;
         public Color emptyStarColor;
 
         [Header("Events")]
         public UnityEvent_LevelEntity OnClick;
+        public UnityEvent_LevelObject OnClickObject;
         public UnityEvent_LevelEntity OnSelection;
         public UnityEvent_LevelEntity OnDeselection;
 
-        public void SetLevel ( LevelEntity level ) {
-            this.level = level;
+        public void SetLevel ( LevelObject level ) {
+            this.levelObject = level;
         }
 
-        public void LevelSelectHandler ( LevelEntity selectedLevel ) {
-            if ( level == selectedLevel )
-                OnSelection.Invoke( level );
+        public void LevelSelectHandler ( LevelObject selectedLevel ) {
+            if ( levelObject == selectedLevel )
+                OnSelection.Invoke( levelObject.entity );
             else
-                OnDeselection.Invoke( level );
+                OnDeselection.Invoke( levelObject.entity );
         }
 
         public void UpdateUI () {
-            if ( !level )
+            if ( levelObject == null )
                 return;
 
             if ( nameText )
-                nameText.text = level?.levelName;
+                nameText.text = levelObject.entity.levelName;
 
             if ( mapImage )
-                mapImage.sprite = level?.mapSprite;
+                mapImage.sprite = levelObject.entity.mapSprite;
+
+            if ( lockedImage ) {
+                star1.gameObject.SetActive( !levelObject.entity.state.locked );
+                star2.gameObject.SetActive( !levelObject.entity.state.locked );
+                star3.gameObject.SetActive( !levelObject.entity.state.locked );
+                lockedImage.gameObject.SetActive( levelObject.entity.state.locked );
+            }
 
             UpdateScoreUI();
         }
 
         public void UpdateScoreUI () {
             if ( star1 ) {
-                if ( level.maxScore >= .3f )
+                if ( levelObject.entity.state.maxScore >= .3f )
                     star1.sprite = starFull;
                 else {
                     star1.sprite = starEmpty;
@@ -56,7 +65,7 @@
                 }
             }
             if ( star2 ) {
-                if ( level.maxScore >= .6f )
+                if ( levelObject.entity.state.maxScore >= .6f )
                     star2.sprite = starFull;
                 else {
                     star2.sprite = starEmpty;
@@ -64,7 +73,7 @@
                 }
             }
             if ( star3 ) {
-                if ( level.maxScore >= .9f )
+                if ( levelObject.entity.state.maxScore >= .9f )
                     star3.sprite = starFull;
                 else {
                     star3.sprite = starEmpty;
@@ -74,7 +83,8 @@
         }
 
         public void Click () {
-            OnClick.Invoke( level );
+            OnClick.Invoke( levelObject.entity );
+            OnClickObject.Invoke( levelObject );
         }
     }
 }

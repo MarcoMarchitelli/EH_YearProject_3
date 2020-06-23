@@ -28,10 +28,10 @@
             }
 
             //wave phase graphics
-            gameData.phaseUI.SetTexts( gameData.currentLevel.CurrentWave.preWaveText );
+            gameData.phaseUI.SetTexts( gameData.currentLevelObject.entity.CurrentWave.preWaveText );
             gameData.phaseUI.Play( .5f, Rewind );
 
-            duration = gameData.currentLevel.CurrentWave.placementTime;
+            duration = gameData.currentLevelObject.entity.CurrentWave.placementTime;
             timer = 0;
             count = true;
 

@@ -9,7 +9,7 @@
         public string levelName;
         public Sprite mapSprite;
 
-        [ReadOnly] public float maxScore;
+        [ReadOnly] public LevelState state;
         private float currentScore;
         public float CurrentScore => currentScore;
 
@@ -37,7 +37,7 @@
             }
 
             currentWave = waves[currentWaveIndex];
-            //RuntimeLevelData.turretModules.Clear();
+
             foreach ( var module in currentWave.modules ) {
                 TurretModule t = Instantiate( module, modulesContainer.transform );
                 t.Setup();
@@ -53,8 +53,14 @@
         }
 
         public void SaveMaxScore () {
-            if ( currentScore > maxScore )
-                maxScore = currentScore;
+            if ( currentScore > state.maxScore )
+                state.maxScore = currentScore;
         }
+    }
+
+    [System.Serializable]
+    public class LevelState {
+        public float maxScore;
+        public bool locked;
     }
 }
