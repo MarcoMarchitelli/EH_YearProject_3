@@ -10,6 +10,7 @@
         [Header("Events")]
         public UnityEvent OnPlay;
         public UnityEvent OnAllPlayEnd;
+        public UnityEvent OnRewind;
         public UnityEvent OnAllRewindEnd;
 
         private int playEndCount, rewindEndCount;
@@ -43,6 +44,7 @@
         public void Rewind () {
             foreach ( var tweener in tweeners )
                 tweener.Rewind();
+            OnRewind.Invoke();
         }
 
         public void ResetTweens () {
