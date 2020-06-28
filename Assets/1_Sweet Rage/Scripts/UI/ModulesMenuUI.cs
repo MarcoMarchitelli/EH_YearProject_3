@@ -8,9 +8,9 @@
         public TurretType[] turretTypes;
 
         [Header("Refs")]
-        public Transform shootersMenu;
-        public Transform elementsMenu;
-        public Transform modifiersMenu;
+        public ModuleMenuUI shootersMenu;
+        public ModuleMenuUI elementsMenu;
+        public ModuleMenuUI modifiersMenu;
         public CanvasGroup canvasGroup;
         public RectTransform rectTransform;
 
@@ -28,17 +28,17 @@
             foreach ( var turretType in turretTypes ) {
                 switch ( turretType.moduleType ) {
                     case TurretType.ModuleType.shooter:
-                    mgUI = Instantiate( moduleGroupUIPrefab, shootersMenu );
+                    mgUI = Instantiate( moduleGroupUIPrefab, shootersMenu.transform );
                     mgUI.turretType = turretType;
                     moduleGroupUIs.Add( mgUI );
                     break;
                     case TurretType.ModuleType.element:
-                    mgUI = Instantiate( moduleGroupUIPrefab, elementsMenu );
+                    mgUI = Instantiate( moduleGroupUIPrefab, elementsMenu.transform );
                     mgUI.turretType = turretType;
                     moduleGroupUIs.Add( mgUI );
                     break;
                     case TurretType.ModuleType.modifier:
-                    mgUI = Instantiate( moduleGroupUIPrefab, modifiersMenu );
+                    mgUI = Instantiate( moduleGroupUIPrefab, modifiersMenu.transform );
                     mgUI.turretType = turretType;
                     moduleGroupUIs.Add( mgUI );
                     break;
@@ -51,18 +51,23 @@
             foreach ( var moduleGroupUI in moduleGroupUIs ) {
                 moduleGroupUI.ClearModules();
             }
-            for ( int i = 0; i < RuntimeLevelData.turretModules.Count; i++ ) {
-                TurretModule tm = RuntimeLevelData.turretModules[i];
-                foreach ( var moduleGroupUI in moduleGroupUIs ) {
+
+            //cycle groups
+            foreach ( var moduleGroupUI in moduleGroupUIs ) {
+                //setactive false
+                moduleGroupUI.gameObject.SetActive( false );
+                //cycle modules
+                for ( int i = 0; i < RuntimeLevelData.turretModules.Count; i++ ) {
+                    TurretModule tm = RuntimeLevelData.turretModules[i];
+                    //if equal => setactive true
                     if ( moduleGroupUI.turretType == tm.turretType ) {
+                        moduleGroupUI.gameObject.SetActive( true );
                         moduleGroupUI.AddModule( tm );
                         moduleGroupUI.UpdateUI();
                     }
                 }
             }
-            foreach ( var moduleGroupUI in moduleGroupUIs ) {
-                moduleGroupUI.gameObject.SetActive( moduleGroupUI.ModuleCount != 0 );
-            }
+
             LayoutRebuilder.ForceRebuildLayoutImmediate( rectTransform );
         }
 
@@ -79,22 +84,22 @@
         public void RemoveTurretModule ( TurretModule module ) {
             RuntimeLevelData.turretModules.Remove( module );
             UpdateUI();
-        } 
+        }
         #endregion
 
         private void DestroyModuleGroupsUIs () {
-            int count = shootersMenu.childCount;
+            int count = shootersMenu.transform.childCount;
             int i;
             for ( i = 0; i < count; i++ ) {
-                Destroy( shootersMenu.GetChild( i ).gameObject );
+                Destroy( shootersMenu.transform.GetChild( i ).gameObject );
             }
-            count = elementsMenu.childCount;
+            count = elementsMenu.transform.childCount;
             for ( i = 0; i < count; i++ ) {
-                Destroy( elementsMenu.GetChild( i ).gameObject );
+                Destroy( elementsMenu.transform.GetChild( i ).gameObject );
             }
-            count = modifiersMenu.childCount;
+            count = modifiersMenu.transform.childCount;
             for ( i = 0; i < count; i++ ) {
-                Destroy( modifiersMenu.GetChild( i ).gameObject );
+                Destroy( modifiersMenu.transform.GetChild( i ).gameObject );
             }
         }
     }
