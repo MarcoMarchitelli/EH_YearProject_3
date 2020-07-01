@@ -4,6 +4,9 @@
     using System.Collections.Generic;
     using Deirin.EB;
     using Deirin.Utilities;
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
 
     [RequireComponent( typeof( CapsuleCollider ) )]
     public class EnemyDetector : BaseBehaviour {
@@ -71,6 +74,13 @@
                 }
             }
         }
+
+#if UNITY_EDITOR
+        private void OnDrawGizmos () {
+            Vector3 pos = transform.position + Vector3.up * 2f;
+            Handles.Label( pos, currentTarget ? currentTarget.name : "NULL", EditorStyles.boldLabel );
+        }
+#endif
         #endregion
 
         #region API
@@ -137,11 +147,11 @@
                 return;
 
             Enemy t = enemiesInRange[0];
-            float maxPathPercent = t.pathPatroller.CoveredPath;
+            float maxPathPercent = t.pathPatroller.PathPercent;
 
             for ( int i = 1; i < enemyCount; i++ ) {
                 Enemy tempEnemy = enemiesInRange[i];
-                float tempPercent = tempEnemy.pathPatroller.CoveredPath;
+                float tempPercent = tempEnemy.pathPatroller.PathPercent;
                 if ( maxPathPercent < tempPercent ) {
                     maxPathPercent = tempPercent;
                     t = tempEnemy;
@@ -159,11 +169,11 @@
                 return;
 
             Enemy t = null;
-            float maxPathPercent = currentTarget.pathPatroller.CoveredPath;
+            float maxPathPercent = currentTarget.pathPatroller.PathPercent;
 
             for ( int i = 1; i < enemyCount; i++ ) {
                 Enemy tempEnemy = enemiesInRange[i];
-                float tempPercent = tempEnemy.pathPatroller.CoveredPath;
+                float tempPercent = tempEnemy.pathPatroller.PathPercent;
                 if ( maxPathPercent < tempPercent ) {
                     maxPathPercent = tempPercent;
                     t = tempEnemy;

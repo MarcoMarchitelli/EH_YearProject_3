@@ -21,11 +21,12 @@
 
         public float Speed => speed;
         public float CurrentSpeed => currentSpeed;
-        public float CoveredPath => coveredPath;
+        public float PathPercent => pathPercent;
 
         private float startSpeed, currentSpeed;
         private bool patrolling;
         private float coveredPath;
+        private float pathPercent;
         private float offset;
 
         #region Overrides
@@ -76,11 +77,12 @@
 
         private void Patrol () {
             coveredPath += Time.deltaTime * currentSpeed;
+            pathPercent = Mathf.Clamp01( coveredPath / pathCreator.path.length );
 
             Vector3 targetPos = pathCreator.path.GetPointAtDistance( coveredPath, PathCreation.EndOfPathInstruction.Stop );
             Vector3 targetDirection = pathCreator.path.GetDirectionAtDistance( coveredPath, PathCreation.EndOfPathInstruction.Stop );
             Vector3 upVector = pathCreator.path.GetNormalAtDistance( coveredPath, PathCreation.EndOfPathInstruction.Stop );
-            
+
             transform.rotation = Quaternion.LookRotation( targetDirection, upVector );
             transform.position = targetPos + Vector3.Cross( targetDirection, upVector ) * offset;
         }

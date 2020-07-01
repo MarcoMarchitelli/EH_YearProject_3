@@ -24,7 +24,7 @@
             }
 #if UNITY_EDITOR
             else {
-                print( name + " could not find path patroller" );
+                Debug.LogWarning( name + " could not find path patroller" );
             }
 #endif
         }
