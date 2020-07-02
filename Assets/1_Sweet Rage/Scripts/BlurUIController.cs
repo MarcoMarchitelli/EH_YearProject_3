@@ -18,6 +18,7 @@
         private void Awake () {
             propertyID = Shader.PropertyToID( propertyName );
             tween = material.DOFloat( targetValue, propertyID, duration ).SetEase( ease );
+            tween.SetAutoKill( false );
         }
 
         public void Play () {

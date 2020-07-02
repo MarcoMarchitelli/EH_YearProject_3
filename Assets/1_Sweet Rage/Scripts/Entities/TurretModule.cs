@@ -88,6 +88,9 @@
         }
 
         public void LeftMouseDownHandler () {
+            if ( GameTimer.instance.Paused )
+                return;
+
             if ( mouseEntered ) {
                 if ( state == State.placed ) {
                     mouseDowned = true;
@@ -126,6 +129,7 @@
         public void SetState ( State state ) {
             this.state = state;
         }
+
         #endregion
     }
 

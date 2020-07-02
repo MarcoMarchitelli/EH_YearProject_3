@@ -11,6 +11,8 @@
         private bool paused;
         private float previousTimeScale, timer;
 
+        public bool Paused => paused;
+
         private void Awake () {
             if ( !instance )
                 instance = this;

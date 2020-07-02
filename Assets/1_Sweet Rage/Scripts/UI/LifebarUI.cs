@@ -76,6 +76,7 @@ public class LifebarUI : MonoBehaviour {
             }
 
             percent += Time.deltaTime * speed;
+            percent = Mathf.Clamp( percent, 0, targetPercent );
 
             yield return null;
         }
