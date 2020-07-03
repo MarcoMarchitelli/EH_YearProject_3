@@ -325,6 +325,7 @@ MonoBehaviour:
   ignoresTimescale: 1
   delay: 0
   relative: 0
+  speedBased: 0
   ease: 0
   loops: 0
   loopType: 0
@@ -617,6 +618,7 @@ MonoBehaviour:
   ignoresTimescale: 1
   delay: 0
   relative: 0
+  speedBased: 0
   ease: 0
   loops: 0
   loopType: 0
@@ -1238,6 +1240,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3353344526434076296}
+  - component: {fileID: 358125849}
   m_Layer: 5
   m_Name: Gameplay UI
   m_TagString: Untagged
@@ -1267,6 +1270,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &358125849
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3353344526434076297}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &4592775147140883800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,6 +1330,7 @@ MonoBehaviour:
   ignoresTimescale: 0
   delay: 0
   relative: 0
+  speedBased: 0
   ease: 0
   loops: 0
   loopType: 0
