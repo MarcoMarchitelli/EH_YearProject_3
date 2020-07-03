@@ -14,7 +14,7 @@
 
         private bool gateOpen, opening, closing;
         private float timer;
-        private bool loss;
+        private bool levelEnd;
         private Vector3 startPos, endPos;
         private System.Action OnGateOpen;
 
@@ -29,7 +29,7 @@
         }
 
         private void Update () {
-            if ( loss )
+            if ( levelEnd )
                 return;
 
             if ( opening ) {
@@ -90,8 +90,8 @@
             }
         }
 
-        public void LossHandler () {
-            loss = true;
+        public void LevelEndHandler () {
+            levelEnd = true;
         }
     }
 

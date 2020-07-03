@@ -561,14 +561,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 199451610}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94b510521cd55ea48934aa393c6d542f, type: 3}
+  m_Script: {fileID: 11500000, guid: dfca6e3df93f5ae48a0a23796bc998cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ignoresContainer: 0
-  duration: 250
+  duration: 200
   ignoresTimescale: 1
   delay: 0.6
-  relative: 1
+  relative: 0
   speedBased: 1
   ease: 0
   loops: 0
@@ -594,7 +594,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 2.5
+          m_FloatArgument: 2
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -612,8 +612,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   target: {fileID: 46892524}
   targetTransformPosition: {fileID: 6147970946573858008}
-  targetPosition: {x: 0, y: -245, z: 0}
-  local: 0
+  targetAnchoredPosition: {x: 0, y: 0}
 --- !u!4 &199451612
 Transform:
   m_ObjectHideFlags: 0
@@ -654,14 +653,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 275266891}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94b510521cd55ea48934aa393c6d542f, type: 3}
+  m_Script: {fileID: 11500000, guid: dfca6e3df93f5ae48a0a23796bc998cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ignoresContainer: 0
-  duration: 250
+  duration: 200
   ignoresTimescale: 1
   delay: 0.5
-  relative: 1
+  relative: 0
   speedBased: 1
   ease: 0
   loops: 0
@@ -694,8 +693,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   target: {fileID: 46892524}
   targetTransformPosition: {fileID: 6147970946573858008}
-  targetPosition: {x: 0, y: -245, z: 0}
-  local: 0
+  targetAnchoredPosition: {x: 0, y: 0}
 --- !u!4 &275266893
 Transform:
   m_ObjectHideFlags: 0
@@ -1434,6 +1432,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 558059980}
         m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3405833160769276968}
+        m_MethodName: LevelEndHandler
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4124,7 +4133,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 3405833160769276968}
-        m_MethodName: LossHandler
+        m_MethodName: LevelEndHandler
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
