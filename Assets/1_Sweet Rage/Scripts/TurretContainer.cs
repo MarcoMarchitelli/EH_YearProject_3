@@ -24,7 +24,7 @@
         public int maxModules;
         public float moduleHeight;
         public Vector3 arrowOffset;
-        public float modulesAnimationDuration = .5f;
+        public float modulesAnimationSpeed = .5f;
         [ReadOnly] public State state;
 
         [Header("Turret Types")]
@@ -84,7 +84,7 @@
             //check module type
             switch ( module.turretType.moduleType ) {
                 //if it is a shooter
-                case TurretType.ModuleType.shooter: 
+                case TurretType.ModuleType.shooter:
 
                 //if we have elements placed we apply effect
                 ElementsContainer shooterElements;
@@ -130,6 +130,8 @@
                 else if ( modifierPreview )
                     modifierModules.Remove( module );
 
+                module.graphics.DOKill();
+                module.graphics.transform.position = module.transform.position;
                 shooterPreview = elementPreview = modifierPreview = false;
                 SortModules();
             }
@@ -186,7 +188,11 @@
                 Vector3 prevGraphic = module.graphics.position;
                 module.transform.position = currentTopPosition;
                 module.graphics.position = prevGraphic;
-                module.graphics.DOMove( currentTopPosition, modulesAnimationDuration ).SetEase( Ease.OutCubic ).SetUpdate( true );
+                module.graphics.DOMove( currentTopPosition, modulesAnimationSpeed )
+                    .SetEase( Ease.OutCubic )
+                    .SetUpdate( true )
+                    .SetSpeedBased( true )
+                    .SetAutoKill( true );
                 module.graphics.DOPlay();
                 currentTopPosition = module.topModuleSpot.position;
             }

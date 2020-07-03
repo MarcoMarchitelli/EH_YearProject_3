@@ -28,6 +28,7 @@
 
         public void SelectTurret () {
             turretModule.gameObject.SetActive( true );
+            turretModule.transform.position = turretModule.mouseFollower.GetTargetPosition();
             turretModule.SetState( TurretModule.State.selected );
             OnTurretSelection.Invoke( turretModule );
         }

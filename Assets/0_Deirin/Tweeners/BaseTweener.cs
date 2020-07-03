@@ -10,6 +10,7 @@
         public bool ignoresTimescale;
         [Min(0)] public float delay;
         public bool relative;
+        public bool speedBased;
         public Ease ease;
         [Min(-1)] public int loops;
         public LoopType loopType;
@@ -39,6 +40,7 @@
             tween.SetLoops( loops, loopType );
             tween.SetAutoKill( autoKill );
             tween.SetRelative( relative );
+            tween.SetSpeedBased( speedBased );
 
             tween.onComplete += OnPlayEnd.Invoke;
             tween.onRewind += OnRewindEnd.Invoke;

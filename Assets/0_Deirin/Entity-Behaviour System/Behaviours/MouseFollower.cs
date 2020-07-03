@@ -19,6 +19,7 @@
         public Vector3 planeNormal;
         public LayerMask castMask;
         public float rayMaxDistance;
+        public float speed;
 
         public Coroutine plane, raycast, screen;
 
@@ -75,11 +76,42 @@
             }
         }
 
+        public Vector3 GetTargetPosition () {
+            Vector3 targetPos = Vector3.zero;
+            Ray r = cam.ScreenPointToRay(Input.mousePosition);
+
+            switch ( followMode ) {
+                case FollowMode.PlaneCasting:
+                Plane p = new Plane(planeNormal, planeCenter);
+                float distance = 0;
+                if ( p.Raycast( r, out distance ) ) {
+                    Vector3 pos = r.origin + r.direction * distance;
+                    targetPos = pos + positionOffset;
+                }
+                break;
+                case FollowMode.RayCasting:
+                RaycastHit hit;
+                if ( Physics.Raycast( r, out hit, rayMaxDistance, castMask ) ) {
+                    targetPos = hit.point + positionOffset;
+                }
+                break;
+                case FollowMode.ScreenSpace:
+                targetPos = Input.mousePosition;
+                break;
+            }
+
+            return targetPos;
+        }
+
         IEnumerator ScreenSpaceRoutine () {
             if ( !target )
                 yield break;
             while ( true ) {
-                target.position = Input.mousePosition;
+                transform.position = Vector3.MoveTowards(
+                     transform.position,
+                     Input.mousePosition,
+                     Time.deltaTime * speed
+                );
                 yield return null;
             }
         }
@@ -91,7 +123,11 @@
                 Ray r = cam.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if ( Physics.Raycast( r, out hit, rayMaxDistance, castMask ) ) {
-                    transform.position = hit.point + positionOffset;
+                    transform.position = Vector3.MoveTowards(
+                        transform.position,
+                        hit.point + positionOffset,
+                        Time.deltaTime * speed
+                        );
                 }
                 yield return null;
             }
@@ -106,7 +142,11 @@
                 float distance = 0;
                 if ( p.Raycast( r, out distance ) ) {
                     Vector3 pos = r.origin + r.direction * distance;
-                    transform.position = pos + positionOffset;
+                    transform.position = Vector3.MoveTowards(
+                        transform.position,
+                        pos + positionOffset,
+                        Time.deltaTime * speed
+                    );
                 }
                 yield return null;
             }

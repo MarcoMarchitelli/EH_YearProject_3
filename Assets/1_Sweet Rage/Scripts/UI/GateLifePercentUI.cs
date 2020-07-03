@@ -14,6 +14,7 @@
 
         private bool gateOpen, opening, closing;
         private float timer;
+        private bool loss;
         private Vector3 startPos, endPos;
         private System.Action OnGateOpen;
 
@@ -28,6 +29,9 @@
         }
 
         private void Update () {
+            if ( loss )
+                return;
+
             if ( opening ) {
                 timer += Time.deltaTime;
                 float percent = timer / gateOpeningDuration;
@@ -84,6 +88,10 @@
                 opening = true;
                 closing = false;
             }
+        }
+
+        public void LossHandler () {
+            loss = true;
         }
     }
 
