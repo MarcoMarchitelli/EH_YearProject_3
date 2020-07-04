@@ -29,6 +29,9 @@
         public UnityEvent OnMouseExit;
         public UnityEvent OnMouseDown;
         public UnityEvent OnMouseUp;
+        [Header("Game State Events")]
+        public UnityEvent OnWaveStartWhilePlaced;
+        public UnityEvent OnWaveEndWhilePlaced;
 
         private TurretContainer turretContainer;
         private bool mouseEntered, mouseDowned;
@@ -140,13 +143,24 @@
                 mouseEntered = false;
             }
         }
+
+        public void WaveStartHandler () {
+            if ( state == State.placed ) {
+                OnWaveStartWhilePlaced.Invoke();
+            }
+        }
+
+        public void WaveEndHandler () {
+            if ( state == State.placed ) {
+                OnWaveEndWhilePlaced.Invoke();
+            }
+        }
         #endregion
 
         #region API
         public void SetState ( State state ) {
             this.state = state;
         }
-
         #endregion
     }
 
