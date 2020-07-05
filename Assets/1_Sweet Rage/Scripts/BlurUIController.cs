@@ -19,15 +19,17 @@
         }
 
         public void Play () {
-            material.DOFloat( targetValue,"_Size", duration )
+            material.DOFloat( targetValue, propertyID, duration )
             .SetEase( ease )
-            .SetAutoKill( true );
+            .SetAutoKill( true )
+            .PlayForward();
         }
 
         public void Play ( float duration ) {
-            material.DOFloat( targetValue, "_Size", duration )
+            material.DOFloat( targetValue, propertyID, duration )
             .SetEase( ease )
-            .SetAutoKill( true );
+            .SetAutoKill( true )
+            .PlayForward();
         }
 
         public void SetTargetValue ( float value ) {
