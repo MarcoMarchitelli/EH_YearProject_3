@@ -10,7 +10,7 @@
 
         [Header("Global Events")]
         public GameEvent OnEnemyReachedEnd;
-        public GameEvent OnLevelEndClick;
+        public GameEvent OnLevelTransitionOutEnd;
         public GameEvent_Float OnEndGateLifeChange;
 
         public override void Enter () {
@@ -29,7 +29,7 @@
 
             gameData.currentLevel.CurrentWave.OnWaveEnd.AddListener( WaveEndHandler );
             OnEnemyReachedEnd.OnInvoke += LossHandler;
-            OnLevelEndClick.OnInvoke += LevelEndClickHandler;
+            OnLevelTransitionOutEnd.OnInvoke += LevelEndClickHandler;
             OnEndGateLifeChange.OnInvoke += EndGateLifeChangeHandler;
         }
 
@@ -56,7 +56,7 @@
 
             gameData.currentLevel.CurrentWave.OnWaveEnd.RemoveListener( WaveEndHandler );
             OnEnemyReachedEnd.OnInvoke -= LossHandler;
-            OnLevelEndClick.OnInvoke -= LevelEndClickHandler;
+            OnLevelTransitionOutEnd.OnInvoke -= LevelEndClickHandler;
         }
     }
 }

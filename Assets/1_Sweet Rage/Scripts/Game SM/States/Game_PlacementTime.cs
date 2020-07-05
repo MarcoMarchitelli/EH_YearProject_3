@@ -10,7 +10,7 @@
 
         [Header("Global Events")]
         public GameEvent OnPlaceTimeSkipClick;
-        public GameEvent OnLevelEndClick;
+        public GameEvent OnLevelTransitionOutEnd;
 
         private bool count;
         private float timer, duration;
@@ -36,7 +36,7 @@
             count = true;
 
             OnPlaceTimeSkipClick.OnInvoke += SkipHandler;
-            OnLevelEndClick.OnInvoke += LevelEndClickHandler;
+            OnLevelTransitionOutEnd.OnInvoke += LevelEndClickHandler;
         }
 
         public override void Tick () {
@@ -65,7 +65,7 @@
             base.Exit();
 
             OnPlaceTimeSkipClick.OnInvoke -= SkipHandler;
-            OnLevelEndClick.OnInvoke -= LevelEndClickHandler;
+            OnLevelTransitionOutEnd.OnInvoke -= LevelEndClickHandler;
         }
     }
 }
