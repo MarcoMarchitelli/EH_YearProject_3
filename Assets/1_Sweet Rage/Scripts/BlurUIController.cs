@@ -13,24 +13,25 @@
         public Ease ease;
 
         private int propertyID;
-        private Tween tween;
 
         private void Awake () {
             propertyID = Shader.PropertyToID( propertyName );
-            tween = material.DOFloat( targetValue, propertyID, duration ).SetEase( ease );
-            tween.SetAutoKill( false );
         }
 
         public void Play () {
-            tween.PlayForward();
+            material.DOFloat( targetValue,"_Size", duration )
+            .SetEase( ease )
+            .SetAutoKill( true );
         }
 
-        public void Rewind () {
-            tween.PlayBackwards();
+        public void Play ( float duration ) {
+            material.DOFloat( targetValue, "_Size", duration )
+            .SetEase( ease )
+            .SetAutoKill( true );
         }
 
-        public void Kill () {
-            tween.Kill();
+        public void SetTargetValue ( float value ) {
+            targetValue = value;
         }
     }
 }
