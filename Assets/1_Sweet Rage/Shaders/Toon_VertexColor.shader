@@ -63,6 +63,7 @@
 					OUT.worldNormal = UnityObjectToWorldNormal( IN.normal );
 					OUT.pos = UnityObjectToClipPos( IN.pos );
 					OUT.uv = IN.uv;					
+					OUT.vertexColor = IN.vertexColor;
 					TRANSFER_VERTEX_TO_FRAGMENT(OUT);
 					return OUT;
 				}
