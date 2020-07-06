@@ -48,10 +48,11 @@ MonoBehaviour:
   ignoresTimescale: 1
   delay: 0
   relative: 0
+  speedBased: 0
   ease: 0
   loops: -1
   loopType: 0
-  autoKill: 0
+  autoKill: 1
   OnPlay:
     m_PersistentCalls:
       m_Calls: []
@@ -127,10 +128,11 @@ MonoBehaviour:
   ignoresTimescale: 1
   delay: 0
   relative: 0
+  speedBased: 0
   ease: 0
   loops: -1
   loopType: 0
-  autoKill: 0
+  autoKill: 1
   OnPlay:
     m_PersistentCalls:
       m_Calls: []
@@ -587,10 +589,11 @@ MonoBehaviour:
   ignoresTimescale: 1
   delay: 0
   relative: 0
+  speedBased: 0
   ease: 0
   loops: -1
   loopType: 0
-  autoKill: 0
+  autoKill: 1
   OnPlay:
     m_PersistentCalls:
       m_Calls: []
@@ -733,10 +736,11 @@ MonoBehaviour:
   ignoresTimescale: 1
   delay: 0
   relative: 0
+  speedBased: 0
   ease: 0
   loops: -1
   loopType: 0
-  autoKill: 0
+  autoKill: 1
   OnPlay:
     m_PersistentCalls:
       m_Calls: []
@@ -889,6 +893,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  OnRewind:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   OnAllRewindEnd:
     m_PersistentCalls:
       m_Calls: []
@@ -976,81 +985,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Turret UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 26266284368193660, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
-        type: 3}
-      propertyPath: OnTurretSelection.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 26266284368193660, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
-        type: 3}
-      propertyPath: OnTurretSelection.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 26266284368193660, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
-        type: 3}
-      propertyPath: OnTurretSelection.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 26266284368193660, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
-        type: 3}
-      propertyPath: OnTurretSelection.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 8984795219202958734}
-    - target: {fileID: 26266284368193660, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
-        type: 3}
-      propertyPath: OnTurretSelection.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: Stop
-      objectReference: {fileID: 0}
-    - target: {fileID: 26266284368193660, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
-        type: 3}
-      propertyPath: OnTurretSelection.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 26266284368193660, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
-        type: 3}
-      propertyPath: OnTurretSelection.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 26266284368193660, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
-        type: 3}
-      propertyPath: OnTurretSelection.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 26266284368193660, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
-        type: 3}
-      propertyPath: OnTurretSelection.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 26266284368193660, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
-        type: 3}
-      propertyPath: OnTurretSelection.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: Kill
-      objectReference: {fileID: 0}
-    - target: {fileID: 26266284368193660, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
-        type: 3}
-      propertyPath: OnTurretSelection.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 26266284368193660, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
-        type: 3}
-      propertyPath: OnTurretSelection.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 26266284368193660, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
-        type: 3}
-      propertyPath: OnTurretSelection.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 26266284368193660, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
-        type: 3}
-      propertyPath: OnTurretSelection.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8508171130877221995, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
-        type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 26266284368193661, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
         type: 3}
@@ -1156,33 +1090,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 26266282787593557, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 26266282787593557, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 3f91331724a9da84197e9b6d94f0483c,
-        type: 3}
-    - target: {fileID: 26266283335744964, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 26266283335744964, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 3f91331724a9da84197e9b6d94f0483c,
-        type: 3}
-    - target: {fileID: 26266283335744964, guid: 3229e9ef39c17ec4da409929b4b1d0eb,
-        type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3229e9ef39c17ec4da409929b4b1d0eb, type: 3}

@@ -29,11 +29,11 @@
             //phase UI setup
             gameData.phaseUI.Setup();
 
-            OnLevelTransitionInEnd.OnInvoke += LevelTransitionEndHandler;
+            OnLevelTransitionInEnd.OnInvoke += LevelTransitionInEndHandler;
         }
 
-        private void LevelTransitionEndHandler () => gameData.GoNext();
+        private void LevelTransitionInEndHandler () => gameData.GoNext();
 
-        public override void Exit () => OnLevelTransitionInEnd.OnInvoke += LevelTransitionEndHandler;
+        public override void Exit () => OnLevelTransitionInEnd.OnInvoke += LevelTransitionInEndHandler;
     }
 }
