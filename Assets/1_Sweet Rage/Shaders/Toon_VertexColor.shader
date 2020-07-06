@@ -1,4 +1,4 @@
-﻿Shader "Custom/Toon_VertexColor_Outline" {
+﻿Shader "Custom/Toon_VertexColor" {
 	Properties{
 		_ShadingPalette("Shading Palette", 2D) = "white" {}
 		_ShadingIntesity("Shading Palette Intensity", Range(0,1)) = 0
@@ -6,10 +6,6 @@
 
 		_LightColorIntensity("Light Color Intensity", Range(0,1)) = 0
 		_ShadowIntesity("Shadow Intesity", Range(0,1)) = 0
-
-		_OutlineColor("Outline Color", Color) = (0, 0, 0, 1)
-		_OutlineWidth("Outline Width", Range(0, 400)) = 0.03
-		_DistanceInfluence("Distance Influence", Range(0,1)) = 0
 	}
 
 		Subshader{
@@ -38,12 +34,14 @@
 					float4 pos : POSITION;
 					float3 normal : NORMAL;
 					float4 vertexColor : COLOR;
+					float2 uv : TEXCOORD0;
 				};
 
 				struct v2f {
 					float4 pos : SV_POSITION;
 					float3 worldNormal : NORMAL;
 					float4 vertexColor : COLOR;
+					float2 uv : TEXCOORD0;
 					LIGHTING_COORDS(1,2)
 				};
 
@@ -54,16 +52,17 @@
 				float _LightColorIntensity;
 				float _ShadowIntesity;
 				float _ShadingIntesity;
-
-				float map(float s, float a1, float a2, float b1, float b2)
+				
+				float map( float s, float a1, float a2, float b1, float b2 )
 				{
 					return b1 + (s - a1) * (b2 - b1) / (a2 - a1);
 				}
 
-				v2f vertexShader(vertexInput IN) {
+				v2f vertexShader( vertexInput IN ) {
 					v2f OUT;
-					OUT.pos = UnityObjectToClipPos(IN.pos);
-					OUT.worldNormal = UnityObjectToWorldNormal(IN.normal);
+					OUT.worldNormal = UnityObjectToWorldNormal( IN.normal );
+					OUT.pos = UnityObjectToClipPos( IN.pos );
+					OUT.uv = IN.uv;					
 					OUT.vertexColor = IN.vertexColor;
 					TRANSFER_VERTEX_TO_FRAGMENT(OUT);
 					return OUT;
@@ -87,48 +86,18 @@
 
 					//color
 					fixed4 color = IN.vertexColor;
+
 					color *= _Tint;
 					color *= lerp(1, _LightColor0, _LightColorIntensity);
 					color *= lerp(1, shadingColor, _ShadingIntesity);
 					color *= lerp(1, shadow, _ShadowIntesity);
 
-					return saturate(color);
+					return saturate( color );
 				}
 
 				ENDCG
 			}
 
 			UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
-
-			Pass {
-
-				Cull Front
-
-				CGPROGRAM
-
-				#pragma vertex VertexProgram
-				#pragma fragment FragmentProgram
-
-				half _OutlineWidth;
-				float _DistanceInfluence;
-
-				float4 VertexProgram(float4 position : POSITION, float3 normal : NORMAL) : SV_POSITION {
-					float4 clipPosition = UnityObjectToClipPos(position);
-					float3 clipNormal = mul((float3x3) UNITY_MATRIX_VP, mul((float3x3) UNITY_MATRIX_M, normal));
-					float distanceInfluence = lerp(1, clipPosition.w, _DistanceInfluence);
-					float2 offset = normalize(clipNormal.xy) / _ScreenParams.xy * _OutlineWidth * distanceInfluence * 2;
-					clipPosition.xy += offset;
-					return clipPosition;
-				}
-
-				half4 _OutlineColor;
-
-				half4 FragmentProgram() : SV_TARGET {
-					return _OutlineColor;
-				}
-
-				ENDCG
-
-			}
 		}
 }
