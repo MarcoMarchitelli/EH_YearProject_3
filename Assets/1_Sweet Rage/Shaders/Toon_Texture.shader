@@ -1,4 +1,4 @@
-﻿Shader "Custom/Toon_Texture_Outline" {
+﻿Shader "Custom/Toon_Texture" {
 	Properties{
 		_MainTex("Main Texture",2D) = "white" {}
 		_Tint("Tint", Color) = (1, 1, 1, 1)
@@ -6,10 +6,6 @@
 		_LambertStep("Lambert Step", Range(0,1)) = 0
 		_ShadingIntesity("Shading Intensity", Range(0,1)) = 0
 		_LightColorIntensity("Light Color Intensity", Range(0,1)) = 0
-
-		_OutlineColor("Outline Color", Color) = (0, 0, 0, 1)
-		_OutlineWidth("Outline Width", Range(0, 400)) = 0.03
-		_DistanceInfluence("Distance Influence", Range(0,1)) = 0
 	}
 
 	Subshader{
@@ -72,8 +68,8 @@
 
 			v2f vertexShader(vertexInput IN) {
 				v2f OUT;
-				OUT.pos = UnityObjectToClipPos(IN.pos);
 				OUT.worldNormal = UnityObjectToWorldNormal(IN.normal);
+				OUT.pos = UnityObjectToClipPos(IN.pos);
 				OUT.uv = IN.uv;
 				TRANSFER_VERTEX_TO_FRAGMENT(OUT);
 				return OUT;
@@ -107,36 +103,5 @@
 		}
 
 		UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
-
-		Pass {
-
-			Cull Front
-
-			CGPROGRAM
-
-			#pragma vertex VertexProgram
-			#pragma fragment FragmentProgram
-
-			half _OutlineWidth;
-			float _DistanceInfluence;
-
-			float4 VertexProgram(float4 position : POSITION, float3 normal : NORMAL) : SV_POSITION {
-				float4 clipPosition = UnityObjectToClipPos(position);
-				float3 clipNormal = mul((float3x3) UNITY_MATRIX_VP, mul((float3x3) UNITY_MATRIX_M, normal));
-				float distanceInfluence = lerp(1, clipPosition.w, _DistanceInfluence);
-				float2 offset = normalize(clipNormal.xy) / _ScreenParams.xy * _OutlineWidth * distanceInfluence * 2;
-				clipPosition.xy += offset;
-				return clipPosition;
-			}
-
-			half4 _OutlineColor;
-
-			half4 FragmentProgram() : SV_TARGET {
-				return _OutlineColor;
-			}
-
-			ENDCG
-
-		}
 	}
 }
