@@ -99,7 +99,7 @@
                 Debug.LogWarning( "Enemy " + e.name + " does not have a PathPatroller behaviour!" );
             }
 #endif
-            CheckDuty();
+			CheckAllSpawned();
         }
 
         private void StopAllStoppableChilds () {
@@ -109,19 +109,23 @@
         }
 
         private void CheckDuty () {
-            if ( allSpawned ) {
-                OnAllSpawned.Invoke();
+            if ( enemies.Count == 0 ) {
+                OnDutyFullfilled?.Invoke();
 #if UNITY_EDITOR
-                print( name + " finished spawning" );
+                print( name + " finished duty" );
 #endif
-                if ( enemies.Count == 0 ) {
-                    OnDutyFullfilled?.Invoke();
-#if UNITY_EDITOR
-                    print( name + " finished duty" );
-#endif
-                }
             }
         }
-        #endregion
-    }
+
+		private void CheckAllSpawned(){
+			if (allSpawned)
+			{
+				OnAllSpawned.Invoke();
+#if UNITY_EDITOR
+				print(name + " finished spawning");
+#endif
+			}
+		}
+		#endregion
+	}
 }
