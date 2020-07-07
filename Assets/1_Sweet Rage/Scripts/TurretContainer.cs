@@ -41,11 +41,15 @@
         private Vector3 currentTopPosition;
 
         private bool shooterPreview, elementPreview, modifierPreview;
+        private float halfModuleHeight;
 
         private bool hasShooter => shooterModules.Count > 0;
         private int moduleCount => shooterModules.Count + elementModules.Count + modifierModules.Count;
 
-        private void Awake () => currentTopPosition = transform.position;
+        private void Awake () {
+            currentTopPosition = transform.position;
+            halfModuleHeight = moduleHeight * .5f;
+        }
 
         #region API
         public void SetState ( int state ) {
@@ -116,6 +120,7 @@
             }
 
             capsuleCollider.height += moduleHeight;
+            capsuleCollider.center += Vector3.up * halfModuleHeight;
 
             previewModule = null;
             shooterPreview = elementPreview = modifierPreview = false;
@@ -168,6 +173,7 @@
                 module.graphics.position = module.transform.position;
 
                 capsuleCollider.height -= moduleHeight;
+                capsuleCollider.center -= Vector3.up * halfModuleHeight;
 
                 SortModules();
             }

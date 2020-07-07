@@ -364,9 +364,9 @@ MonoBehaviour:
   projectileDamageBuff: {fileID: 273577067570088153, guid: 9895a909e5d35cb469fb33dd4ab157c9,
     type: 3}
   maxModules: 4
-  moduleHeight: 2
+  moduleHeight: 1
   arrowOffset: {x: 0, y: 3, z: 0}
-  modulesAnimationSpeed: 25
+  modulesAnimationSpeed: 50
   state: 0
   fire: {fileID: 11400000, guid: 7f74b68fea3f8914cb94a2dfed741fa9, type: 2}
   ice: {fileID: 11400000, guid: 7c237fb287a45684f8e2086790a2b85a, type: 2}
@@ -386,7 +386,7 @@ CapsuleCollider:
   m_Radius: 3
   m_Height: 6
   m_Direction: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!1 &2012774268480292053
 GameObject:
   m_ObjectHideFlags: 0
@@ -1035,6 +1035,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2012774268480292050}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 43b874507f94b244d9c8ed945a0a2344,
+        type: 3}
+      propertyPath: m_Name
+      value: SM_Stand
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 43b874507f94b244d9c8ed945a0a2344,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1104,11 +1109,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 43b874507f94b244d9c8ed945a0a2344,
-        type: 3}
-      propertyPath: m_Name
-      value: SM_Stand
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 43b874507f94b244d9c8ed945a0a2344,
         type: 3}
