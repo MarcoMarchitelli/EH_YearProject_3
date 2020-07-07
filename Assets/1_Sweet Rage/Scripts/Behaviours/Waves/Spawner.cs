@@ -109,7 +109,7 @@
         }
 
         private void CheckDuty () {
-            if ( enemies.Count == 0 ) {
+            if (allSpawned && enemies.Count == 0) {
                 OnDutyFullfilled?.Invoke();
 #if UNITY_EDITOR
                 print( name + " finished duty" );
