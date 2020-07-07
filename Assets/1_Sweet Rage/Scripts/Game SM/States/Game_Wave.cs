@@ -9,12 +9,16 @@
         public UnityEvent OnLeftMouseUp;
 
         [Header("Global Events")]
-        public GameEvent OnEnemyReachedEnd;
+        public GameEvent LossEvent;
         public GameEvent OnLevelTransitionOutEnd;
         public GameEvent_Float OnEndGateLifeChange;
 
+        private bool lost;
+
         public override void Enter () {
             base.Enter();
+
+            lost = false;
 
             //Local func
             void Rewind () {
@@ -28,7 +32,8 @@
             gameData.currentLevel.CurrentWave.StartWave();
 
             gameData.currentLevel.CurrentWave.OnWaveEnd.AddListener( WaveEndHandler );
-            OnEnemyReachedEnd.OnInvoke += LossHandler;
+
+            LossEvent.OnInvoke += LossHandler;
             OnLevelTransitionOutEnd.OnInvoke += LevelEndClickHandler;
             OnEndGateLifeChange.OnInvoke += EndGateLifeChangeHandler;
         }
@@ -40,22 +45,29 @@
                 OnLeftMouseUp.Invoke();
         }
 
+        #region Handlers
         private void EndGateLifeChangeHandler ( float percent ) => gameData.currentLevel.SetCurrentScore( percent );
 
         private void LevelEndClickHandler () => gameData.GoToMainMenu();
 
-        public void LossHandler () => gameData.GoLoss();
+        public void LossHandler () {
+            lost = true;
+            gameData.GoLoss();
+        }
 
         private void WaveEndHandler ( int id ) {
-            gameData.currentLevel.CurrentWave.gameObject.SetActive( false );
-            gameData.GoNext();
+            if ( !lost ) {
+                gameData.currentLevel.CurrentWave.gameObject.SetActive( false );
+                gameData.GoNext();
+            }
         }
+        #endregion
 
         public override void Exit () {
             base.Exit();
 
             gameData.currentLevel.CurrentWave.OnWaveEnd.RemoveListener( WaveEndHandler );
-            OnEnemyReachedEnd.OnInvoke -= LossHandler;
+            LossEvent.OnInvoke -= LossHandler;
             OnLevelTransitionOutEnd.OnInvoke -= LevelEndClickHandler;
         }
     }
