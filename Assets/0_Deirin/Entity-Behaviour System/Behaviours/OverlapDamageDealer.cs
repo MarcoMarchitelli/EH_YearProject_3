@@ -1,6 +1,7 @@
 ﻿namespace Deirin.EB {
     using UnityEngine;
     using Deirin.Utilities;
+    using SweetRage;
 
     public class OverlapDamageDealer : BaseBehaviour, IDamager {
         public enum GetComponentMode { self, parent, children }
@@ -9,14 +10,17 @@
         [SerializeField] private float damage;
         public float radius;
         public GetComponentMode getComponentMode;
+		public bool excludeBulletAndTower = true;
 
-        [Header("Events")]
+
+		[Header("Events")]
         public UnityEvent_Entity OnEntityHit;
 
         private Collider[] hitObjs;
         private BaseEntity tempEntity;
         private DamageReceiver tempDamageReceiver;
         private float startDamage;
+
 
         protected override void CustomSetup () {
             startDamage = damage;
@@ -52,7 +56,11 @@
             switch ( getComponentMode ) {
                 case GetComponentMode.self:
                 for ( int i = 0; i < hitObjs.Length; i++ ) {
-                    if ( hitObjs[i].TryGetComponent( out tempEntity ) ) {
+                    if ( hitObjs[i].TryGetComponent( out tempEntity ) )
+					{
+						if (excludeBulletAndTower && (tempEntity is Projectile || tempEntity is TurretModule))
+								break;
+
                         OnEntityHit.Invoke( tempEntity );
                         if ( tempEntity.TryGetBehaviour( out tempDamageReceiver ) ) {
                             DealDamage();
@@ -63,8 +71,12 @@
                 case GetComponentMode.parent:
                 for ( int i = 0; i < hitObjs.Length; i++ ) {
                     tempEntity = hitObjs[i].GetComponentInParent<BaseEntity>();
-                    if ( tempEntity ) {
-                        OnEntityHit.Invoke( tempEntity );
+                    if ( tempEntity ) 
+					{
+						if (excludeBulletAndTower && (tempEntity is Projectile || tempEntity is TurretModule))
+							break;
+
+						OnEntityHit.Invoke( tempEntity );
                         if ( tempEntity.TryGetBehaviour( out tempDamageReceiver ) ) {
                             DealDamage();
                         }
@@ -75,7 +87,10 @@
                 for ( int i = 0; i < hitObjs.Length; i++ ) {
                     tempEntity = hitObjs[i].GetComponentInChildren<BaseEntity>();
                     if ( tempEntity ) {
-                        OnEntityHit.Invoke( tempEntity );
+						if (excludeBulletAndTower && (tempEntity is Projectile || tempEntity is TurretModule))
+							break;
+
+						OnEntityHit.Invoke( tempEntity );
                         if ( tempEntity.TryGetBehaviour( out tempDamageReceiver ) ) {
                             DealDamage();
                         }
