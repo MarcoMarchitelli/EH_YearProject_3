@@ -16,6 +16,7 @@
             gameData.Win += Win;
             gameData.Loss += Loss;
             gameData.MainMenu += MainMenu;
+            gameData.Retry += Retry;
 
             gameData.animator = animator;
             data = gameData;  
@@ -36,11 +37,16 @@
         private void MainMenu () {
             animator.SetTrigger( "MainMenu" );
         }
+
+        private void Retry () {
+            animator.SetTrigger( "Retry" );
+        }
     }
 
     [System.Serializable]
     public class GameData : IStateMachineData {
         [HideInInspector] public LevelEntity currentLevel;
+        [HideInInspector] public LevelEntity currentSelectedLevel;
         [HideInInspector] public LevelEntity[] levelsEntities;
         [HideInInspector] public PhaseUI phaseUI;
         [HideInInspector] public PlaceTimeUI placeTimeUI;
@@ -48,7 +54,7 @@
         [HideInInspector] public MainMenuUI mainMenuUI;
         [HideInInspector] public Animator animator;
 
-        public System.Action Next, Win, Loss, MainMenu;
+        public System.Action Next, Win, Loss, MainMenu, Retry;
 
         public void GoNext () {
             Next?.Invoke();
@@ -64,6 +70,10 @@
 
         public void GoToMainMenu () {
             MainMenu?.Invoke();
+        }
+
+        public void GoRetry () {
+            Retry?.Invoke();
         }
     }
 }
