@@ -72,6 +72,7 @@ Transform:
   - {fileID: 6084279757346540734}
   - {fileID: 9175339163015280057}
   - {fileID: 958628155367047917}
+  - {fileID: 4718008120071779901}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -186,6 +187,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6498971783699973989}
+        m_MethodName: InstantiateObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8586329555334888933}
         m_MethodName: InstantiateObject
         m_Mode: 1
         m_Arguments:
@@ -1050,6 +1062,62 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   target: {fileID: 4964278068648616644}
   targetColor: {r: 0.8773585, g: 0.22761661, b: 0.22761661, a: 1}
+--- !u!1 &5453346925066749129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4718008120071779901}
+  - component: {fileID: 8586329555334888933}
+  m_Layer: 0
+  m_Name: Sound Instantiator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4718008120071779901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5453346925066749129}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1285193917929420040}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8586329555334888933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5453346925066749129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 171c5e8a17a48d646abdde5064e22ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objPrefab: {fileID: 8811738127386228146, guid: 64522a2411060434ba136179162e9ea1,
+    type: 3}
+  referenceTransform: {fileID: 1285193917929420040}
+  setAsParent: 0
+  usePosition: 1
+  position: {x: 0, y: 0, z: 0}
+  useRotation: 0
+  rotationEulers: {x: 0, y: 0, z: 0}
+  OnInstantiate:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &6099393280657793870
 GameObject:
   m_ObjectHideFlags: 0
@@ -1523,15 +1591,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8333dafb5b70c64092ab06a0a386061, type: 3}
---- !u!198 &3380787900373903209 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 4735119124970524918, guid: a8333dafb5b70c64092ab06a0a386061,
-    type: 3}
-  m_PrefabInstance: {fileID: 8024426552898844575}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8169461487342649959 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2162779637773792760, guid: a8333dafb5b70c64092ab06a0a386061,
+    type: 3}
+  m_PrefabInstance: {fileID: 8024426552898844575}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3380787900373903209 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4735119124970524918, guid: a8333dafb5b70c64092ab06a0a386061,
     type: 3}
   m_PrefabInstance: {fileID: 8024426552898844575}
   m_PrefabAsset: {fileID: 0}
