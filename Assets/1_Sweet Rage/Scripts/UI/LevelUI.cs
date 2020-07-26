@@ -48,7 +48,7 @@
 
         public void UpdateScoreUI () {
             if ( star1 ) {
-                if ( level.maxScore >= 0f )
+                if ( level.maxScore > 0f )
                     star1.sprite = starFull;
                 else {
                     star1.sprite = starEmpty;
