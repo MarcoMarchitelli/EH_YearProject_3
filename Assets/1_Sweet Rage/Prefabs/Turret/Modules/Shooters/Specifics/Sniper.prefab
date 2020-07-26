@@ -56,11 +56,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6166750828390419662, guid: af1e27d07ffe71942bb70847c89f0a41,
-        type: 3}
-      propertyPath: m_Name
-      value: Sniper
-      objectReference: {fileID: 0}
     - target: {fileID: 6166750828390419661, guid: af1e27d07ffe71942bb70847c89f0a41,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -116,6 +111,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6166750828390419662, guid: af1e27d07ffe71942bb70847c89f0a41,
+        type: 3}
+      propertyPath: m_Name
+      value: Sniper
+      objectReference: {fileID: 0}
     - target: {fileID: 6166750828390419658, guid: af1e27d07ffe71942bb70847c89f0a41,
         type: 3}
       propertyPath: turretType
@@ -166,7 +166,7 @@ PrefabInstance:
     - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
         type: 3}
       propertyPath: OnShoot.m_PersistentCalls.m_Calls.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
         type: 3}
@@ -197,6 +197,31 @@ PrefabInstance:
     - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
         type: 3}
       propertyPath: OnShoot.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
+        type: 3}
+      propertyPath: OnShoot.m_PersistentCalls.m_Calls.Array.data[5].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
+        type: 3}
+      propertyPath: OnShoot.m_PersistentCalls.m_Calls.Array.data[5].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
+        type: 3}
+      propertyPath: OnShoot.m_PersistentCalls.m_Calls.Array.data[5].m_Target
+      value: 
+      objectReference: {fileID: 4204016056824471033}
+    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
+        type: 3}
+      propertyPath: OnShoot.m_PersistentCalls.m_Calls.Array.data[5].m_MethodName
+      value: InstantiateObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434595995856103039, guid: af1e27d07ffe71942bb70847c89f0a41,
+        type: 3}
+      propertyPath: OnShoot.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4359206484371225801, guid: af1e27d07ffe71942bb70847c89f0a41,
@@ -234,6 +259,12 @@ PrefabInstance:
       propertyPath: OnTargetSeen.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ResumeShooting
       objectReference: {fileID: 0}
+    - target: {fileID: 3307614730997133854, guid: af1e27d07ffe71942bb70847c89f0a41,
+        type: 3}
+      propertyPath: objPrefab
+      value: 
+      objectReference: {fileID: 8811738127386228146, guid: ec16b8093cc542b4481af4ceb3b112d2,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af1e27d07ffe71942bb70847c89f0a41, type: 3}
 --- !u!4 &4765964482498257706 stripped
@@ -242,3 +273,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1707049280459599847}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4204016056824471033 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3307614730997133854, guid: af1e27d07ffe71942bb70847c89f0a41,
+    type: 3}
+  m_PrefabInstance: {fileID: 1707049280459599847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 171c5e8a17a48d646abdde5064e22ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
